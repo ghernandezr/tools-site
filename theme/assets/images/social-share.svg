@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d47a1"/>
+      <stop offset="60%" stop-color="#1a73e8"/>
+      <stop offset="100%" stop-color="#1e88e5"/>
+    </linearGradient>
+    <linearGradient id="greenGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2e7d32"/>
+      <stop offset="100%" stop-color="#34a853"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="cardShadow" x="-5%" y="-5%" width="110%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="12" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGrad)"/>
+
+  <!-- Decorative blobs -->
+  <circle cx="1150" cy="0"   r="260" fill="#ffffff" opacity="0.03"/>
+  <circle cx="1080" cy="630" r="300" fill="#34a853"  opacity="0.08"/>
+  <circle cx="0"    cy="630" r="200" fill="#ffffff"  opacity="0.03"/>
+  <circle cx="60"   cy="60"  r="120" fill="#1e88e5"  opacity="0.15"/>
+
+  <!-- Horizontal accent line -->
+  <rect x="80" y="310" width="6" height="120" rx="3" fill="#34a853"/>
+
+  <!-- ── LEFT COLUMN: Headline ── -->
+  <!-- Eyebrow label -->
+  <rect x="80" y="100" width="220" height="36" rx="18" fill="#34a853" opacity="0.25"/>
+  <text x="190" y="123" font-family="'Helvetica Neue',Arial,sans-serif" font-size="17" font-weight="700" fill="#a8f5be" text-anchor="middle" letter-spacing="2">FREE · ONLINE</text>
+
+  <!-- Main headline -->
+  <text x="80" y="210" font-family="'Helvetica Neue',Arial,sans-serif" font-size="88" font-weight="800" fill="#ffffff" letter-spacing="-2">Calculators</text>
+  <text x="80" y="308" font-family="'Helvetica Neue',Arial,sans-serif" font-size="88" font-weight="800" fill="#ffffff" letter-spacing="-2">&amp; Utility</text>
+  <text x="80" y="406" font-family="'Helvetica Neue',Arial,sans-serif" font-size="88" font-weight="800" fill="#34a853" letter-spacing="-2">Tools</text>
+
+  <!-- Subtext -->
+  <text x="80" y="460" font-family="Arial,sans-serif" font-size="26" fill="#ffffff" opacity="0.75">Fast, accurate &amp; 100% free — no sign-up needed.</text>
+
+  <!-- Tool chips row 1 -->
+  <rect x="80"  y="495" width="148" height="40" rx="20" fill="#ffffff" opacity="0.12"/>
+  <text x="154" y="521" font-family="Arial,sans-serif" font-size="18" font-weight="600" fill="#ffffff" text-anchor="middle">💰 Loan</text>
+
+  <rect x="240" y="495" width="196" height="40" rx="20" fill="#ffffff" opacity="0.12"/>
+  <text x="338" y="521" font-family="Arial,sans-serif" font-size="18" font-weight="600" fill="#ffffff" text-anchor="middle">📈 Compound</text>
+
+  <rect x="448" y="495" width="168" height="40" rx="20" fill="#ffffff" opacity="0.12"/>
+  <text x="532" y="521" font-family="Arial,sans-serif" font-size="18" font-weight="600" fill="#ffffff" text-anchor="middle">💳 Credit Card</text>
+
+  <!-- Tool chips row 2 -->
+  <rect x="80"  y="545" width="148" height="40" rx="20" fill="#ffffff" opacity="0.12"/>
+  <text x="154" y="571" font-family="Arial,sans-serif" font-size="18" font-weight="600" fill="#ffffff" text-anchor="middle">💵 Salary</text>
+
+  <rect x="240" y="545" width="140" height="40" rx="20" fill="#ffffff" opacity="0.12"/>
+  <text x="310" y="571" font-family="Arial,sans-serif" font-size="18" font-weight="600" fill="#ffffff" text-anchor="middle">🏷️ Discount</text>
+
+  <rect x="392" y="545" width="144" height="40" rx="20" fill="#ffffff" opacity="0.12"/>
+  <text x="464" y="571" font-family="Arial,sans-serif" font-size="18" font-weight="600" fill="#ffffff" text-anchor="middle">⛽ Fuel Cost</text>
+
+  <rect x="548" y="545" width="68" height="40" rx="20" fill="#ffffff" opacity="0.12"/>
+  <text x="582" y="571" font-family="Arial,sans-serif" font-size="18" font-weight="600" fill="#ffffff" text-anchor="middle">+more</text>
+
+  <!-- ── RIGHT COLUMN: Big calculator mockup ── -->
+  <rect x="740" y="60" width="400" height="510" rx="32" fill="#ffffff" filter="url(#cardShadow)"/>
+
+  <!-- Calc screen -->
+  <rect x="764" y="84" width="352" height="110" rx="16" fill="#1a73e8"/>
+  <rect x="764" y="84" width="352" height="40"  rx="16" fill="#ffffff" opacity="0.06"/>
+  <text x="1100" y="138" font-family="'Helvetica Neue',Arial,sans-serif" font-size="20" font-weight="400" fill="#ffffff" opacity="0.6" text-anchor="end">12 × 18 =</text>
+  <text x="1108" y="180" font-family="'Helvetica Neue',Arial,sans-serif" font-size="52" font-weight="700" fill="#ffffff" text-anchor="end" letter-spacing="-1">216</text>
+
+  <!-- Button grid — 4 cols × 5 rows -->
+  <!-- gap: 12px, btn w:74 h:56, start x:764 y:210 -->
+
+  <!-- Row 1: AC  ±  %  ÷ -->
+  <rect x="764" y="210" width="74" height="56" rx="12" fill="#e8f0fe"/>
+  <rect x="850" y="210" width="74" height="56" rx="12" fill="#e8f0fe"/>
+  <rect x="936" y="210" width="74" height="56" rx="12" fill="#e8f0fe"/>
+  <rect x="1022" y="210" width="74" height="56" rx="12" fill="#34a853"/>
+  <text x="801" y="246" font-family="Arial,sans-serif" font-size="19" font-weight="700" fill="#1a73e8" text-anchor="middle">AC</text>
+  <text x="887" y="246" font-family="Arial,sans-serif" font-size="22" font-weight="600" fill="#1a73e8" text-anchor="middle">+/−</text>
+  <text x="973" y="246" font-family="Arial,sans-serif" font-size="22" font-weight="600" fill="#1a73e8" text-anchor="middle">%</text>
+  <text x="1059" y="246" font-family="Arial,sans-serif" font-size="26" font-weight="700" fill="#ffffff" text-anchor="middle">÷</text>
+
+  <!-- Row 2: 7 8 9 × -->
+  <rect x="764" y="278" width="74" height="56" rx="12" fill="#f1f3f4"/>
+  <rect x="850" y="278" width="74" height="56" rx="12" fill="#f1f3f4"/>
+  <rect x="936" y="278" width="74" height="56" rx="12" fill="#f1f3f4"/>
+  <rect x="1022" y="278" width="74" height="56" rx="12" fill="#34a853"/>
+  <text x="801" y="315" font-family="Arial,sans-serif" font-size="24" font-weight="500" fill="#1a202c" text-anchor="middle">7</text>
+  <text x="887" y="315" font-family="Arial,sans-serif" font-size="24" font-weight="500" fill="#1a202c" text-anchor="middle">8</text>
+  <text x="973" y="315" font-family="Arial,sans-serif" font-size="24" font-weight="500" fill="#1a202c" text-anchor="middle">9</text>
+  <text x="1059" y="315" font-family="Arial,sans-serif" font-size="26" font-weight="700" fill="#ffffff" text-anchor="middle">×</text>
+
+  <!-- Row 3: 4 5 6 − -->
+  <rect x="764" y="346" width="74" height="56" rx="12" fill="#f1f3f4"/>
+  <rect x="850" y="346" width="74" height="56" rx="12" fill="#f1f3f4"/>
+  <rect x="936" y="346" width="74" height="56" rx="12" fill="#f1f3f4"/>
+  <rect x="1022" y="346" width="74" height="56" rx="12" fill="#34a853"/>
+  <text x="801" y="383" font-family="Arial,sans-serif" font-size="24" font-weight="500" fill="#1a202c" text-anchor="middle">4</text>
+  <text x="887" y="383" font-family="Arial,sans-serif" font-size="24" font-weight="500" fill="#1a202c" text-anchor="middle">5</text>
+  <text x="973" y="383" font-family="Arial,sans-serif" font-size="24" font-weight="500" fill="#1a202c" text-anchor="middle">6</text>
+  <text x="1059" y="383" font-family="Arial,sans-serif" font-size="26" font-weight="700" fill="#ffffff" text-anchor="middle">−</text>
+
+  <!-- Row 4: 1 2 3 + -->
+  <rect x="764" y="414" width="74" height="56" rx="12" fill="#f1f3f4"/>
+  <rect x="850" y="414" width="74" height="56" rx="12" fill="#f1f3f4"/>
+  <rect x="936" y="414" width="74" height="56" rx="12" fill="#f1f3f4"/>
+  <rect x="1022" y="414" width="74" height="56" rx="12" fill="#34a853"/>
+  <text x="801" y="451" font-family="Arial,sans-serif" font-size="24" font-weight="500" fill="#1a202c" text-anchor="middle">1</text>
+  <text x="887" y="451" font-family="Arial,sans-serif" font-size="24" font-weight="500" fill="#1a202c" text-anchor="middle">2</text>
+  <text x="973" y="451" font-family="Arial,sans-serif" font-size="24" font-weight="500" fill="#1a202c" text-anchor="middle">3</text>
+  <text x="1059" y="451" font-family="Arial,sans-serif" font-size="26" font-weight="700" fill="#ffffff" text-anchor="middle">+</text>
+
+  <!-- Row 5: 0 (wide)  .  = -->
+  <rect x="764" y="482" width="160" height="56" rx="12" fill="#f1f3f4"/>
+  <rect x="936" y="482" width="74"  height="56" rx="12" fill="#f1f3f4"/>
+  <rect x="1022" y="482" width="74" height="56" rx="12" fill="#1a73e8"/>
+  <text x="844" y="519" font-family="Arial,sans-serif" font-size="24" font-weight="500" fill="#1a202c" text-anchor="middle">0</text>
+  <text x="973" y="519" font-family="Arial,sans-serif" font-size="24" font-weight="500" fill="#1a202c" text-anchor="middle">.</text>
+  <text x="1059" y="519" font-family="Arial,sans-serif" font-size="28" font-weight="700" fill="#ffffff" text-anchor="middle">=</text>
+
+  <!-- Domain strip at bottom -->
+  <rect x="0" y="594" width="1200" height="36" fill="#000000" opacity="0.20"/>
+  <text x="600" y="619" font-family="Arial,sans-serif" font-size="20" fill="#ffffff" opacity="0.80" text-anchor="middle">https://quickcalclab.com/</text>
+</svg>

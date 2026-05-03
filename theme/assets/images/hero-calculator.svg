@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 340" width="560" height="340" role="img" aria-label="Free online calculators and financial tools illustration">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#F0F4FF"/>
+      <stop offset="100%" stop-color="#F0FDF8"/>
+    </linearGradient>
+    <linearGradient id="card-face" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#2563EB"/>
+      <stop offset="100%" stop-color="#1D4ED8"/>
+    </linearGradient>
+    <linearGradient id="screen-g" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#1E3A8A"/>
+      <stop offset="100%" stop-color="#1E40AF"/>
+    </linearGradient>
+    <linearGradient id="btn-accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#3B82F6"/>
+      <stop offset="100%" stop-color="#6366F1"/>
+    </linearGradient>
+    <linearGradient id="sparkline-fill" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#2563EB" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#2563EB" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="f-main" x="-18%" y="-18%" width="136%" height="136%">
+      <feDropShadow dx="0" dy="12" stdDeviation="18" flood-color="#1D4ED8" flood-opacity="0.16"/>
+    </filter>
+    <filter id="f-float" x="-25%" y="-25%" width="150%" height="150%">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#64748B" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="560" height="340" rx="20" fill="url(#bg)"/>
+
+  <!-- Subtle decorative circle, top-right -->
+  <circle cx="490" cy="70" r="90" fill="none" stroke="#DBEAFE" stroke-width="40" opacity="0.35"/>
+
+  <!-- Subtle decorative circle, bottom-left -->
+  <circle cx="70" cy="290" r="60" fill="none" stroke="#D1FAE5" stroke-width="28" opacity="0.35"/>
+
+  <!-- ── MAIN CALCULATOR CARD (center-left) ── -->
+  <g filter="url(#f-main)" transform="translate(110,44)">
+    <!-- Card body -->
+    <rect width="200" height="256" rx="24" fill="url(#card-face)"/>
+    <!-- Subtle inner highlight rim -->
+    <rect x="1" y="1" width="198" height="254" rx="23" fill="none" stroke="#fff" stroke-width="1" opacity="0.1"/>
+
+    <!-- Screen area -->
+    <rect x="16" y="20" width="168" height="72" rx="14" fill="url(#screen-g)"/>
+    <!-- Screen label -->
+    <text x="24" y="43" font-family="system-ui,sans-serif" font-size="10" fill="#93C5FD" font-weight="500" opacity="0.8">Loan Payment</text>
+    <!-- Screen result -->
+    <text x="24" y="76" font-family="system-ui,sans-serif" font-size="28" fill="#ffffff" font-weight="700">$842<tspan font-size="14" fill="#93C5FD" font-weight="400">/mo</tspan></text>
+
+    <!-- Divider -->
+    <line x1="16" y1="106" x2="184" y2="106" stroke="#ffffff" stroke-width="1" opacity="0.1"/>
+
+    <!-- Button grid: 4×4, clean -->
+    <!-- Row 1 -->
+    <rect x="16"  y="116" width="36" height="28" rx="10" fill="#fff" opacity="0.12"/>
+    <rect x="60"  y="116" width="36" height="28" rx="10" fill="#fff" opacity="0.12"/>
+    <rect x="104" y="116" width="36" height="28" rx="10" fill="#fff" opacity="0.12"/>
+    <rect x="148" y="116" width="36" height="28" rx="10" fill="#fff" opacity="0.06"/>
+    <!-- Row 2 -->
+    <rect x="16"  y="152" width="36" height="28" rx="10" fill="#fff" opacity="0.12"/>
+    <rect x="60"  y="152" width="36" height="28" rx="10" fill="#fff" opacity="0.12"/>
+    <rect x="104" y="152" width="36" height="28" rx="10" fill="#fff" opacity="0.12"/>
+    <rect x="148" y="152" width="36" height="28" rx="10" fill="#fff" opacity="0.06"/>
+    <!-- Row 3 -->
+    <rect x="16"  y="188" width="36" height="28" rx="10" fill="#fff" opacity="0.12"/>
+    <rect x="60"  y="188" width="36" height="28" rx="10" fill="#fff" opacity="0.12"/>
+    <rect x="104" y="188" width="36" height="28" rx="10" fill="#fff" opacity="0.12"/>
+    <rect x="148" y="188" width="36" height="62" rx="10" fill="url(#btn-accent)" opacity="0.9"/>
+    <!-- Row 4 -->
+    <rect x="16"  y="224" width="80" height="28" rx="10" fill="#fff" opacity="0.12"/>
+    <rect x="104" y="224" width="36" height="28" rx="10" fill="#fff" opacity="0.12"/>
+
+    <!-- Button labels row 1 -->
+    <text x="34"  y="135" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#fff" font-weight="500" opacity="0.85">7</text>
+    <text x="78"  y="135" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#fff" font-weight="500" opacity="0.85">8</text>
+    <text x="122" y="135" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#fff" font-weight="500" opacity="0.85">9</text>
+    <text x="166" y="135" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#fff" font-weight="400" opacity="0.5">÷</text>
+    <!-- Row 2 -->
+    <text x="34"  y="171" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#fff" font-weight="500" opacity="0.85">4</text>
+    <text x="78"  y="171" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#fff" font-weight="500" opacity="0.85">5</text>
+    <text x="122" y="171" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#fff" font-weight="500" opacity="0.85">6</text>
+    <text x="166" y="171" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#fff" font-weight="400" opacity="0.5">×</text>
+    <!-- Row 3 -->
+    <text x="34"  y="207" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#fff" font-weight="500" opacity="0.85">1</text>
+    <text x="78"  y="207" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#fff" font-weight="500" opacity="0.85">2</text>
+    <text x="122" y="207" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#fff" font-weight="500" opacity="0.85">3</text>
+    <text x="166" y="224" text-anchor="middle" font-family="system-ui,sans-serif" font-size="18" fill="#fff" font-weight="700">=</text>
+    <!-- Row 4 -->
+    <text x="56"  y="243" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#fff" font-weight="500" opacity="0.85">0</text>
+    <text x="122" y="243" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#fff" font-weight="500" opacity="0.85">.</text>
+  </g>
+
+  <!-- ── FLOATING STAT CARD (right, vertically centered) ── -->
+  <g filter="url(#f-float)" transform="translate(346,72)">
+    <rect width="180" height="196" rx="20" fill="#ffffff" opacity="0.98"/>
+
+    <!-- Sparkline chart area -->
+    <text x="16" y="28" font-family="system-ui,sans-serif" font-size="10" fill="#9CA3AF" font-weight="500">Compound Interest</text>
+    <!-- Area fill under sparkline -->
+    <polygon points="16,90 40,78 70,62 100,52 130,38 164,24 164,100 16,100" fill="url(#sparkline-fill)"/>
+    <!-- Sparkline -->
+    <polyline points="16,90 40,78 70,62 100,52 130,38 164,24"
+              fill="none" stroke="#2563EB" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Endpoint dot -->
+    <circle cx="164" cy="24" r="5" fill="#2563EB"/>
+    <circle cx="164" cy="24" r="9" fill="#2563EB" opacity="0.15"/>
+    <!-- Growth label -->
+    <text x="16"  y="120" font-family="system-ui,sans-serif" font-size="22" fill="#111827" font-weight="700">+247%</text>
+    <text x="16"  y="138" font-family="system-ui,sans-serif" font-size="10" fill="#6B7280" font-weight="400">over 20 years</text>
+
+    <!-- Divider -->
+    <line x1="16" y1="152" x2="164" y2="152" stroke="#F3F4F6" stroke-width="1.5"/>
+
+    <!-- Pill tags -->
+    <rect x="16" y="162" width="50" height="20" rx="10" fill="#EFF6FF"/>
+    <text x="41" y="176" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#2563EB" font-weight="600">Free</text>
+
+    <rect x="74" y="162" width="54" height="20" rx="10" fill="#F0FDF4"/>
+    <text x="101" y="176" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#059669" font-weight="600">Private</text>
+
+    <rect x="136" y="162" width="28" height="20" rx="10" fill="#FFF7ED"/>
+    <text x="150" y="176" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#EA580C" font-weight="600">Fast</text>
+  </g>
+</svg>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Generate logo.png</title>
+<style>
+  body { font-family: Arial, sans-serif; display: flex; flex-direction: column; align-items: center; padding: 2rem; background: #f8f9fa; }
+  canvas { border: 1px solid #ddd; background: #fff; margin: 1rem 0; }
+  a { display: inline-block; margin-top: 1rem; padding: .75rem 2rem; background: #1a73e8; color: #fff; border-radius: 6px; text-decoration: none; font-weight: 700; font-size: 1rem; }
+  a:hover { background: #1557b0; }
+  p { color: #555; font-size: .9rem; }
+</style>
+</head>
+<body>
+<h2>QuickCalc Lab — Logo Generator</h2>
+<p>Preview (440×96 px, @2x for retina):</p>
+<canvas id="c" width="440" height="96"></canvas>
+<a id="dl" download="logo.png">⬇ Download logo.png</a>
+
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+const W = 440, H = 96;
+
+// ---- Background (transparent) ----
+ctx.clearRect(0, 0, W, H);
+
+// ---- Calculator icon (scaled @2x) ----
+const ic = { x: 4, y: 8, w: 72, h: 80, rx: 10 };
+
+// Body
+ctx.beginPath();
+roundRect(ctx, ic.x, ic.y, ic.w, ic.h, ic.rx);
+ctx.fillStyle = '#1a73e8';
+ctx.fill();
+
+// Screen
+ctx.beginPath();
+roundRect(ctx, ic.x + 12, ic.y + 10, 48, 20, 4);
+ctx.fillStyle = 'rgba(255,255,255,0.92)';
+ctx.fill();
+
+// Screen number line
+ctx.beginPath();
+roundRect(ctx, ic.x + 40, ic.y + 17, 16, 4, 2);
+ctx.fillStyle = '#1a73e8';
+ctx.fill();
+
+// Buttons row 1
+[[12,48,'rgba(255,255,255,0.85)'],[30,48,'rgba(255,255,255,0.85)'],[48,48,'#34a853']].forEach(([bx,by,col]) => {
+  ctx.beginPath();
+  roundRect(ctx, ic.x + bx, ic.y + by, 14, 10, 3);
+  ctx.fillStyle = col;
+  ctx.fill();
+});
+
+// Buttons row 2
+[[12,62,'rgba(255,255,255,0.85)'],[30,62,'rgba(255,255,255,0.85)'],[48,62,'rgba(255,255,255,0.85)']].forEach(([bx,by,col]) => {
+  ctx.beginPath();
+  roundRect(ctx, ic.x + bx, ic.y + by, 14, 10, 3);
+  ctx.fillStyle = col;
+  ctx.fill();
+});
+
+// ---- Text ----
+ctx.font = "bold 40px 'Segoe UI', Arial, sans-serif";
+ctx.letterSpacing = '-1px';
+
+// "QuickCalc" in blue
+ctx.fillStyle = '#1a73e8';
+ctx.fillText('QuickCalc', 92, 63);
+
+// Measure "QuickCalc" to position "Lab"
+const qcWidth = ctx.measureText('QuickCalc').width;
+
+// " Lab" in green
+ctx.fillStyle = '#34a853';
+ctx.fillText(' Lab', 92 + qcWidth, 63);
+
+// ---- Export ----
+const link = document.getElementById('dl');
+link.href = canvas.toDataURL('image/png');
+
+// ---- Helper ----
+function roundRect(ctx, x, y, w, h, r) {
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + w - r, y);
+  ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+  ctx.lineTo(x + w, y + h - r);
+  ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  ctx.lineTo(x + r, y + h);
+  ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+  ctx.lineTo(x, y + r);
+  ctx.quadraticCurveTo(x, y, x + r, y);
+  ctx.closePath();
+}
+</script>
+</body>
+</html>

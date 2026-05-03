@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SVG to PNG Converter</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 40px; background: #f1f3f4; }
+    h1 { color: #1a73e8; }
+    .card { background: #fff; border-radius: 12px; padding: 24px; margin-bottom: 32px; box-shadow: 0 2px 8px rgba(0,0,0,.1); }
+    canvas { display: block; max-width: 100%; border: 1px solid #e2e8f0; border-radius: 8px; margin: 12px 0; }
+    button {
+      background: #1a73e8; color: #fff; border: none; padding: 12px 28px;
+      border-radius: 8px; font-size: 15px; font-weight: 700; cursor: pointer;
+    }
+    button:hover { background: #1557b0; }
+  </style>
+</head>
+<body>
+  <h1>SVG → PNG Converter</h1>
+
+  <div class="card">
+    <h2>1. Logo for Google — 512×512</h2>
+    <canvas id="c-logo" width="512" height="512"></canvas>
+    <button onclick="save('c-logo','logo-google.svg','logo-google.png',512,512)">⬇ Download logo-google.png</button>
+  </div>
+
+  <div class="card">
+    <h2>2. Social Share Image — 1200×630</h2>
+    <canvas id="c-social" width="1200" height="630" style="max-width:100%"></canvas>
+    <button onclick="save('c-social','social-share.svg','social-share.png',1200,630)">⬇ Download social-share.png</button>
+  </div>
+
+  <script>
+    function drawSvg(canvasId, svgFile, w, h) {
+      const canvas = document.getElementById(canvasId);
+      const ctx = canvas.getContext('2d');
+      const img = new Image();
+      img.onload = () => ctx.drawImage(img, 0, 0, w, h);
+      img.src = svgFile;
+    }
+
+    function save(canvasId, svgFile, filename, w, h) {
+      const canvas = document.getElementById(canvasId);
+      const ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, w, h);
+      const img = new Image();
+      img.onload = () => {
+        ctx.drawImage(img, 0, 0, w, h);
+        const a = document.createElement('a');
+        a.download = filename;
+        a.href = canvas.toDataURL('image/png');
+        a.click();
+      };
+      img.src = svgFile + '?v=' + Date.now();
+    }
+
+    window.onload = () => {
+      drawSvg('c-logo',   'logo-google.svg',  512, 512);
+      drawSvg('c-social', 'social-share.svg', 1200, 630);
+    };
+  </script>
+</body>
+</html>

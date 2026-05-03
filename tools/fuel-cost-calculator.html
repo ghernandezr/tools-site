@@ -1,0 +1,104 @@
+<!-- ============================================================
+     TOOL 8: FUEL COST CALCULATOR
+     Slug: /fuel-cost-calculator/
+     Primary keyword: "fuel cost calculator"
+     RankMath Title: Fuel Cost Calculator — Gas Cost per Trip | ToolsHub
+     RankMath Meta: Calculate your total gas cost for any trip. Enter distance, MPG, and current gas price for instant fuel cost estimate. Free online tool.
+     ============================================================ -->
+
+<h1>Fuel Cost Calculator — Estimate Gas Cost for Any Trip</h1>
+
+<p>Our free <strong>fuel cost calculator</strong> estimates how much gas will cost for any drive. Enter your trip distance, your vehicle's fuel efficiency (MPG), and the current gas price per gallon — and instantly see total fuel cost, gallons used, and cost per mile.</p>
+
+[ad_slot position="header"]
+
+<div class="tool-card">
+  <h2>Fuel Cost Calculator</h2>
+  <form id="fuel-form">
+    <div class="tool-group">
+      <label for="fuel-distance">Trip Distance (miles)</label>
+      <input type="number" id="fuel-distance" placeholder="e.g. 350" min="0.1" step="any" required>
+    </div>
+    <div class="tool-group">
+      <label for="fuel-mpg">Vehicle Fuel Efficiency (MPG)</label>
+      <input type="number" id="fuel-mpg" placeholder="e.g. 28" min="0.1" step="any" required>
+    </div>
+    <div class="tool-group">
+      <label for="fuel-price">Gas Price ($ per gallon)</label>
+      <input type="number" id="fuel-price" placeholder="e.g. 3.59" min="0.01" step="any" required>
+    </div>
+    <button type="submit" class="tool-btn">Calculate Fuel Cost</button>
+  </form>
+
+  <div id="fuel-error" class="tool-error"></div>
+
+  <div id="fuel-result" class="tool-result">
+    <div class="tool-result__label">Total Fuel Cost</div>
+    <div class="tool-result__value" id="fuel-cost">—</div>
+    <div class="tool-result__breakdown">
+      <strong>Gallons Used:</strong> <span id="fuel-gallons">—</span><br>
+      <strong>Cost Per Mile:</strong> <span id="fuel-per-mile">—</span>
+    </div>
+  </div>
+
+  <button id="fuel-reset" class="tool-reset">Reset</button>
+</div>
+
+[ad_slot position="mid"]
+
+<h2>Fuel Cost Formula</h2>
+<div class="tool-formula">
+  Gallons Used = Distance (miles) ÷ MPG<br>
+  Total Cost = Gallons Used × Gas Price per Gallon<br>
+  Cost Per Mile = Total Cost ÷ Distance<br><br>
+  Example: 350 miles, 28 MPG, $3.59/gallon:<br>
+  Gallons = 350 ÷ 28 = 12.5 gallons<br>
+  Total Cost = 12.5 × $3.59 = $44.88<br>
+  Cost per mile = $44.88 ÷ 350 = $0.128/mile
+</div>
+
+<h2>Average MPG by Vehicle Type</h2>
+<ul>
+  <li><strong>Compact car</strong> (Honda Civic, Toyota Corolla): 30–38 MPG</li>
+  <li><strong>Midsize sedan</strong> (Toyota Camry, Honda Accord): 28–35 MPG</li>
+  <li><strong>SUV / Crossover</strong> (Toyota RAV4, Honda CR-V): 24–30 MPG</li>
+  <li><strong>Full-size SUV/truck</strong> (Ford F-150, Chevy Tahoe): 15–22 MPG</li>
+  <li><strong>Hybrid</strong> (Toyota Prius, Honda Insight): 45–55 MPG</li>
+  <li><strong>Minivan</strong> (Honda Odyssey, Toyota Sienna): 19–26 MPG</li>
+</ul>
+<p>Find your exact MPG on the EPA's <strong>fueleconomy.gov</strong> or check your vehicle's dashboard average.</p>
+
+<h2>Related Tools</h2>
+<ul>
+  <li><a href="/unit-converter/"><strong>Unit Converter</strong></a> — Convert km to miles or liters to gallons if planning international travel.</li>
+  <li><a href="/percentage-calculator/"><strong>Percentage Calculator</strong></a> — Calculate how much fuel cost increases with gas price changes.</li>
+  <li><a href="/date-difference-calculator/"><strong>Date Difference Calculator</strong></a> — Plan travel timelines alongside fuel costs.</li>
+</ul>
+
+<div class="tool-faq">
+  <h2>Frequently Asked Questions</h2>
+
+  <div class="tool-faq__item">
+    <div class="tool-faq__question">How do I calculate gas cost for a road trip?</div>
+    <div class="tool-faq__answer">Divide your total trip distance by your vehicle's MPG to get gallons needed. Multiply gallons by the current gas price per gallon. Example: 500 miles ÷ 30 MPG = 16.67 gallons × $3.50 = $58.33 total fuel cost.</div>
+  </div>
+
+  <div class="tool-faq__item">
+    <div class="tool-faq__question">How much does it cost to drive 1,000 miles?</div>
+    <div class="tool-faq__answer">It depends on your MPG and gas price. At 30 MPG and $3.50/gallon: 1,000 ÷ 30 = 33.3 gallons × $3.50 = $116.67. At 20 MPG and $3.50/gallon: 1,000 ÷ 20 = 50 gallons × $3.50 = $175.00.</div>
+  </div>
+
+  <div class="tool-faq__item">
+    <div class="tool-faq__question">Where do I find my car's MPG?</div>
+    <div class="tool-faq__answer">Check your vehicle's dashboard (many modern cars display current or average MPG), your owner's manual, or the EPA's official fuel economy database at fueleconomy.gov. For most accurate results, use your vehicle's real-world average MPG rather than the EPA estimate, which is tested under ideal conditions.</div>
+  </div>
+
+  <div class="tool-faq__item">
+    <div class="tool-faq__question">Does the calculator work for metric (km and liters)?</div>
+    <div class="tool-faq__answer">This calculator uses miles and gallons (US standard). For metric, use our Unit Converter to convert kilometers to miles first. For L/100km vehicles, convert using: MPG = 235.214 ÷ L/100km. Then enter the converted MPG value above.</div>
+  </div>
+</div>
+
+<p><small>⚠️ <strong>Disclaimer:</strong> Estimates only. Actual fuel use varies with driving conditions, speed, load, and vehicle condition. See our <a href="/disclaimer/">full Disclaimer</a>.</small></p>
+
+[ad_slot position="footer"]

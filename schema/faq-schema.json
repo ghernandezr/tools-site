@@ -1,0 +1,145 @@
+{
+  "_comment": "FAQ Schema Templates for each tool page. Paste directly into RankMath > Schema > FAQ schema builder, OR add via wp_head as JSON-LD. Replace yoursite.com with your actual domain.",
+
+  "_usage": "RankMath Free supports FAQ schema via: Edit Page > RankMath > Schema > Add Schema > FAQ. Add each question/answer pair there. Alternatively, paste the JSON-LD block for each page into the page's HTML using a Custom HTML block in the block editor.",
+
+  "loan-payment-calculator": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I calculate my monthly loan payment?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Use the amortization formula: M = P × [r(1+r)^n] / [(1+r)^n−1], where P is the principal, r is the monthly interest rate (annual rate ÷ 12 ÷ 100), and n is the number of monthly payments. Our free loan payment calculator applies this formula automatically."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is a good monthly payment for a $25,000 loan?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For a $25,000 loan at 6.5% APR over 5 years, the monthly payment is approximately $488.59. Lower rates and longer terms reduce monthly payments but increase total interest paid over the life of the loan."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does this loan calculator work for mortgages?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Enter the loan amount (home price minus down payment), your mortgage APR, and loan term. Note: this shows principal + interest only. Your actual mortgage payment may also include property taxes, homeowner's insurance, and PMI."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I lower my monthly loan payment?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You can lower your monthly payment by borrowing less, securing a lower interest rate (improve your credit score), extending your loan term, or making a larger down payment. Note that a longer term means paying more total interest."
+        }
+      }
+    ]
+  },
+
+  "compound-interest-calculator": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is compound interest?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Compound interest is interest calculated on both the initial principal AND accumulated interest from prior periods. Unlike simple interest, it causes exponential growth over time — often called 'interest on interest.'"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much will $10,000 grow in 10 years at 7%?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "At 7% annual interest compounded monthly, $10,000 grows to approximately $20,097 in 10 years — nearly doubling. This illustrates the Rule of 72: divide 72 by your annual rate to estimate doubling time. At 7%, 72 ÷ 7 ≈ 10.3 years."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What compounding frequency should I use?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Choose the frequency that matches your actual account. Savings accounts typically compound daily. CDs may compound daily or monthly. Bonds typically compound semi-annually. For general investment projections, monthly or annual compounding is commonly used."
+        }
+      }
+    ]
+  },
+
+  "tip-calculator": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How much should I tip at a restaurant?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "In the United States, 18–20% is standard for good service at sit-down restaurants. For exceptional service, 25% or more is appropriate. For counter service or takeout, 10–15% is common."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I calculate a 20% tip quickly in my head?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Move the decimal point one place left to find 10%, then double it for 20%. For a $75 bill: 10% = $7.50, so 20% = $15.00. For 15%, take 10% and add half: $7.50 + $3.75 = $11.25."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is a tip on a $100 bill at 20%?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "20% of $100 = $20 tip. Total bill = $120. Split among 4 people, each person pays $30 ($25 food + $5 tip per person)."
+        }
+      }
+    ]
+  },
+
+  "unit-converter": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How many miles is 1 kilometer?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "1 kilometer = 0.621371 miles. As a quick estimate, multiply km by 0.6. For example, 10 km ≈ 6 miles (exact: 6.214 miles)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I convert Celsius to Fahrenheit?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Formula: °F = (°C × 9/5) + 32. Example: 25°C = (25 × 1.8) + 32 = 77°F. Key reference: 0°C = 32°F, 100°C = 212°F, 37°C = 98.6°F (body temperature)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many pounds is 1 kilogram?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "1 kilogram = 2.20462 pounds. To convert quickly: multiply kg by 2.2. Example: 70 kg × 2.2 = 154 lbs (exact: 154.32 lbs)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many km is a 5K race?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A 5K race is exactly 5 kilometers = 3.107 miles. A 10K = 6.214 miles. A half marathon = 21.097 km = 13.109 miles. A full marathon = 42.195 km = 26.219 miles."
+        }
+      }
+    ]
+  }
+}

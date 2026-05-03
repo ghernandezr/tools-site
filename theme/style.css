@@ -1,0 +1,15 @@
+/*
+Theme Name:   ToolsHub Child
+Theme URI:    https://yoursite.com
+Description:  Astra Child Theme for ToolsHub — utility calculators site
+Author:       Your Name
+Author URI:   https://yoursite.com
+Template:     astra
+Version:      1.0.0
+License:      GNU General Public License v2 or later
+License URI:  http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain:  toolshub-child
+*/
+
+/* Import parent theme styles */
+@import url("../astra/style.css");

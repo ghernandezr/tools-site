@@ -1,0 +1,153 @@
+<!-- ============================================================
+     TOOL 5: TIP CALCULATOR
+     Slug: /tip-calculator/
+     Primary keyword: "tip calculator"
+     RankMath Title: Tip Calculator — Calculate Tip Amount & Split Bill | ToolsHub
+     RankMath Meta: Free tip calculator: calculate your tip amount by percentage, see total bill, and split evenly among any number of people. No sign-up required.
+     ============================================================ -->
+
+<h1>Tip Calculator — Calculate Tip Amount &amp; Split the Bill</h1>
+
+<p>Our free <strong>tip calculator</strong> helps you quickly figure out the right tip for any restaurant bill, plus split it evenly among your group. Enter your bill amount, tip percentage, and number of people — get instant results.</p>
+
+[ad_slot position="header"]
+
+<div class="tool-card">
+  <h2>Tip Calculator</h2>
+  <form id="tip-form">
+    <div class="tool-group">
+      <label for="tip-bill">Bill Amount ($)</label>
+      <input type="number" id="tip-bill" placeholder="e.g. 85.50" min="0.01" step="any" required>
+    </div>
+    <div class="tool-group">
+      <label for="tip-percent">Tip Percentage (%)</label>
+      <select id="tip-percent">
+        <option value="10">10% — Below average</option>
+        <option value="15">15% — Standard</option>
+        <option value="18">18% — Good service</option>
+        <option value="20" selected>20% — Great service</option>
+        <option value="25">25% — Exceptional</option>
+        <option value="custom">Custom %</option>
+      </select>
+    </div>
+    <div class="tool-group" id="tip-custom-group" style="display:none;">
+      <label for="tip-custom">Custom Tip %</label>
+      <input type="number" id="tip-custom" placeholder="e.g. 22" min="0" max="200" step="any">
+    </div>
+    <div class="tool-group">
+      <label for="tip-people">Number of People</label>
+      <input type="number" id="tip-people" placeholder="1" min="1" step="1" value="1">
+    </div>
+    <button type="submit" class="tool-btn">Calculate Tip</button>
+  </form>
+
+  <div id="tip-error" class="tool-error"></div>
+
+  <div id="tip-result" class="tool-result">
+    <div class="tool-result__label">Tip Amount</div>
+    <div class="tool-result__value" id="tip-amount">—</div>
+    <div class="tool-result__breakdown">
+      <strong>Total Bill (with tip):</strong> <span id="tip-total">—</span><br>
+      <strong>Per Person (total):</strong> <span id="tip-per-person">—</span><br>
+      <strong>Tip Per Person:</strong> <span id="tip-per-tip">—</span>
+    </div>
+  </div>
+
+  <button id="tip-reset" class="tool-reset">Reset</button>
+</div>
+
+[ad_slot position="mid"]
+
+<h2>How Tip Is Calculated</h2>
+<div class="tool-formula">
+  Tip Amount = Bill × (Tip % ÷ 100)<br>
+  Total Bill = Bill + Tip Amount<br>
+  Per Person = Total Bill ÷ Number of People<br><br>
+  Example: $85.50 bill, 20% tip, 3 people:<br>
+  Tip = $85.50 × 0.20 = $17.10<br>
+  Total = $85.50 + $17.10 = $102.60<br>
+  Per person = $102.60 ÷ 3 = $34.20
+</div>
+
+<h2>Tip Percentage Guide</h2>
+<ul>
+  <li><strong>10%</strong> — Below average. Use for genuinely poor service.</li>
+  <li><strong>15%</strong> — Standard. Acceptable for average service at sit-down restaurants.</li>
+  <li><strong>18%</strong> — Good. Common default for many restaurants that add gratuity automatically.</li>
+  <li><strong>20%</strong> — Great. The most common tip for good service in the US.</li>
+  <li><strong>25%+</strong> — Exceptional service, or when you want to show extra appreciation.</li>
+</ul>
+
+<h2>Who Do You Tip?</h2>
+<ul>
+  <li><strong>Restaurant servers:</strong> 15–25% of pre-tax bill</li>
+  <li><strong>Bartenders:</strong> $1–2 per drink, or 15–20%</li>
+  <li><strong>Food delivery:</strong> 10–20%, minimum $3–5</li>
+  <li><strong>Taxi / rideshare:</strong> 15–20%</li>
+  <li><strong>Hotel housekeeping:</strong> $2–5/night</li>
+  <li><strong>Hair salon:</strong> 15–20%</li>
+</ul>
+
+<h2>Related Tools</h2>
+<ul>
+  <li><a href="/percentage-calculator/"><strong>Percentage Calculator</strong></a> — Calculate any percentage quickly.</li>
+  <li><a href="/discount-calculator/"><strong>Discount Calculator</strong></a> — Works with percentage discounts the same way.</li>
+  <li><a href="/unit-converter/"><strong>Unit Converter</strong></a> — Handy for travel where currency or measurement conversions apply.</li>
+</ul>
+
+<div class="tool-faq">
+  <h2>Frequently Asked Questions</h2>
+
+  <div class="tool-faq__item">
+    <div class="tool-faq__question">How much should I tip at a restaurant?</div>
+    <div class="tool-faq__answer">In the United States, tipping 18–20% is standard for good service at a sit-down restaurant. Tipping is calculated on the pre-tax subtotal in most cases, though some prefer to tip on the total including tax. For exceptional service, 25% or more is appropriate.</div>
+  </div>
+
+  <div class="tool-faq__item">
+    <div class="tool-faq__question">How do I calculate a 20% tip quickly in my head?</div>
+    <div class="tool-faq__answer">Move the decimal point one place left to find 10%, then double it for 20%. For a $75 bill: 10% = $7.50, so 20% = $15.00. For 15%, find 10% then add half of that: $7.50 + $3.75 = $11.25.</div>
+  </div>
+
+  <div class="tool-faq__item">
+    <div class="tool-faq__question">Should I tip on the pre-tax or post-tax amount?</div>
+    <div class="tool-faq__answer">There's no universal rule. Most people tip on the pre-tax subtotal, which is what the server actually provided service on. Some tip on the total bill for simplicity. The difference on a $50 bill with 8% tax and 20% tip is $0.80 — minimal either way.</div>
+  </div>
+
+  <div class="tool-faq__item">
+    <div class="tool-faq__question">What is a tip on a $100 bill at 20%?</div>
+    <div class="tool-faq__answer">20% of $100 = $20. Your total would be $120. Split among 4 people, each person pays $30 total ($25 for food + $5 tip per person).</div>
+  </div>
+</div>
+
+<!-- Custom tip % toggle (small inline script, no framework) -->
+<script>
+(function(){
+  var sel = document.getElementById('tip-percent');
+  var customGroup = document.getElementById('tip-custom-group');
+  var customInput = document.getElementById('tip-custom');
+  if (sel) {
+    sel.addEventListener('change', function(){
+      if (sel.value === 'custom') {
+        customGroup.style.display = 'block';
+        customInput.required = true;
+      } else {
+        customGroup.style.display = 'none';
+        customInput.required = false;
+      }
+    });
+  }
+  // Override tip-form submit to handle custom %
+  var form = document.getElementById('tip-form');
+  if (form) {
+    form.addEventListener('submit', function(){
+      if (sel.value === 'custom' && customInput.value) {
+        sel.value = customInput.value; // pass custom value to calculator
+      }
+    }, true); // capture phase before calculators.js
+  }
+})();
+</script>
+
+<p><small>⚠️ <strong>Disclaimer:</strong> For informational purposes only. Tipping customs vary by country and establishment. See our <a href="/disclaimer/">full Disclaimer</a>.</small></p>
+
+[ad_slot position="footer"]

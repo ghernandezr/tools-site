@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a73e8"/>
+      <stop offset="100%" stop-color="#0d47a1"/>
+    </linearGradient>
+    <linearGradient id="calcGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#e8f0fe" stop-opacity="1"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#000000" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="512" height="512" rx="80" fill="url(#bgGrad)"/>
+  <circle cx="420" cy="80"  r="60" fill="#ffffff" opacity="0.05"/>
+  <circle cx="90"  cy="440" r="80" fill="#34a853" opacity="0.10"/>
+
+  <!-- Calculator card -->
+  <rect x="116" y="88" width="280" height="336" rx="24" fill="url(#calcGrad)" filter="url(#shadow)"/>
+
+  <!-- Screen -->
+  <rect x="136" y="108" width="240" height="88" rx="12" fill="#1a73e8"/>
+  <rect x="136" y="108" width="240" height="30" rx="12" fill="#ffffff" opacity="0.08"/>
+  <!-- Screen display bars (simulate number) -->
+  <rect x="260" y="130" width="100" height="10" rx="5" fill="#ffffff" opacity="0.4"/>
+  <rect x="220" y="148" width="140" height="28" rx="6" fill="#ffffff" opacity="0.9"/>
+
+  <!-- Row 1 buttons -->
+  <rect x="136" y="212" width="52" height="44" rx="10" fill="#e8f0fe"/>
+  <rect x="200" y="212" width="52" height="44" rx="10" fill="#e8f0fe"/>
+  <rect x="264" y="212" width="52" height="44" rx="10" fill="#e8f0fe"/>
+  <rect x="328" y="212" width="52" height="44" rx="10" fill="#34a853"/>
+  <!-- Row 1 icons: two bars (AC), divide, multiply, minus -->
+  <rect x="150" y="230" width="24" height="4" rx="2" fill="#1a73e8"/>
+  <rect x="150" y="238" width="24" height="4" rx="2" fill="#1a73e8"/>
+  <!-- divide icon -->
+  <rect x="214" y="232" width="24" height="4" rx="2" fill="#1a73e8"/>
+  <circle cx="226" cy="226" r="3" fill="#1a73e8"/>
+  <circle cx="226" cy="242" r="3" fill="#1a73e8"/>
+  <!-- multiply X -->
+  <rect x="275" y="229" width="28" height="4" rx="2" fill="#1a73e8" transform="rotate(45 289 231)"/>
+  <rect x="275" y="229" width="28" height="4" rx="2" fill="#1a73e8" transform="rotate(-45 289 231)"/>
+  <!-- minus -->
+  <rect x="340" y="232" width="28" height="4" rx="2" fill="#ffffff"/>
+
+  <!-- Row 2 buttons -->
+  <rect x="136" y="268" width="52" height="44" rx="10" fill="#f1f3f4"/>
+  <rect x="200" y="268" width="52" height="44" rx="10" fill="#f1f3f4"/>
+  <rect x="264" y="268" width="52" height="44" rx="10" fill="#f1f3f4"/>
+  <rect x="328" y="268" width="52" height="44" rx="10" fill="#34a853"/>
+  <!-- 7 8 9 = dots -->
+  <circle cx="162" cy="290" r="6" fill="#1a73e8" opacity="0.6"/>
+  <circle cx="226" cy="290" r="6" fill="#1a73e8" opacity="0.6"/>
+  <circle cx="290" cy="290" r="6" fill="#1a73e8" opacity="0.6"/>
+  <!-- plus icon -->
+  <rect x="340" y="288" width="28" height="4" rx="2" fill="#ffffff"/>
+  <rect x="352" y="276" width="4" height="28" rx="2" fill="#ffffff"/>
+
+  <!-- Row 3 buttons -->
+  <rect x="136" y="324" width="52" height="44" rx="10" fill="#f1f3f4"/>
+  <rect x="200" y="324" width="52" height="44" rx="10" fill="#f1f3f4"/>
+  <rect x="264" y="324" width="52" height="44" rx="10" fill="#f1f3f4"/>
+  <rect x="328" y="324" width="52" height="44" rx="10" fill="#34a853"/>
+  <circle cx="162" cy="346" r="6" fill="#1a73e8" opacity="0.6"/>
+  <circle cx="226" cy="346" r="6" fill="#1a73e8" opacity="0.6"/>
+  <circle cx="290" cy="346" r="6" fill="#1a73e8" opacity="0.6"/>
+  <rect x="340" y="344" width="28" height="4" rx="2" fill="#ffffff"/>
+  <rect x="352" y="332" width="4" height="28" rx="2" fill="#ffffff"/>
+
+  <!-- Row 4 buttons -->
+  <rect x="136" y="380" width="116" height="44" rx="10" fill="#f1f3f4"/>
+  <rect x="264" y="380" width="52"  height="44" rx="10" fill="#f1f3f4"/>
+  <rect x="328" y="380" width="52"  height="44" rx="10" fill="#1a73e8"/>
+  <circle cx="194" cy="402" r="6" fill="#1a73e8" opacity="0.6"/>
+  <circle cx="290" cy="402" r="5" fill="#1a73e8" opacity="0.6"/>
+  <!-- equals -->
+  <rect x="340" y="396" width="28" height="4" rx="2" fill="#ffffff"/>
+  <rect x="340" y="406" width="28" height="4" rx="2" fill="#ffffff"/>
+</svg>

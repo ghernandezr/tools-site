@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 52" width="240" height="52" role="img" aria-label="QuickCalc Lab logo">
+  <title>QuickCalc Lab</title>
+  <defs>
+    <!-- Icon gradient: blue to indigo -->
+    <linearGradient id="iconGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4f8ef7"/>
+      <stop offset="100%" stop-color="#1a56db"/>
+    </linearGradient>
+    <!-- Icon inner shadow / shine -->
+    <linearGradient id="shineGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <!-- Text gradient: blue -->
+    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1a56db"/>
+      <stop offset="100%" stop-color="#2563eb"/>
+    </linearGradient>
+    <filter id="softShadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#1a56db" flood-opacity="0.28"/>
+    </filter>
+  </defs>
+
+  <!-- Icon background with rounded corners -->
+  <rect x="2" y="4" width="42" height="44" rx="10" ry="10" fill="url(#iconGrad)" filter="url(#softShadow)"/>
+  <!-- Shine overlay -->
+  <rect x="2" y="4" width="42" height="22" rx="10" ry="10" fill="url(#shineGrad)"/>
+
+  <!-- Screen display area -->
+  <rect x="8" y="10" width="30" height="11" rx="3" ry="3" fill="#ffffff" opacity="0.95"/>
+  <!-- Cursor / number on screen -->
+  <rect x="28" y="14" width="7" height="3" rx="1.5" fill="#2563eb" opacity="0.7"/>
+
+  <!-- Button grid: 3x2 -->
+  <!-- Row 1 -->
+  <rect x="8"  y="27" width="7" height="6" rx="2" fill="#ffffff" opacity="0.80"/>
+  <rect x="18" y="27" width="7" height="6" rx="2" fill="#ffffff" opacity="0.80"/>
+  <rect x="28" y="27" width="7" height="6" rx="2" fill="#34d399"/>
+  <!-- Row 2 -->
+  <rect x="8"  y="36" width="7" height="6" rx="2" fill="#ffffff" opacity="0.80"/>
+  <rect x="18" y="36" width="7" height="6" rx="2" fill="#ffffff" opacity="0.80"/>
+  <rect x="28" y="36" width="7" height="6" rx="2" fill="#ffffff" opacity="0.80"/>
+
+  <!-- Wordmark -->
+  <!-- "Quick" in dark weight -->
+  <text
+    x="54"
+    y="34"
+    font-family="'Segoe UI', system-ui, Arial, sans-serif"
+    font-size="23"
+    font-weight="800"
+    letter-spacing="-0.5"
+    fill="url(#textGrad)"
+  >Quick</text>
+
+  <!-- "Calc" slightly lighter -->
+  <text
+    x="117"
+    y="34"
+    font-family="'Segoe UI', system-ui, Arial, sans-serif"
+    font-size="23"
+    font-weight="600"
+    letter-spacing="-0.5"
+    fill="#1e40af"
+  >Calc</text>
+
+  <!-- Dot separator -->
+  <circle cx="163" cy="30" r="2.5" fill="#34d399"/>
+
+  <!-- "Lab" accent -->
+  <text
+    x="170"
+    y="34"
+    font-family="'Segoe UI', system-ui, Arial, sans-serif"
+    font-size="23"
+    font-weight="800"
+    letter-spacing="-0.5"
+    fill="#059669"
+  >Lab</text>
+</svg>

@@ -1,0 +1,141 @@
+<!-- ============================================================
+     TOOL 6: PERCENTAGE CALCULATOR
+     Slug: /percentage-calculator/
+     Primary keyword: "percentage calculator"
+     RankMath Title: Percentage Calculator — 3 Ways to Calculate Percentages | ToolsHub
+     RankMath Meta: Free percentage calculator: find what percent of a number is, what percentage X is of Y, and percentage change between two values. Instant results.
+     ============================================================ -->
+
+<h1>Percentage Calculator — Calculate Any Percentage Instantly</h1>
+
+<p>Our free <strong>percentage calculator</strong> solves three common percentage problems: finding a percentage of a number, figuring out what percentage one number is of another, and calculating the percentage change (increase or decrease) between two values.</p>
+
+[ad_slot position="header"]
+
+<div class="tool-card">
+  <h2>Percentage Calculator</h2>
+  <form id="pct-form">
+    <div class="tool-group">
+      <label for="pct-mode">What do you want to calculate?</label>
+      <select id="pct-mode">
+        <option value="of">What is X% of Y? (e.g. 20% of 500)</option>
+        <option value="what">X is what % of Y? (e.g. 75 is what % of 300?)</option>
+        <option value="change">% change from X to Y (e.g. from 80 to 100)</option>
+      </select>
+    </div>
+    <div class="tool-group">
+      <label for="pct-a" id="pct-a-label">X (first value)</label>
+      <input type="number" id="pct-a" placeholder="e.g. 20" step="any" required>
+    </div>
+    <div class="tool-group">
+      <label for="pct-b" id="pct-b-label">Y (second value)</label>
+      <input type="number" id="pct-b" placeholder="e.g. 500" step="any" required>
+    </div>
+    <button type="submit" class="tool-btn">Calculate Percentage</button>
+  </form>
+
+  <div id="pct-error" class="tool-error"></div>
+
+  <div id="pct-result" class="tool-result">
+    <div class="tool-result__label" id="pct-label">Result</div>
+    <div class="tool-result__value" id="pct-answer">—</div>
+  </div>
+
+  <button id="pct-reset" class="tool-reset">Reset</button>
+</div>
+
+<!-- Dynamic label update based on mode -->
+<script>
+(function(){
+  var modeEl  = document.getElementById('pct-mode');
+  var labelA  = document.getElementById('pct-a-label');
+  var labelB  = document.getElementById('pct-b-label');
+  var inputA  = document.getElementById('pct-a');
+  var inputB  = document.getElementById('pct-b');
+  var labels  = {
+    'of':     { a: 'Percentage (X%)', b: 'Whole number (Y)', ph_a: 'e.g. 20', ph_b: 'e.g. 500' },
+    'what':   { a: 'Part (X)', b: 'Whole (Y)', ph_a: 'e.g. 75', ph_b: 'e.g. 300' },
+    'change': { a: 'Original value (X)', b: 'New value (Y)', ph_a: 'e.g. 80', ph_b: 'e.g. 100' }
+  };
+  function updateLabels() {
+    var m = modeEl.value;
+    if (labels[m]) {
+      labelA.textContent = labels[m].a;
+      labelB.textContent = labels[m].b;
+      inputA.placeholder = labels[m].ph_a;
+      inputB.placeholder = labels[m].ph_b;
+    }
+  }
+  if (modeEl) { modeEl.addEventListener('change', updateLabels); updateLabels(); }
+})();
+</script>
+
+[ad_slot position="mid"]
+
+<h2>Percentage Formulas Explained</h2>
+
+<div class="tool-formula">
+  1. What is X% of Y?<br>
+     Result = (X ÷ 100) × Y<br>
+     Example: 20% of 500 = (20 ÷ 100) × 500 = 100<br><br>
+
+  2. X is what percent of Y?<br>
+     Result = (X ÷ Y) × 100<br>
+     Example: 75 is what % of 300? → (75 ÷ 300) × 100 = 25%<br><br>
+
+  3. Percentage change from X to Y:<br>
+     Result = ((Y − X) ÷ X) × 100<br>
+     Example: From 80 to 100 → ((100 − 80) ÷ 80) × 100 = 25% increase<br>
+     Example: From 100 to 80 → ((80 − 100) ÷ 100) × 100 = −20% decrease
+</div>
+
+<h2>Common Percentage Calculations</h2>
+<ul>
+  <li><strong>15% of 200</strong> = 30</li>
+  <li><strong>25% of 80</strong> = 20</li>
+  <li><strong>8.5% sales tax on $120</strong> = $10.20 (total $130.20)</li>
+  <li><strong>7 is what % of 28?</strong> = 25%</li>
+  <li><strong>Raise from $50,000 to $55,000</strong> = 10% increase</li>
+  <li><strong>Stock dropped from $200 to $160</strong> = 20% decrease</li>
+</ul>
+
+<h2>Related Tools</h2>
+<ul>
+  <li><a href="/discount-calculator/"><strong>Discount Calculator</strong></a> — Uses percentage off to find final price and savings.</li>
+  <li><a href="/tip-calculator/"><strong>Tip Calculator</strong></a> — Calculate percentage-based tips on restaurant bills.</li>
+  <li><a href="/salary-to-hourly-converter/"><strong>Salary Converter</strong></a> — Calculate percentage raises or salary comparisons.</li>
+  <li><a href="/unit-converter/"><strong>Unit Converter</strong></a> — Convert units that often involve percentages in formulas.</li>
+</ul>
+
+<div class="tool-faq">
+  <h2>Frequently Asked Questions</h2>
+
+  <div class="tool-faq__item">
+    <div class="tool-faq__question">How do I calculate a percentage of a number?</div>
+    <div class="tool-faq__answer">Multiply the number by the percentage divided by 100. Formula: Result = (Percentage ÷ 100) × Number. Example: 30% of 250 = 0.30 × 250 = 75.</div>
+  </div>
+
+  <div class="tool-faq__item">
+    <div class="tool-faq__question">How do I calculate percentage increase or decrease?</div>
+    <div class="tool-faq__answer">Formula: % Change = ((New Value − Old Value) ÷ Old Value) × 100. A positive result means increase; negative means decrease. Example: Price went from $40 to $50 = ((50−40) ÷ 40) × 100 = 25% increase.</div>
+  </div>
+
+  <div class="tool-faq__item">
+    <div class="tool-faq__question">What is 20% of 500?</div>
+    <div class="tool-faq__answer">20% of 500 = (20 ÷ 100) × 500 = 100. Quick mental math: move the decimal one place left for 10% ($50), then double it for 20% ($100).</div>
+  </div>
+
+  <div class="tool-faq__item">
+    <div class="tool-faq__question">How do I find what percentage one number is of another?</div>
+    <div class="tool-faq__answer">Divide the part by the whole and multiply by 100. Formula: % = (Part ÷ Whole) × 100. Example: 45 out of 180 total = (45 ÷ 180) × 100 = 25%.</div>
+  </div>
+
+  <div class="tool-faq__item">
+    <div class="tool-faq__question">How do I calculate sales tax?</div>
+    <div class="tool-faq__answer">Use Mode 1 (What is X% of Y?). Enter your tax rate as X and the pre-tax price as Y. The result is the tax amount. Add it to the original price for the total. Example: 8.25% tax on $150 = $12.38 tax → total $162.38.</div>
+  </div>
+</div>
+
+<p><small>⚠️ <strong>Disclaimer:</strong> For informational purposes only. See our <a href="/disclaimer/">full Disclaimer</a>.</small></p>
+
+[ad_slot position="footer"]

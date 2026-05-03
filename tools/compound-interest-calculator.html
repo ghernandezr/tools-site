@@ -1,0 +1,121 @@
+<!-- ============================================================
+     TOOL 3: COMPOUND INTEREST CALCULATOR
+     Slug: /compound-interest-calculator/
+     Primary keyword: "compound interest calculator"
+     RankMath Title: Compound Interest Calculator — Free Investment Growth Tool | ToolsHub
+     RankMath Meta: Calculate how your money grows with compound interest. Enter principal, rate, compounding frequency, and time to see your future balance instantly.
+     ============================================================ -->
+
+<h1>Compound Interest Calculator — See How Your Money Grows</h1>
+
+<p>Use our free <strong>compound interest calculator</strong> to see how your savings or investment grows over time. Enter your starting amount, interest rate, compounding frequency, and time period — and instantly see your final balance and total interest earned.</p>
+
+[ad_slot position="header"]
+
+<div class="tool-card">
+  <h2>Compound Interest Calculator</h2>
+  <form id="ci-form">
+    <div class="tool-group">
+      <label for="ci-principal">Initial Principal ($)</label>
+      <input type="number" id="ci-principal" placeholder="e.g. 10000" min="1" step="any" required>
+    </div>
+    <div class="tool-group">
+      <label for="ci-rate">Annual Interest Rate (%)</label>
+      <input type="number" id="ci-rate" placeholder="e.g. 7" min="0" step="any" required>
+    </div>
+    <div class="tool-group">
+      <label for="ci-frequency">Compounding Frequency</label>
+      <select id="ci-frequency">
+        <option value="1">Annually (1×/year)</option>
+        <option value="2">Semi-annually (2×/year)</option>
+        <option value="4">Quarterly (4×/year)</option>
+        <option value="12" selected>Monthly (12×/year)</option>
+        <option value="365">Daily (365×/year)</option>
+      </select>
+    </div>
+    <div class="tool-group">
+      <label for="ci-years">Time Period (Years)</label>
+      <input type="number" id="ci-years" placeholder="e.g. 10" min="0.1" step="any" required>
+    </div>
+    <button type="submit" class="tool-btn">Calculate Compound Interest</button>
+  </form>
+
+  <div id="ci-error" class="tool-error"></div>
+
+  <div id="ci-result" class="tool-result">
+    <div class="tool-result__label">Final Balance</div>
+    <div class="tool-result__value" id="ci-final">—</div>
+    <div class="tool-result__breakdown">
+      <strong>Principal Invested:</strong> <span id="ci-principal-out">—</span><br>
+      <strong>Interest Earned:</strong> <span id="ci-earned">—</span>
+    </div>
+  </div>
+
+  <button id="ci-reset" class="tool-reset">Reset Calculator</button>
+</div>
+
+[ad_slot position="mid"]
+
+<h2>The Compound Interest Formula</h2>
+<p>This calculator uses the standard compound interest formula as taught in finance and mathematics:</p>
+
+<div class="tool-formula">
+  A = P × (1 + r/n)^(n×t)<br><br>
+  Where:<br>
+  A = Final amount (principal + interest)<br>
+  P = Principal (initial investment)<br>
+  r = Annual interest rate (as a decimal, e.g. 7% = 0.07)<br>
+  n = Number of times interest compounds per year<br>
+  t = Time in years<br><br>
+  Example: $10,000 at 7% compounded monthly for 10 years:<br>
+  A = $10,000 × (1 + 0.07/12)^(12×10) = $20,096.61
+</div>
+
+<h2>Compounding Frequency Comparison</h2>
+<p>The same $10,000 at 7% APR for 10 years grows to:</p>
+<ul>
+  <li><strong>Annually:</strong> $19,671.51</li>
+  <li><strong>Monthly:</strong> $20,096.61</li>
+  <li><strong>Daily:</strong> $20,136.96</li>
+</ul>
+<p>More frequent compounding means slightly more growth, but the difference between monthly and daily is minimal for most purposes.</p>
+
+<h2>Related Tools</h2>
+<ul>
+  <li><a href="/loan-payment-calculator/"><strong>Loan Payment Calculator</strong></a> — Compound interest works against you with debt. Compare borrowing costs.</li>
+  <li><a href="/credit-card-interest-calculator/"><strong>Credit Card Interest Calculator</strong></a> — See compound interest in action on revolving debt.</li>
+  <li><a href="/percentage-calculator/"><strong>Percentage Calculator</strong></a> — Calculate growth percentages and return rates.</li>
+</ul>
+
+<div class="tool-faq">
+  <h2>Frequently Asked Questions</h2>
+
+  <div class="tool-faq__item">
+    <div class="tool-faq__question">What is compound interest?</div>
+    <div class="tool-faq__answer">Compound interest is interest calculated on both the initial principal AND the accumulated interest from previous periods. Unlike simple interest (calculated on principal only), compound interest causes exponential growth over time — often called "interest on interest."</div>
+  </div>
+
+  <div class="tool-faq__item">
+    <div class="tool-faq__question">How much will $10,000 grow in 10 years at 7%?</div>
+    <div class="tool-faq__answer">At 7% annual interest compounded monthly, $10,000 grows to approximately $20,097 in 10 years — nearly doubling. This demonstrates the "Rule of 72": divide 72 by your annual rate to estimate how many years it takes to double. At 7%, 72 ÷ 7 ≈ 10.3 years.</div>
+  </div>
+
+  <div class="tool-faq__item">
+    <div class="tool-faq__question">What compounding frequency should I choose?</div>
+    <div class="tool-faq__answer">Choose the frequency that matches your actual account. Savings accounts typically compound daily. CDs may compound daily or monthly. Bonds typically compound semi-annually. For investment returns (stocks), annual is most common for modeling purposes. When in doubt, monthly is a reasonable default.</div>
+  </div>
+
+  <div class="tool-faq__item">
+    <div class="tool-faq__question">Does this calculator include regular deposits?</div>
+    <div class="tool-faq__answer">This version calculates growth on a single lump-sum investment only. It does not include recurring contributions. For calculations with regular monthly deposits (like a retirement account), you would use the future value of an annuity formula. We plan to add a savings goal calculator with recurring deposits in a future update.</div>
+  </div>
+
+  <div class="tool-faq__item">
+    <div class="tool-faq__question">What interest rate should I use for stock market returns?</div>
+    <div class="tool-faq__answer">The US stock market (S&amp;P 500) has historically returned approximately 7–10% annually on average, before adjusting for inflation. After inflation, the real return is approximately 5–7%. Using 6–7% is a common conservative assumption for long-term investment projections. This is not investment advice — actual returns vary significantly year to year.</div>
+  </div>
+</div>
+
+<p><small>⚠️ <strong>Disclaimer:</strong> For educational purposes only. Investment returns are not guaranteed. See our <a href="/disclaimer/">full Disclaimer</a>.</small></p>
+
+[ad_slot position="footer"]

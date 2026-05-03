@@ -1,0 +1,122 @@
+<!-- ============================================================
+     ADSENSE SLOT TEMPLATES
+     Instructions:
+     1. Get approved by Google AdSense at ads.google.com
+     2. Create ad units in your AdSense account
+     3. Replace ca-pub-XXXXXXXXXXXXXXXX with your Publisher ID
+     4. Replace each data-ad-slot value with your unit's slot ID
+     5. The shortcode [ad_slot position="header|mid|footer"] in page
+        content will output these wrappers automatically via functions.php
+     ============================================================ -->
+
+
+<!-- ============================================================
+     SLOT 1: HEADER / LEADERBOARD (728×90 desktop / responsive mobile)
+     Best for: Below site title, above tool content
+     CLS Prevention: min-height: 90px reserved in tools.css
+     ============================================================ -->
+<div class="ad-slot ad-slot--header" aria-label="Advertisement">
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+       data-ad-slot="1111111111"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+  <!-- AdSense lazy-loader in calculators.js triggers push() on intersection -->
+</div>
+
+
+<!-- ============================================================
+     SLOT 2: MID-CONTENT (300×250 rectangle / responsive)
+     Best for: After formula explanation, between sections
+     CLS Prevention: min-height: 250px reserved in tools.css
+     ============================================================ -->
+<div class="ad-slot ad-slot--mid" aria-label="Advertisement">
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+       data-ad-slot="2222222222"
+       data-ad-format="rectangle"
+       data-full-width-responsive="true"></ins>
+</div>
+
+
+<!-- ============================================================
+     SLOT 3: FOOTER / LEADERBOARD (728×90 or responsive)
+     Best for: Below FAQ section, above footer
+     CLS Prevention: min-height: 90px reserved in tools.css
+     ============================================================ -->
+<div class="ad-slot ad-slot--footer" aria-label="Advertisement">
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+       data-ad-slot="3333333333"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+</div>
+
+
+<!-- ============================================================
+     ADSENSE SCRIPT TAG
+     Add this ONCE to your site — via:
+       Appearance > Customize > Additional CSS/Scripts (NOT recommended)
+       OR better: wp_enqueue_script in functions.php (recommended)
+       OR: RankMath > General Settings > Analytics > Header Scripts
+
+     CRITICAL: Use async attribute to prevent render blocking.
+     The lazy-loader in calculators.js handles the push() calls.
+     ============================================================ -->
+<script>
+/*
+  Add this to functions.php to load AdSense script asynchronously:
+
+  function toolshub_adsense_script() {
+    if ( ! is_admin() ) {
+      echo '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"><\/script>';
+    }
+  }
+  add_action( 'wp_head', 'toolshub_adsense_script' );
+
+  NOTE: Only add after AdSense approval. Adding before approval
+  may delay or jeopardize your application.
+*/
+</script>
+
+
+<!-- ============================================================
+     AUTO ADS (ALTERNATIVE TO MANUAL SLOTS)
+     If you prefer Google Auto Ads instead of manual placement:
+     Add this single script to wp_head and remove all manual slots.
+     Auto Ads handles placement automatically — less control but easier.
+
+     Pros: Easier setup, Google optimizes placement
+     Cons: Less control over CLS, may hurt PageSpeed if not configured well
+
+     Recommendation: Use manual slots (above) for better performance control.
+     ============================================================ -->
+<!--
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+-->
+
+
+<!-- ============================================================
+     AD PLACEMENT STRATEGY NOTES
+     ============================================================
+
+     ✅ DO:
+     - Place ads BELOW the fold on mobile (after first screen)
+     - Reserve space with min-height CSS to prevent CLS
+     - Use IntersectionObserver lazy loading (done in calculators.js)
+     - Keep at least 1 ad-free screen of content above the fold
+     - Ensure ads do not overlap tool inputs or buttons
+
+     ❌ DON'T:
+     - Place ads directly adjacent to click targets (Google policy)
+     - Put more than 3 ad units per page (diminishing returns)
+     - Place ads where they could be confused with calculator buttons
+     - Use sticky/fixed position ads on mobile (bad UX + may violate policy)
+     - Place interstitial or popup ads (violates Google AdSense policies)
+
+     ADSENSE POLICY REFERENCE:
+     https://support.google.com/adsense/answer/1346295
+-->

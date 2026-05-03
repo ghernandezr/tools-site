@@ -1,0 +1,104 @@
+<!-- ============================================================
+     TOOL 7: DISCOUNT CALCULATOR
+     Slug: /discount-calculator/
+     Primary keyword: "discount calculator"
+     RankMath Title: Discount Calculator — Final Price After % Off | ToolsHub
+     RankMath Meta: Calculate the final price after any percentage discount. Enter original price and discount % to instantly see your savings and new price. Free tool.
+     ============================================================ -->
+
+<h1>Discount Calculator — Find Final Price After Percentage Off</h1>
+
+<p>Use our free <strong>discount calculator</strong> to instantly find out how much you save and what the final price is after any percentage discount. Perfect for sales, coupons, clearance events, and online shopping deals.</p>
+
+[ad_slot position="header"]
+
+<div class="tool-card">
+  <h2>Discount Calculator</h2>
+  <form id="discount-form">
+    <div class="tool-group">
+      <label for="discount-original">Original Price ($)</label>
+      <input type="number" id="discount-original" placeholder="e.g. 149.99" min="0.01" step="any" required>
+    </div>
+    <div class="tool-group">
+      <label for="discount-percent">Discount Percentage (%)</label>
+      <input type="number" id="discount-percent" placeholder="e.g. 30" min="0" max="100" step="any" required>
+    </div>
+    <button type="submit" class="tool-btn">Calculate Discount</button>
+  </form>
+
+  <div id="discount-error" class="tool-error"></div>
+
+  <div id="discount-result" class="tool-result">
+    <div class="tool-result__label">Final Price</div>
+    <div class="tool-result__value" id="discount-final">—</div>
+    <div class="tool-result__breakdown">
+      <strong>Original Price:</strong> <span id="discount-original-out">—</span><br>
+      <strong>You Save:</strong> <span id="discount-savings">—</span>
+    </div>
+  </div>
+
+  <button id="discount-reset" class="tool-reset">Reset</button>
+</div>
+
+[ad_slot position="mid"]
+
+<h2>Discount Formula</h2>
+<div class="tool-formula">
+  Savings = Original Price × (Discount % ÷ 100)<br>
+  Final Price = Original Price − Savings<br><br>
+  Example: $149.99 at 30% off:<br>
+  Savings = $149.99 × 0.30 = $45.00<br>
+  Final Price = $149.99 − $45.00 = $104.99
+</div>
+
+<h2>Common Discount Examples</h2>
+<ul>
+  <li><strong>$50 item, 10% off</strong> → Save $5.00 → Pay $45.00</li>
+  <li><strong>$100 item, 25% off</strong> → Save $25.00 → Pay $75.00</li>
+  <li><strong>$200 item, 40% off</strong> → Save $80.00 → Pay $120.00</li>
+  <li><strong>$499 item, 15% off</strong> → Save $74.85 → Pay $424.15</li>
+  <li><strong>$1,200 item, 33% off</strong> → Save $396.00 → Pay $804.00</li>
+</ul>
+
+<h2>Stacked Discounts</h2>
+<p>If a store applies two discounts in sequence (e.g., 20% off, then an additional 10% off), they do NOT add up to 30%. Calculate them sequentially:</p>
+<div class="tool-formula">
+  $100 → 20% off → $80 → additional 10% off → $72<br>
+  Total effective discount: 28% (not 30%)
+</div>
+<p>Use the calculator twice in sequence for stacked discounts.</p>
+
+<h2>Related Tools</h2>
+<ul>
+  <li><a href="/percentage-calculator/"><strong>Percentage Calculator</strong></a> — Find what percentage you're saving or what a discount equals.</li>
+  <li><a href="/tip-calculator/"><strong>Tip Calculator</strong></a> — Calculate tip on the final (post-discount) price.</li>
+  <li><a href="/unit-converter/"><strong>Unit Converter</strong></a> — Great for international shopping where unit differences matter.</li>
+</ul>
+
+<div class="tool-faq">
+  <h2>Frequently Asked Questions</h2>
+
+  <div class="tool-faq__item">
+    <div class="tool-faq__question">How do I calculate a discount percentage?</div>
+    <div class="tool-faq__answer">Formula: Discount % = ((Original Price − Sale Price) ÷ Original Price) × 100. Example: item was $80, now $60 → ((80−60) ÷ 80) × 100 = 25% discount. Use our Percentage Calculator for this calculation.</div>
+  </div>
+
+  <div class="tool-faq__item">
+    <div class="tool-faq__question">What is 20% off $75?</div>
+    <div class="tool-faq__answer">20% of $75 = $15 savings. Final price = $75 − $15 = $60. Quick mental trick: 20% off means you pay 80% of the original price. $75 × 0.80 = $60.</div>
+  </div>
+
+  <div class="tool-faq__item">
+    <div class="tool-faq__question">How do I find the original price from a discounted price?</div>
+    <div class="tool-faq__answer">Formula: Original Price = Sale Price ÷ (1 − Discount%). Example: You paid $70 after a 30% discount → Original = $70 ÷ 0.70 = $100. This is also called "reverse discount" calculation.</div>
+  </div>
+
+  <div class="tool-faq__item">
+    <div class="tool-faq__question">Does the discount apply before or after tax?</div>
+    <div class="tool-faq__answer">In most retail situations in the US, discounts are applied to the pre-tax price. Sales tax is then calculated on the discounted price. For example: $100 item, 20% off = $80, then 8% tax = $86.40 final total. This calculator shows the pre-tax discounted price only.</div>
+  </div>
+</div>
+
+<p><small>⚠️ <strong>Disclaimer:</strong> For informational purposes only. Tax not included. See our <a href="/disclaimer/">full Disclaimer</a>.</small></p>
+
+[ad_slot position="footer"]

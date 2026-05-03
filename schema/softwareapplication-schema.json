@@ -1,0 +1,158 @@
+{
+  "_comment": "SoftwareApplication Schema Template — paste into RankMath Schema Builder OR inject via functions.php wp_head hook. Replace all PLACEHOLDER values before publishing.",
+
+  "loan-payment-calculator": {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Loan Payment Calculator",
+    "url": "https://yoursite.com/loan-payment-calculator/",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web Browser",
+    "description": "Free online loan payment calculator. Calculate monthly payment, total interest, and total cost for any loan using the standard amortization formula.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Organization",
+      "name": "ToolsHub",
+      "url": "https://yoursite.com"
+    }
+  },
+
+  "credit-card-interest-calculator": {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Credit Card Interest Calculator",
+    "url": "https://yoursite.com/credit-card-interest-calculator/",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web Browser",
+    "description": "Calculate your monthly credit card interest charge, how much of your payment reduces principal, and how many months to pay off your balance.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  },
+
+  "compound-interest-calculator": {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Compound Interest Calculator",
+    "url": "https://yoursite.com/compound-interest-calculator/",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web Browser",
+    "description": "Calculate how an investment grows with compound interest using the formula A = P(1 + r/n)^(nt). Supports annual, monthly, and daily compounding.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  },
+
+  "salary-to-hourly-converter": {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Salary to Hourly Converter",
+    "url": "https://yoursite.com/salary-to-hourly-converter/",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web Browser",
+    "description": "Convert any annual salary to hourly, daily, weekly, and monthly pay. Customizable hours per week and weeks per year.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  },
+
+  "tip-calculator": {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Tip Calculator",
+    "url": "https://yoursite.com/tip-calculator/",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web Browser",
+    "description": "Calculate tip amount by percentage, see total bill including tip, and split evenly among any number of people.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  },
+
+  "percentage-calculator": {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Percentage Calculator",
+    "url": "https://yoursite.com/percentage-calculator/",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web Browser",
+    "description": "Solve three types of percentage problems: find X% of Y, find what % X is of Y, and calculate % change between two values.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  },
+
+  "discount-calculator": {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Discount Calculator",
+    "url": "https://yoursite.com/discount-calculator/",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web Browser",
+    "description": "Calculate final price, total savings, and discount amount from any original price and percentage off.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  },
+
+  "fuel-cost-calculator": {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Fuel Cost Calculator",
+    "url": "https://yoursite.com/fuel-cost-calculator/",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web Browser",
+    "description": "Estimate total gas cost for any trip using distance (miles), fuel efficiency (MPG), and current gas price per gallon.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  },
+
+  "date-difference-calculator": {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Date Difference Calculator",
+    "url": "https://yoursite.com/date-difference-calculator/",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web Browser",
+    "description": "Calculate the exact number of days, weeks, months, and years between any two dates.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  },
+
+  "unit-converter": {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Unit Converter",
+    "url": "https://yoursite.com/unit-converter/",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web Browser",
+    "description": "Convert length (km to miles), weight (kg to lbs), and temperature (Celsius to Fahrenheit) instantly. Free online unit conversion tool.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+}
