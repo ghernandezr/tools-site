@@ -1,104 +1,368 @@
 <!-- ============================================================
-     TOOL 7: DISCOUNT CALCULATOR
+     TOOL 7: DISCOUNT CALCULATOR — Plugin Style Edition
      Slug: /discount-calculator/
      Primary keyword: "discount calculator"
      RankMath Title: Discount Calculator — Final Price After % Off | ToolsHub
      RankMath Meta: Calculate the final price after any percentage discount. Enter original price and discount % to instantly see your savings and new price. Free tool.
+     =============================================================
+     CSS: theme/assets/css/tools.css (classes .dsc-*)
+     JS:  theme/assets/js/calculators.js (initDiscountCalculator)
      ============================================================ -->
 
-<h1>Discount Calculator — Find Final Price After Percentage Off</h1>
+<div class="lpc-wrap">
 
-<p>Use our free <strong>discount calculator</strong> to instantly find out how much you save and what the final price is after any percentage discount. Perfect for sales, coupons, clearance events, and online shopping deals.</p>
+<!-- ════════════════════════════════════════════════
+     TOOL HERO
+     ════════════════════════════════════════════════ -->
+<section class="lpc-hero">
+  <div class="th-container">
+    <div class="lpc-hero__inner">
 
-[ad_slot position="header"]
+      <div class="lpc-hero__text">
+        <div class="lpc-hero__eyebrow">
+          <span class="lpc-hero__eyebrow-line"></span>
+          Shopping · Free Tool
+        </div>
+        <h1 class="lpc-hero__title">
+          Discount Calculator<br>
+          <span>Final Price After % Off</span>
+        </h1>
+        <p class="lpc-hero__desc">
+          Our free <strong>discount calculator</strong> instantly shows your final price, total savings, and what percentage of the original price you're paying — great for sales, coupons, and online shopping.
+        </p>
+      </div>
 
-<div class="tool-card">
-  <h2>Discount Calculator</h2>
-  <form id="discount-form">
-    <div class="tool-group">
-      <label for="discount-original">Original Price ($)</label>
-      <input type="number" id="discount-original" placeholder="e.g. 149.99" min="0.01" step="any" required>
+      <div class="lpc-hero__badges">
+        <div class="lpc-badge lpc-badge--blue">
+          <span class="lpc-badge__number">%</span>
+          <span class="lpc-badge__label">Off</span>
+        </div>
+        <div class="lpc-badge lpc-badge--dark">
+          <span class="lpc-badge__number">100%</span>
+          <span class="lpc-badge__label">Free &amp;</span>
+          <span class="lpc-badge__sublabel">Private</span>
+        </div>
+      </div>
+
     </div>
-    <div class="tool-group">
-      <label for="discount-percent">Discount Percentage (%)</label>
-      <input type="number" id="discount-percent" placeholder="e.g. 30" min="0" max="100" step="any" required>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════
+     AD — LEADERBOARD
+     ════════════════════════════════════════════════ -->
+<div class="th-container">
+  <div class="ad-leaderboard">
+    <span class="ad-label">Advertisement</span>
+    [ad_slot position="header"]
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     CALCULATOR UI
+     ════════════════════════════════════════════════ -->
+<section>
+  <div class="dsc-calculator" id="dsc-calculator">
+
+    <!-- Header -->
+    <header class="dsc-header">
+      <div class="dsc-header-icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+        </svg>
+      </div>
+      <div>
+        <h2 class="dsc-title">Discount <span style="color: var(--dsc-primary);">Calculator</span></h2>
+        <p class="dsc-subtitle">Instant Savings &amp; Final Price</p>
+      </div>
+    </header>
+
+    <!-- Main Layout: Sidebar + Panel -->
+    <div class="dsc-layout">
+
+      <!-- Sidebar: Inputs -->
+      <aside class="dsc-sidebar" aria-label="Discount parameters">
+        <div class="dsc-glass-card">
+          <h3 class="dsc-section-label">Enter Deal Details</h3>
+          <div class="dsc-field-stack">
+
+            <div class="dsc-input-group">
+              <label class="dsc-label-tech" for="dsc-original">Original Price ($)</label>
+              <input type="number" id="dsc-original" class="dsc-input-field" placeholder="e.g. 149.99" min="0.01" step="any" autocomplete="off">
+              <div class="dsc-presets">
+                <button type="button" class="dsc-preset-btn" onclick="DSC.setPrice(50)">$50</button>
+                <button type="button" class="dsc-preset-btn" onclick="DSC.setPrice(100)">$100</button>
+                <button type="button" class="dsc-preset-btn" onclick="DSC.setPrice(250)">$250</button>
+                <button type="button" class="dsc-preset-btn" onclick="DSC.setPrice(500)">$500</button>
+              </div>
+            </div>
+
+            <div class="dsc-input-group">
+              <label class="dsc-label-tech" for="dsc-percent">Discount (%)</label>
+              <input type="number" id="dsc-percent" class="dsc-input-field" placeholder="e.g. 30" min="0" max="100" step="any" autocomplete="off">
+              <div class="dsc-presets">
+                <button type="button" class="dsc-preset-btn" onclick="DSC.setPercent(10)">10%</button>
+                <button type="button" class="dsc-preset-btn" onclick="DSC.setPercent(20)">20%</button>
+                <button type="button" class="dsc-preset-btn" onclick="DSC.setPercent(30)">30%</button>
+                <button type="button" class="dsc-preset-btn" onclick="DSC.setPercent(50)">50%</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </aside>
+
+      <!-- Panel: Results -->
+      <main class="dsc-panel" aria-label="Calculation results">
+
+        <!-- KPI Cards -->
+        <div class="dsc-kpi-row">
+          <div class="dsc-kpi-card dsc-kpi-card--primary">
+            <span class="dsc-kpi-label">Final Price</span>
+            <strong class="dsc-kpi-value dsc-kpi-value--primary" id="dsc-kpi-final">—</strong>
+          </div>
+          <div class="dsc-kpi-card dsc-kpi-card--green">
+            <span class="dsc-kpi-label">You Save</span>
+            <strong class="dsc-kpi-value dsc-kpi-value--green" id="dsc-kpi-savings">—</strong>
+          </div>
+          <div class="dsc-kpi-card dsc-kpi-card--amber">
+            <span class="dsc-kpi-label">You Pay</span>
+            <strong class="dsc-kpi-value dsc-kpi-value--amber" id="dsc-kpi-pay-pct">—</strong>
+          </div>
+        </div>
+
+        <!-- Impact Panel -->
+        <div class="dsc-impact-panel">
+          <div class="dsc-impact-content">
+            <div class="dsc-impact-left">
+              <div class="dsc-impact-badge">
+                <span class="dsc-impact-badge-dot"></span>
+                <span>Live Calculation</span>
+              </div>
+              <h3 class="dsc-impact-title">Savings Summary</h3>
+              <p class="dsc-impact-desc" id="dsc-impact-desc">Enter a price and discount to see your savings instantly.</p>
+            </div>
+            <div class="dsc-impact-stats" id="dsc-impact-stats" style="display:none;">
+              <div class="dsc-impact-stat">
+                <p class="dsc-impact-stat-label">Original Price</p>
+                <p class="dsc-impact-stat-value" id="dsc-stat-original">—</p>
+              </div>
+              <div class="dsc-impact-stat">
+                <p class="dsc-impact-stat-label">Amount Saved</p>
+                <p class="dsc-impact-stat-value" id="dsc-stat-saved">—</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Breakdown Bar -->
+        <div class="dsc-breakdown-card">
+          <h4 class="dsc-breakdown-title">Price Breakdown</h4>
+          <div class="dsc-breakdown-bar">
+            <div class="dsc-breakdown-segment dsc-breakdown-segment--final" id="dsc-bar-final" style="width:70%"></div>
+            <div class="dsc-breakdown-segment dsc-breakdown-segment--saving" id="dsc-bar-saving" style="width:30%"></div>
+          </div>
+          <div class="dsc-breakdown-legend">
+            <div class="dsc-legend-item">
+              <span class="dsc-legend-dot dsc-legend-dot--final"></span>
+              <span id="dsc-legend-final">Final Price (—)</span>
+            </div>
+            <div class="dsc-legend-item">
+              <span class="dsc-legend-dot dsc-legend-dot--saving"></span>
+              <span id="dsc-legend-saving">You Save (—)</span>
+            </div>
+          </div>
+        </div>
+
+      </main>
     </div>
-    <button type="submit" class="tool-btn">Calculate Discount</button>
-  </form>
 
-  <div id="discount-error" class="tool-error"></div>
+    <!-- Bottom Ad Placeholder -->
+    <div class="dsc-ad-slot" aria-hidden="true"></div>
 
-  <div id="discount-result" class="tool-result">
-    <div class="tool-result__label">Final Price</div>
-    <div class="tool-result__value" id="discount-final">—</div>
-    <div class="tool-result__breakdown">
-      <strong>Original Price:</strong> <span id="discount-original-out">—</span><br>
-      <strong>You Save:</strong> <span id="discount-savings">—</span>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════
+     MAIN CONTENT
+     ════════════════════════════════════════════════ -->
+<section class="ab-mission">
+  <div class="th-container">
+    <div class="lpc-content-grid">
+
+      <!-- Left 2/3: article content -->
+      <div>
+
+        <!-- MID CONTENT AD -->
+        <div class="ad-infeed" style="margin:0 0 2rem;">
+          <span class="ad-label">Advertisement</span>
+          [ad_slot position="mid"]
+        </div>
+
+        <!-- FORMULAS -->
+        <h2 class="ab-section-title">Discount Formulas Explained</h2>
+        <p class="ab-section-subtitle">Two simple formulas behind every discount calculation:</p>
+
+        <div class="tool-formula-pro">
+          <div class="tfp-header">
+            <span class="tfp-badge">1</span>
+            <span class="tfp-title">Savings Amount</span>
+          </div>
+          <div class="tfp-equation">
+            <span class="tfp-var tfp-result">Savings</span>
+            <span class="tfp-equals">=</span>
+            <span class="tfp-var">Original Price</span>
+            <span class="tfp-operator">×</span>
+            <div class="tfp-fraction">
+              <div class="tfp-numerator">Discount %</div>
+              <div class="tfp-denominator">100</div>
+            </div>
+          </div>
+          <div class="tfp-legend">
+            <div class="tfp-legend-item">
+              <span class="tfp-legend-var">Example</span>
+              <span class="tfp-legend-desc">$149.99 × 30% = $149.99 × 0.30 = <strong>$45.00 saved</strong></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tool-formula-pro">
+          <div class="tfp-header">
+            <span class="tfp-badge">2</span>
+            <span class="tfp-title">Final Price</span>
+          </div>
+          <div class="tfp-equation">
+            <span class="tfp-var tfp-result">Final Price</span>
+            <span class="tfp-equals">=</span>
+            <span class="tfp-var">Original Price</span>
+            <span class="tfp-operator">−</span>
+            <span class="tfp-var">Savings</span>
+          </div>
+          <div class="tfp-legend">
+            <div class="tfp-legend-item">
+              <span class="tfp-legend-var">Example</span>
+              <span class="tfp-legend-desc">$149.99 − $45.00 = <strong>$104.99 final price</strong></span>
+            </div>
+          </div>
+        </div>
+
+        <h2>Common Discount Examples</h2>
+        <ul>
+          <li><strong>$50 item, 10% off</strong> → Save $5.00 → Pay $45.00</li>
+          <li><strong>$100 item, 25% off</strong> → Save $25.00 → Pay $75.00</li>
+          <li><strong>$200 item, 40% off</strong> → Save $80.00 → Pay $120.00</li>
+          <li><strong>$499 item, 15% off</strong> → Save $74.85 → Pay $424.15</li>
+          <li><strong>$1,200 item, 33% off</strong> → Save $396.00 → Pay $804.00</li>
+        </ul>
+
+        <h2>Stacked Discounts</h2>
+        <p>If a store applies two discounts in sequence (e.g., 20% off, then an additional 10% off), they do <strong>not</strong> add up to 30%. Calculate them sequentially:</p>
+        <div class="tool-formula-pro">
+          <div class="tfp-header">
+            <span class="tfp-badge">!</span>
+            <span class="tfp-title">Stacked Discount Example</span>
+          </div>
+          <div class="tfp-equation">
+            <span class="tfp-var">$100</span>
+            <span class="tfp-operator">→</span>
+            <span class="tfp-var">20% off</span>
+            <span class="tfp-operator">→</span>
+            <span class="tfp-var">$80</span>
+            <span class="tfp-operator">→</span>
+            <span class="tfp-var">10% off</span>
+            <span class="tfp-operator">→</span>
+            <span class="tfp-var tfp-result">$72</span>
+          </div>
+          <div class="tfp-legend">
+            <div class="tfp-legend-item">
+              <span class="tfp-legend-var">Note</span>
+              <span class="tfp-legend-desc">Total effective discount is 28%, not 30%. Use the calculator twice in sequence.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- INTERNAL LINKS -->
+        <h2>Related Tools</h2>
+        <ul>
+          <li><a href="/percentage-calculator/"><strong>Percentage Calculator</strong></a> — Find what percentage you're saving or what a discount equals.</li>
+          <li><a href="/tip-calculator/"><strong>Tip Calculator</strong></a> — Calculate tip on the final post-discount price.</li>
+          <li><a href="/salary-to-hourly-converter/"><strong>Salary Converter</strong></a> — See how much of your hourly wage an item really costs.</li>
+          <li><a href="/unit-converter/"><strong>Unit Converter</strong></a> — Great for international shopping where unit differences matter.</li>
+        </ul>
+
+        <!-- FAQ SECTION -->
+        <div class="tool-faq">
+          <h2>Frequently Asked Questions</h2>
+
+          <div class="tool-faq__item">
+            <div class="tool-faq__question">How do I calculate a discount percentage?</div>
+            <div class="tool-faq__answer">Formula: Discount % = ((Original Price − Sale Price) ÷ Original Price) × 100. Example: item was $80, now $60 → ((80−60) ÷ 80) × 100 = 25% discount. Use our Percentage Calculator for this reverse calculation.</div>
+          </div>
+
+          <div class="tool-faq__item">
+            <div class="tool-faq__question">What is 20% off $75?</div>
+            <div class="tool-faq__answer">20% of $75 = $15 savings. Final price = $75 − $15 = $60. Quick mental trick: 20% off means you pay 80% of the original price. $75 × 0.80 = $60.</div>
+          </div>
+
+          <div class="tool-faq__item">
+            <div class="tool-faq__question">How do I find the original price from a discounted price?</div>
+            <div class="tool-faq__answer">Formula: Original Price = Sale Price ÷ (1 − Discount%). Example: You paid $70 after a 30% discount → Original = $70 ÷ 0.70 = $100. This is also called a "reverse discount" or "back-calculation."</div>
+          </div>
+
+          <div class="tool-faq__item">
+            <div class="tool-faq__question">Does the discount apply before or after tax?</div>
+            <div class="tool-faq__answer">In most US retail situations, discounts are applied to the pre-tax price. Sales tax is then calculated on the discounted price. Example: $100 item, 20% off = $80, then 8% tax = $86.40 final total. This calculator shows the pre-tax discounted price only.</div>
+          </div>
+
+          <div class="tool-faq__item">
+            <div class="tool-faq__question">Do stacked discounts add up?</div>
+            <div class="tool-faq__answer">No. Two sequential discounts of 20% and 10% give a combined discount of only 28%, not 30%. To calculate: apply the first discount to get an interim price, then apply the second discount to that interim price. The calculator above can be used twice in sequence for this.</div>
+          </div>
+        </div>
+
+        <p><small>⚠️ <strong>Disclaimer:</strong> For informational purposes only. Tax not included. See our <a href="/disclaimer/">full Disclaimer</a>.</small></p>
+
+      </div>
+
+      <!-- Right 1/3: ad + callout -->
+      <div class="ab-sidebar">
+
+        <div class="ad-sidebar">
+          <span class="ad-label">Advertisement</span>
+          <span class="ad-placeholder-text">Ad Space</span>
+          [ad_slot position="sidebar"]
+        </div>
+
+        <div class="lpc-sidebar-card">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          <p class="lpc-sidebar-card__title">100% Private</p>
+          <p class="lpc-sidebar-card__text">Your calculations are never stored or sent to any server. All math happens instantly in your browser.</p>
+        </div>
+
+        <div class="ab-callout">
+          <span class="ab-callout__icon">💡</span>
+          <div class="ab-callout__title">Pro Tip</div>
+          <p class="ab-callout__text">
+            Quick mental math: to find 10% of any price, move the decimal one place left. 20% = double that. 5% = cut 10% in half. 25% = divide by 4.
+          </p>
+        </div>
+
+      </div>
+
     </div>
   </div>
+</section>
 
-  <button id="discount-reset" class="tool-reset">Reset</button>
-</div>
-
-[ad_slot position="mid"]
-
-<h2>Discount Formula</h2>
-<div class="tool-formula">
-  Savings = Original Price × (Discount % ÷ 100)<br>
-  Final Price = Original Price − Savings<br><br>
-  Example: $149.99 at 30% off:<br>
-  Savings = $149.99 × 0.30 = $45.00<br>
-  Final Price = $149.99 − $45.00 = $104.99
-</div>
-
-<h2>Common Discount Examples</h2>
-<ul>
-  <li><strong>$50 item, 10% off</strong> → Save $5.00 → Pay $45.00</li>
-  <li><strong>$100 item, 25% off</strong> → Save $25.00 → Pay $75.00</li>
-  <li><strong>$200 item, 40% off</strong> → Save $80.00 → Pay $120.00</li>
-  <li><strong>$499 item, 15% off</strong> → Save $74.85 → Pay $424.15</li>
-  <li><strong>$1,200 item, 33% off</strong> → Save $396.00 → Pay $804.00</li>
-</ul>
-
-<h2>Stacked Discounts</h2>
-<p>If a store applies two discounts in sequence (e.g., 20% off, then an additional 10% off), they do NOT add up to 30%. Calculate them sequentially:</p>
-<div class="tool-formula">
-  $100 → 20% off → $80 → additional 10% off → $72<br>
-  Total effective discount: 28% (not 30%)
-</div>
-<p>Use the calculator twice in sequence for stacked discounts.</p>
-
-<h2>Related Tools</h2>
-<ul>
-  <li><a href="/percentage-calculator/"><strong>Percentage Calculator</strong></a> — Find what percentage you're saving or what a discount equals.</li>
-  <li><a href="/tip-calculator/"><strong>Tip Calculator</strong></a> — Calculate tip on the final (post-discount) price.</li>
-  <li><a href="/unit-converter/"><strong>Unit Converter</strong></a> — Great for international shopping where unit differences matter.</li>
-</ul>
-
-<div class="tool-faq">
-  <h2>Frequently Asked Questions</h2>
-
-  <div class="tool-faq__item">
-    <div class="tool-faq__question">How do I calculate a discount percentage?</div>
-    <div class="tool-faq__answer">Formula: Discount % = ((Original Price − Sale Price) ÷ Original Price) × 100. Example: item was $80, now $60 → ((80−60) ÷ 80) × 100 = 25% discount. Use our Percentage Calculator for this calculation.</div>
+<!-- ════════════════════════════════════════════════
+     AD — FOOTER
+     ════════════════════════════════════════════════ -->
+<section class="ab-policy" style="padding:3rem 0;">
+  <div class="th-container">
+    <div class="ad-leaderboard">
+      <span class="ad-label">Advertisement</span>
+      [ad_slot position="footer"]
+    </div>
   </div>
+</section>
 
-  <div class="tool-faq__item">
-    <div class="tool-faq__question">What is 20% off $75?</div>
-    <div class="tool-faq__answer">20% of $75 = $15 savings. Final price = $75 − $15 = $60. Quick mental trick: 20% off means you pay 80% of the original price. $75 × 0.80 = $60.</div>
-  </div>
-
-  <div class="tool-faq__item">
-    <div class="tool-faq__question">How do I find the original price from a discounted price?</div>
-    <div class="tool-faq__answer">Formula: Original Price = Sale Price ÷ (1 − Discount%). Example: You paid $70 after a 30% discount → Original = $70 ÷ 0.70 = $100. This is also called "reverse discount" calculation.</div>
-  </div>
-
-  <div class="tool-faq__item">
-    <div class="tool-faq__question">Does the discount apply before or after tax?</div>
-    <div class="tool-faq__answer">In most retail situations in the US, discounts are applied to the pre-tax price. Sales tax is then calculated on the discounted price. For example: $100 item, 20% off = $80, then 8% tax = $86.40 final total. This calculator shows the pre-tax discounted price only.</div>
-  </div>
-</div>
-
-<p><small>⚠️ <strong>Disclaimer:</strong> For informational purposes only. Tax not included. See our <a href="/disclaimer/">full Disclaimer</a>.</small></p>
-
-[ad_slot position="footer"]
+</div><!-- /.lpc-wrap -->

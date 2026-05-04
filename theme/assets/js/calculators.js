@@ -957,38 +957,92 @@
   }
 
   /* ============================================================
-     TOOL 7 — Discount Calculator
-     Formula: Final = Original - (Original × Discount%)
+     TOOL 7 — Discount Calculator (Plugin Style Edition)
+     Formula: Savings = Original × (Discount% / 100)
+              Final   = Original − Savings
+     Features: Real-time calculation, KPI cards, breakdown bar
   ============================================================ */
   function initDiscountCalculator() {
-    var form = el('discount-form');
-    if (!form) return;
+    var container = document.getElementById('dsc-calculator');
+    if (!container) return;
 
-    var resultEl = el('discount-result');
-    var errorEl = el('discount-error');
-    var resetBtn = el('discount-reset');
+    var els = {
+      original: el('dsc-original'),
+      percent: el('dsc-percent'),
+      kpiFinal: el('dsc-kpi-final'),
+      kpiSavings: el('dsc-kpi-savings'),
+      kpiPayPct: el('dsc-kpi-pay-pct'),
+      impactDesc: el('dsc-impact-desc'),
+      impactStats: el('dsc-impact-stats'),
+      statOriginal: el('dsc-stat-original'),
+      statSaved: el('dsc-stat-saved'),
+      barFinal: el('dsc-bar-final'),
+      barSaving: el('dsc-bar-saving'),
+      legendFinal: el('dsc-legend-final'),
+      legendSaving: el('dsc-legend-saving'),
+    };
 
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
+    if (!els.original || !els.percent) return;
 
-      var original = parseFloat(el('discount-original').value);
-      var pct = parseFloat(el('discount-percent').value);
+    var fmtCur = new Intl.NumberFormat('en-US', {
+      style: 'currency', currency: 'USD',
+      minimumFractionDigits: 2, maximumFractionDigits: 2,
+    });
 
-      if (isNaN(original) || original <= 0) return showError(resultEl, errorEl, 'Please enter a valid original price.');
-      if (isNaN(pct) || pct < 0 || pct > 100) return showError(resultEl, errorEl, 'Discount must be between 0 and 100.');
+    function calculate() {
+      var original = parseFloat(els.original.value) || 0;
+      var pct = parseFloat(els.percent.value) || 0;
+
+      if (original <= 0 || pct < 0 || pct > 100) {
+        resetUI();
+        return;
+      }
 
       var savings = original * (pct / 100);
       var finalPrice = original - savings;
+      var finalPct = 100 - pct;
+      var barFinalW = Math.max(0, Math.min(100, finalPct));
+      var barSavingW = Math.max(0, Math.min(100, pct));
 
-      el('discount-savings').textContent = fmtCurrency(savings);
-      el('discount-final').textContent = fmtCurrency(finalPrice);
-      el('discount-original-out').textContent = fmtCurrency(original);
+      if (els.kpiFinal) els.kpiFinal.textContent = fmtCur.format(finalPrice);
+      if (els.kpiSavings) els.kpiSavings.textContent = fmtCur.format(savings);
+      if (els.kpiPayPct) els.kpiPayPct.textContent = finalPct.toFixed(1) + '% of original';
 
-      showResult(resultEl, errorEl);
-      resetBtn && resetBtn.classList.add('is-visible');
+      if (els.impactDesc) els.impactDesc.textContent =
+        fmtCur.format(original) + ' at ' + pct + '% off → pay ' + fmtCur.format(finalPrice) + ', save ' + fmtCur.format(savings) + '.';
+
+      if (els.impactStats) els.impactStats.style.display = 'grid';
+      if (els.statOriginal) els.statOriginal.textContent = fmtCur.format(original);
+      if (els.statSaved) els.statSaved.textContent = fmtCur.format(savings);
+
+      if (els.barFinal) els.barFinal.style.width = barFinalW + '%';
+      if (els.barSaving) els.barSaving.style.width = barSavingW + '%';
+      if (els.legendFinal) els.legendFinal.textContent = 'Final Price (' + finalPct.toFixed(0) + '%)';
+      if (els.legendSaving) els.legendSaving.textContent = 'You Save (' + pct.toFixed(0) + '%)';
+    }
+
+    function resetUI() {
+      if (els.kpiFinal) els.kpiFinal.textContent = '—';
+      if (els.kpiSavings) els.kpiSavings.textContent = '—';
+      if (els.kpiPayPct) els.kpiPayPct.textContent = '—';
+      if (els.impactDesc) els.impactDesc.textContent = 'Enter a price and discount to see your savings instantly.';
+      if (els.impactStats) els.impactStats.style.display = 'none';
+      if (els.barFinal) els.barFinal.style.width = '70%';
+      if (els.barSaving) els.barSaving.style.width = '30%';
+      if (els.legendFinal) els.legendFinal.textContent = 'Final Price (—)';
+      if (els.legendSaving) els.legendSaving.textContent = 'You Save (—)';
+    }
+
+    [els.original, els.percent].forEach(function (input) {
+      if (input) input.addEventListener('input', calculate);
     });
 
-    bindReset(resetBtn, form, resultEl, errorEl);
+    window.DSC = {
+      setPrice: function (val) { els.original.value = val; calculate(); },
+      setPercent: function (val) { els.percent.value = val; calculate(); },
+    };
+
+    calculate();
   }
 
   /* ============================================================

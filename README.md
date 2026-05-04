@@ -68,11 +68,11 @@ Las siguientes herramientas en `tools/` están listas para usar:
 - **Credit Card** — Calculadora de interés de tarjeta de crédito (credit-card-interest-calculator.html)
 - **Tip** — Calculadora de propinas (tip-calculator.html)
 - **Percentage** — Calculadora de porcentajes (percentage-calculator.html)
+- **Discount** — Calculadora de descuentos (discount-calculator.html)
 
 
 ### 🚧 Herramientas Pendientes
 
-- **Discount** — Calculadora de descuentos (discount-calculator.html)
 - **Unit** — Conversor de unidades (unit-converter.html)
 
 ---
