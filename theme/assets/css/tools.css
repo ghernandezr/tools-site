@@ -3016,3 +3016,435 @@ nav .sub-menu a {
 .fcc-animate-in {
   animation: fcc-fade-in 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
+
+/* =============================================================
+   TOOL 3 — COMPOUND INTEREST CALCULATOR (cic-*)
+   Matches fcc-* design system · Finance / Emerald palette
+   ============================================================= */
+
+/* ─── Custom Properties ───────────────────────────────────────────────────── */
+.cic-calculator {
+  --cic-primary:       #059669;
+  --cic-primary-dark:  #047857;
+  --cic-primary-light: #d1fae5;
+  --cic-amber:         #f59e0b;
+  --cic-blue:          #6366f1;
+  --cic-text:          #0f172a;
+  --cic-text-muted:    #64748b;
+  --cic-text-light:    #94a3b8;
+  --cic-border:        #e2e8f0;
+  --cic-radius:        0.75rem;
+  --cic-radius-lg:     1rem;
+  --cic-radius-xl:     1.25rem;
+  --cic-transition:    0.18s ease;
+  --cic-font:          inherit;
+}
+
+/* ─── Calculator Container ────────────────────────────────────────────────── */
+.cic-calculator {
+  font-family: var(--cic-font);
+  color: var(--cic-text);
+  background: radial-gradient(circle at top right, #f8fafc, #ecfdf5);
+  border-radius: 2rem;
+  padding: 1.25rem;
+  max-width: 1100px;
+  margin: 0 auto 2.5rem;
+}
+
+@media (min-width: 640px) {
+  .cic-calculator { padding: 1.5rem; }
+}
+
+/* ─── Header ──────────────────────────────────────────────────────────────── */
+.cic-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.cic-header-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  background: var(--cic-primary);
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgb(5 150 105 / 0.35);
+}
+
+.cic-title {
+  font-size: 1.2rem;
+  font-weight: 800;
+  margin: 0 0 0.1rem;
+  color: var(--cic-text);
+  line-height: 1.2;
+}
+
+.cic-subtitle {
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--cic-text-muted);
+  margin: 0;
+}
+
+/* ─── Layout Grid ─────────────────────────────────────────────────────────── */
+.cic-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+@media (min-width: 900px) {
+  .cic-layout {
+    display: grid;
+    grid-template-columns: 5fr 8fr;
+    align-items: start;
+  }
+}
+
+/* ─── Glass Card ──────────────────────────────────────────────────────────── */
+.cic-glass-card {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: var(--cic-radius-xl);
+  padding: 1.25rem;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+}
+
+/* ─── Section Labels ──────────────────────────────────────────────────────── */
+.cic-section-label {
+  font-size: 0.6rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--cic-text-muted);
+  margin: 0 0 1rem;
+}
+
+/* ─── Input Groups ────────────────────────────────────────────────────────── */
+.cic-field-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.cic-input-group {
+  background: #fff;
+  border: 1px solid var(--cic-border);
+  border-radius: var(--cic-radius-lg);
+  padding: 0.75rem;
+  transition: border-color var(--cic-transition), box-shadow var(--cic-transition);
+}
+
+.cic-input-group:focus-within {
+  border-color: var(--cic-primary);
+  box-shadow: 0 0 0 4px rgba(5, 150, 105, 0.1);
+}
+
+.cic-label-tech {
+  display: block;
+  font-size: 0.6rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--cic-text-muted);
+  margin-bottom: 0.25rem;
+}
+
+.cic-input-field {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--cic-text);
+  padding: 0;
+  line-height: 1.4;
+  box-sizing: border-box;
+  appearance: textfield;
+}
+
+.cic-input-field::-webkit-inner-spin-button,
+.cic-input-field::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+.cic-input-field::placeholder {
+  color: var(--cic-text-light);
+  font-weight: 400;
+}
+
+.cic-select {
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  appearance: auto;
+  -webkit-appearance: auto;
+}
+
+/* ─── Quick Presets ───────────────────────────────────────────────────────── */
+.cic-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.cic-preset-btn {
+  padding: 0.35rem 0.75rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  background: #f1f5f9;
+  border: 1px solid var(--cic-border);
+  border-radius: 2rem;
+  cursor: pointer;
+  color: var(--cic-text-muted);
+  transition: all var(--cic-transition);
+}
+
+.cic-preset-btn:hover {
+  background: var(--cic-primary-light);
+  border-color: var(--cic-primary);
+  color: var(--cic-primary);
+}
+
+/* ─── KPI Cards ───────────────────────────────────────────────────────────── */
+.cic-kpi-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.875rem;
+  margin-bottom: 1.25rem;
+}
+
+@media (min-width: 560px) {
+  .cic-kpi-row {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.cic-kpi-card {
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: var(--cic-radius-xl);
+  padding: 1rem 1.25rem;
+  border-left-width: 4px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  transition: transform var(--cic-transition);
+}
+
+.cic-kpi-card:hover {
+  transform: translateY(-2px);
+}
+
+.cic-kpi-card--primary { border-left-color: var(--cic-primary); }
+.cic-kpi-card--green   { border-left-color: #22c55e; }
+.cic-kpi-card--amber   { border-left-color: var(--cic-amber); }
+
+.cic-kpi-label {
+  display: block;
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--cic-text-muted);
+  margin-bottom: 0.25rem;
+}
+
+.cic-kpi-value {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--cic-text);
+  line-height: 1.1;
+}
+
+.cic-kpi-value--primary { color: var(--cic-primary); }
+.cic-kpi-value--green   { color: #22c55e; }
+.cic-kpi-value--amber   { color: var(--cic-amber); }
+
+/* ─── Impact Panel ────────────────────────────────────────────────────────── */
+.cic-impact-panel {
+  background: linear-gradient(135deg, #047857 0%, #059669 50%, #0d9488 100%);
+  border-radius: 1.75rem;
+  padding: 1.75rem;
+  color: #fff;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 1.25rem;
+}
+
+.cic-impact-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+@media (min-width: 600px) {
+  .cic-impact-content {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.cic-impact-left { flex: 1; }
+
+.cic-impact-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 2rem;
+  padding: 0.3rem 0.75rem;
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.75rem;
+  backdrop-filter: blur(8px);
+}
+
+.cic-impact-badge-dot {
+  width: 0.4rem;
+  height: 0.4rem;
+  background: #fbbf24;
+  border-radius: 50%;
+}
+
+.cic-impact-title {
+  font-size: 1.25rem;
+  font-weight: 900;
+  margin: 0 0 0.5rem;
+  line-height: 1.2;
+}
+
+.cic-impact-desc {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: rgba(209, 250, 229, 0.85);
+  margin: 0;
+}
+
+.cic-impact-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.875rem;
+  flex-shrink: 0;
+}
+
+.cic-impact-stat {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 1rem;
+  padding: 0.875rem;
+  backdrop-filter: blur(8px);
+}
+
+.cic-impact-stat-label {
+  font-size: 0.55rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(209, 250, 229, 0.75);
+  margin: 0 0 0.2rem;
+}
+
+.cic-impact-stat-value {
+  font-size: 1.1rem;
+  font-weight: 900;
+  margin: 0;
+}
+
+/* ─── Visual Breakdown ────────────────────────────────────────────────────── */
+.cic-breakdown-card {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: var(--cic-radius-xl);
+  padding: 1.5rem;
+}
+
+.cic-breakdown-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--cic-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 1rem;
+}
+
+.cic-breakdown-bar {
+  height: 2rem;
+  background: #e2e8f0;
+  border-radius: var(--cic-radius);
+  overflow: hidden;
+  display: flex;
+  margin-bottom: 1rem;
+}
+
+.cic-breakdown-segment {
+  height: 100%;
+  transition: width 0.4s ease;
+}
+
+.cic-breakdown-segment--principal { background: var(--cic-primary); }
+.cic-breakdown-segment--interest  { background: var(--cic-amber); }
+
+.cic-breakdown-legend {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.cic-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--cic-text-muted);
+}
+
+.cic-legend-dot {
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.cic-legend-dot--principal { background: var(--cic-primary); }
+.cic-legend-dot--interest  { background: var(--cic-amber); }
+
+/* ─── Ad Placeholder ──────────────────────────────────────────────────────── */
+.cic-ad-slot {
+  margin: 1.25rem 0;
+  text-align: center;
+  min-height: 1px;
+}
+
+/* ─── Mobile Touch Fixes ──────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .cic-input-field { font-size: 1rem; }
+}
+
+/* ─── Animation ──────────────────────────────────────────────────────────── */
+@keyframes cic-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.cic-animate-in {
+  animation: cic-fade-in 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}

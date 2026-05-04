@@ -257,39 +257,61 @@
      Formula: A = P(1 + r/n)^(nt)
   ============================================================ */
   function initCompoundInterestCalculator() {
-    var form = el('ci-form');
-    if (!form) return;
+    var principalEl = el('ci-principal');
+    var rateEl = el('ci-rate');
+    var frequencyEl = el('ci-frequency');
+    var yearsEl = el('ci-years');
 
-    var resultEl = el('ci-result');
-    var errorEl = el('ci-error');
-    var resetBtn = el('ci-reset');
+    if (!principalEl) return;
 
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
+    function calcCIC() {
+      var P = parseFloat(principalEl.value);
+      var r = parseFloat(rateEl.value) / 100;
+      var n = parseFloat(frequencyEl.value);
+      var t = parseFloat(yearsEl.value);
 
-      var P = parseFloat(el('ci-principal').value);
-      var r = parseFloat(el('ci-rate').value) / 100;
-      var n = parseFloat(el('ci-frequency').value);
-      var t = parseFloat(el('ci-years').value);
-
-      if (isNaN(P) || P <= 0) return showError(resultEl, errorEl, 'Please enter a valid principal amount.');
-      if (isNaN(r) || r < 0) return showError(resultEl, errorEl, 'Please enter a valid interest rate.');
-      if (isNaN(n) || n <= 0) return showError(resultEl, errorEl, 'Invalid compounding frequency.');
-      if (isNaN(t) || t <= 0) return showError(resultEl, errorEl, 'Please enter a valid time period.');
+      if (isNaN(P) || P <= 0 || isNaN(r) || r < 0 || isNaN(n) || n <= 0 || isNaN(t) || t <= 0) {
+        el('ci-final').textContent = '$0.00';
+        el('ci-earned').textContent = '$0.00';
+        el('ci-growth-pct').textContent = '0.0%';
+        el('ci-principal-out').textContent = '$0.00';
+        el('ci-rule72').textContent = '— yrs';
+        el('cic-bar-principal').style.width = '100%';
+        el('cic-bar-interest').style.width = '0%';
+        el('cic-legend-principal-pct').textContent = 'Principal (100%)';
+        el('cic-legend-interest-pct').textContent = 'Interest Earned (0%)';
+        return;
+      }
 
       var A = P * Math.pow(1 + r / n, n * t);
       var interest = A - P;
+      var growthPct = ((A - P) / P) * 100;
+      var principalPct = Math.round((P / A) * 100);
+      var interestPct = 100 - principalPct;
+      var rule72 = r > 0 ? (72 / (r * 100)).toFixed(1) : '—';
 
       el('ci-final').textContent = fmtCurrency(A);
-      el('ci-principal-out').textContent = fmtCurrency(P);
       el('ci-earned').textContent = fmtCurrency(interest);
+      el('ci-growth-pct').textContent = growthPct.toFixed(1) + '%';
+      el('ci-principal-out').textContent = fmtCurrency(P);
+      el('ci-rule72').textContent = rule72 + ' yrs';
+      el('cic-bar-principal').style.width = principalPct + '%';
+      el('cic-bar-interest').style.width = interestPct + '%';
+      el('cic-legend-principal-pct').textContent = 'Principal (' + principalPct + '%)';
+      el('cic-legend-interest-pct').textContent = 'Interest Earned (' + interestPct + '%)';
+    }
 
-      showResult(resultEl, errorEl);
-      resetBtn && resetBtn.classList.add('is-visible');
-    });
-
-    bindReset(resetBtn, form, resultEl, errorEl);
+    principalEl.addEventListener('input', calcCIC);
+    rateEl.addEventListener('input', calcCIC);
+    frequencyEl.addEventListener('change', calcCIC);
+    yearsEl.addEventListener('input', calcCIC);
   }
+
+  window.CIC = {
+    setPrincipal: function (v) { var f = el('ci-principal'); if (f) { f.value = v; f.dispatchEvent(new Event('input')); } },
+    setRate: function (v) { var f = el('ci-rate'); if (f) { f.value = v; f.dispatchEvent(new Event('input')); } },
+    setYears: function (v) { var f = el('ci-years'); if (f) { f.value = v; f.dispatchEvent(new Event('input')); } }
+  };
 
   /* ============================================================
      TOOL 4 — Salary to Hourly Converter
