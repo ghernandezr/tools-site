@@ -493,57 +493,7 @@
   }
 
   /* ============================================================
-     TOOL 9 — Date Difference Calculator
-     Formula: Days = End Date − Start Date
-  ============================================================ */
-  function initDateDiffCalculator() {
-    var form = el('date-form');
-    if (!form) return;
-
-    var resultEl = el('date-result');
-    var errorEl = el('date-error');
-    var resetBtn = el('date-reset');
-
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-
-      var startVal = el('date-start').value;
-      var endVal = el('date-end').value;
-
-      if (!startVal) return showError(resultEl, errorEl, 'Please select a start date.');
-      if (!endVal) return showError(resultEl, errorEl, 'Please select an end date.');
-
-      var start = new Date(startVal);
-      var end = new Date(endVal);
-
-      if (isNaN(start.getTime()) || isNaN(end.getTime())) {
-        return showError(resultEl, errorEl, 'Invalid date(s) entered.');
-      }
-
-      var diffMs = end - start;
-      var diffDays = Math.round(diffMs / (1000 * 60 * 60 * 24));
-      var absDays = Math.abs(diffDays);
-      var weeks = Math.floor(absDays / 7);
-      var days = absDays % 7;
-      var months = Math.floor(absDays / 30.4375);
-      var years = Math.floor(absDays / 365.25);
-
-      var direction = diffDays >= 0 ? 'from start to end' : 'end is before start';
-
-      el('date-days').textContent = absDays + ' days (' + direction + ')';
-      el('date-weeks').textContent = weeks + ' weeks, ' + days + ' day(s)';
-      el('date-months').textContent = months + ' months (approx.)';
-      el('date-years').textContent = years + ' year(s) (approx.)';
-
-      showResult(resultEl, errorEl);
-      resetBtn && resetBtn.classList.add('is-visible');
-    });
-
-    bindReset(resetBtn, form, resultEl, errorEl);
-  }
-
-  /* ============================================================
-     TOOL 10 — Unit Converter
+     TOOL 9 — Unit Converter
      Length: km ↔ miles | Weight: kg ↔ lbs | Temp: C ↔ F
   ============================================================ */
   function initUnitConverter() {
@@ -671,7 +621,6 @@
     initPercentageCalculator();
     initDiscountCalculator();
     initFuelCalculator();
-    initDateDiffCalculator();
     initUnitConverter();
     bindFAQ();
     initAdSenseLazy();

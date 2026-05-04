@@ -179,7 +179,6 @@ function toolshub_tool_schema() {
         'percentage-calculator',
         'discount-calculator',
         'fuel-cost-calculator',
-        'date-difference-calculator',
         'unit-converter',
     );
 
