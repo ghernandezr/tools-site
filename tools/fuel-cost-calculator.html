@@ -9,196 +9,341 @@
      JS:  theme/assets/js/calculators.js (initFuelCalculator)
      ============================================================ -->
 
-<h1>Fuel Cost Calculator — Estimate Gas Cost for Any Trip</h1>
+<div class="lpc-wrap">
 
-<p>Our free <strong>fuel cost calculator</strong> estimates how much gas will cost for any drive. Enter your trip distance, your vehicle's fuel efficiency (MPG), and the current gas price per gallon — and instantly see total fuel cost, gallons used, and cost per mile.</p>
+<!-- ══════════════════════════════════════════════
+     TOOL HERO
+     ══════════════════════════════════════════════ -->
+<section class="lpc-hero">
+  <div class="th-container">
+    <div class="lpc-hero__inner">
 
-[ad_slot position="header"]
+      <div class="lpc-hero__text">
+        <div class="lpc-hero__eyebrow">
+          <span class="lpc-hero__eyebrow-line"></span>
+          Travel · Free Tool
+        </div>
+        <h1 class="lpc-hero__title">
+          Fuel Cost Calculator<br>
+          <span>Estimate Gas Cost for Any Trip</span>
+        </h1>
+        <p class="lpc-hero__desc">
+          Our free <strong>fuel cost calculator</strong> estimates how much gas will cost for any drive. Enter your trip distance, your vehicle's fuel efficiency (MPG), and the current gas price per gallon — and instantly see total fuel cost, gallons used, and cost per mile.
+        </p>
+      </div>
 
-<!-- ═══════════════════════════════════════════════════════════════════════════
-     CALCULATOR UI — Plugin Style
-     ═══════════════════════════════════════════════════════════════════════════ -->
-<div class="fcc-calculator" id="fcc-fuel-calculator">
+      <div class="lpc-hero__badges">
+        <div class="lpc-badge lpc-badge--blue">
+          <span class="lpc-badge__number">⛽</span>
+          <span class="lpc-badge__label">Fuel Calculator</span>
+        </div>
+        <div class="lpc-badge lpc-badge--dark">
+          <span class="lpc-badge__number">100%</span>
+          <span class="lpc-badge__label">Free &amp;</span>
+          <span class="lpc-badge__sublabel">Private</span>
+        </div>
+      </div>
 
-  <!-- Header -->
-  <header class="fcc-header">
-    <div class="fcc-header-icon" aria-hidden="true">
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-        <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/>
-        <circle cx="7" cy="17" r="2"/>
-        <circle cx="17" cy="17" r="2"/>
-        <path d="M2 12h12"/>
-      </svg>
     </div>
-    <div>
-      <h2 class="fcc-title">Fuel Cost <span style="color: var(--fcc-primary);">Calculator</span></h2>
-      <p class="fcc-subtitle">Trip Cost Estimation Tool</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     AD — LEADERBOARD
+     ══════════════════════════════════════════════ -->
+<div class="th-container">
+  <div class="ad-leaderboard">
+    <span class="ad-label">Advertisement</span>
+    [ad_slot position="header"]
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     CALCULATOR UI
+     ══════════════════════════════════════════════ -->
+<section>
+  <div class="fcc-calculator" id="fcc-fuel-calculator">
+
+    <!-- Header -->
+    <header class="fcc-header">
+      <div class="fcc-header-icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/>
+          <circle cx="7" cy="17" r="2"/>
+          <circle cx="17" cy="17" r="2"/>
+          <path d="M2 12h12"/>
+        </svg>
+      </div>
+      <div>
+        <h2 class="fcc-title">Fuel Cost <span style="color: var(--fcc-primary);">Calculator</span></h2>
+        <p class="fcc-subtitle">Trip Cost Estimation Tool</p>
+      </div>
+    </header>
+
+    <!-- Main Layout: Sidebar + Panel -->
+    <div class="fcc-layout">
+
+      <!-- Sidebar: Inputs -->
+      <aside class="fcc-sidebar" aria-label="Trip parameters">
+        <div class="fcc-glass-card">
+          <h3 class="fcc-section-label">Trip Parameters</h3>
+          <div class="fcc-field-stack">
+
+            <div class="fcc-input-group">
+              <label class="fcc-label-tech" for="fcc-distance">Trip Distance (miles)</label>
+              <input type="number" id="fcc-distance" class="fcc-input-field" placeholder="350" min="0.1" step="any" autocomplete="off">
+            </div>
+
+            <div class="fcc-input-group">
+              <label class="fcc-label-tech" for="fcc-mpg">Vehicle MPG</label>
+              <input type="number" id="fcc-mpg" class="fcc-input-field" placeholder="28" min="0.1" step="any" autocomplete="off">
+              <div class="fcc-presets">
+                <button type="button" class="fcc-preset-btn" onclick="FCC.setMPG(25)">SUV (25)</button>
+                <button type="button" class="fcc-preset-btn" onclick="FCC.setMPG(30)">Sedan (30)</button>
+                <button type="button" class="fcc-preset-btn" onclick="FCC.setMPG(50)">Hybrid (50)</button>
+              </div>
+            </div>
+
+            <div class="fcc-input-group">
+              <label class="fcc-label-tech" for="fcc-price">Gas Price ($/gallon)</label>
+              <input type="number" id="fcc-price" class="fcc-input-field" placeholder="3.59" min="0.01" step="any" autocomplete="off">
+              <div class="fcc-presets">
+                <button type="button" class="fcc-preset-btn" onclick="FCC.setPrice(3.29)">$3.29</button>
+                <button type="button" class="fcc-preset-btn" onclick="FCC.setPrice(3.59)">$3.59</button>
+                <button type="button" class="fcc-preset-btn" onclick="FCC.setPrice(3.99)">$3.99</button>
+                <button type="button" class="fcc-preset-btn" onclick="FCC.setPrice(4.29)">$4.29</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </aside>
+
+      <!-- Panel: Results -->
+      <main class="fcc-panel" aria-label="Calculation results">
+
+        <!-- KPI Cards -->
+        <div class="fcc-kpi-row">
+          <div class="fcc-kpi-card fcc-kpi-card--primary">
+            <span class="fcc-kpi-label">Total Fuel Cost</span>
+            <strong class="fcc-kpi-value fcc-kpi-value--primary" id="fcc-kpi-total">$0.00</strong>
+          </div>
+          <div class="fcc-kpi-card fcc-kpi-card--green">
+            <span class="fcc-kpi-label">Gallons Needed</span>
+            <strong class="fcc-kpi-value fcc-kpi-value--green" id="fcc-kpi-gallons">0.0</strong>
+          </div>
+          <div class="fcc-kpi-card fcc-kpi-card--amber">
+            <span class="fcc-kpi-label">Cost Per Mile</span>
+            <strong class="fcc-kpi-value fcc-kpi-value--amber" id="fcc-kpi-mile">$0.00</strong>
+          </div>
+        </div>
+
+        <!-- Impact Panel -->
+        <div class="fcc-impact-panel">
+          <div class="fcc-impact-content">
+            <div class="fcc-impact-left">
+              <div class="fcc-impact-badge">
+                <span class="fcc-impact-badge-dot"></span>
+                <span>Live Estimate</span>
+              </div>
+              <h3 class="fcc-impact-title">Trip Cost Summary</h3>
+              <p class="fcc-impact-desc">Based on current gas prices and your vehicle's efficiency. Actual consumption varies with driving conditions.</p>
+            </div>
+            <div class="fcc-impact-stats">
+              <div class="fcc-impact-stat">
+                <p class="fcc-impact-stat-label">One-Way Cost</p>
+                <p class="fcc-impact-stat-value" id="fcc-stat-oneway">$0.00</p>
+              </div>
+              <div class="fcc-impact-stat">
+                <p class="fcc-impact-stat-label">Round Trip</p>
+                <p class="fcc-impact-stat-value" id="fcc-stat-round">$0.00</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Visual Breakdown -->
+        <div class="fcc-breakdown-card">
+          <h4 class="fcc-breakdown-title">Fuel Budget Visualization</h4>
+          <div class="fcc-breakdown-bar" aria-hidden="true">
+            <div class="fcc-breakdown-segment fcc-breakdown-segment--fuel" id="fcc-bar-fuel" style="width: 75%;"></div>
+            <div class="fcc-breakdown-segment fcc-breakdown-segment--reserve" id="fcc-bar-reserve" style="width: 25%;"></div>
+          </div>
+          <div class="fcc-breakdown-legend">
+            <div class="fcc-legend-item">
+              <span class="fcc-legend-dot fcc-legend-dot--fuel"></span>
+              <span>Fuel Cost (75%)</span>
+            </div>
+            <div class="fcc-legend-item">
+              <span class="fcc-legend-dot fcc-legend-dot--reserve"></span>
+              <span>Buffer (25%)</span>
+            </div>
+          </div>
+        </div>
+
+      </main>
     </div>
-  </header>
 
-  <!-- Main Layout: Sidebar + Panel -->
-  <div class="fcc-layout">
+    <!-- Bottom Ad Placeholder -->
+    <div class="fcc-ad-slot" aria-hidden="true"></div>
 
-    <!-- Sidebar: Inputs -->
-    <aside class="fcc-sidebar" aria-label="Trip parameters">
-      <div class="fcc-glass-card">
-        <h3 class="fcc-section-label">Trip Parameters</h3>
-        <div class="fcc-field-stack">
+  </div>
+</section>
 
-          <div class="fcc-input-group">
-            <label class="fcc-label-tech" for="fcc-distance">Trip Distance (miles)</label>
-            <input type="number" id="fcc-distance" class="fcc-input-field" placeholder="350" min="0.1" step="any" autocomplete="off">
-          </div>
+<!-- ══════════════════════════════════════════════
+     MAIN CONTENT
+     ══════════════════════════════════════════════ -->
+<section class="ab-mission">
+  <div class="th-container">
+    <div class="lpc-content-grid">
 
-          <div class="fcc-input-group">
-            <label class="fcc-label-tech" for="fcc-mpg">Vehicle MPG</label>
-            <input type="number" id="fcc-mpg" class="fcc-input-field" placeholder="28" min="0.1" step="any" autocomplete="off">
-            <div class="fcc-presets">
-              <button type="button" class="fcc-preset-btn" onclick="FCC.setMPG(25)">SUV (25)</button>
-              <button type="button" class="fcc-preset-btn" onclick="FCC.setMPG(30)">Sedan (30)</button>
-              <button type="button" class="fcc-preset-btn" onclick="FCC.setMPG(50)">Hybrid (50)</button>
-            </div>
-          </div>
+      <!-- Left 2/3: article content -->
+      <div>
 
-          <div class="fcc-input-group">
-            <label class="fcc-label-tech" for="fcc-price">Gas Price ($/gallon)</label>
-            <input type="number" id="fcc-price" class="fcc-input-field" placeholder="3.59" min="0.01" step="any" autocomplete="off">
-            <div class="fcc-presets">
-              <button type="button" class="fcc-preset-btn" onclick="FCC.setPrice(3.29)">$3.29</button>
-              <button type="button" class="fcc-preset-btn" onclick="FCC.setPrice(3.59)">$3.59</button>
-              <button type="button" class="fcc-preset-btn" onclick="FCC.setPrice(3.99)">$3.99</button>
-              <button type="button" class="fcc-preset-btn" onclick="FCC.setPrice(4.29)">$4.29</button>
-            </div>
-          </div>
-
+        <!-- MID CONTENT AD -->
+        <div class="ad-infeed" style="margin:0 0 2rem;">
+          <span class="ad-label">Advertisement</span>
+          [ad_slot position="mid"]
         </div>
+
+        <!-- HOW IT WORKS -->
+        <h2 class="ab-section-title">Fuel Cost Formula</h2>
+        <p class="ab-section-subtitle">This calculator uses three simple formulas to estimate your trip's fuel cost:</p>
+
+        <div class="tool-formula-pro">
+          <div class="tfp-header">
+            <span class="tfp-badge">∑ Formula</span>
+            <span class="tfp-title">Fuel Cost Calculation</span>
+          </div>
+          <div class="tfp-equation">
+            <span class="tfp-var tfp-result">Gallons</span>
+            <span class="tfp-equals">=</span>
+            <div class="tfp-fraction">
+              <div class="tfp-numerator">Distance (miles)</div>
+              <div class="tfp-denominator">MPG</div>
+            </div>
+          </div>
+          <div class="tfp-equation" style="margin-top:1rem;">
+            <span class="tfp-var tfp-result">Total Cost</span>
+            <span class="tfp-equals">=</span>
+            <span class="tfp-var">Gallons</span>
+            <span class="tfp-operator">×</span>
+            <span class="tfp-var">Price/gal</span>
+          </div>
+          <div class="tfp-equation" style="margin-top:1rem;">
+            <span class="tfp-var tfp-result">Cost/mile</span>
+            <span class="tfp-equals">=</span>
+            <div class="tfp-fraction">
+              <div class="tfp-numerator">Total Cost</div>
+              <div class="tfp-denominator">Distance (miles)</div>
+            </div>
+          </div>
+          <div class="tfp-legend">
+            <div class="tfp-legend-item">
+              <span class="tfp-legend-var">Gallons</span>
+              <span class="tfp-legend-desc">Total gallons of fuel needed for the trip</span>
+            </div>
+            <div class="tfp-legend-item">
+              <span class="tfp-legend-var">MPG</span>
+              <span class="tfp-legend-desc">Your vehicle's fuel efficiency (miles per gallon)</span>
+            </div>
+            <div class="tfp-legend-item">
+              <span class="tfp-legend-var">Price/gal</span>
+              <span class="tfp-legend-desc">Current gas price per gallon (USD)</span>
+            </div>
+            <div class="tfp-legend-item">
+              <span class="tfp-legend-var">Example</span>
+              <span class="tfp-legend-desc">350 miles ÷ 28 MPG = 12.5 gal × $3.59 = <strong>$44.88</strong> &nbsp;|&nbsp; $44.88 ÷ 350 = <strong>$0.128/mile</strong></span>
+            </div>
+          </div>
+        </div>
+
+        <h2>Average MPG by Vehicle Type</h2>
+        <ul>
+          <li><strong>Compact car</strong> (Honda Civic, Toyota Corolla): 30–38 MPG</li>
+          <li><strong>Midsize sedan</strong> (Toyota Camry, Honda Accord): 28–35 MPG</li>
+          <li><strong>SUV / Crossover</strong> (Toyota RAV4, Honda CR-V): 24–30 MPG</li>
+          <li><strong>Full-size SUV/truck</strong> (Ford F-150, Chevy Tahoe): 15–22 MPG</li>
+          <li><strong>Hybrid</strong> (Toyota Prius, Honda Insight): 45–55 MPG</li>
+          <li><strong>Minivan</strong> (Honda Odyssey, Toyota Sienna): 19–26 MPG</li>
+        </ul>
+        <p>Find your exact MPG on the EPA's <strong>fueleconomy.gov</strong> or check your vehicle's dashboard average.</p>
+
+        <!-- INTERNAL LINKS -->
+        <h2>Related Tools</h2>
+        <ul>
+          <li><a href="/unit-converter/"><strong>Unit Converter</strong></a> — Convert km to miles or liters to gallons if planning international travel.</li>
+          <li><a href="/percentage-calculator/"><strong>Percentage Calculator</strong></a> — Calculate how much fuel cost increases with gas price changes.</li>
+        </ul>
+
+        <!-- FAQ SECTION -->
+        <div class="tool-faq">
+          <h2>Frequently Asked Questions</h2>
+
+          <div class="tool-faq__item">
+            <div class="tool-faq__question">How do I calculate gas cost for a road trip?</div>
+            <div class="tool-faq__answer">Divide your total trip distance by your vehicle's MPG to get gallons needed. Multiply gallons by the current gas price per gallon. Example: 500 miles ÷ 30 MPG = 16.67 gallons × $3.50 = $58.33 total fuel cost.</div>
+          </div>
+
+          <div class="tool-faq__item">
+            <div class="tool-faq__question">How much does it cost to drive 1,000 miles?</div>
+            <div class="tool-faq__answer">It depends on your MPG and gas price. At 30 MPG and $3.50/gallon: 1,000 ÷ 30 = 33.3 gallons × $3.50 = $116.67. At 20 MPG and $3.50/gallon: 1,000 ÷ 20 = 50 gallons × $3.50 = $175.00.</div>
+          </div>
+
+          <div class="tool-faq__item">
+            <div class="tool-faq__question">Where do I find my car's MPG?</div>
+            <div class="tool-faq__answer">Check your vehicle's dashboard (many modern cars display current or average MPG), your owner's manual, or the EPA's official fuel economy database at fueleconomy.gov. For most accurate results, use your vehicle's real-world average MPG rather than the EPA estimate, which is tested under ideal conditions.</div>
+          </div>
+
+          <div class="tool-faq__item">
+            <div class="tool-faq__question">Does the calculator work for metric (km and liters)?</div>
+            <div class="tool-faq__answer">This calculator uses miles and gallons (US standard). For metric, use our Unit Converter to convert kilometers to miles first. For L/100km vehicles, convert using: MPG = 235.214 ÷ L/100km. Then enter the converted MPG value above.</div>
+          </div>
+        </div>
+
+        <p><small>⚠️ <strong>Disclaimer:</strong> Estimates only. Actual fuel use varies with driving conditions, speed, load, and vehicle condition. See our <a href="/disclaimer/">full Disclaimer</a>.</small></p>
+
       </div>
-    </aside>
 
-    <!-- Panel: Results -->
-    <main class="fcc-panel" aria-label="Calculation results">
+      <!-- Right 1/3: ad + callout -->
+      <div class="ab-sidebar">
 
-      <!-- KPI Cards -->
-      <div class="fcc-kpi-row">
-        <div class="fcc-kpi-card fcc-kpi-card--primary">
-          <span class="fcc-kpi-label">Total Fuel Cost</span>
-          <strong class="fcc-kpi-value fcc-kpi-value--primary" id="fcc-kpi-total">$0.00</strong>
+        <div class="ad-sidebar">
+          <span class="ad-label">Advertisement</span>
+          <span class="ad-placeholder-text">Ad Space</span>
+          [ad_slot position="sidebar"]
         </div>
-        <div class="fcc-kpi-card fcc-kpi-card--green">
-          <span class="fcc-kpi-label">Gallons Needed</span>
-          <strong class="fcc-kpi-value fcc-kpi-value--green" id="fcc-kpi-gallons">0.0</strong>
+
+        <div class="lpc-sidebar-card">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          <p class="lpc-sidebar-card__title">100% Private</p>
+          <p class="lpc-sidebar-card__text">Your trip data is never stored or sent to any server. All calculations happen instantly in your browser.</p>
         </div>
-        <div class="fcc-kpi-card fcc-kpi-card--amber">
-          <span class="fcc-kpi-label">Cost Per Mile</span>
-          <strong class="fcc-kpi-value fcc-kpi-value--amber" id="fcc-kpi-mile">$0.00</strong>
+
+        <div class="ab-callout">
+          <span class="ab-callout__icon">💡</span>
+          <div class="ab-callout__title">Pro Tip</div>
+          <p class="ab-callout__text">
+            Your real-world MPG is often 10–15% lower than the EPA estimate. Use your car's dashboard average for the most accurate fuel cost estimate.
+          </p>
         </div>
+
       </div>
 
-      <!-- Impact Panel -->
-      <div class="fcc-impact-panel">
-        <div class="fcc-impact-content">
-          <div class="fcc-impact-left">
-            <div class="fcc-impact-badge">
-              <span class="fcc-impact-badge-dot"></span>
-              <span>Live Estimate</span>
-            </div>
-            <h3 class="fcc-impact-title">Trip Cost Summary</h3>
-            <p class="fcc-impact-desc">Based on current gas prices and your vehicle's efficiency. Actual consumption varies with driving conditions.</p>
-          </div>
-          <div class="fcc-impact-stats">
-            <div class="fcc-impact-stat">
-              <p class="fcc-impact-stat-label">One-Way Cost</p>
-              <p class="fcc-impact-stat-value" id="fcc-stat-oneway">$0.00</p>
-            </div>
-            <div class="fcc-impact-stat">
-              <p class="fcc-impact-stat-label">Round Trip</p>
-              <p class="fcc-impact-stat-value" id="fcc-stat-round">$0.00</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Visual Breakdown -->
-      <div class="fcc-breakdown-card">
-        <h4 class="fcc-breakdown-title">Fuel Budget Visualization</h4>
-        <div class="fcc-breakdown-bar" aria-hidden="true">
-          <div class="fcc-breakdown-segment fcc-breakdown-segment--fuel" id="fcc-bar-fuel" style="width: 75%;"></div>
-          <div class="fcc-breakdown-segment fcc-breakdown-segment--reserve" id="fcc-bar-reserve" style="width: 25%;"></div>
-        </div>
-        <div class="fcc-breakdown-legend">
-          <div class="fcc-legend-item">
-            <span class="fcc-legend-dot fcc-legend-dot--fuel"></span>
-            <span>Fuel Cost (75%)</span>
-          </div>
-          <div class="fcc-legend-item">
-            <span class="fcc-legend-dot fcc-legend-dot--reserve"></span>
-            <span>Buffer (25%)</span>
-          </div>
-        </div>
-      </div>
-
-    </main>
+    </div>
   </div>
+</section>
 
-  <!-- Bottom Ad Placeholder -->
-  <div class="fcc-ad-slot" aria-hidden="true"></div>
-
-</div>
-
-[ad_slot position="mid"]
-
-<h2>Fuel Cost Formula</h2>
-<div class="tool-formula">
-  Gallons Used = Distance (miles) ÷ MPG<br>
-  Total Cost = Gallons Used × Gas Price per Gallon<br>
-  Cost Per Mile = Total Cost ÷ Distance<br><br>
-  Example: 350 miles, 28 MPG, $3.59/gallon:<br>
-  Gallons = 350 ÷ 28 = 12.5 gallons<br>
-  Total Cost = 12.5 × $3.59 = $44.88<br>
-  Cost per mile = $44.88 ÷ 350 = $0.128/mile
-</div>
-
-<h2>Average MPG by Vehicle Type</h2>
-<ul>
-  <li><strong>Compact car</strong> (Honda Civic, Toyota Corolla): 30–38 MPG</li>
-  <li><strong>Midsize sedan</strong> (Toyota Camry, Honda Accord): 28–35 MPG</li>
-  <li><strong>SUV / Crossover</strong> (Toyota RAV4, Honda CR-V): 24–30 MPG</li>
-  <li><strong>Full-size SUV/truck</strong> (Ford F-150, Chevy Tahoe): 15–22 MPG</li>
-  <li><strong>Hybrid</strong> (Toyota Prius, Honda Insight): 45–55 MPG</li>
-  <li><strong>Minivan</strong> (Honda Odyssey, Toyota Sienna): 19–26 MPG</li>
-</ul>
-<p>Find your exact MPG on the EPA's <strong>fueleconomy.gov</strong> or check your vehicle's dashboard average.</p>
-
-<h2>Related Tools</h2>
-<ul>
-  <li><a href="/unit-converter/"><strong>Unit Converter</strong></a> — Convert km to miles or liters to gallons if planning international travel.</li>
-  <li><a href="/percentage-calculator/"><strong>Percentage Calculator</strong></a> — Calculate how much fuel cost increases with gas price changes.</li>
-</ul>
-
-<div class="tool-faq">
-  <h2>Frequently Asked Questions</h2>
-
-  <div class="tool-faq__item">
-    <div class="tool-faq__question">How do I calculate gas cost for a road trip?</div>
-    <div class="tool-faq__answer">Divide your total trip distance by your vehicle's MPG to get gallons needed. Multiply gallons by the current gas price per gallon. Example: 500 miles ÷ 30 MPG = 16.67 gallons × $3.50 = $58.33 total fuel cost.</div>
+<!-- ══════════════════════════════════════════════
+     AD — FOOTER
+     ══════════════════════════════════════════════ -->
+<section class="ab-policy" style="padding:3rem 0;">
+  <div class="th-container">
+    <div class="ad-leaderboard">
+      <span class="ad-label">Advertisement</span>
+      [ad_slot position="footer"]
+    </div>
   </div>
+</section>
 
-  <div class="tool-faq__item">
-    <div class="tool-faq__question">How much does it cost to drive 1,000 miles?</div>
-    <div class="tool-faq__answer">It depends on your MPG and gas price. At 30 MPG and $3.50/gallon: 1,000 ÷ 30 = 33.3 gallons × $3.50 = $116.67. At 20 MPG and $3.50/gallon: 1,000 ÷ 20 = 50 gallons × $3.50 = $175.00.</div>
-  </div>
-
-  <div class="tool-faq__item">
-    <div class="tool-faq__question">Where do I find my car's MPG?</div>
-    <div class="tool-faq__answer">Check your vehicle's dashboard (many modern cars display current or average MPG), your owner's manual, or the EPA's official fuel economy database at fueleconomy.gov. For most accurate results, use your vehicle's real-world average MPG rather than the EPA estimate, which is tested under ideal conditions.</div>
-  </div>
-
-  <div class="tool-faq__item">
-    <div class="tool-faq__question">Does the calculator work for metric (km and liters)?</div>
-    <div class="tool-faq__answer">This calculator uses miles and gallons (US standard). For metric, use our Unit Converter to convert kilometers to miles first. For L/100km vehicles, convert using: MPG = 235.214 ÷ L/100km. Then enter the converted MPG value above.</div>
-  </div>
-</div>
-
-<p><small>⚠️ <strong>Disclaimer:</strong> Estimates only. Actual fuel use varies with driving conditions, speed, load, and vehicle condition. See our <a href="/disclaimer/">full Disclaimer</a>.</small></p>
-
-[ad_slot position="footer"]
+</div><!-- /.lpc-wrap -->
