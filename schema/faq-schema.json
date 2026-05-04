@@ -42,6 +42,37 @@
     ]
   },
 
+  "credit-card-interest-calculator": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How is credit card interest calculated?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Credit card interest is calculated using your Daily Periodic Rate (DPR): DPR = APR ÷ 365. Your monthly interest charge = average daily balance × DPR × days in billing cycle. For example, a $1,000 balance at 24% APR: DPR = 0.0658%, monthly interest ≈ $20."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long will it take to pay off my credit card?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It depends on your balance, APR, and monthly payment. Paying only the minimum (often 1–2% of balance) can take decades. For a $3,000 balance at 20% APR, paying $100/month takes about 4 years and costs ~$1,800 in interest. Paying $200/month cuts it to under 18 months."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is a good APR for a credit card?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "As of 2024, the average credit card APR in the U.S. is around 20–24%. Rates below 20% are considered good. Cards for excellent credit (750+) may offer 15–18% APR. The best strategy is to pay your full balance monthly to avoid interest entirely."
+        }
+      }
+    ]
+  },
+
   "compound-interest-calculator": {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -73,6 +104,37 @@
     ]
   },
 
+  "salary-to-hourly-converter": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I convert my annual salary to hourly rate?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Divide your annual salary by the number of hours worked per year. Standard formula: hourly = annual ÷ (hours/week × weeks/year). For a $60,000 salary at 40 hours/week, 52 weeks: $60,000 ÷ 2,080 = $28.85/hour."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many working hours are in a year?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A standard full-time year has 2,080 working hours (40 hours/week × 52 weeks). Accounting for 10 federal holidays it drops to 2,000 hours. With 2 weeks vacation: 1,960 hours. Use 2,080 as the baseline unless your employer specifies otherwise."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is $50,000 a year as an hourly wage?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "$50,000 per year ÷ 2,080 hours = approximately $24.04 per hour. Monthly: ~$4,167. Weekly: ~$961.54. Daily (8-hour day): ~$192.31."
+        }
+      }
+    ]
+  },
+
   "tip-calculator": {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -99,6 +161,138 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "20% of $100 = $20 tip. Total bill = $120. Split among 4 people, each person pays $30 ($25 food + $5 tip per person)."
+        }
+      }
+    ]
+  },
+
+  "percentage-calculator": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I calculate a percentage of a number?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Multiply the number by the percentage and divide by 100. Formula: result = (number × percentage) ÷ 100. Example: 15% of 200 = (200 × 15) ÷ 100 = 30."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I calculate percentage change?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Percentage change = ((new value − old value) ÷ old value) × 100. Example: price goes from $80 to $100: ((100 − 80) ÷ 80) × 100 = 25% increase. A negative result means a decrease."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What percentage is 30 out of 150?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "30 out of 150 = (30 ÷ 150) × 100 = 20%. Use this formula (part ÷ whole × 100) whenever you need to find what percent one number is of another."
+        }
+      }
+    ]
+  },
+
+  "discount-calculator": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I calculate a discounted price?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Multiply the original price by (1 − discount% ÷ 100). Example: $120 item with 25% off: $120 × (1 − 0.25) = $120 × 0.75 = $90. Your savings = $120 − $90 = $30."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much do I save with a 30% discount on a $200 item?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "30% of $200 = $60 savings. Final price = $200 − $60 = $140. To verify: $140 ÷ $200 = 0.70, meaning you pay 70% of the original price."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I find the original price before a discount?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Divide the sale price by (1 − discount% ÷ 100). Example: item is $75 after 40% off: original price = $75 ÷ (1 − 0.40) = $75 ÷ 0.60 = $125."
+        }
+      }
+    ]
+  },
+
+  "fuel-cost-calculator": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I calculate fuel cost for a road trip?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Formula: fuel cost = (distance ÷ MPG) × price per gallon. Example: 300-mile trip, 30 MPG car, gas at $3.50/gallon: (300 ÷ 30) × $3.50 = 10 gallons × $3.50 = $35 total fuel cost."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does it cost to drive 500 miles?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It depends on your car's MPG and the gas price. At 25 MPG and $3.50/gallon: (500 ÷ 25) × $3.50 = 20 gallons × $3.50 = $70. At 35 MPG: (500 ÷ 35) × $3.50 ≈ $50. Better fuel economy means significant savings on long trips."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is a good MPG for a car?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For gas-powered vehicles, 30+ MPG combined is considered good. Compact cars typically get 30–40 MPG. SUVs average 20–28 MPG. Hybrids can achieve 45–55 MPG. EPA ratings are available at fueleconomy.gov for any vehicle."
+        }
+      }
+    ]
+  },
+
+  "mortgage-calculator": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is PITI in a mortgage payment?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "PITI stands for Principal, Interest, Taxes, and Insurance — the four components of a full monthly mortgage payment. Principal reduces your loan balance, Interest is the lender's fee, Taxes are property taxes (often escrowed), and Insurance includes homeowner's insurance and PMI if applicable."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When does PMI go away?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "PMI (Private Mortgage Insurance) is automatically cancelled by lenders when your loan balance reaches 78% of the original home value (i.e., you have 22% equity), per the Homeowners Protection Act. You can also request cancellation at 80% LTV (20% equity). Our calculator shows the exact month PMI drops."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much house can I afford?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A common rule is the 28/36 rule: your monthly mortgage payment (PITI) should not exceed 28% of your gross monthly income, and total debt payments should not exceed 36%. For a $6,000/month income, max mortgage payment ≈ $1,680. Use our mortgage calculator to find a home price that fits your budget."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I make extra mortgage payments?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Extra payments apply directly to principal, reducing total interest paid and shortening your loan term. Even $100/month extra on a $300,000 30-year mortgage at 7% saves over $40,000 in interest and cuts ~4 years off the loan. Our calculator shows exact savings in the Extra Payments tab."
         }
       }
     ]

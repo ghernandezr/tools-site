@@ -172,6 +172,7 @@ function toolshub_tool_schema() {
 
     $tool_slugs = array(
         'loan-payment-calculator',
+        'mortgage-calculator',
         'credit-card-interest-calculator',
         'compound-interest-calculator',
         'salary-to-hourly-converter',

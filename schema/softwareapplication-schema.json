@@ -126,18 +126,23 @@
     }
   },
 
-  "date-difference-calculator": {
+  "mortgage-calculator": {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": "Date Difference Calculator",
-    "url": "https://yoursite.com/date-difference-calculator/",
+    "name": "Mortgage Calculator",
+    "url": "https://yoursite.com/mortgage-calculator/",
     "applicationCategory": "UtilitiesApplication",
     "operatingSystem": "Web Browser",
-    "description": "Calculate the exact number of days, weeks, months, and years between any two dates.",
+    "description": "Free mortgage calculator with full PITI breakdown (principal, interest, taxes, insurance), PMI, HOA fees, extra payments, equity growth tracking, and refinancing analysis.",
     "offers": {
       "@type": "Offer",
       "price": "0",
       "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Organization",
+      "name": "ToolsHub",
+      "url": "https://yoursite.com"
     }
   },
 
