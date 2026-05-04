@@ -1,153 +1,371 @@
 <!-- ============================================================
-     TOOL 5: TIP CALCULATOR
+     TOOL 5: TIP CALCULATOR — Plugin Style Edition
      Slug: /tip-calculator/
      Primary keyword: "tip calculator"
      RankMath Title: Tip Calculator — Calculate Tip Amount & Split Bill | ToolsHub
      RankMath Meta: Free tip calculator: calculate your tip amount by percentage, see total bill, and split evenly among any number of people. No sign-up required.
+     =============================================================
+     CSS: theme/assets/css/tools.css (classes .fcc-* reused)
+     JS:  theme/assets/js/calculators.js (initTipCalculator)
      ============================================================ -->
 
-<h1>Tip Calculator — Calculate Tip Amount &amp; Split the Bill</h1>
+<div class="lpc-wrap">
 
-<p>Our free <strong>tip calculator</strong> helps you quickly figure out the right tip for any restaurant bill, plus split it evenly among your group. Enter your bill amount, tip percentage, and number of people — get instant results.</p>
+<!-- ══════════════════════════════════════════════
+     TOOL HERO
+     ══════════════════════════════════════════════ -->
+<section class="lpc-hero">
+  <div class="th-container">
+    <div class="lpc-hero__inner">
 
-[ad_slot position="header"]
+      <div class="lpc-hero__text">
+        <div class="lpc-hero__eyebrow">
+          <span class="lpc-hero__eyebrow-line"></span>
+          Dining · Free Tool
+        </div>
+        <h1 class="lpc-hero__title">
+          Tip Calculator<br>
+          <span>Calculate Tip &amp; Split the Bill</span>
+        </h1>
+        <p class="lpc-hero__desc">
+          Our free <strong>tip calculator</strong> helps you instantly figure out the right tip for any restaurant bill and split it evenly among your group. Enter your bill amount, select a tip percentage, and set the number of people — results update in real time.
+        </p>
+      </div>
 
-<div class="tool-card">
-  <h2>Tip Calculator</h2>
-  <form id="tip-form">
-    <div class="tool-group">
-      <label for="tip-bill">Bill Amount ($)</label>
-      <input type="number" id="tip-bill" placeholder="e.g. 85.50" min="0.01" step="any" required>
-    </div>
-    <div class="tool-group">
-      <label for="tip-percent">Tip Percentage (%)</label>
-      <select id="tip-percent">
-        <option value="10">10% — Below average</option>
-        <option value="15">15% — Standard</option>
-        <option value="18">18% — Good service</option>
-        <option value="20" selected>20% — Great service</option>
-        <option value="25">25% — Exceptional</option>
-        <option value="custom">Custom %</option>
-      </select>
-    </div>
-    <div class="tool-group" id="tip-custom-group" style="display:none;">
-      <label for="tip-custom">Custom Tip %</label>
-      <input type="number" id="tip-custom" placeholder="e.g. 22" min="0" max="200" step="any">
-    </div>
-    <div class="tool-group">
-      <label for="tip-people">Number of People</label>
-      <input type="number" id="tip-people" placeholder="1" min="1" step="1" value="1">
-    </div>
-    <button type="submit" class="tool-btn">Calculate Tip</button>
-  </form>
+      <div class="lpc-hero__badges">
+        <div class="lpc-badge lpc-badge--blue">
+          <span class="lpc-badge__number">🍽️</span>
+          <span class="lpc-badge__label">Tip Calculator</span>
+        </div>
+        <div class="lpc-badge lpc-badge--dark">
+          <span class="lpc-badge__number">100%</span>
+          <span class="lpc-badge__label">Free &amp;</span>
+          <span class="lpc-badge__sublabel">Private</span>
+        </div>
+      </div>
 
-  <div id="tip-error" class="tool-error"></div>
-
-  <div id="tip-result" class="tool-result">
-    <div class="tool-result__label">Tip Amount</div>
-    <div class="tool-result__value" id="tip-amount">—</div>
-    <div class="tool-result__breakdown">
-      <strong>Total Bill (with tip):</strong> <span id="tip-total">—</span><br>
-      <strong>Per Person (total):</strong> <span id="tip-per-person">—</span><br>
-      <strong>Tip Per Person:</strong> <span id="tip-per-tip">—</span>
     </div>
   </div>
+</section>
 
-  <button id="tip-reset" class="tool-reset">Reset</button>
-</div>
-
-[ad_slot position="mid"]
-
-<h2>How Tip Is Calculated</h2>
-<div class="tool-formula">
-  Tip Amount = Bill × (Tip % ÷ 100)<br>
-  Total Bill = Bill + Tip Amount<br>
-  Per Person = Total Bill ÷ Number of People<br><br>
-  Example: $85.50 bill, 20% tip, 3 people:<br>
-  Tip = $85.50 × 0.20 = $17.10<br>
-  Total = $85.50 + $17.10 = $102.60<br>
-  Per person = $102.60 ÷ 3 = $34.20
-</div>
-
-<h2>Tip Percentage Guide</h2>
-<ul>
-  <li><strong>10%</strong> — Below average. Use for genuinely poor service.</li>
-  <li><strong>15%</strong> — Standard. Acceptable for average service at sit-down restaurants.</li>
-  <li><strong>18%</strong> — Good. Common default for many restaurants that add gratuity automatically.</li>
-  <li><strong>20%</strong> — Great. The most common tip for good service in the US.</li>
-  <li><strong>25%+</strong> — Exceptional service, or when you want to show extra appreciation.</li>
-</ul>
-
-<h2>Who Do You Tip?</h2>
-<ul>
-  <li><strong>Restaurant servers:</strong> 15–25% of pre-tax bill</li>
-  <li><strong>Bartenders:</strong> $1–2 per drink, or 15–20%</li>
-  <li><strong>Food delivery:</strong> 10–20%, minimum $3–5</li>
-  <li><strong>Taxi / rideshare:</strong> 15–20%</li>
-  <li><strong>Hotel housekeeping:</strong> $2–5/night</li>
-  <li><strong>Hair salon:</strong> 15–20%</li>
-</ul>
-
-<h2>Related Tools</h2>
-<ul>
-  <li><a href="/percentage-calculator/"><strong>Percentage Calculator</strong></a> — Calculate any percentage quickly.</li>
-  <li><a href="/discount-calculator/"><strong>Discount Calculator</strong></a> — Works with percentage discounts the same way.</li>
-  <li><a href="/unit-converter/"><strong>Unit Converter</strong></a> — Handy for travel where currency or measurement conversions apply.</li>
-</ul>
-
-<div class="tool-faq">
-  <h2>Frequently Asked Questions</h2>
-
-  <div class="tool-faq__item">
-    <div class="tool-faq__question">How much should I tip at a restaurant?</div>
-    <div class="tool-faq__answer">In the United States, tipping 18–20% is standard for good service at a sit-down restaurant. Tipping is calculated on the pre-tax subtotal in most cases, though some prefer to tip on the total including tax. For exceptional service, 25% or more is appropriate.</div>
-  </div>
-
-  <div class="tool-faq__item">
-    <div class="tool-faq__question">How do I calculate a 20% tip quickly in my head?</div>
-    <div class="tool-faq__answer">Move the decimal point one place left to find 10%, then double it for 20%. For a $75 bill: 10% = $7.50, so 20% = $15.00. For 15%, find 10% then add half of that: $7.50 + $3.75 = $11.25.</div>
-  </div>
-
-  <div class="tool-faq__item">
-    <div class="tool-faq__question">Should I tip on the pre-tax or post-tax amount?</div>
-    <div class="tool-faq__answer">There's no universal rule. Most people tip on the pre-tax subtotal, which is what the server actually provided service on. Some tip on the total bill for simplicity. The difference on a $50 bill with 8% tax and 20% tip is $0.80 — minimal either way.</div>
-  </div>
-
-  <div class="tool-faq__item">
-    <div class="tool-faq__question">What is a tip on a $100 bill at 20%?</div>
-    <div class="tool-faq__answer">20% of $100 = $20. Your total would be $120. Split among 4 people, each person pays $30 total ($25 for food + $5 tip per person).</div>
+<!-- ══════════════════════════════════════════════
+     AD — LEADERBOARD
+     ══════════════════════════════════════════════ -->
+<div class="th-container">
+  <div class="ad-leaderboard">
+    <span class="ad-label">Advertisement</span>
+    [ad_slot position="header"]
   </div>
 </div>
 
-<!-- Custom tip % toggle (small inline script, no framework) -->
-<script>
-(function(){
-  var sel = document.getElementById('tip-percent');
-  var customGroup = document.getElementById('tip-custom-group');
-  var customInput = document.getElementById('tip-custom');
-  if (sel) {
-    sel.addEventListener('change', function(){
-      if (sel.value === 'custom') {
-        customGroup.style.display = 'block';
-        customInput.required = true;
-      } else {
-        customGroup.style.display = 'none';
-        customInput.required = false;
-      }
-    });
-  }
-  // Override tip-form submit to handle custom %
-  var form = document.getElementById('tip-form');
-  if (form) {
-    form.addEventListener('submit', function(){
-      if (sel.value === 'custom' && customInput.value) {
-        sel.value = customInput.value; // pass custom value to calculator
-      }
-    }, true); // capture phase before calculators.js
-  }
-})();
-</script>
+<!-- ══════════════════════════════════════════════
+     CALCULATOR UI
+     ══════════════════════════════════════════════ -->
+<section>
+  <div class="fcc-calculator" id="tc-tip-calculator">
 
-<p><small>⚠️ <strong>Disclaimer:</strong> For informational purposes only. Tipping customs vary by country and establishment. See our <a href="/disclaimer/">full Disclaimer</a>.</small></p>
+    <!-- Header -->
+    <header class="fcc-header">
+      <div class="fcc-header-icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
+          <path d="M12 6v6l4 2"/>
+        </svg>
+      </div>
+      <div>
+        <h2 class="fcc-title">Tip <span style="color: var(--fcc-primary);">Calculator</span></h2>
+        <p class="fcc-subtitle">Bill Split &amp; Gratuity Tool</p>
+      </div>
+    </header>
 
-[ad_slot position="footer"]
+    <!-- Main Layout: Sidebar + Panel -->
+    <div class="fcc-layout">
+
+      <!-- Sidebar: Inputs -->
+      <aside class="fcc-sidebar" aria-label="Tip parameters">
+        <div class="fcc-glass-card">
+          <h3 class="fcc-section-label">Bill Parameters</h3>
+          <div class="fcc-field-stack">
+
+            <div class="fcc-input-group">
+              <label class="fcc-label-tech" for="tc-bill">Bill Amount ($)</label>
+              <input type="number" id="tc-bill" class="fcc-input-field" placeholder="85.50" min="0.01" step="any" autocomplete="off">
+            </div>
+
+            <div class="fcc-input-group">
+              <label class="fcc-label-tech" for="tc-percent">Tip Percentage (%)</label>
+              <select id="tc-percent" class="fcc-input-field">
+                <option value="10">10% — Below average</option>
+                <option value="15">15% — Standard</option>
+                <option value="18">18% — Good service</option>
+                <option value="20" selected>20% — Great service</option>
+                <option value="25">25% — Exceptional</option>
+                <option value="custom">Custom %</option>
+              </select>
+              <div class="fcc-presets">
+                <button type="button" class="fcc-preset-btn" onclick="TC.setTip(15)">15%</button>
+                <button type="button" class="fcc-preset-btn" onclick="TC.setTip(18)">18%</button>
+                <button type="button" class="fcc-preset-btn" onclick="TC.setTip(20)">20%</button>
+                <button type="button" class="fcc-preset-btn" onclick="TC.setTip(25)">25%</button>
+              </div>
+            </div>
+
+            <div class="fcc-input-group" id="tc-custom-group" style="display:none;">
+              <label class="fcc-label-tech" for="tc-custom">Custom Tip %</label>
+              <input type="number" id="tc-custom" class="fcc-input-field" placeholder="e.g. 22" min="0" max="200" step="any" autocomplete="off">
+            </div>
+
+            <div class="fcc-input-group">
+              <label class="fcc-label-tech" for="tc-people">Number of People</label>
+              <input type="number" id="tc-people" class="fcc-input-field" placeholder="1" min="1" step="1" value="1" autocomplete="off">
+              <div class="fcc-presets">
+                <button type="button" class="fcc-preset-btn" onclick="TC.setPeople(2)">2</button>
+                <button type="button" class="fcc-preset-btn" onclick="TC.setPeople(3)">3</button>
+                <button type="button" class="fcc-preset-btn" onclick="TC.setPeople(4)">4</button>
+                <button type="button" class="fcc-preset-btn" onclick="TC.setPeople(6)">6</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </aside>
+
+      <!-- Panel: Results -->
+      <main class="fcc-panel" aria-label="Calculation results">
+
+        <!-- KPI Cards -->
+        <div class="fcc-kpi-row">
+          <div class="fcc-kpi-card fcc-kpi-card--primary">
+            <span class="fcc-kpi-label">Tip Amount</span>
+            <strong class="fcc-kpi-value fcc-kpi-value--primary" id="tc-kpi-tip">$0.00</strong>
+          </div>
+          <div class="fcc-kpi-card fcc-kpi-card--green">
+            <span class="fcc-kpi-label">Total Bill</span>
+            <strong class="fcc-kpi-value fcc-kpi-value--green" id="tc-kpi-total">$0.00</strong>
+          </div>
+          <div class="fcc-kpi-card fcc-kpi-card--amber">
+            <span class="fcc-kpi-label">Per Person</span>
+            <strong class="fcc-kpi-value fcc-kpi-value--amber" id="tc-kpi-per-person">$0.00</strong>
+          </div>
+        </div>
+
+        <!-- Impact Panel -->
+        <div class="fcc-impact-panel">
+          <div class="fcc-impact-content">
+            <div class="fcc-impact-left">
+              <div class="fcc-impact-badge">
+                <span class="fcc-impact-badge-dot"></span>
+                <span>Live Estimate</span>
+              </div>
+              <h3 class="fcc-impact-title">Bill Split Summary</h3>
+              <p class="fcc-impact-desc">Results update instantly as you type. Tip is calculated on the pre-tax subtotal you enter.</p>
+            </div>
+            <div class="fcc-impact-stats">
+              <div class="fcc-impact-stat">
+                <p class="fcc-impact-stat-label">Tip Per Person</p>
+                <p class="fcc-impact-stat-value" id="tc-stat-tip-per">$0.00</p>
+              </div>
+              <div class="fcc-impact-stat">
+                <p class="fcc-impact-stat-label">Bill Per Person</p>
+                <p class="fcc-impact-stat-value" id="tc-stat-bill-per">$0.00</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Visual Breakdown -->
+        <div class="fcc-breakdown-card">
+          <h4 class="fcc-breakdown-title">Bill Breakdown Visualization</h4>
+          <div class="fcc-breakdown-bar" aria-hidden="true">
+            <div class="fcc-breakdown-segment fcc-breakdown-segment--fuel" id="tc-bar-bill" style="width: 83%;"></div>
+            <div class="fcc-breakdown-segment fcc-breakdown-segment--reserve" id="tc-bar-tip" style="width: 17%;"></div>
+          </div>
+          <div class="fcc-breakdown-legend">
+            <div class="fcc-legend-item">
+              <span class="fcc-legend-dot fcc-legend-dot--fuel"></span>
+              <span id="tc-legend-bill">Bill (83%)</span>
+            </div>
+            <div class="fcc-legend-item">
+              <span class="fcc-legend-dot fcc-legend-dot--reserve"></span>
+              <span id="tc-legend-tip">Tip (17%)</span>
+            </div>
+          </div>
+        </div>
+
+      </main>
+    </div>
+
+    <!-- Bottom Ad Placeholder -->
+    <div class="fcc-ad-slot" aria-hidden="true"></div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     MAIN CONTENT
+     ══════════════════════════════════════════════ -->
+<section class="ab-mission">
+  <div class="th-container">
+    <div class="lpc-content-grid">
+
+      <!-- Left 2/3: article content -->
+      <div>
+
+        <!-- MID CONTENT AD -->
+        <div class="ad-infeed" style="margin:0 0 2rem;">
+          <span class="ad-label">Advertisement</span>
+          [ad_slot position="mid"]
+        </div>
+
+        <!-- HOW IT WORKS -->
+        <h2 class="ab-section-title">How Tip Is Calculated</h2>
+        <p class="ab-section-subtitle">Three simple formulas power every result in this calculator:</p>
+
+        <div class="tool-formula-pro">
+          <div class="tfp-header">
+            <span class="tfp-badge">∑ Formula</span>
+            <span class="tfp-title">Tip &amp; Bill Split Calculation</span>
+          </div>
+          <div class="tfp-equation">
+            <span class="tfp-var tfp-result">Tip Amount</span>
+            <span class="tfp-equals">=</span>
+            <span class="tfp-var">Bill</span>
+            <span class="tfp-operator">×</span>
+            <div class="tfp-fraction">
+              <div class="tfp-numerator">Tip %</div>
+              <div class="tfp-denominator">100</div>
+            </div>
+          </div>
+          <div class="tfp-equation" style="margin-top:1rem;">
+            <span class="tfp-var tfp-result">Total Bill</span>
+            <span class="tfp-equals">=</span>
+            <span class="tfp-var">Bill</span>
+            <span class="tfp-operator">+</span>
+            <span class="tfp-var">Tip Amount</span>
+          </div>
+          <div class="tfp-equation" style="margin-top:1rem;">
+            <span class="tfp-var tfp-result">Per Person</span>
+            <span class="tfp-equals">=</span>
+            <div class="tfp-fraction">
+              <div class="tfp-numerator">Total Bill</div>
+              <div class="tfp-denominator">Number of People</div>
+            </div>
+          </div>
+          <div class="tfp-legend">
+            <div class="tfp-legend-item">
+              <span class="tfp-legend-var">Bill</span>
+              <span class="tfp-legend-desc">The pre-tax subtotal shown on your receipt</span>
+            </div>
+            <div class="tfp-legend-item">
+              <span class="tfp-legend-var">Tip %</span>
+              <span class="tfp-legend-desc">Your chosen gratuity percentage (e.g. 20%)</span>
+            </div>
+            <div class="tfp-legend-item">
+              <span class="tfp-legend-var">People</span>
+              <span class="tfp-legend-desc">How many people are splitting the bill equally</span>
+            </div>
+            <div class="tfp-legend-item">
+              <span class="tfp-legend-var">Example</span>
+              <span class="tfp-legend-desc">$85.50 bill × 20% = $17.10 tip &nbsp;|&nbsp; Total $102.60 ÷ 3 people = <strong>$34.20/person</strong></span>
+            </div>
+          </div>
+        </div>
+
+        <h2>Tip Percentage Guide</h2>
+        <ul>
+          <li><strong>10%</strong> — Below average. Use for genuinely poor service.</li>
+          <li><strong>15%</strong> — Standard. Acceptable for average service at sit-down restaurants.</li>
+          <li><strong>18%</strong> — Good. Common default for many restaurants that add gratuity automatically.</li>
+          <li><strong>20%</strong> — Great. The most common tip for good service in the US.</li>
+          <li><strong>25%+</strong> — Exceptional service, or when you want to show extra appreciation.</li>
+        </ul>
+
+        <h2>Who Do You Tip?</h2>
+        <ul>
+          <li><strong>Restaurant servers:</strong> 15–25% of pre-tax bill</li>
+          <li><strong>Bartenders:</strong> $1–2 per drink, or 15–20%</li>
+          <li><strong>Food delivery:</strong> 10–20%, minimum $3–5</li>
+          <li><strong>Taxi / rideshare:</strong> 15–20%</li>
+          <li><strong>Hotel housekeeping:</strong> $2–5/night</li>
+          <li><strong>Hair salon:</strong> 15–20%</li>
+        </ul>
+
+        <!-- INTERNAL LINKS -->
+        <h2>Related Tools</h2>
+        <ul>
+          <li><a href="/percentage-calculator/"><strong>Percentage Calculator</strong></a> — Calculate any percentage quickly.</li>
+          <li><a href="/discount-calculator/"><strong>Discount Calculator</strong></a> — Works with percentage discounts the same way.</li>
+          <li><a href="/unit-converter/"><strong>Unit Converter</strong></a> — Handy for travel where currency or measurement conversions apply.</li>
+        </ul>
+
+        <!-- FAQ SECTION -->
+        <div class="tool-faq">
+          <h2>Frequently Asked Questions</h2>
+
+          <div class="tool-faq__item">
+            <div class="tool-faq__question">How much should I tip at a restaurant?</div>
+            <div class="tool-faq__answer">In the United States, tipping 18–20% is standard for good service at a sit-down restaurant. Tipping is calculated on the pre-tax subtotal in most cases, though some prefer to tip on the total including tax. For exceptional service, 25% or more is appropriate.</div>
+          </div>
+
+          <div class="tool-faq__item">
+            <div class="tool-faq__question">How do I calculate a 20% tip quickly in my head?</div>
+            <div class="tool-faq__answer">Move the decimal point one place left to find 10%, then double it for 20%. For a $75 bill: 10% = $7.50, so 20% = $15.00. For 15%, find 10% then add half of that: $7.50 + $3.75 = $11.25.</div>
+          </div>
+
+          <div class="tool-faq__item">
+            <div class="tool-faq__question">Should I tip on the pre-tax or post-tax amount?</div>
+            <div class="tool-faq__answer">There's no universal rule. Most people tip on the pre-tax subtotal, which is what the server actually provided service on. Some tip on the total bill for simplicity. The difference on a $50 bill with 8% tax and 20% tip is $0.80 — minimal either way.</div>
+          </div>
+
+          <div class="tool-faq__item">
+            <div class="tool-faq__question">What is a tip on a $100 bill at 20%?</div>
+            <div class="tool-faq__answer">20% of $100 = $20. Your total would be $120. Split among 4 people, each person pays $30 total ($25 for food + $5 tip per person).</div>
+          </div>
+        </div>
+
+        <p><small>⚠️ <strong>Disclaimer:</strong> For informational purposes only. Tipping customs vary by country and establishment. See our <a href="/disclaimer/">full Disclaimer</a>.</small></p>
+
+      </div>
+
+      <!-- Right 1/3: ad + callout -->
+      <div class="ab-sidebar">
+
+        <div class="ad-sidebar">
+          <span class="ad-label">Advertisement</span>
+          <span class="ad-placeholder-text">Ad Space</span>
+          [ad_slot position="sidebar"]
+        </div>
+
+        <div class="lpc-sidebar-card">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          <p class="lpc-sidebar-card__title">100% Private</p>
+          <p class="lpc-sidebar-card__text">Your bill data is never stored or sent to any server. All calculations happen instantly in your browser.</p>
+        </div>
+
+        <div class="ab-callout">
+          <span class="ab-callout__icon">💡</span>
+          <div class="ab-callout__title">Pro Tip</div>
+          <p class="ab-callout__text">
+            In the US, 20% is the most common tip for good service. A quick mental trick: move the decimal left once (10%), then double it.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     AD — FOOTER
+     ══════════════════════════════════════════════ -->
+<section class="ab-policy" style="padding:3rem 0;">
+  <div class="th-container">
+    <div class="ad-leaderboard">
+      <span class="ad-label">Advertisement</span>
+      [ad_slot position="footer"]
+    </div>
+  </div>
+</section>
+
+</div><!-- /.lpc-wrap -->

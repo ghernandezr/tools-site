@@ -717,43 +717,115 @@
   }
 
   /* ============================================================
-     TOOL 5 — Tip Calculator
+     TOOL 5 — Tip Calculator (Plugin Style Edition)
      Formula: Tip = Bill × (Tip% / 100); Total = Bill + Tip
+     Features: Real-time calculation, KPI cards, preset buttons, bar viz
   ============================================================ */
   function initTipCalculator() {
-    var form = el('tip-form');
-    if (!form) return;
+    var container = document.getElementById('tc-tip-calculator');
+    if (!container) return;
 
-    var resultEl = el('tip-result');
-    var errorEl = el('tip-error');
-    var resetBtn = el('tip-reset');
+    var els = {
+      bill: el('tc-bill'),
+      percent: el('tc-percent'),
+      customGroup: el('tc-custom-group'),
+      custom: el('tc-custom'),
+      people: el('tc-people'),
+      kpiTip: el('tc-kpi-tip'),
+      kpiTotal: el('tc-kpi-total'),
+      kpiPerPerson: el('tc-kpi-per-person'),
+      statTipPer: el('tc-stat-tip-per'),
+      statBillPer: el('tc-stat-bill-per'),
+      barBill: el('tc-bar-bill'),
+      barTip: el('tc-bar-tip'),
+      legendBill: el('tc-legend-bill'),
+      legendTip: el('tc-legend-tip'),
+    };
 
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
+    if (!els.bill || !els.percent || !els.people) return;
 
-      var bill = parseFloat(el('tip-bill').value);
-      var tipPct = parseFloat(el('tip-percent').value);
-      var people = parseFloat(el('tip-people').value) || 1;
+    var fmtCur = new Intl.NumberFormat('en-US', {
+      style: 'currency', currency: 'USD',
+      minimumFractionDigits: 2, maximumFractionDigits: 2,
+    });
 
-      if (isNaN(bill) || bill <= 0) return showError(resultEl, errorEl, 'Please enter a valid bill amount.');
-      if (isNaN(tipPct) || tipPct < 0) return showError(resultEl, errorEl, 'Please enter a valid tip percentage.');
-      if (people < 1) return showError(resultEl, errorEl, 'Number of people must be at least 1.');
+    function getEffectivePct() {
+      if (els.percent.value === 'custom') {
+        return parseFloat(els.custom.value) || 0;
+      }
+      return parseFloat(els.percent.value) || 0;
+    }
+
+    function calculate() {
+      var bill = parseFloat(els.bill.value) || 0;
+      var tipPct = getEffectivePct();
+      var people = parseFloat(els.people.value) || 1;
+
+      if (bill <= 0 || tipPct < 0 || people < 1) {
+        resetUI();
+        return;
+      }
 
       var tip = bill * (tipPct / 100);
       var total = bill + tip;
       var perPerson = total / people;
       var tipPer = tip / people;
+      var billPer = bill / people;
 
-      el('tip-amount').textContent = fmtCurrency(tip);
-      el('tip-total').textContent = fmtCurrency(total);
-      el('tip-per-person').textContent = fmtCurrency(perPerson);
-      el('tip-per-tip').textContent = fmtCurrency(tipPer);
+      if (els.kpiTip) els.kpiTip.textContent = fmtCur.format(tip);
+      if (els.kpiTotal) els.kpiTotal.textContent = fmtCur.format(total);
+      if (els.kpiPerPerson) els.kpiPerPerson.textContent = fmtCur.format(perPerson);
+      if (els.statTipPer) els.statTipPer.textContent = fmtCur.format(tipPer);
+      if (els.statBillPer) els.statBillPer.textContent = fmtCur.format(billPer);
 
-      showResult(resultEl, errorEl);
-      resetBtn && resetBtn.classList.add('is-visible');
+      var billPct = Math.round((bill / total) * 100);
+      var tipPctBar = 100 - billPct;
+      if (els.barBill) els.barBill.style.width = billPct + '%';
+      if (els.barTip) els.barTip.style.width = tipPctBar + '%';
+      if (els.legendBill) els.legendBill.textContent = 'Bill (' + billPct + '%)';
+      if (els.legendTip) els.legendTip.textContent = 'Tip (' + tipPctBar + '%)';
+    }
+
+    function resetUI() {
+      var zero = '$0.00';
+      if (els.kpiTip) els.kpiTip.textContent = zero;
+      if (els.kpiTotal) els.kpiTotal.textContent = zero;
+      if (els.kpiPerPerson) els.kpiPerPerson.textContent = zero;
+      if (els.statTipPer) els.statTipPer.textContent = zero;
+      if (els.statBillPer) els.statBillPer.textContent = zero;
+      if (els.barBill) els.barBill.style.width = '83%';
+      if (els.barTip) els.barTip.style.width = '17%';
+      if (els.legendBill) els.legendBill.textContent = 'Bill (83%)';
+      if (els.legendTip) els.legendTip.textContent = 'Tip (17%)';
+    }
+
+    els.percent.addEventListener('change', function () {
+      if (els.percent.value === 'custom') {
+        els.customGroup.style.display = 'block';
+        els.custom.focus();
+      } else {
+        els.customGroup.style.display = 'none';
+      }
+      calculate();
     });
 
-    bindReset(resetBtn, form, resultEl, errorEl);
+    [els.bill, els.custom, els.people].forEach(function (input) {
+      if (input) input.addEventListener('input', calculate);
+    });
+
+    window.TC = {
+      setTip: function (val) {
+        els.percent.value = val;
+        els.customGroup.style.display = 'none';
+        calculate();
+      },
+      setPeople: function (val) {
+        els.people.value = val;
+        calculate();
+      }
+    };
+
+    calculate();
   }
 
   /* ============================================================
