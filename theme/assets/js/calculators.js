@@ -205,51 +205,158 @@
   }
 
   /* ============================================================
-     TOOL 2 — Credit Card Interest Calculator
+     TOOL 2 — Credit Card Interest Calculator (Pro Style)
      Formula: Monthly Interest = Balance × (APR / 100 / 12)
   ============================================================ */
   function initCreditCardCalculator() {
-    var form = el('cc-form');
-    if (!form) return;
+    var container = document.getElementById('ccc-credit-calculator');
+    if (!container) return;
 
-    var resultEl = el('cc-result');
-    var errorEl = el('cc-error');
-    var resetBtn = el('cc-reset');
+    // Elements
+    var els = {
+      balance: el('cc-balance'),
+      apr: el('cc-apr'),
+      payment: el('cc-payment'),
+      kpiInterest: el('cc-kpi-interest'),
+      kpiMonths: el('cc-kpi-months'),
+      kpiTotalInterest: el('cc-kpi-total-interest'),
+      statPrincipal: el('cc-stat-principal'),
+      statPayoffDate: el('cc-stat-payoff-date'),
+      barPrincipal: el('cc-bar-principal'),
+      barInterest: el('cc-bar-interest'),
+      legendPrincipalPct: el('cc-legend-principal-pct'),
+      legendInterestPct: el('cc-legend-interest-pct'),
+      alert: el('cc-alert'),
+      alertText: el('cc-alert-text'),
+      resetBtn: el('cc-reset')
+    };
 
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
+    // Check if all required elements exist
+    if (!els.balance || !els.apr || !els.payment) return;
 
-      var balance = parseFloat(el('cc-balance').value);
-      var apr = parseFloat(el('cc-apr').value);
-      var payment = parseFloat(el('cc-payment').value);
+    function calculate() {
+      var balance = parseFloat(els.balance.value) || 0;
+      var apr = parseFloat(els.apr.value) || 0;
+      var payment = parseFloat(els.payment.value) || 0;
 
-      if (isNaN(balance) || balance <= 0) return showError(resultEl, errorEl, 'Please enter a valid balance.');
-      if (isNaN(apr) || apr < 0) return showError(resultEl, errorEl, 'Please enter a valid APR.');
-      if (isNaN(payment) || payment <= 0) return showError(resultEl, errorEl, 'Please enter a valid monthly payment.');
+      if (balance <= 0 || apr < 0 || payment <= 0) {
+        // Reset to defaults
+        els.kpiInterest.textContent = '$0.00';
+        els.kpiMonths.textContent = '0';
+        els.kpiTotalInterest.textContent = '$0.00';
+        els.statPrincipal.textContent = '$0.00';
+        els.statPayoffDate.textContent = '—';
+        els.barPrincipal.style.width = '50%';
+        els.barInterest.style.width = '50%';
+        els.legendPrincipalPct.textContent = '50%';
+        els.legendInterestPct.textContent = '50%';
+        if (els.alert) els.alert.classList.add('ccc-alert--hidden');
+        return;
+      }
 
       var monthlyRate = apr / 100 / 12;
       var monthlyInterest = balance * monthlyRate;
       var principal = payment - monthlyInterest;
 
-      if (payment <= monthlyInterest) {
-        return showError(resultEl, errorEl, 'Your payment is too low to cover the interest. The balance will never be paid off. Increase your monthly payment above ' + fmtCurrency(monthlyInterest) + '.');
+      // Show/hide alert for insufficient payment or excessive payment
+      if (els.alert && els.alertText) {
+        if (payment <= monthlyInterest) {
+          els.alert.classList.remove('ccc-alert--hidden');
+          els.alertText.textContent = 'Your payment of ' + fmtCurrency(payment) + ' does not cover the monthly interest of ' + fmtCurrency(monthlyInterest) + '. Increase your payment to at least ' + fmtCurrency(monthlyInterest + 1) + ' to make progress.';
+          els.kpiMonths.textContent = '∞';
+          els.statPayoffDate.textContent = 'Never';
+        } else if (payment > balance) {
+          els.alert.classList.remove('ccc-alert--hidden');
+          els.alertText.textContent = 'Your payment of ' + fmtCurrency(payment) + ' exceeds your balance of ' + fmtCurrency(balance) + '. You only need ' + fmtCurrency(balance + monthlyInterest) + ' to pay off this card in full. The excess amount will not reduce your debt further.';
+        } else {
+          els.alert.classList.add('ccc-alert--hidden');
+        }
       }
 
-      // Months to pay off
-      var months = Math.log(payment / (payment - balance * monthlyRate)) / Math.log(1 + monthlyRate);
-      var totalPaid = payment * Math.ceil(months);
-      var totalInterest = totalPaid - balance;
+      // Months to pay off (only if payment covers interest)
+      var months = 0;
+      var totalInterest = 0;
+      if (payment > monthlyInterest) {
+        // If payment is enough to pay off balance + interest in one month
+        if (payment >= balance + monthlyInterest) {
+          months = 1;
+          totalInterest = monthlyInterest;
+        } else {
+          // Normal amortization calculation
+          months = Math.log(payment / (payment - balance * monthlyRate)) / Math.log(1 + monthlyRate);
+          var totalPaid = payment * Math.ceil(months);
+          totalInterest = totalPaid - balance;
+        }
+      }
 
-      el('cc-monthly-interest').textContent = fmtCurrency(monthlyInterest);
-      el('cc-principal-paid').textContent = fmtCurrency(principal);
-      el('cc-months').textContent = Math.ceil(months) + ' months';
-      el('cc-total-interest').textContent = fmtCurrency(totalInterest);
+      // Calculate payoff date
+      var payoffDate = new Date();
+      payoffDate.setMonth(payoffDate.getMonth() + Math.ceil(months));
+      var payoffDateStr = months > 0 ? payoffDate.toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : '—';
 
-      showResult(resultEl, errorEl);
-      resetBtn && resetBtn.classList.add('is-visible');
+      // Calculate breakdown percentages
+      // Cap effective payment at balance + interest for correct percentage display
+      var effectivePayment = payment >= balance + monthlyInterest ? balance + monthlyInterest : payment;
+      var principalPct = effectivePayment > 0 ? ((effectivePayment - monthlyInterest) / effectivePayment) * 100 : 50;
+      var interestPct = effectivePayment > 0 ? (monthlyInterest / effectivePayment) * 100 : 50;
+
+      // Update KPI cards
+      els.kpiInterest.textContent = fmtCurrency(monthlyInterest);
+      els.kpiMonths.textContent = payment > monthlyInterest ? Math.ceil(months) : '∞';
+      els.kpiTotalInterest.textContent = payment > monthlyInterest ? fmtCurrency(totalInterest) : '∞';
+
+      // Update impact stats
+      // When payment exceeds balance + interest, principal is the full balance
+      var principalPaid = payment >= balance + monthlyInterest ? balance : (principal > 0 ? principal : 0);
+      els.statPrincipal.textContent = fmtCurrency(principalPaid);
+      els.statPayoffDate.textContent = payoffDateStr;
+
+      // Update breakdown bar
+      els.barPrincipal.style.width = principalPct + '%';
+      els.barInterest.style.width = interestPct + '%';
+      els.legendPrincipalPct.textContent = Math.round(principalPct) + '%';
+      els.legendInterestPct.textContent = Math.round(interestPct) + '%';
+    }
+
+    // Event listeners
+    [els.balance, els.apr, els.payment].forEach(function (input) {
+      if (input) {
+        input.addEventListener('input', calculate);
+        input.addEventListener('change', calculate);
+      }
     });
 
-    bindReset(resetBtn, form, resultEl, errorEl);
+    // Form submit (prevent default, calculate)
+    var form = el('cc-form');
+    if (form) {
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        calculate();
+      });
+    }
+
+    // Reset button
+    if (els.resetBtn) {
+      els.resetBtn.addEventListener('click', function () {
+        if (form) form.reset();
+        calculate();
+      });
+    }
+
+    // Preset helpers (exposed globally)
+    window.CCC = {
+      setAPR: function (val) {
+        els.apr.value = val;
+        calculate();
+      },
+      setPayment: function (val) {
+        els.payment.value = val;
+        calculate();
+      }
+    };
+
+    // Initial calc
+    calculate();
   }
 
   /* ============================================================

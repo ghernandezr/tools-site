@@ -1,111 +1,343 @@
 <!-- ============================================================
-     TOOL 2: CREDIT CARD INTEREST CALCULATOR
+     TOOL 2: CREDIT CARD INTEREST CALCULATOR — Plugin Style Edition
      Slug: /credit-card-interest-calculator/
      Primary keyword: "credit card interest calculator"
      RankMath Title: Credit Card Interest Calculator — Monthly Interest & Payoff Time | ToolsHub
      RankMath Meta: Calculate how much interest your credit card charges each month and how long it will take to pay off your balance. Free, instant, no sign-up.
+     =============================================================
+     CSS: theme/assets/css/tools.css (classes .ccc-*)
+     JS:  theme/assets/js/calculators.js (initCreditCardCalculator)
      ============================================================ -->
 
-<h1>Credit Card Interest Calculator — Monthly Charges &amp; Payoff Timeline</h1>
+<div class="lpc-wrap">
 
-<p>Our free <strong>credit card interest calculator</strong> shows you exactly how much interest your credit card charges each month based on your balance and APR — and how many months it will take to pay off your balance at your current payment amount.</p>
+<!-- ══════════════════════════════════════════════
+     TOOL HERO
+     ══════════════════════════════════════════════ -->
+<section class="lpc-hero">
+  <div class="th-container">
+    <div class="lpc-hero__inner">
 
-[ad_slot position="header"]
+      <div class="lpc-hero__text">
+        <div class="lpc-hero__eyebrow">
+          <span class="lpc-hero__eyebrow-line"></span>
+          Finance · Free Tool
+        </div>
+        <h1 class="lpc-hero__title">
+          Credit Card Interest<br>
+          <span>Calculator — Monthly Charges & Payoff</span>
+        </h1>
+        <p class="lpc-hero__desc">
+          Our free <strong>credit card interest calculator</strong> shows exactly how much interest your credit card charges each month based on your balance and APR — and how many months it will take to pay off your balance at your current payment amount.
+        </p>
+      </div>
 
-<!-- CALCULATOR -->
-<div class="tool-card">
-  <h2>Credit Card Interest Calculator</h2>
-  <form id="cc-form">
-    <div class="tool-group">
-      <label for="cc-balance">Current Balance ($)</label>
-      <input type="number" id="cc-balance" placeholder="e.g. 3500" min="1" step="any" required>
+      <div class="lpc-hero__badges">
+        <div class="lpc-badge lpc-badge--blue">
+          <span class="lpc-badge__number">💳</span>
+          <span class="lpc-badge__label">CC Interest Tool</span>
+        </div>
+        <div class="lpc-badge lpc-badge--dark">
+          <span class="lpc-badge__number">100%</span>
+          <span class="lpc-badge__label">Free &amp;</span>
+          <span class="lpc-badge__sublabel">Private</span>
+        </div>
+      </div>
+
     </div>
-    <div class="tool-group">
-      <label for="cc-apr">Annual Percentage Rate — APR (%)</label>
-      <input type="number" id="cc-apr" placeholder="e.g. 22.99" min="0" step="any" required>
-    </div>
-    <div class="tool-group">
-      <label for="cc-payment">Monthly Payment ($)</label>
-      <input type="number" id="cc-payment" placeholder="e.g. 150" min="1" step="any" required>
-    </div>
-    <button type="submit" class="tool-btn">Calculate Interest &amp; Payoff</button>
-  </form>
-
-  <div id="cc-error" class="tool-error"></div>
-
-  <div id="cc-result" class="tool-result">
-    <div class="tool-result__label">Monthly Interest Charge</div>
-    <div class="tool-result__value" id="cc-monthly-interest">—</div>
-    <div class="tool-result__breakdown">
-      <strong>Principal Paid This Month:</strong> <span id="cc-principal-paid">—</span><br>
-      <strong>Months to Pay Off:</strong> <span id="cc-months">—</span><br>
-      <strong>Total Interest You'll Pay:</strong> <span id="cc-total-interest">—</span>
-    </div>
   </div>
+</section>
 
-  <button id="cc-reset" class="tool-reset">Reset Calculator</button>
-</div>
-
-[ad_slot position="mid"]
-
-<h2>How Credit Card Interest Is Calculated</h2>
-<p>Credit card interest compounds <strong>daily</strong> in most cases, but is billed monthly. The standard formula for your monthly interest charge is:</p>
-
-<div class="tool-formula">
-  Monthly Interest = Balance × (APR ÷ 100 ÷ 12)<br><br>
-  Example: $3,500 balance at 22.99% APR<br>
-  Monthly Interest = $3,500 × (22.99 ÷ 100 ÷ 12) = $67.05<br><br>
-  Months to Pay Off = log(Payment / (Payment − Balance × Monthly Rate)) / log(1 + Monthly Rate)<br><br>
-  Principal paid per month = Monthly Payment − Monthly Interest
-</div>
-
-<h3>Key Terms Explained</h3>
-<ul>
-  <li><strong>APR (Annual Percentage Rate)</strong> — The yearly interest rate on your card. Find it on your statement or card agreement. Average US credit card APR: ~20–27%.</li>
-  <li><strong>Monthly Interest Charge</strong> — The dollar amount of interest added to your balance each billing cycle.</li>
-  <li><strong>Principal Paid</strong> — The portion of your payment that actually reduces your balance (payment minus interest).</li>
-  <li><strong>Months to Pay Off</strong> — How long it takes to reach $0 at your current payment amount. Assumes no new charges.</li>
-</ul>
-
-<h2>Why This Matters</h2>
-<p>At a 22.99% APR on a $3,500 balance, you're paying ~$67/month in interest alone. A minimum payment of $75 only reduces your balance by ~$8 per month — it would take over 20 years to pay off at the minimum. Use our calculator to find a payment that actually works.</p>
-
-<h2>Related Tools</h2>
-<ul>
-  <li><a href="/loan-payment-calculator/"><strong>Loan Payment Calculator</strong></a> — Compare the cost of a personal loan vs. carrying credit card debt.</li>
-  <li><a href="/compound-interest-calculator/"><strong>Compound Interest Calculator</strong></a> — See how compound interest works in your favor when saving.</li>
-  <li><a href="/percentage-calculator/"><strong>Percentage Calculator</strong></a> — Calculate percentage-based charges and fees.</li>
-</ul>
-
-<div class="tool-faq">
-  <h2>Frequently Asked Questions</h2>
-
-  <div class="tool-faq__item">
-    <div class="tool-faq__question">How is credit card interest calculated monthly?</div>
-    <div class="tool-faq__answer">The formula is: Monthly Interest = Balance × (APR ÷ 12 ÷ 100). So a $3,500 balance at 21% APR = $3,500 × 0.0175 = $61.25 in interest that month. The remaining portion of any payment reduces your principal balance.</div>
-  </div>
-
-  <div class="tool-faq__item">
-    <div class="tool-faq__question">What happens if my payment only covers the interest?</div>
-    <div class="tool-faq__answer">If your monthly payment equals the monthly interest, your balance never decreases — you'll be paying indefinitely. If your payment is less than the interest, your balance actually grows despite making payments. Our calculator warns you if this happens and tells you the minimum payment needed to make progress.</div>
-  </div>
-
-  <div class="tool-faq__item">
-    <div class="tool-faq__question">How do I pay off credit card debt faster?</div>
-    <div class="tool-faq__answer">Increase your monthly payment as much as possible. Even an extra $50/month can cut years off your payoff timeline. Consider the avalanche method (pay highest APR card first) or snowball method (pay smallest balance first for motivation). Balance transfers to a 0% APR card can also help eliminate interest charges during a promotional period.</div>
-  </div>
-
-  <div class="tool-faq__item">
-    <div class="tool-faq__question">Is 22.99% APR high for a credit card?</div>
-    <div class="tool-faq__answer">As of 2024, the average US credit card APR is approximately 20–27%. A 22.99% APR is within the typical range for general-purpose credit cards. Cards for people with excellent credit may offer 15–18%, while store cards and secured cards often exceed 25–29%. The best rate is always 0% — achieved by paying your full balance each month.</div>
-  </div>
-
-  <div class="tool-faq__item">
-    <div class="tool-faq__question">Does this calculator account for daily compounding?</div>
-    <div class="tool-faq__answer">This calculator uses the standard monthly calculation method, which closely approximates the actual amount you'll see on your statement. For exact daily-compounding results, the difference is typically less than $1/month on most balances. Your monthly statement is the most accurate source for your actual charge.</div>
+<!-- ══════════════════════════════════════════════
+     AD — LEADERBOARD
+     ══════════════════════════════════════════════ -->
+<div class="th-container">
+  <div class="ad-leaderboard">
+    <span class="ad-label">Advertisement</span>
+    [ad_slot position="header"]
   </div>
 </div>
 
-<p><small>⚠️ <strong>Disclaimer:</strong> For educational purposes only. Not financial advice. Actual charges may differ based on your card issuer's billing methodology. See our <a href="/disclaimer/">full Disclaimer</a>.</small></p>
+<!-- ══════════════════════════════════════════════
+     CALCULATOR UI
+     ══════════════════════════════════════════════ -->
+<section>
+  <div class="ccc-calculator" id="ccc-credit-calculator">
 
-[ad_slot position="footer"]
+    <!-- Header -->
+    <header class="ccc-header">
+      <div class="ccc-header-icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+          <line x1="1" y1="10" x2="23" y2="10"></line>
+        </svg>
+      </div>
+      <div>
+        <h2 class="ccc-title">Credit Card <span style="color: var(--ccc-primary);">Interest Calculator</span></h2>
+        <p class="ccc-subtitle">Monthly Charges & Payoff Timeline</p>
+      </div>
+    </header>
+
+    <!-- Main Layout: Sidebar + Panel -->
+    <div class="ccc-layout">
+
+      <!-- Sidebar: Inputs -->
+      <aside class="ccc-sidebar" aria-label="Credit card parameters">
+        <div class="ccc-glass-card">
+          <h3 class="ccc-section-label">Card Details</h3>
+          <form id="cc-form" class="ccc-field-stack">
+
+            <div class="ccc-input-group">
+              <label class="ccc-label-tech" for="cc-balance">Current Balance ($)</label>
+              <input type="number" id="cc-balance" class="ccc-input-field" placeholder="3500" min="1" step="any" autocomplete="off" required>
+            </div>
+
+            <div class="ccc-input-group">
+              <label class="ccc-label-tech" for="cc-apr">Annual APR (%)</label>
+              <input type="number" id="cc-apr" class="ccc-input-field" placeholder="22.99" min="0" step="any" autocomplete="off" required>
+              <div class="ccc-presets">
+                <button type="button" class="ccc-preset-btn" onclick="CCC.setAPR(18.99)">Good (19%)</button>
+                <button type="button" class="ccc-preset-btn" onclick="CCC.setAPR(22.99)">Avg (23%)</button>
+                <button type="button" class="ccc-preset-btn" onclick="CCC.setAPR(27.99)">High (28%)</button>
+              </div>
+            </div>
+
+            <div class="ccc-input-group">
+              <label class="ccc-label-tech" for="cc-payment">Monthly Payment ($)</label>
+              <input type="number" id="cc-payment" class="ccc-input-field" placeholder="150" min="1" step="any" autocomplete="off" required>
+              <div class="ccc-presets">
+                <button type="button" class="ccc-preset-btn" onclick="CCC.setPayment(100)">$100</button>
+                <button type="button" class="ccc-preset-btn" onclick="CCC.setPayment(200)">$200</button>
+                <button type="button" class="ccc-preset-btn" onclick="CCC.setPayment(500)">$500</button>
+              </div>
+            </div>
+
+          </form>
+        </div>
+      </aside>
+
+      <!-- Panel: Results -->
+      <main class="ccc-panel" aria-label="Calculation results">
+
+        <!-- KPI Cards -->
+        <div class="ccc-kpi-row">
+          <div class="ccc-kpi-card ccc-kpi-card--primary">
+            <span class="ccc-kpi-label">Monthly Interest</span>
+            <strong class="ccc-kpi-value ccc-kpi-value--primary" id="cc-kpi-interest">$0.00</strong>
+          </div>
+          <div class="ccc-kpi-card ccc-kpi-card--red">
+            <span class="ccc-kpi-label">Months to Payoff</span>
+            <strong class="ccc-kpi-value ccc-kpi-value--red" id="cc-kpi-months">0</strong>
+          </div>
+          <div class="ccc-kpi-card ccc-kpi-card--amber">
+            <span class="ccc-kpi-label">Total Interest</span>
+            <strong class="ccc-kpi-value ccc-kpi-value--amber" id="cc-kpi-total-interest">$0.00</strong>
+          </div>
+        </div>
+
+        <!-- Alert Box -->
+        <div id="cc-alert" class="ccc-alert ccc-alert--hidden">
+          <div class="ccc-alert-icon">⚠️</div>
+          <div class="ccc-alert-content">
+            <h4 class="ccc-alert-title">Payment Warning</h4>
+            <p class="ccc-alert-text" id="cc-alert-text">Your payment doesn't cover the monthly interest. Your balance will grow over time.</p>
+          </div>
+        </div>
+
+        <!-- Impact Panel -->
+        <div class="ccc-impact-panel">
+          <div class="ccc-impact-content">
+            <div class="ccc-impact-left">
+              <div class="ccc-impact-badge">
+                <span class="ccc-impact-badge-dot"></span>
+                <span>Live Calculation</span>
+              </div>
+              <h3 class="ccc-impact-title">Debt Payoff Summary</h3>
+              <p class="ccc-impact-desc">Based on your current balance, APR, and payment amount. Results assume no new charges are added to the card.</p>
+            </div>
+            <div class="ccc-impact-stats">
+              <div class="ccc-impact-stat">
+                <p class="ccc-impact-stat-label">Principal Paid/Month</p>
+                <p class="ccc-impact-stat-value" id="cc-stat-principal">$0.00</p>
+              </div>
+              <div class="ccc-impact-stat">
+                <p class="ccc-impact-stat-label">Payoff Date</p>
+                <p class="ccc-impact-stat-value" id="cc-stat-payoff-date">—</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Visual Breakdown -->
+        <div class="ccc-breakdown-card">
+          <h4 class="ccc-breakdown-title">Payment Breakdown</h4>
+          <div class="ccc-breakdown-bar" aria-hidden="true">
+            <div class="ccc-breakdown-segment ccc-breakdown-segment--principal" id="cc-bar-principal" style="width: 50%;"></div>
+            <div class="ccc-breakdown-segment ccc-breakdown-segment--interest" id="cc-bar-interest" style="width: 50%;"></div>
+          </div>
+          <div class="ccc-breakdown-legend">
+            <div class="ccc-legend-item">
+              <span class="ccc-legend-dot ccc-legend-dot--principal"></span>
+              <span>Principal (<span id="cc-legend-principal-pct">50%</span>)</span>
+            </div>
+            <div class="ccc-legend-item">
+              <span class="ccc-legend-dot ccc-legend-dot--interest"></span>
+              <span>Interest (<span id="cc-legend-interest-pct">50%</span>)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Reset Button -->
+        <button id="cc-reset" class="ccc-reset-btn">Reset Calculator</button>
+
+      </main>
+    </div>
+
+    <!-- Bottom Ad Placeholder -->
+    <div class="ccc-ad-slot" aria-hidden="true"></div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     MAIN CONTENT
+     ══════════════════════════════════════════════ -->
+<section class="ab-mission">
+  <div class="th-container">
+    <div class="lpc-content-grid">
+
+      <!-- Left 2/3: article content -->
+      <div>
+
+        <!-- MID CONTENT AD -->
+        <div class="ad-infeed" style="margin:0 0 2rem;">
+          <span class="ad-label">Advertisement</span>
+          [ad_slot position="mid"]
+        </div>
+
+        <!-- HOW IT WORKS -->
+        <h2 class="ab-section-title">Credit Card Interest Formula</h2>
+        <p class="ab-section-subtitle">Credit card interest compounds daily in most cases, but is billed monthly. Here are the formulas used:</p>
+
+        <div class="tool-formula-pro">
+          <div class="tfp-header">
+            <span class="tfp-badge">∑ Formula</span>
+            <span class="tfp-title">Monthly Interest Calculation</span>
+          </div>
+          <div class="tfp-equation">
+            <span class="tfp-var tfp-result">Monthly Interest</span>
+            <span class="tfp-equals">=</span>
+            <span class="tfp-var">Balance</span>
+            <span class="tfp-operator">×</span>
+            <span class="tfp-var">(APR ÷ 12 ÷ 100)</span>
+          </div>
+          <div class="tfp-equation" style="margin-top:1rem;">
+            <span class="tfp-var tfp-result">Principal Paid</span>
+            <span class="tfp-equals">=</span>
+            <span class="tfp-var">Payment</span>
+            <span class="tfp-operator">−</span>
+            <span class="tfp-var">Monthly Interest</span>
+          </div>
+          <div class="tfp-legend">
+            <div class="tfp-legend-item">
+              <span class="tfp-legend-var">Example</span>
+              <span class="tfp-legend-desc">$3,500 at 22.99% APR = $3,500 × 0.01916 = <strong>$67.05/month</strong> interest. With $150 payment, $82.95 goes to principal.</span>
+            </div>
+          </div>
+        </div>
+
+        <h3>Key Terms Explained</h3>
+        <ul>
+          <li><strong>APR (Annual Percentage Rate)</strong> — The yearly interest rate on your card. Find it on your statement or card agreement. Average US credit card APR: ~20–27%.</li>
+          <li><strong>Monthly Interest Charge</strong> — The dollar amount of interest added to your balance each billing cycle.</li>
+          <li><strong>Principal Paid</strong> — The portion of your payment that actually reduces your balance (payment minus interest).</li>
+          <li><strong>Months to Pay Off</strong> — How long it takes to reach $0 at your current payment amount. Assumes no new charges.</li>
+        </ul>
+
+        <h2>Why This Matters</h2>
+        <p>At a 22.99% APR on a $3,500 balance, you're paying ~$67/month in interest alone. A minimum payment of $75 only reduces your balance by ~$8 per month — it would take over 20 years to pay off at the minimum. Use our calculator to find a payment that actually works.</p>
+
+        <!-- INTERNAL LINKS -->
+        <h2>Related Tools</h2>
+        <ul>
+          <li><a href="/loan-payment-calculator/"><strong>Loan Payment Calculator</strong></a> — Compare the cost of a personal loan vs. carrying credit card debt.</li>
+          <li><a href="/compound-interest-calculator/"><strong>Compound Interest Calculator</strong></a> — See how compound interest works in your favor when saving.</li>
+          <li><a href="/percentage-calculator/"><strong>Percentage Calculator</strong></a> — Calculate percentage-based charges and fees.</li>
+        </ul>
+
+        <!-- FAQ SECTION -->
+        <div class="tool-faq">
+          <h2>Frequently Asked Questions</h2>
+
+          <div class="tool-faq__item">
+            <div class="tool-faq__question">How is credit card interest calculated monthly?</div>
+            <div class="tool-faq__answer">The formula is: Monthly Interest = Balance × (APR ÷ 12 ÷ 100). So a $3,500 balance at 21% APR = $3,500 × 0.0175 = $61.25 in interest that month. The remaining portion of any payment reduces your principal balance.</div>
+          </div>
+
+          <div class="tool-faq__item">
+            <div class="tool-faq__question">What happens if my payment only covers the interest?</div>
+            <div class="tool-faq__answer">If your monthly payment equals the monthly interest, your balance never decreases — you'll be paying indefinitely. If your payment is less than the interest, your balance actually grows despite making payments. Our calculator warns you if this happens and tells you the minimum payment needed to make progress.</div>
+          </div>
+
+          <div class="tool-faq__item">
+            <div class="tool-faq__question">How do I pay off credit card debt faster?</div>
+            <div class="tool-faq__answer">Increase your monthly payment as much as possible. Even an extra $50/month can cut years off your payoff timeline. Consider the avalanche method (pay highest APR card first) or snowball method (pay smallest balance first for motivation). Balance transfers to a 0% APR card can also help eliminate interest charges during a promotional period.</div>
+          </div>
+
+          <div class="tool-faq__item">
+            <div class="tool-faq__question">Is 22.99% APR high for a credit card?</div>
+            <div class="tool-faq__answer">As of 2024, the average US credit card APR is approximately 20–27%. A 22.99% APR is within the typical range for general-purpose credit cards. Cards for people with excellent credit may offer 15–18%, while store cards and secured cards often exceed 25–29%. The best rate is always 0% — achieved by paying your full balance each month.</div>
+          </div>
+
+          <div class="tool-faq__item">
+            <div class="tool-faq__question">Does this calculator account for daily compounding?</div>
+            <div class="tool-faq__answer">This calculator uses the standard monthly calculation method, which closely approximates the actual amount you'll see on your statement. For exact daily-compounding results, the difference is typically less than $1/month on most balances. Your monthly statement is the most accurate source for your actual charge.</div>
+          </div>
+        </div>
+
+        <p><small>⚠️ <strong>Disclaimer:</strong> For educational purposes only. Not financial advice. Actual charges may differ based on your card issuer's billing methodology. See our <a href="/disclaimer/">full Disclaimer</a>.</small></p>
+
+      </div>
+
+      <!-- Right 1/3: ad + callout -->
+      <div class="ab-sidebar">
+
+        <div class="ad-sidebar">
+          <span class="ad-label">Advertisement</span>
+          <span class="ad-placeholder-text">Ad Space</span>
+          [ad_slot position="sidebar"]
+        </div>
+
+        <div class="lpc-sidebar-card">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          <p class="lpc-sidebar-card__title">100% Private</p>
+          <p class="lpc-sidebar-card__text">Your credit card data is never stored or sent to any server. All calculations happen instantly in your browser.</p>
+        </div>
+
+        <div class="ab-callout">
+          <span class="ab-callout__icon">💡</span>
+          <div class="ab-callout__title">Pro Tip</div>
+          <p class="ab-callout__text">
+            Paying just the minimum can cost you thousands in interest. Increasing your monthly payment by even $50 can cut years off your debt payoff timeline.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     AD — FOOTER
+     ══════════════════════════════════════════════ -->
+<section class="ab-policy" style="padding:3rem 0;">
+  <div class="th-container">
+    <div class="ad-leaderboard">
+      <span class="ad-label">Advertisement</span>
+      [ad_slot position="footer"]
+    </div>
+  </div>
+</section>
+
+</div><!-- /.lpc-wrap -->
