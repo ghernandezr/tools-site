@@ -64,13 +64,14 @@ Las siguientes herramientas en `tools/` están listas para usar:
 - **Mortgage** — Calculadora de hipotecas (disponible en Finance Suite Pro plugin)
 - **Fuel** — Calculadora de costo de combustible (fuel-cost-calculator.html)
 - **Compound** — Calculadora de interés compuesto (compound-interest-calculator.html)
+- **Salary** — Conversor de salario a hora (salary-to-hourly-converter.html)
+- **Credit Card** — Calculadora de interés de tarjeta de crédito (credit-card-interest-calculator.html)
+- **Tip** — Calculadora de propinas (tip-calculator.html)
+- **Percentage** — Calculadora de porcentajes (percentage-calculator.html)
+
 
 ### 🚧 Herramientas Pendientes
 
-- **Credit Card** — Calculadora de interés de tarjeta de crédito (credit-card-interest-calculator.html)
-- **Salary** — Conversor de salario a hora (salary-to-hourly-converter.html)
-- **Tip** — Calculadora de propinas (tip-calculator.html)
-- **Percentage** — Calculadora de porcentajes (percentage-calculator.html)
 - **Discount** — Calculadora de descuentos (discount-calculator.html)
 - **Unit** — Conversor de unidades (unit-converter.html)
 

@@ -829,52 +829,131 @@
   }
 
   /* ============================================================
-     TOOL 6 — Percentage Calculator
+     TOOL 6 — Percentage Calculator (Plugin Style Edition)
      Three modes:
        A) What is X% of Y?      → Result = (X/100) * Y
        B) X is what % of Y?     → Result = (X/Y) * 100
        C) % change from X to Y  → Result = ((Y-X)/X) * 100
+     Features: Real-time calculation, KPI cards, formula display
   ============================================================ */
   function initPercentageCalculator() {
-    var form = el('pct-form');
-    if (!form) return;
+    var container = document.getElementById('pct-calculator');
+    if (!container) return;
 
-    var resultEl = el('pct-result');
-    var errorEl = el('pct-error');
-    var resetBtn = el('pct-reset');
+    var els = {
+      mode: el('pct-mode'),
+      labelA: el('pct-a-label'),
+      labelB: el('pct-b-label'),
+      inputA: el('pct-a'),
+      inputB: el('pct-b'),
+      modeDesc: el('pct-mode-desc'),
+      kpiResult: el('pct-kpi-result'),
+      kpiSecondary: el('pct-kpi-secondary'),
+      kpiSecondaryCard: el('pct-kpi-secondary-card'),
+      resultLabel: el('pct-result-label'),
+      secondaryLabel: el('pct-secondary-label'),
+      impactDesc: el('pct-impact-desc'),
+      impactStats: el('pct-impact-stats'),
+      stat1: el('pct-stat-1'),
+      formulaDisplay: el('pct-formula-display'),
+    };
 
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
+    if (!els.mode || !els.inputA || !els.inputB) return;
 
-      var mode = el('pct-mode').value;
-      var a = parseFloat(el('pct-a').value);
-      var b = parseFloat(el('pct-b').value);
-      var result;
-      var label;
+    var modes = {
+      'of': {
+        a: 'Percentage (X%)', b: 'Whole number (Y)',
+        ph_a: 'e.g. 20', ph_b: 'e.g. 500',
+        desc: 'Example: 20% of 500 = 100',
+        resultLabel: 'Result',
+        secondaryLabel: 'Of which is',
+        formula: '(X ÷ 100) × Y',
+        calc: function (a, b) {
+          var result = (a / 100) * b;
+          return { primary: fmt(result, 2), secondary: null, desc: a + '% of ' + b + ' = ' + fmt(result, 2) };
+        }
+      },
+      'what': {
+        a: 'Part (X)', b: 'Whole (Y)',
+        ph_a: 'e.g. 75', ph_b: 'e.g. 300',
+        desc: 'Example: 75 is what % of 300? = 25%',
+        resultLabel: 'Percentage',
+        secondaryLabel: 'Decimal',
+        formula: '(X ÷ Y) × 100',
+        calc: function (a, b) {
+          var result = (a / b) * 100;
+          return { primary: fmt(result, 2) + '%', secondary: fmt(a / b, 4), desc: a + ' is ' + fmt(result, 2) + '% of ' + b };
+        }
+      },
+      'change': {
+        a: 'Original value (X)', b: 'New value (Y)',
+        ph_a: 'e.g. 80', ph_b: 'e.g. 100',
+        desc: 'Example: From 80 to 100 = 25% increase',
+        resultLabel: '% Change',
+        secondaryLabel: 'Difference',
+        formula: '((Y − X) ÷ X) × 100',
+        calc: function (a, b) {
+          var diff = b - a;
+          var result = (diff / a) * 100;
+          var sign = result > 0 ? 'increase' : 'decrease';
+          return { primary: fmt(result, 2) + '% ' + sign, secondary: (diff > 0 ? '+' : '') + fmt(diff, 2), desc: 'From ' + a + ' to ' + b + ' = ' + fmt(result, 2) + '% ' + sign };
+        }
+      }
+    };
 
-      if (isNaN(a) || isNaN(b)) return showError(resultEl, errorEl, 'Please fill in both fields.');
+    function updateMode() {
+      var m = modes[els.mode.value];
+      if (m) {
+        els.labelA.textContent = m.a;
+        els.labelB.textContent = m.b;
+        els.inputA.placeholder = m.ph_a;
+        els.inputB.placeholder = m.ph_b;
+        els.modeDesc.textContent = m.desc;
+        els.resultLabel.textContent = m.resultLabel;
+        els.secondaryLabel.textContent = m.secondaryLabel;
+        calculate();
+      }
+    }
 
-      if (mode === 'of') {
-        result = (a / 100) * b;
-        label = a + '% of ' + fmt(b, 2) + ' =';
-      } else if (mode === 'what') {
-        if (b === 0) return showError(resultEl, errorEl, 'Whole value cannot be zero.');
-        result = (a / b) * 100;
-        label = fmt(a, 2) + ' is what % of ' + fmt(b, 2) + '?';
-      } else if (mode === 'change') {
-        if (a === 0) return showError(resultEl, errorEl, 'Starting value cannot be zero.');
-        result = ((b - a) / a) * 100;
-        label = 'Change from ' + fmt(a, 2) + ' to ' + fmt(b, 2);
+    function resetUI() {
+      els.kpiResult.textContent = '—';
+      els.kpiSecondaryCard.style.display = 'none';
+      els.impactStats.style.display = 'none';
+      els.impactDesc.textContent = 'Enter values to see your percentage calculation update instantly.';
+      els.formulaDisplay.innerHTML = '<span class="tfp-var">Result</span><span class="tfp-equals">=</span><span class="tfp-var">Enter values</span>';
+    }
+
+    function calculate() {
+      var a = parseFloat(els.inputA.value);
+      var b = parseFloat(els.inputB.value);
+      var m = modes[els.mode.value];
+
+      if (isNaN(a) || isNaN(b)) {
+        resetUI();
+        return;
       }
 
-      el('pct-label').textContent = label;
-      el('pct-answer').textContent = fmt(result, 4) + (mode === 'of' ? '' : '%');
+      var result = m.calc(a, b);
+      els.kpiResult.textContent = result.primary;
+      els.impactDesc.textContent = result.desc;
+      els.impactStats.style.display = 'flex';
+      els.stat1.textContent = m.formula;
 
-      showResult(resultEl, errorEl);
-      resetBtn && resetBtn.classList.add('is-visible');
-    });
+      els.formulaDisplay.innerHTML = '<span class="tfp-var tfp-result">' + m.resultLabel + '</span><span class="tfp-equals">=</span><span class="tfp-var">' + m.formula + '</span><span class="tfp-equals">→</span><span class="tfp-var tfp-result">' + result.primary + '</span>';
 
-    bindReset(resetBtn, form, resultEl, errorEl);
+      if (result.secondary) {
+        els.kpiSecondary.textContent = result.secondary;
+        els.kpiSecondaryCard.style.display = 'block';
+      } else {
+        els.kpiSecondaryCard.style.display = 'none';
+      }
+    }
+
+    els.mode.addEventListener('change', updateMode);
+    els.inputA.addEventListener('input', calculate);
+    els.inputB.addEventListener('input', calculate);
+
+    updateMode();
   }
 
   /* ============================================================

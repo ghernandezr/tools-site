@@ -1,141 +1,352 @@
 <!-- ============================================================
-     TOOL 6: PERCENTAGE CALCULATOR
+     TOOL 6: PERCENTAGE CALCULATOR — Plugin Style Edition
      Slug: /percentage-calculator/
      Primary keyword: "percentage calculator"
      RankMath Title: Percentage Calculator — 3 Ways to Calculate Percentages | ToolsHub
      RankMath Meta: Free percentage calculator: find what percent of a number is, what percentage X is of Y, and percentage change between two values. Instant results.
+     =============================================================
+     CSS: theme/assets/css/tools.css (classes .fcc-* reused)
+     JS:  theme/assets/js/calculators.js (initPercentageCalculator)
      ============================================================ -->
 
-<h1>Percentage Calculator — Calculate Any Percentage Instantly</h1>
+<div class="lpc-wrap">
 
-<p>Our free <strong>percentage calculator</strong> solves three common percentage problems: finding a percentage of a number, figuring out what percentage one number is of another, and calculating the percentage change (increase or decrease) between two values.</p>
+<!-- ════════════════════════════════════════════════
+     TOOL HERO
+     ════════════════════════════════════════════════ -->
+<section class="lpc-hero">
+  <div class="th-container">
+    <div class="lpc-hero__inner">
 
-[ad_slot position="header"]
+      <div class="lpc-hero__text">
+        <div class="lpc-hero__eyebrow">
+          <span class="lpc-hero__eyebrow-line"></span>
+          Math · Free Tool
+        </div>
+        <h1 class="lpc-hero__title">
+          Percentage Calculator<br>
+          <span>3 Ways to Calculate Percentages</span>
+        </h1>
+        <p class="lpc-hero__desc">
+          Our free <strong>percentage calculator</strong> solves three common percentage problems instantly: finding a percentage of a number, figuring out what percentage one number is of another, and calculating percentage change between two values.
+        </p>
+      </div>
 
-<div class="tool-card">
-  <h2>Percentage Calculator</h2>
-  <form id="pct-form">
-    <div class="tool-group">
-      <label for="pct-mode">What do you want to calculate?</label>
-      <select id="pct-mode">
-        <option value="of">What is X% of Y? (e.g. 20% of 500)</option>
-        <option value="what">X is what % of Y? (e.g. 75 is what % of 300?)</option>
-        <option value="change">% change from X to Y (e.g. from 80 to 100)</option>
-      </select>
+      <div class="lpc-hero__badges">
+        <div class="lpc-badge lpc-badge--blue">
+          <span class="lpc-badge__number">%</span>
+          <span class="lpc-badge__label">Percentage</span>
+        </div>
+        <div class="lpc-badge lpc-badge--dark">
+          <span class="lpc-badge__number">100%</span>
+          <span class="lpc-badge__label">Free &amp;</span>
+          <span class="lpc-badge__sublabel">Private</span>
+        </div>
+      </div>
+
     </div>
-    <div class="tool-group">
-      <label for="pct-a" id="pct-a-label">X (first value)</label>
-      <input type="number" id="pct-a" placeholder="e.g. 20" step="any" required>
-    </div>
-    <div class="tool-group">
-      <label for="pct-b" id="pct-b-label">Y (second value)</label>
-      <input type="number" id="pct-b" placeholder="e.g. 500" step="any" required>
-    </div>
-    <button type="submit" class="tool-btn">Calculate Percentage</button>
-  </form>
-
-  <div id="pct-error" class="tool-error"></div>
-
-  <div id="pct-result" class="tool-result">
-    <div class="tool-result__label" id="pct-label">Result</div>
-    <div class="tool-result__value" id="pct-answer">—</div>
   </div>
+</section>
 
-  <button id="pct-reset" class="tool-reset">Reset</button>
-</div>
-
-<!-- Dynamic label update based on mode -->
-<script>
-(function(){
-  var modeEl  = document.getElementById('pct-mode');
-  var labelA  = document.getElementById('pct-a-label');
-  var labelB  = document.getElementById('pct-b-label');
-  var inputA  = document.getElementById('pct-a');
-  var inputB  = document.getElementById('pct-b');
-  var labels  = {
-    'of':     { a: 'Percentage (X%)', b: 'Whole number (Y)', ph_a: 'e.g. 20', ph_b: 'e.g. 500' },
-    'what':   { a: 'Part (X)', b: 'Whole (Y)', ph_a: 'e.g. 75', ph_b: 'e.g. 300' },
-    'change': { a: 'Original value (X)', b: 'New value (Y)', ph_a: 'e.g. 80', ph_b: 'e.g. 100' }
-  };
-  function updateLabels() {
-    var m = modeEl.value;
-    if (labels[m]) {
-      labelA.textContent = labels[m].a;
-      labelB.textContent = labels[m].b;
-      inputA.placeholder = labels[m].ph_a;
-      inputB.placeholder = labels[m].ph_b;
-    }
-  }
-  if (modeEl) { modeEl.addEventListener('change', updateLabels); updateLabels(); }
-})();
-</script>
-
-[ad_slot position="mid"]
-
-<h2>Percentage Formulas Explained</h2>
-
-<div class="tool-formula">
-  1. What is X% of Y?<br>
-     Result = (X ÷ 100) × Y<br>
-     Example: 20% of 500 = (20 ÷ 100) × 500 = 100<br><br>
-
-  2. X is what percent of Y?<br>
-     Result = (X ÷ Y) × 100<br>
-     Example: 75 is what % of 300? → (75 ÷ 300) × 100 = 25%<br><br>
-
-  3. Percentage change from X to Y:<br>
-     Result = ((Y − X) ÷ X) × 100<br>
-     Example: From 80 to 100 → ((100 − 80) ÷ 80) × 100 = 25% increase<br>
-     Example: From 100 to 80 → ((80 − 100) ÷ 100) × 100 = −20% decrease
-</div>
-
-<h2>Common Percentage Calculations</h2>
-<ul>
-  <li><strong>15% of 200</strong> = 30</li>
-  <li><strong>25% of 80</strong> = 20</li>
-  <li><strong>8.5% sales tax on $120</strong> = $10.20 (total $130.20)</li>
-  <li><strong>7 is what % of 28?</strong> = 25%</li>
-  <li><strong>Raise from $50,000 to $55,000</strong> = 10% increase</li>
-  <li><strong>Stock dropped from $200 to $160</strong> = 20% decrease</li>
-</ul>
-
-<h2>Related Tools</h2>
-<ul>
-  <li><a href="/discount-calculator/"><strong>Discount Calculator</strong></a> — Uses percentage off to find final price and savings.</li>
-  <li><a href="/tip-calculator/"><strong>Tip Calculator</strong></a> — Calculate percentage-based tips on restaurant bills.</li>
-  <li><a href="/salary-to-hourly-converter/"><strong>Salary Converter</strong></a> — Calculate percentage raises or salary comparisons.</li>
-  <li><a href="/unit-converter/"><strong>Unit Converter</strong></a> — Convert units that often involve percentages in formulas.</li>
-</ul>
-
-<div class="tool-faq">
-  <h2>Frequently Asked Questions</h2>
-
-  <div class="tool-faq__item">
-    <div class="tool-faq__question">How do I calculate a percentage of a number?</div>
-    <div class="tool-faq__answer">Multiply the number by the percentage divided by 100. Formula: Result = (Percentage ÷ 100) × Number. Example: 30% of 250 = 0.30 × 250 = 75.</div>
-  </div>
-
-  <div class="tool-faq__item">
-    <div class="tool-faq__question">How do I calculate percentage increase or decrease?</div>
-    <div class="tool-faq__answer">Formula: % Change = ((New Value − Old Value) ÷ Old Value) × 100. A positive result means increase; negative means decrease. Example: Price went from $40 to $50 = ((50−40) ÷ 40) × 100 = 25% increase.</div>
-  </div>
-
-  <div class="tool-faq__item">
-    <div class="tool-faq__question">What is 20% of 500?</div>
-    <div class="tool-faq__answer">20% of 500 = (20 ÷ 100) × 500 = 100. Quick mental math: move the decimal one place left for 10% ($50), then double it for 20% ($100).</div>
-  </div>
-
-  <div class="tool-faq__item">
-    <div class="tool-faq__question">How do I find what percentage one number is of another?</div>
-    <div class="tool-faq__answer">Divide the part by the whole and multiply by 100. Formula: % = (Part ÷ Whole) × 100. Example: 45 out of 180 total = (45 ÷ 180) × 100 = 25%.</div>
-  </div>
-
-  <div class="tool-faq__item">
-    <div class="tool-faq__question">How do I calculate sales tax?</div>
-    <div class="tool-faq__answer">Use Mode 1 (What is X% of Y?). Enter your tax rate as X and the pre-tax price as Y. The result is the tax amount. Add it to the original price for the total. Example: 8.25% tax on $150 = $12.38 tax → total $162.38.</div>
+<!-- ════════════════════════════════════════════════
+     AD — LEADERBOARD
+     ════════════════════════════════════════════════ -->
+<div class="th-container">
+  <div class="ad-leaderboard">
+    <span class="ad-label">Advertisement</span>
+    [ad_slot position="header"]
   </div>
 </div>
 
-<p><small>⚠️ <strong>Disclaimer:</strong> For informational purposes only. See our <a href="/disclaimer/">full Disclaimer</a>.</small></p>
+<!-- ════════════════════════════════════════════════
+     CALCULATOR UI
+     ════════════════════════════════════════════════ -->
+<section>
+  <div class="fcc-calculator" id="pct-calculator">
 
-[ad_slot position="footer"]
+    <!-- Header -->
+    <header class="fcc-header">
+      <div class="fcc-header-icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <line x1="19" y1="5" x2="5" y2="19"></line>
+          <circle cx="6.5" cy="6.5" r="2.5"></circle>
+          <circle cx="17.5" cy="17.5" r="2.5"></circle>
+        </svg>
+      </div>
+      <div>
+        <h2 class="fcc-title">Percentage <span style="color: var(--fcc-primary);">Calculator</span></h2>
+        <p class="fcc-subtitle">3 Calculation Modes</p>
+      </div>
+    </header>
+
+    <!-- Main Layout: Sidebar + Panel -->
+    <div class="fcc-layout">
+
+      <!-- Sidebar: Inputs -->
+      <aside class="fcc-sidebar" aria-label="Percentage parameters">
+        <div class="fcc-glass-card">
+          <h3 class="fcc-section-label">Calculation Mode</h3>
+          <div class="fcc-field-stack">
+
+            <div class="fcc-input-group">
+              <label class="fcc-label-tech" for="pct-mode">What do you want to calculate?</label>
+              <select id="pct-mode" class="fcc-input-field">
+                <option value="of">What is X% of Y?</option>
+                <option value="what">X is what % of Y?</option>
+                <option value="change">% change from X to Y</option>
+              </select>
+              <p class="fcc-help-text" id="pct-mode-desc">Example: 20% of 500 = 100</p>
+            </div>
+
+            <div class="fcc-input-group">
+              <label class="fcc-label-tech" for="pct-a" id="pct-a-label">X (first value)</label>
+              <input type="number" id="pct-a" class="fcc-input-field" placeholder="e.g. 20" step="any" autocomplete="off">
+            </div>
+
+            <div class="fcc-input-group">
+              <label class="fcc-label-tech" for="pct-b" id="pct-b-label">Y (second value)</label>
+              <input type="number" id="pct-b" class="fcc-input-field" placeholder="e.g. 500" step="any" autocomplete="off">
+            </div>
+
+          </div>
+        </div>
+      </aside>
+
+      <!-- Panel: Results -->
+      <main class="fcc-panel" aria-label="Calculation results">
+
+        <!-- KPI Cards -->
+        <div class="fcc-kpi-row">
+          <div class="fcc-kpi-card fcc-kpi-card--primary">
+            <span class="fcc-kpi-label" id="pct-result-label">Result</span>
+            <strong class="fcc-kpi-value fcc-kpi-value--primary" id="pct-kpi-result">—</strong>
+          </div>
+          <div class="fcc-kpi-card fcc-kpi-card--green" id="pct-kpi-secondary-card" style="display:none;">
+            <span class="fcc-kpi-label" id="pct-secondary-label">Additional</span>
+            <strong class="fcc-kpi-value fcc-kpi-value--green" id="pct-kpi-secondary">—</strong>
+          </div>
+        </div>
+
+        <!-- Impact Panel -->
+        <div class="fcc-impact-panel">
+          <div class="fcc-impact-content">
+            <div class="fcc-impact-left">
+              <div class="fcc-impact-badge">
+                <span class="fcc-impact-badge-dot"></span>
+                <span>Live Calculation</span>
+              </div>
+              <h3 class="fcc-impact-title">Calculation Summary</h3>
+              <p class="fcc-impact-desc" id="pct-impact-desc">Enter values to see your percentage calculation update instantly.</p>
+            </div>
+            <div class="fcc-impact-stats" id="pct-impact-stats" style="display:none;">
+              <div class="fcc-impact-stat">
+                <p class="fcc-impact-stat-label" id="pct-stat-1-label">Formula Used</p>
+                <p class="fcc-impact-stat-value" id="pct-stat-1" style="font-size:0.9rem;">—</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Formula Display -->
+        <div class="fcc-breakdown-card">
+          <h4 class="fcc-breakdown-title">Formula & Breakdown</h4>
+          <div class="tool-formula-pro" style="margin:0;">
+            <div class="tfp-equation" id="pct-formula-display">
+              <span class="tfp-var">Result</span>
+              <span class="tfp-equals">=</span>
+              <span class="tfp-var">Enter values</span>
+            </div>
+          </div>
+        </div>
+
+      </main>
+    </div>
+
+    <!-- Bottom Ad Placeholder -->
+    <div class="fcc-ad-slot" aria-hidden="true"></div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════
+     MAIN CONTENT
+     ════════════════════════════════════════════════ -->
+<section class="ab-mission">
+  <div class="th-container">
+    <div class="lpc-content-grid">
+
+      <!-- Left 2/3: article content -->
+      <div>
+
+        <!-- MID CONTENT AD -->
+        <div class="ad-infeed" style="margin:0 0 2rem;">
+          <span class="ad-label">Advertisement</span>
+          [ad_slot position="mid"]
+        </div>
+
+        <!-- HOW IT WORKS -->
+        <h2 class="ab-section-title">Percentage Formulas Explained</h2>
+        <p class="ab-section-subtitle">Three essential formulas for every percentage calculation:</p>
+
+        <div class="tool-formula-pro">
+          <div class="tfp-header">
+            <span class="tfp-badge">1</span>
+            <span class="tfp-title">What is X% of Y?</span>
+          </div>
+          <div class="tfp-equation">
+            <span class="tfp-var tfp-result">Result</span>
+            <span class="tfp-equals">=</span>
+            <span class="tfp-var">X</span>
+            <span class="tfp-operator">÷</span>
+            <span class="tfp-var">100</span>
+            <span class="tfp-operator">×</span>
+            <span class="tfp-var">Y</span>
+          </div>
+          <div class="tfp-legend">
+            <div class="tfp-legend-item">
+              <span class="tfp-legend-var">Example</span>
+              <span class="tfp-legend-desc">20% of 500 = (20 ÷ 100) × 500 = <strong>100</strong></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tool-formula-pro">
+          <div class="tfp-header">
+            <span class="tfp-badge">2</span>
+            <span class="tfp-title">X is what percent of Y?</span>
+          </div>
+          <div class="tfp-equation">
+            <span class="tfp-var tfp-result">%</span>
+            <span class="tfp-equals">=</span>
+            <span class="tfp-var">X</span>
+            <span class="tfp-operator">÷</span>
+            <span class="tfp-var">Y</span>
+            <span class="tfp-operator">×</span>
+            <span class="tfp-var">100</span>
+          </div>
+          <div class="tfp-legend">
+            <div class="tfp-legend-item">
+              <span class="tfp-legend-var">Example</span>
+              <span class="tfp-legend-desc">75 is what % of 300? → (75 ÷ 300) × 100 = <strong>25%</strong></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tool-formula-pro">
+          <div class="tfp-header">
+            <span class="tfp-badge">3</span>
+            <span class="tfp-title">Percentage change from X to Y</span>
+          </div>
+          <div class="tfp-equation">
+            <span class="tfp-var tfp-result">% Change</span>
+            <span class="tfp-equals">=</span>
+            <div class="tfp-fraction">
+              <div class="tfp-numerator">Y − X</div>
+              <div class="tfp-denominator">X</div>
+            </div>
+            <span class="tfp-operator">×</span>
+            <span class="tfp-var">100</span>
+          </div>
+          <div class="tfp-legend">
+            <div class="tfp-legend-item">
+              <span class="tfp-legend-var">Example</span>
+              <span class="tfp-legend-desc">From 80 to 100 → ((100−80) ÷ 80) × 100 = <strong>25% increase</strong></span>
+            </div>
+          </div>
+        </div>
+
+        <h2>Common Percentage Calculations</h2>
+        <ul>
+          <li><strong>15% of 200</strong> = 30</li>
+          <li><strong>25% of 80</strong> = 20</li>
+          <li><strong>8.5% sales tax on $120</strong> = $10.20 (total $130.20)</li>
+          <li><strong>7 is what % of 28?</strong> = 25%</li>
+          <li><strong>Raise from $50,000 to $55,000</strong> = 10% increase</li>
+          <li><strong>Stock dropped from $200 to $160</strong> = 20% decrease</li>
+        </ul>
+
+        <!-- INTERNAL LINKS -->
+        <h2>Related Tools</h2>
+        <ul>
+          <li><a href="/discount-calculator/"><strong>Discount Calculator</strong></a> — Uses percentage off to find final price and savings.</li>
+          <li><a href="/tip-calculator/"><strong>Tip Calculator</strong></a> — Calculate percentage-based tips on restaurant bills.</li>
+          <li><a href="/salary-to-hourly-converter/"><strong>Salary Converter</strong></a> — Calculate percentage raises or salary comparisons.</li>
+          <li><a href="/unit-converter/"><strong>Unit Converter</strong></a> — Convert units that often involve percentages in formulas.</li>
+        </ul>
+
+        <!-- FAQ SECTION -->
+        <div class="tool-faq">
+          <h2>Frequently Asked Questions</h2>
+
+          <div class="tool-faq__item">
+            <div class="tool-faq__question">How do I calculate a percentage of a number?</div>
+            <div class="tool-faq__answer">Multiply the number by the percentage divided by 100. Formula: Result = (Percentage ÷ 100) × Number. Example: 30% of 250 = 0.30 × 250 = 75.</div>
+          </div>
+
+          <div class="tool-faq__item">
+            <div class="tool-faq__question">How do I calculate percentage increase or decrease?</div>
+            <div class="tool-faq__answer">Formula: % Change = ((New Value − Old Value) ÷ Old Value) × 100. A positive result means increase; negative means decrease. Example: Price went from $40 to $50 = ((50−40) ÷ 40) × 100 = 25% increase.</div>
+          </div>
+
+          <div class="tool-faq__item">
+            <div class="tool-faq__question">What is 20% of 500?</div>
+            <div class="tool-faq__answer">20% of 500 = (20 ÷ 100) × 500 = 100. Quick mental math: move the decimal one place left for 10% ($50), then double it for 20% ($100).</div>
+          </div>
+
+          <div class="tool-faq__item">
+            <div class="tool-faq__question">How do I find what percentage one number is of another?</div>
+            <div class="tool-faq__answer">Divide the part by the whole and multiply by 100. Formula: % = (Part ÷ Whole) × 100. Example: 45 out of 180 total = (45 ÷ 180) × 100 = 25%.</div>
+          </div>
+
+          <div class="tool-faq__item">
+            <div class="tool-faq__question">How do I calculate sales tax?</div>
+            <div class="tool-faq__answer">Use Mode 1 (What is X% of Y?). Enter your tax rate as X and the pre-tax price as Y. The result is the tax amount. Add it to the original price for the total. Example: 8.25% tax on $150 = $12.38 tax → total $162.38.</div>
+          </div>
+        </div>
+
+        <p><small>⚠️ <strong>Disclaimer:</strong> For informational purposes only. See our <a href="/disclaimer/">full Disclaimer</a>.</small></p>
+
+      </div>
+
+      <!-- Right 1/3: ad + callout -->
+      <div class="ab-sidebar">
+
+        <div class="ad-sidebar">
+          <span class="ad-label">Advertisement</span>
+          <span class="ad-placeholder-text">Ad Space</span>
+          [ad_slot position="sidebar"]
+        </div>
+
+        <div class="lpc-sidebar-card">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          <p class="lpc-sidebar-card__title">100% Private</p>
+          <p class="lpc-sidebar-card__text">Your calculations are never stored or sent to any server. All math happens instantly in your browser.</p>
+        </div>
+
+        <div class="ab-callout">
+          <span class="ab-callout__icon">💡</span>
+          <div class="ab-callout__title">Pro Tip</div>
+          <p class="ab-callout__text">
+            Quick mental math: To find 10% of any number, move the decimal one place left. For 20%, double it. For 5%, cut the 10% in half.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════
+     AD — FOOTER
+     ════════════════════════════════════════════════ -->
+<section class="ab-policy" style="padding:3rem 0;">
+  <div class="th-container">
+    <div class="ad-leaderboard">
+      <span class="ad-label">Advertisement</span>
+      [ad_slot position="footer"]
+    </div>
+  </div>
+</section>
+
+</div><!-- /.lpc-wrap -->
