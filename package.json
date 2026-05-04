@@ -1,0 +1,41 @@
+{
+  "name": "tools-site",
+  "version": "1.0.0",
+  "description": "WordPress utility tools and calculators site",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:ci": "jest --ci --coverage --maxWorkers=2"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0"
+  },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "testMatch": [
+      "**/theme/assets/js/**/*.test.js"
+    ],
+    "collectCoverageFrom": [
+      "theme/assets/js/calculators.js"
+    ],
+    "coverageReporters": [
+      "text",
+      "text-summary",
+      "lcov",
+      "html"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 25,
+        "functions": 25,
+        "lines": 25,
+        "statements": 25
+      }
+    },
+    "testPathIgnorePatterns": [
+      "/node_modules/"
+    ]
+  }
+}

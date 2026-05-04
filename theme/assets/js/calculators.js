@@ -8,7 +8,7 @@
   'use strict';
 
   /* ============================================================
-     Utility helpers
+     Utility helpers (exported for testing)
   ============================================================ */
   function fmt(n, decimals) {
     if (isNaN(n) || !isFinite(n)) return 'N/A';
@@ -22,6 +22,214 @@
     if (isNaN(n) || !isFinite(n)) return 'N/A';
     return '$' + fmt(n, 2);
   }
+
+  // Export utilities for testing
+  window.ToolsHubUtils = {
+    fmt: fmt,
+    fmtCurrency: fmtCurrency
+  };
+
+  /* ============================================================
+     Pure calculation functions (exported for testing)
+  ============================================================ */
+
+  // Loan Calculator calculations
+  window.calculateLoan = function (principal, annualRate, years) {
+    if (!principal || !annualRate || !years || principal <= 0 || annualRate <= 0 || years <= 0) {
+      return null;
+    }
+    var i = annualRate / 100 / 12;
+    var n = years * 12;
+    var x = Math.pow(1 + i, n);
+    var monthly = (principal * x * i) / (x - 1);
+    if (!isFinite(monthly)) return null;
+    var totalPayment = monthly * n;
+    var totalInterest = totalPayment - principal;
+    var principalPct = (principal / totalPayment) * 100;
+    return {
+      monthly: monthly,
+      totalPayment: totalPayment,
+      totalInterest: totalInterest,
+      principalPct: principalPct,
+      interestPct: 100 - principalPct,
+      months: n
+    };
+  };
+
+  // Credit Card Calculator calculations
+  window.calculateCreditCard = function (balance, apr, payment) {
+    if (balance <= 0 || apr < 0 || payment <= 0) {
+      return { monthlyInterest: 0, months: 0, totalInterest: 0, payoffDate: null };
+    }
+    var monthlyRate = apr / 100 / 12;
+    var monthlyInterest = balance * monthlyRate;
+
+    if (payment <= monthlyInterest) {
+      return { monthlyInterest: monthlyInterest, months: Infinity, totalInterest: Infinity, payoffDate: null, error: 'insufficient_payment' };
+    }
+
+    var months, totalInterest;
+    if (payment >= balance + monthlyInterest) {
+      months = 1;
+      totalInterest = monthlyInterest;
+    } else {
+      months = Math.log(payment / (payment - balance * monthlyRate)) / Math.log(1 + monthlyRate);
+      // Calculate actual total interest using amortization formula:
+      // Total Interest = (payment * n) - principal, where n is exact months (not rounded)
+      // But for the final partial month, the payment is exactly the remaining balance + interest
+      var exactMonths = months;
+      var fullMonths = Math.floor(exactMonths);
+      var remainingBalance = balance * Math.pow(1 + monthlyRate, fullMonths) - payment * ((Math.pow(1 + monthlyRate, fullMonths) - 1) / monthlyRate);
+      var finalPayment = remainingBalance > 0 ? remainingBalance * (1 + monthlyRate) : 0;
+      var totalPaid = payment * fullMonths + finalPayment;
+      totalInterest = totalPaid - balance;
+    }
+
+    var payoffDate = new Date();
+    payoffDate.setMonth(payoffDate.getMonth() + Math.ceil(months));
+
+    return {
+      monthlyInterest: monthlyInterest,
+      months: Math.ceil(months),
+      totalInterest: totalInterest,
+      payoffDate: payoffDate,
+      principalPaid: payment >= balance + monthlyInterest ? balance : payment - monthlyInterest
+    };
+  };
+
+  // Compound Interest Calculator calculations
+  window.calculateCompoundInterest = function (principal, rate, frequency, years) {
+    if (isNaN(principal) || principal <= 0 || isNaN(rate) || rate < 0 || isNaN(frequency) || frequency <= 0 || isNaN(years) || years <= 0) {
+      return null;
+    }
+    var r = rate / 100;
+    var n = frequency;
+    var t = years;
+    var A = principal * Math.pow(1 + r / n, n * t);
+    var interest = A - principal;
+    var growthPct = ((A - principal) / principal) * 100;
+    var principalPct = Math.round((principal / A) * 100);
+    var rule72 = r > 0 ? (72 / (r * 100)).toFixed(1) : null;
+    return {
+      finalAmount: A,
+      interestEarned: interest,
+      growthPct: growthPct,
+      principalPct: principalPct,
+      interestPct: 100 - principalPct,
+      rule72: rule72
+    };
+  };
+
+  // Salary Converter calculations
+  window.calculateSalary = function (annual, hoursWk, weeksYr) {
+    hoursWk = hoursWk || 40;
+    weeksYr = weeksYr || 52;
+    if (isNaN(annual) || annual <= 0) return null;
+    var totalHours = hoursWk * weeksYr;
+    return {
+      hourly: annual / totalHours,
+      monthly: annual / 12,
+      weekly: annual / weeksYr,
+      daily: annual / (weeksYr * 5),
+      totalHours: totalHours
+    };
+  };
+
+  // Tip Calculator calculations
+  window.calculateTip = function (bill, tipPct, people) {
+    if (isNaN(bill) || bill <= 0) return { error: 'invalid_bill' };
+    if (isNaN(tipPct) || tipPct < 0) return { error: 'invalid_tip' };
+    if (people === 0 || people < 1) return { error: 'invalid_people' };
+    people = people || 1;
+    var tip = bill * (tipPct / 100);
+    var total = bill + tip;
+    return {
+      tip: tip,
+      total: total,
+      perPerson: total / people,
+      tipPerPerson: tip / people
+    };
+  };
+
+  // Percentage Calculator calculations
+  window.calculatePercentage = function (mode, a, b) {
+    if (isNaN(a) || isNaN(b)) return { error: 'invalid_input' };
+    var result, label;
+    if (mode === 'of') {
+      result = (a / 100) * b;
+      label = a + '% of ' + b;
+    } else if (mode === 'what') {
+      if (b === 0) return { error: 'division_by_zero' };
+      result = (a / b) * 100;
+      label = a + ' is what % of ' + b;
+    } else if (mode === 'change') {
+      if (a === 0) return { error: 'division_by_zero' };
+      result = ((b - a) / a) * 100;
+      label = 'Change from ' + a + ' to ' + b;
+    } else {
+      return { error: 'invalid_mode' };
+    }
+    return { result: result, label: label };
+  };
+
+  // Discount Calculator calculations
+  window.calculateDiscount = function (original, pct) {
+    if (isNaN(original) || original <= 0) return { error: 'invalid_price' };
+    if (isNaN(pct) || pct < 0 || pct > 100) return { error: 'invalid_discount' };
+    var savings = original * (pct / 100);
+    return {
+      savings: savings,
+      finalPrice: original - savings,
+      original: original
+    };
+  };
+
+  // Fuel Cost Calculator calculations
+  window.calculateFuelCost = function (distance, mpg, price) {
+    if (distance <= 0 || mpg <= 0 || price <= 0) return null;
+    var gallons = distance / mpg;
+    var totalCost = gallons * price;
+    return {
+      gallons: gallons,
+      totalCost: totalCost,
+      costPerMile: totalCost / distance,
+      roundTrip: totalCost * 2
+    };
+  };
+
+  // Unit Converter calculations
+  window.convertUnit = function (type, value, mode) {
+    if (isNaN(value)) return { error: 'invalid_value' };
+    var result, label;
+    if (type === 'length') {
+      if (mode === 'km-to-mi') {
+        result = value * 0.621371;
+        label = value + ' km = ' + result + ' miles';
+      } else {
+        result = value * 1.60934;
+        label = value + ' miles = ' + result + ' km';
+      }
+    } else if (type === 'weight') {
+      if (mode === 'kg-to-lbs') {
+        result = value * 2.20462;
+        label = value + ' kg = ' + result + ' lbs';
+      } else {
+        result = value * 0.453592;
+        label = value + ' lbs = ' + result + ' kg';
+      }
+    } else if (type === 'temp') {
+      if (mode === 'c-to-f') {
+        result = (value * 9 / 5) + 32;
+        label = value + '°C = ' + result + '°F';
+      } else {
+        result = (value - 32) * 5 / 9;
+        label = value + '°F = ' + result + '°C';
+      }
+    } else {
+      return { error: 'invalid_type' };
+    }
+    return { result: result, label: label };
+  };
 
   function el(id) {
     return document.getElementById(id);
@@ -284,7 +492,11 @@
         } else {
           // Normal amortization calculation
           months = Math.log(payment / (payment - balance * monthlyRate)) / Math.log(1 + monthlyRate);
-          var totalPaid = payment * Math.ceil(months);
+          // Calculate actual total paid considering final partial month
+          var fullMonths = Math.floor(months);
+          var remainingBalance = balance * Math.pow(1 + monthlyRate, fullMonths) - payment * ((Math.pow(1 + monthlyRate, fullMonths) - 1) / monthlyRate);
+          var finalPayment = remainingBalance > 0 ? remainingBalance * (1 + monthlyRate) : 0;
+          var totalPaid = payment * fullMonths + finalPayment;
           totalInterest = totalPaid - balance;
         }
       }
