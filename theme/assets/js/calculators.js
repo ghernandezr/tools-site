@@ -455,41 +455,103 @@
   }
 
   /* ============================================================
-     TOOL 8 — Fuel Cost Calculator
+     TOOL 8 — Fuel Cost Calculator (Plugin Style Edition)
      Formula: Cost = (Distance / MPG) × Gas Price
+     Features: Real-time calculation, KPI cards, glass-morphism UI
   ============================================================ */
   function initFuelCalculator() {
-    var form = el('fuel-form');
-    if (!form) return;
+    // Check if new plugin-style UI exists
+    var container = document.getElementById('fcc-fuel-calculator');
+    if (!container) return;
 
-    var resultEl = el('fuel-result');
-    var errorEl = el('fuel-error');
-    var resetBtn = el('fuel-reset');
+    // Elements
+    var els = {
+      distance: el('fcc-distance'),
+      mpg: el('fcc-mpg'),
+      price: el('fcc-price'),
+      kpiTotal: el('fcc-kpi-total'),
+      kpiGallons: el('fcc-kpi-gallons'),
+      kpiMile: el('fcc-kpi-mile'),
+      statOneway: el('fcc-stat-oneway'),
+      statRound: el('fcc-stat-round'),
+      barFuel: el('fcc-bar-fuel'),
+      barReserve: el('fcc-bar-reserve'),
+    };
 
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
+    // Check if all required elements exist
+    if (!els.distance || !els.mpg || !els.price) return;
 
-      var distance = parseFloat(el('fuel-distance').value);
-      var mpg = parseFloat(el('fuel-mpg').value);
-      var price = parseFloat(el('fuel-price').value);
-
-      if (isNaN(distance) || distance <= 0) return showError(resultEl, errorEl, 'Please enter a valid distance.');
-      if (isNaN(mpg) || mpg <= 0) return showError(resultEl, errorEl, 'Please enter a valid fuel efficiency (MPG).');
-      if (isNaN(price) || price <= 0) return showError(resultEl, errorEl, 'Please enter a valid gas price.');
-
-      var gallonsUsed = distance / mpg;
-      var totalCost = gallonsUsed * price;
-      var costPerMile = totalCost / distance;
-
-      el('fuel-gallons').textContent = fmt(gallonsUsed, 2) + ' gallons';
-      el('fuel-cost').textContent = fmtCurrency(totalCost);
-      el('fuel-per-mile').textContent = fmtCurrency(costPerMile) + ' / mile';
-
-      showResult(resultEl, errorEl);
-      resetBtn && resetBtn.classList.add('is-visible');
+    // Formatters
+    var fmtCurrency = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
     });
 
-    bindReset(resetBtn, form, resultEl, errorEl);
+    var fmtNumber = new Intl.NumberFormat('en-US', {
+      minimumFractionDigits: 1,
+      maximumFractionDigits: 1,
+    });
+
+    // Calculate and render
+    function calculate() {
+      var distance = parseFloat(els.distance.value) || 0;
+      var mpg = parseFloat(els.mpg.value) || 0;
+      var price = parseFloat(els.price.value) || 0;
+
+      if (distance <= 0 || mpg <= 0 || price <= 0) {
+        resetUI();
+        return;
+      }
+
+      var gallons = distance / mpg;
+      var totalCost = gallons * price;
+      var costPerMile = totalCost / distance;
+
+      // Update KPIs
+      if (els.kpiTotal) els.kpiTotal.textContent = fmtCurrency.format(totalCost);
+      if (els.kpiGallons) els.kpiGallons.textContent = fmtNumber.format(gallons);
+      if (els.kpiMile) els.kpiMile.textContent = fmtCurrency.format(costPerMile);
+
+      // Update impact stats
+      if (els.statOneway) els.statOneway.textContent = fmtCurrency.format(totalCost);
+      if (els.statRound) els.statRound.textContent = fmtCurrency.format(totalCost * 2);
+
+      // Update visual bar
+      if (els.barFuel) els.barFuel.style.width = '75%';
+      if (els.barReserve) els.barReserve.style.width = '25%';
+    }
+
+    function resetUI() {
+      if (els.kpiTotal) els.kpiTotal.textContent = '$0.00';
+      if (els.kpiGallons) els.kpiGallons.textContent = '0.0';
+      if (els.kpiMile) els.kpiMile.textContent = '$0.00';
+      if (els.statOneway) els.statOneway.textContent = '$0.00';
+      if (els.statRound) els.statRound.textContent = '$0.00';
+      if (els.barFuel) els.barFuel.style.width = '75%';
+      if (els.barReserve) els.barReserve.style.width = '25%';
+    }
+
+    // Event binding - real-time calculation
+    [els.distance, els.mpg, els.price].forEach(function (input) {
+      if (input) input.addEventListener('input', calculate);
+    });
+
+    // Preset helpers (exposed globally)
+    window.FCC = {
+      setMPG: function (val) {
+        els.mpg.value = val;
+        calculate();
+      },
+      setPrice: function (val) {
+        els.price.value = val;
+        calculate();
+      }
+    };
+
+    // Initial calc if prefilled
+    calculate();
   }
 
   /* ============================================================

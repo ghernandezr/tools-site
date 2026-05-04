@@ -2591,3 +2591,434 @@ nav .sub-menu a {
 /* hidden utility */
 .lpc-hidden { display: none !important; }
 .lpc-results-card--fresh .lpc-results-body { pointer-events: auto; }
+
+/* =============================================================
+   FUEL COST CALCULATOR — Plugin Style Edition
+   ============================================================= */
+
+/* ─── Custom Properties ───────────────────────────────────────────────────── */
+.fcc-calculator {
+  --fcc-primary: #6366f1;
+  --fcc-primary-dark: #4f46e5;
+  --fcc-primary-light: #e0e7ff;
+  --fcc-green: #10b981;
+  --fcc-green-light: #d1fae5;
+  --fcc-amber: #f59e0b;
+  --fcc-amber-light: #fef3c7;
+  --fcc-text: #1e293b;
+  --fcc-text-muted: #64748b;
+  --fcc-text-light: #94a3b8;
+  --fcc-border: #e2e8f0;
+  --fcc-bg: #f8fafc;
+  --fcc-bg-card: #ffffff;
+  --fcc-radius: 0.5rem;
+  --fcc-radius-lg: 1rem;
+  --fcc-radius-xl: 1.5rem;
+  --fcc-shadow: 0 4px 20px -4px rgb(0 0 0 / 0.08);
+  --fcc-shadow-lg: 0 16px 40px -8px rgba(79, 70, 229, 0.25);
+  --fcc-font: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --fcc-transition: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─── Calculator Container ────────────────────────────────────────────────── */
+.fcc-calculator {
+  font-family: var(--fcc-font);
+  color: var(--fcc-text);
+  background: radial-gradient(circle at top right, #f8fafc, #eff6ff);
+  padding: 1rem;
+  width: 100%;
+  margin: 0 0 2rem;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+@media (min-width: 640px) {
+  .fcc-calculator { padding: 1.5rem; }
+}
+
+/* ─── Header ──────────────────────────────────────────────────────────────── */
+.fcc-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.fcc-header-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  background: var(--fcc-primary);
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgb(99 102 241 / 0.35);
+}
+
+.fcc-title {
+  font-size: 1.2rem;
+  font-weight: 800;
+  margin: 0 0 0.1rem;
+  color: var(--fcc-text);
+  line-height: 1.2;
+}
+
+.fcc-subtitle {
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--fcc-text-light);
+  margin: 0;
+}
+
+/* ─── Layout Grid ─────────────────────────────────────────────────────────── */
+.fcc-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+@media (min-width: 900px) {
+  .fcc-layout {
+    display: grid;
+    grid-template-columns: 5fr 8fr;
+    align-items: start;
+  }
+}
+
+/* ─── Glass Card ───────────────────────────────────────────────────────────── */
+.fcc-glass-card {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: var(--fcc-shadow);
+  border-radius: var(--fcc-radius-xl);
+  padding: 1.5rem;
+}
+
+/* ─── Section Labels ──────────────────────────────────────────────────────── */
+.fcc-section-label {
+  font-size: 0.6rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--fcc-primary);
+  margin: 0 0 1rem;
+}
+
+/* ─── Input Groups ────────────────────────────────────────────────────────── */
+.fcc-field-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.fcc-input-group {
+  background: #fff;
+  border: 1px solid var(--fcc-border);
+  border-radius: var(--fcc-radius-lg);
+  padding: 0.625rem 0.875rem;
+  transition: border-color var(--fcc-transition), box-shadow var(--fcc-transition);
+}
+
+.fcc-input-group:focus-within {
+  border-color: var(--fcc-primary);
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+.fcc-label-tech {
+  display: block;
+  font-size: 0.6rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--fcc-text-light);
+  margin-bottom: 0.25rem;
+}
+
+.fcc-input-field {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--fcc-text);
+  padding: 0;
+  margin: 0;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.fcc-input-field::-webkit-inner-spin-button,
+.fcc-input-field::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+.fcc-input-field::placeholder {
+  color: var(--fcc-text-light);
+  font-weight: 400;
+}
+
+/* ─── Quick Presets ───────────────────────────────────────────────────────── */
+.fcc-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.fcc-preset-btn {
+  padding: 0.35rem 0.75rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--fcc-text-muted);
+  background: #f1f5f9;
+  border: 1px solid var(--fcc-border);
+  border-radius: var(--fcc-radius);
+  cursor: pointer;
+  transition: all var(--fcc-transition);
+}
+
+.fcc-preset-btn:hover {
+  background: var(--fcc-primary-light);
+  border-color: var(--fcc-primary);
+  color: var(--fcc-primary);
+}
+
+/* ─── KPI Cards ───────────────────────────────────────────────────────────── */
+.fcc-kpi-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.875rem;
+  margin-bottom: 1.25rem;
+}
+
+@media (min-width: 560px) {
+  .fcc-kpi-row {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.fcc-kpi-card {
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: var(--fcc-radius-xl);
+  padding: 1.1rem 1.25rem;
+  box-shadow: var(--fcc-shadow);
+  border-left-width: 4px;
+  border-left-style: solid;
+  transition: transform var(--fcc-transition);
+}
+
+.fcc-kpi-card:hover {
+  transform: translateY(-2px);
+}
+
+.fcc-kpi-card--primary { border-left-color: var(--fcc-primary); }
+.fcc-kpi-card--green { border-left-color: var(--fcc-green); }
+.fcc-kpi-card--amber { border-left-color: var(--fcc-amber); }
+
+.fcc-kpi-label {
+  display: block;
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--fcc-text-light);
+  margin-bottom: 0.25rem;
+}
+
+.fcc-kpi-value {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--fcc-text);
+  line-height: 1.1;
+}
+
+.fcc-kpi-value--primary { color: var(--fcc-primary); }
+.fcc-kpi-value--green { color: var(--fcc-green); }
+.fcc-kpi-value--amber { color: var(--fcc-amber); }
+
+/* ─── Impact Panel ────────────────────────────────────────────────────────── */
+.fcc-impact-panel {
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  border-radius: 1.75rem;
+  padding: 1.75rem;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--fcc-shadow-lg);
+  margin-bottom: 1.25rem;
+}
+
+.fcc-impact-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+@media (min-width: 600px) {
+  .fcc-impact-content {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.fcc-impact-left { flex: 1; }
+
+.fcc-impact-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 9999px;
+  padding: 0.2rem 0.75rem;
+  font-size: 0.55rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.75rem;
+  backdrop-filter: blur(8px);
+}
+
+.fcc-impact-badge-dot {
+  width: 0.4rem;
+  height: 0.4rem;
+  background: #fbbf24;
+  border-radius: 50%;
+}
+
+.fcc-impact-title {
+  font-size: 1.25rem;
+  font-weight: 900;
+  margin: 0 0 0.5rem;
+  line-height: 1.2;
+}
+
+.fcc-impact-desc {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: rgba(224, 231, 255, 0.85);
+  margin: 0;
+}
+
+.fcc-impact-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.875rem;
+  flex-shrink: 0;
+}
+
+.fcc-impact-stat {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 1rem;
+  padding: 1rem 1.1rem;
+  backdrop-filter: blur(8px);
+}
+
+.fcc-impact-stat-label {
+  font-size: 0.55rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(199, 210, 254, 0.9);
+  margin: 0 0 0.2rem;
+}
+
+.fcc-impact-stat-value {
+  font-size: 1.1rem;
+  font-weight: 900;
+  margin: 0 0 0.2rem;
+}
+
+/* ─── Visual Breakdown ────────────────────────────────────────────────────── */
+.fcc-breakdown-card {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: var(--fcc-shadow);
+  border-radius: var(--fcc-radius-xl);
+  padding: 1.5rem;
+}
+
+.fcc-breakdown-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--fcc-text-muted);
+  margin: 0 0 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.fcc-breakdown-bar {
+  height: 2rem;
+  background: #e2e8f0;
+  border-radius: var(--fcc-radius);
+  overflow: hidden;
+  display: flex;
+  margin-bottom: 1rem;
+}
+
+.fcc-breakdown-segment {
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.fcc-breakdown-segment--fuel { background: var(--fcc-primary); }
+.fcc-breakdown-segment--reserve { background: var(--fcc-amber); }
+
+.fcc-breakdown-legend {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.fcc-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--fcc-text-muted);
+}
+
+.fcc-legend-dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 3px;
+}
+
+.fcc-legend-dot--fuel { background: var(--fcc-primary); }
+.fcc-legend-dot--reserve { background: var(--fcc-amber); }
+
+/* ─── Ad Placeholders ─────────────────────────────────────────────────────── */
+.fcc-ad-slot {
+  margin: 1.25rem 0;
+  text-align: center;
+  min-height: 1px;
+}
+
+/* ─── Mobile Touch Fixes ──────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .fcc-input-field { font-size: 1rem; }
+}
+
+/* ─── Animation ─────────────────────────────────────────────────────────────── */
+@keyframes fcc-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fcc-animate-in {
+  animation: fcc-fade-in 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
