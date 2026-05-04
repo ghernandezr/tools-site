@@ -11,6 +11,66 @@ defined( 'ABSPATH' ) || exit;
 
 class FSP_Enqueue {
 
+	/** Bootstraps enqueue hooks */
+	public function register() {
+		add_action( 'wp_enqueue_scripts', [ $this, 'register_assets' ], 5 );
+		add_action( 'wp_enqueue_scripts', [ $this, 'maybe_enqueue_from_content' ], 20 );
+	}
+
+	/** Register shared asset handles */
+	public function register_assets() {
+		wp_register_style(
+			'fsp-styles',
+			FSP_PLUGIN_URL . 'assets/css/styles.css',
+			[],
+			FSP_VERSION
+		);
+
+		wp_register_script(
+			'fsp-finance-engine',
+			FSP_PLUGIN_URL . 'assets/js/finance-engine.js',
+			[],
+			FSP_VERSION,
+			true
+		);
+
+		wp_register_script(
+			'fsp-loan-calculator',
+			FSP_PLUGIN_URL . 'assets/js/loan-calculator.js',
+			[ 'fsp-finance-engine' ],
+			FSP_VERSION,
+			true
+		);
+
+		wp_register_script(
+			'fsp-mortgage-calculator',
+			FSP_PLUGIN_URL . 'assets/js/mortgage-calculator.js',
+			[ 'fsp-finance-engine' ],
+			FSP_VERSION,
+			true
+		);
+	}
+
+	/** Conditionally enqueue assets based on post content */
+	public function maybe_enqueue_from_content() {
+		if ( is_admin() ) {
+			return;
+		}
+
+		$post = get_post();
+		if ( ! $post instanceof WP_Post ) {
+			return;
+		}
+
+		if ( has_shortcode( $post->post_content, 'loan_calculator' ) ) {
+			$this->enqueue_for( 'loan' );
+		}
+
+		if ( has_shortcode( $post->post_content, 'mortgage_calculator' ) ) {
+			$this->enqueue_for( 'mortgage' );
+		}
+	}
+
 	/**
 	 * Tracks which shortcodes are active on the current request
 	 * so we know which asset bundles to load.
@@ -31,41 +91,19 @@ class FSP_Enqueue {
 		}
 		$this->active_tools[ $tool ] = true;
 
-		// Shared stylesheet (loaded once regardless of tool count)
-		if ( ! wp_style_is( 'fsp-styles', 'enqueued' ) ) {
-			wp_enqueue_style(
-				'fsp-styles',
-				FSP_PLUGIN_URL . 'assets/css/styles.css',
-				[],
-				FSP_VERSION
-			);
-		}
+		wp_enqueue_style( 'fsp-styles' );
+		wp_enqueue_script( 'fsp-finance-engine' );
 
-		// Shared finance engine (no dependencies, pure logic)
-		if ( ! wp_script_is( 'fsp-finance-engine', 'enqueued' ) ) {
-			wp_enqueue_script(
-				'fsp-finance-engine',
-				FSP_PLUGIN_URL . 'assets/js/finance-engine.js',
-				[],           // no jQuery dependency
-				FSP_VERSION,
-				true          // load in footer
-			);
-		}
-
-		// Tool-specific controller
 		switch ( $tool ) {
 			case 'loan':
-				wp_enqueue_script(
-					'fsp-loan-calculator',
-					FSP_PLUGIN_URL . 'assets/js/loan-calculator.js',
-					[ 'fsp-finance-engine' ], // depends on engine
-					FSP_VERSION,
-					true
-				);
+				wp_enqueue_script( 'fsp-loan-calculator' );
+				break;
+
+			case 'mortgage':
+				wp_enqueue_script( 'fsp-mortgage-calculator' );
 				break;
 
 			// Future tools: add cases here
-			// case 'mortgage': ...
 			// case 'credit-card': ...
 		}
 	}

@@ -1,41 +1,35 @@
 /**
- * Finance Suite Pro — Loan Calculator UI Controller
+ * Finance Suite Pro — Loan Calculator UI Controller (LoanMaster Pro design)
  *
  * Responsibilities:
- *   • Read inputs from the DOM.
- *   • Validate inputs before calling the engine.
- *   • Call FSP_Engine.calculateLoan().
- *   • Render results and amortization table into the DOM.
- *   • Handle reset and amortization toggle.
- *   • Parse URL parameters (?fsp_amount=...) for pre-calculation.
+ *   • Reactive calculation on every input event (no Calculate button).
+ *   • Call FSP_Engine.calculateMortgage() for full PITI + escrow + refi logic.
+ *   • Render KPIs, impact panel, donut chart, 4 analysis tabs.
+ *   • Handle tab switching and amortization view toggle (annual/monthly).
+ *   • Parse URL parameters (?fsp_amount=...) for pre-calculation on load.
+ *   • Expose FSP_LC namespace for onclick handlers in the template.
  *
  * Depends on: finance-engine.js (loaded first via wp_enqueue_script dependency).
- * No jQuery. No global pollution — all logic is inside an IIFE.
+ * No jQuery. No global pollution beyond FSP_LC.
  */
 
-(function () {
+(function (global) {
 
 	'use strict';
 
-	// ─── Element references ───────────────────────────────────────────────────────
-	// Grabbed once on DOMContentLoaded to avoid repeated querySelector calls.
-	let el = {};
-
 	// ─── State ────────────────────────────────────────────────────────────────────
-	let currentSchedule = [];
-	let currentView = 'monthly'; // 'monthly' | 'annual'
+	let el = {};
+	let lastResult = null;
+	let currentTab = 'breakdown';
+	let currentAmortView = 'annual'; // 'annual' | 'monthly'
 
 	// ─── Bootstrap ───────────────────────────────────────────────────────────────
 
 	document.addEventListener('DOMContentLoaded', function () {
-		// Bail if the calculator is not on this page
-		if (!document.getElementById('fsp-loan-calculator')) {
-			return;
-		}
-
+		if (!document.getElementById('fsp-loan-calculator')) return;
 		cacheElements();
 		bindEvents();
-		maybeAutoCalculate();
+		calculate();
 	});
 
 	// ─── Cache DOM elements ───────────────────────────────────────────────────────
@@ -47,308 +41,241 @@
 			rate: document.getElementById('fsp-rate'),
 			years: document.getElementById('fsp-years'),
 			extra: document.getElementById('fsp-extra'),
-			// Buttons
-			calcBtn: document.getElementById('fsp-calculate'),
-			resetBtn: document.getElementById('fsp-reset'),
-			toggleBtn: document.getElementById('fsp-toggle-amort'),
-			viewMonthly: document.getElementById('fsp-view-monthly'),
-			viewAnnual: document.getElementById('fsp-view-annual'),
-			// Result summary
-			resultsWrap: document.getElementById('fsp-results'),
+			tax: document.getElementById('fsp-tax'),
+			insurance: document.getElementById('fsp-insurance'),
+			// KPIs
 			monthly: document.getElementById('fsp-monthly-payment'),
-			interest: document.getElementById('fsp-total-interest'),
-			totalCost: document.getElementById('fsp-total-cost'),
+			saved: document.getElementById('fsp-interest-saved'),
 			payoff: document.getElementById('fsp-payoff-time'),
-			// Amortization
-			amortSection: document.getElementById('fsp-amortization'),
-			amortWrap: document.getElementById('fsp-amort-table-wrap'),
+			timeSaved: document.getElementById('fsp-time-saved'),
+			// Impact panel
+			totalInt: document.getElementById('fsp-total-interest'),
+			totalSav: document.getElementById('fsp-total-savings'),
+			// Breakdown tab
+			circlePi: document.getElementById('fsp-circle-pi'),
+			circleEsc: document.getElementById('fsp-circle-escrow'),
+			pctPi: document.getElementById('fsp-pct-pi'),
+			detPi: document.getElementById('fsp-det-pi'),
+			detEscrow: document.getElementById('fsp-det-escrow'),
+			detExtra: document.getElementById('fsp-det-extra'),
+			detTotal: document.getElementById('fsp-det-total'),
+			// Equity tab
+			eqLabel: document.getElementById('fsp-eq-label'),
+			eqValue: document.getElementById('fsp-eq-value'),
+			eqPct: document.getElementById('fsp-eq-pct'),
+			eqTime: document.getElementById('fsp-eq-time'),
+			// Refi tab
+			refiRate: document.getElementById('fsp-refi-current-rate'),
+			refiTarget: document.getElementById('fsp-refi-target-rate'),
+			refiSavings: document.getElementById('fsp-refi-savings'),
+			// Amortization table
 			amortBody: document.getElementById('fsp-amort-tbody'),
-			amortThead: document.getElementById('fsp-amort-thead'),
-			// Error
-			errorBox: document.getElementById('fsp-error'),
 		};
+		resetUI();
 	}
 
 	// ─── Event binding ────────────────────────────────────────────────────────────
 
 	function bindEvents() {
-		el.calcBtn.addEventListener('click', handleCalculate);
-		el.resetBtn.addEventListener('click', handleReset);
-		el.toggleBtn.addEventListener('click', handleToggleAmort);
-		el.viewMonthly.addEventListener('click', function () { switchView('monthly'); });
-		el.viewAnnual.addEventListener('click', function () { switchView('annual'); });
-
-		// Allow Enter key on any input to trigger calculation
-		[el.amount, el.rate, el.years, el.extra].forEach(function (input) {
-			input.addEventListener('keydown', function (e) {
-				if (e.key === 'Enter') handleCalculate();
+		[el.amount, el.rate, el.years, el.extra, el.tax, el.insurance]
+			.forEach(function (inp) {
+				if (inp) inp.addEventListener('input', calculate);
 			});
-		});
 	}
 
-	// ─── URL parameter pre-fill ───────────────────────────────────────────────────
+	// ─── Core calculate ───────────────────────────────────────────────────────────
 
-	/**
-	 * If all required fields are already filled (e.g. via PHP pre-fill from URL
-	 * params or shortcode attributes), auto-trigger a calculation on load.
-	 */
-	function maybeAutoCalculate() {
-		if (el.amount.value && el.rate.value && el.years.value) {
-			handleCalculate();
-		}
-	}
+	function calculate() {
+		const P = parseFloat(el.amount.value) || 0;
+		const r = parseFloat(el.rate.value) || 0;
+		const yr = parseFloat(el.years.value) || 0;
+		const ext = parseFloat(el.extra.value) || 0;
+		const tax = parseFloat(el.tax.value) || 0;
+		const ins = parseFloat(el.insurance.value) || 0;
 
-	// ─── Calculate ────────────────────────────────────────────────────────────────
-
-	function handleCalculate() {
-		clearError();
-
-		const inputs = readInputs();
-		const validationError = validateInputs(inputs);
-
-		if (validationError) {
-			showError(validationError);
+		if (P <= 0 || r <= 0 || yr <= 0) {
+			lastResult = null;
+			resetUI();
 			return;
 		}
 
-		const result = FSP_Engine.calculateLoan(inputs);
+		lastResult = FSP_Engine.calculateMortgage({
+			principal: P,
+			rate: r,
+			years: yr,
+			extraMonthly: ext,
+			annualTax: tax,
+			annualIns: ins,
+		});
 
-		currentSchedule = result.amortizationSchedule;
-		renderSummary(result);
-		renderSchedule();
-		showResults();
+		renderAll(lastResult, P, r, ext);
 	}
 
-	// ─── Input helpers ────────────────────────────────────────────────────────────
+	// ─── Render all sections ──────────────────────────────────────────────────────
 
-	function readInputs() {
-		return {
-			principal: parseFloat(el.amount.value) || 0,
-			rate: parseFloat(el.rate.value) || 0,
-			years: parseFloat(el.years.value) || 0,
-			extraMonthly: parseFloat(el.extra.value) || 0,
-		};
+	function renderAll(res, P, rate, extra) {
+		renderKPIs(res);
+		renderImpact(res);
+		renderBreakdown(res, extra);
+		renderEquity(res, P);
+		renderRefi(res, rate);
+		renderAmortTable(res);
 	}
 
-	function validateInputs(inputs) {
-		if (!inputs.principal || inputs.principal <= 0) {
-			return 'Please enter a valid loan amount greater than $0.';
-		}
-		if (!inputs.rate || inputs.rate <= 0 || inputs.rate > 100) {
-			return 'Please enter a valid annual interest rate between 0.01% and 100%.';
-		}
-		if (!inputs.years || inputs.years <= 0 || inputs.years > 50) {
-			return 'Please enter a valid loan term between 1 and 50 years.';
-		}
-		if (inputs.extraMonthly < 0) {
-			return 'Extra monthly payment cannot be negative.';
-		}
-		return null; // no error
-	}
+	// ─── KPI Cards ────────────────────────────────────────────────────────────────
 
-	// ─── Render summary ───────────────────────────────────────────────────────────
+	function renderKPIs(res) {
+		el.monthly.textContent = fmt(res.totalMonthly);
+		el.saved.textContent = fmt(res.interestSaved);
 
-	function renderSummary(result) {
-		el.monthly.textContent = FSP_Engine.formatCurrency(result.monthlyPayment);
-		el.interest.textContent = FSP_Engine.formatCurrency(result.totalInterest);
-		el.totalCost.textContent = FSP_Engine.formatCurrency(result.totalCost);
-		el.payoff.textContent = FSP_Engine.formatMonths(result.payoffMonths);
-	}
+		const yrs = Math.floor(res.payoffMonthsWith / 12);
+		const mo = res.payoffMonthsWith % 12;
+		el.payoff.innerHTML = yrs + 'Y <span style="color:#94a3b8;font-size:1.1rem">' + mo + 'M</span>';
 
-	// ─── View switcher ────────────────────────────────────────────────────────────
-
-	function switchView(view) {
-		currentView = view;
-		el.viewMonthly.classList.toggle('is-active', view === 'monthly');
-		el.viewMonthly.setAttribute('aria-pressed', String(view === 'monthly'));
-		el.viewAnnual.classList.toggle('is-active', view === 'annual');
-		el.viewAnnual.setAttribute('aria-pressed', String(view === 'annual'));
-		if (currentSchedule.length) {
-			renderSchedule();
-		}
-	}
-
-	function renderSchedule() {
-		if (currentView === 'annual') {
-			renderAmortizationAnnual(currentSchedule);
+		const yrSav = Math.floor(res.monthsSaved / 12);
+		const moSav = res.monthsSaved % 12;
+		if (res.monthsSaved > 0) {
+			el.timeSaved.textContent = 'SAVES ' + yrSav + ' YRS AND ' + moSav + ' MO';
 		} else {
-			renderAmortizationMonthly(currentSchedule);
+			el.timeSaved.textContent = 'No extra payment applied';
 		}
 	}
 
-	// ─── Render amortization table — monthly view ────────────────────────────────
+	// ─── Impact Panel ────────────────────────────────────────────────────────────
 
-	/**
-	 * Build the amortization table using a DocumentFragment for a single
-	 * DOM insertion — avoids one reflow per row for tables with 360+ rows.
-	 *
-	 * @param {Array} schedule  Array of row objects from FSP_Engine.calculateLoan.
-	 */
-	function renderAmortizationMonthly(schedule) {
-		el.amortThead.innerHTML =
-			'<tr>' +
-			'<th scope="col">#</th>' +
-			'<th scope="col">Payment</th>' +
-			'<th scope="col">Principal</th>' +
-			'<th scope="col">Interest</th>' +
-			'<th scope="col">Extra</th>' +
-			'<th scope="col">Balance</th>' +
-			'</tr>';
+	function renderImpact(res) {
+		el.totalInt.textContent = fmt(res.totalInterestWith);
+		el.totalSav.textContent = fmt(res.interestSaved);
+	}
 
-		const fragment = document.createDocumentFragment();
+	// ─── Breakdown Tab ───────────────────────────────────────────────────────────
 
-		schedule.forEach(function (row) {
+	function renderBreakdown(res, extra) {
+		const CIRC = 251.2;
+
+		el.circlePi.style.strokeDashoffset = CIRC * (1 - res.piRatio);
+		el.circleEsc.style.strokeDashoffset = CIRC * (1 - (res.piRatio + res.escrowRatio));
+		el.pctPi.textContent = Math.round(res.piRatio * 100) + '%';
+
+		el.detPi.textContent = fmt(res.basePI);
+		el.detEscrow.textContent = fmt(res.escrowMonthly);
+		el.detExtra.textContent = fmt(extra);
+		el.detTotal.textContent = fmt(res.totalMonthly);
+	}
+
+	// ─── Equity Tab ──────────────────────────────────────────────────────────────
+
+	function renderEquity(res, P) {
+		const cpYr = Math.ceil(res.checkpointMonth / 12);
+		el.eqLabel.textContent = 'Equity at Year ' + cpYr;
+		el.eqValue.textContent = fmt(res.equityAtCheckpoint);
+		el.eqPct.textContent = ((res.equityAtCheckpoint / P) * 100).toFixed(1) + '% of total loan paid';
+		el.eqTime.textContent = res.monthsSaved + ' months saved';
+	}
+
+	// ─── Refi Tab ────────────────────────────────────────────────────────────────
+
+	function renderRefi(res, rate) {
+		el.refiRate.textContent = rate.toFixed(2) + '%';
+		el.refiTarget.textContent = res.refiTargetRate.toFixed(2) + '%';
+		el.refiSavings.textContent = fmt(res.refiMonthlySavings) + '/mo';
+	}
+
+	// ─── Amortization Table ───────────────────────────────────────────────────────
+
+	function renderAmortTable(res) {
+		const data = currentAmortView === 'annual' ? res.scheduleAnnual : res.schedule;
+		const label = currentAmortView === 'annual' ? 'Year' : 'Month';
+		const frag = document.createDocumentFragment();
+
+		data.forEach(function (row, idx) {
 			const tr = document.createElement('tr');
-
-			if (row.month % 2 === 0) {
-				tr.classList.add('fsp-row-even');
-			}
-			if (row.balance === 0) {
-				tr.classList.add('fsp-row-final');
-			}
-
-			tr.innerHTML = [
-				'<td>' + row.month + '</td>',
-				'<td>' + FSP_Engine.formatCurrency(row.payment) + '</td>',
-				'<td>' + FSP_Engine.formatCurrency(row.principal) + '</td>',
-				'<td>' + FSP_Engine.formatCurrency(row.interest) + '</td>',
-				'<td>' + FSP_Engine.formatCurrency(row.extra) + '</td>',
-				'<td>' + FSP_Engine.formatCurrency(row.balance) + '</td>',
-			].join('');
-
-			fragment.appendChild(tr);
+			if (idx % 2 === 0) tr.classList.add('fsp-row-even');
+			if (row.balance === 0) tr.classList.add('fsp-row-final');
+			tr.innerHTML =
+				'<td class="fsp-td-period">' + label + ' ' + row.period + '</td>' +
+				'<td class="fsp-td-right">' + fmt(row.interest) + '</td>' +
+				'<td class="fsp-td-right fsp-td-principal">' + fmt(row.principal) + '</td>' +
+				'<td class="fsp-td-right fsp-td-bold">' + fmt(row.balance) + '</td>';
+			frag.appendChild(tr);
 		});
 
 		el.amortBody.innerHTML = '';
-		el.amortBody.appendChild(fragment);
+		el.amortBody.appendChild(frag);
 	}
 
-	// ─── Render amortization table — annual view ─────────────────────────────────
+	// ─── Tab switcher (exposed on FSP_LC) ────────────────────────────────────────
 
-	/**
-	 * Groups the monthly schedule by year and renders one summary row per year.
-	 * Columns: Year | Total Payments | Total Principal | Total Interest | Total Extra | End Balance
-	 *
-	 * @param {Array} schedule  Array of row objects from FSP_Engine.calculateLoan.
-	 */
-	function renderAmortizationAnnual(schedule) {
-		el.amortThead.innerHTML =
-			'<tr>' +
-			'<th scope="col">Year</th>' +
-			'<th scope="col">Total Paid</th>' +
-			'<th scope="col">Principal</th>' +
-			'<th scope="col">Interest</th>' +
-			'<th scope="col">Extra</th>' +
-			'<th scope="col">End Balance</th>' +
-			'</tr>';
-
-		// Aggregate rows into yearly buckets
-		const years = [];
-		schedule.forEach(function (row) {
-			const yearIdx = Math.ceil(row.month / 12);
-			if (!years[yearIdx]) {
-				years[yearIdx] = { year: yearIdx, payment: 0, principal: 0, interest: 0, extra: 0, balance: 0 };
+	function switchTab(tab) {
+		const tabs = ['breakdown', 'equity', 'amort', 'refi'];
+		tabs.forEach(function (t) {
+			const panel = document.getElementById('fsp-tab-' + t);
+			const btn = document.getElementById('fsp-btn-' + t);
+			if (panel) panel.classList.toggle('fsp-tab-panel--hidden', t !== tab);
+			if (btn) {
+				btn.classList.toggle('fsp-tab-btn--active', t === tab);
+				btn.setAttribute('aria-selected', String(t === tab));
 			}
-			years[yearIdx].payment += row.payment;
-			years[yearIdx].principal += row.principal;
-			years[yearIdx].interest += row.interest;
-			years[yearIdx].extra += row.extra;
-			years[yearIdx].balance = row.balance; // last month of the year wins
 		});
+		currentTab = tab;
+	}
 
-		const fragment = document.createDocumentFragment();
-		const totalYears = years.length;
+	// ─── Amort view toggle (exposed on FSP_LC) ───────────────────────────────────
 
-		years.forEach(function (yr) {
-			if (!yr) return;
-			const tr = document.createElement('tr');
-			if (yr.year % 2 === 0) {
-				tr.classList.add('fsp-row-even');
-			}
-			if (yr.balance === 0 || yr.year === totalYears - 1) {
-				tr.classList.add('fsp-row-final');
-			}
-			tr.innerHTML = [
-				'<td>' + yr.year + '</td>',
-				'<td>' + FSP_Engine.formatCurrency(yr.payment) + '</td>',
-				'<td>' + FSP_Engine.formatCurrency(yr.principal) + '</td>',
-				'<td>' + FSP_Engine.formatCurrency(yr.interest) + '</td>',
-				'<td>' + FSP_Engine.formatCurrency(yr.extra) + '</td>',
-				'<td>' + FSP_Engine.formatCurrency(yr.balance) + '</td>',
-			].join('');
-			fragment.appendChild(tr);
-		});
+	function setScheduleView(view) {
+		currentAmortView = view;
+		const btnA = document.getElementById('fsp-view-annual');
+		const btnM = document.getElementById('fsp-view-monthly');
+		if (btnA) btnA.classList.toggle('fsp-view-btn--active', view === 'annual');
+		if (btnM) btnM.classList.toggle('fsp-view-btn--active', view === 'monthly');
+		if (lastResult) renderAmortTable(lastResult);
+	}
 
+	// ─── Formatter ───────────────────────────────────────────────────────────────
+
+	function resetUI() {
+		const zero = fmt(0);
+		el.monthly.textContent = zero;
+		el.saved.textContent = zero;
+		el.payoff.innerHTML = '0Y <span style="color:#94a3b8;font-size:1.1rem">0M</span>';
+		el.timeSaved.textContent = 'Awaiting valid inputs';
+		el.totalInt.textContent = zero;
+		el.totalSav.textContent = zero;
+		el.pctPi.textContent = '0%';
+		el.detPi.textContent = zero;
+		el.detEscrow.textContent = zero;
+		el.detExtra.textContent = zero;
+		el.detTotal.textContent = zero;
+		el.eqLabel.textContent = 'Equity at Year 0';
+		el.eqValue.textContent = zero;
+		el.eqPct.textContent = '0% of total loan paid';
+		el.eqTime.textContent = '0 months saved';
+		el.refiRate.textContent = '0.00%';
+		el.refiTarget.textContent = '0.00%';
+		el.refiSavings.textContent = zero + '/mo';
 		el.amortBody.innerHTML = '';
-		el.amortBody.appendChild(fragment);
-	}
-
-	// ─── Show / hide sections ─────────────────────────────────────────────────────
-
-	function showResults() {
-		el.resultsWrap.removeAttribute('hidden');
-		el.amortSection.removeAttribute('hidden');
-
-		// Collapse the table on new calculations so user sees summary first
-		el.amortWrap.setAttribute('hidden', '');
-		el.toggleBtn.setAttribute('aria-expanded', 'false');
-		el.toggleBtn.textContent = 'Show Schedule';
-
-		// Smooth scroll to results on mobile
-		if (window.innerWidth < 768) {
-			el.resultsWrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+		if (el.circlePi) {
+			el.circlePi.style.strokeDashoffset = 251.2;
+		}
+		if (el.circleEsc) {
+			el.circleEsc.style.strokeDashoffset = 251.2;
 		}
 	}
 
-	// ─── Amortization toggle ──────────────────────────────────────────────────────
-
-	function handleToggleAmort() {
-		const isHidden = el.amortWrap.hasAttribute('hidden');
-
-		if (isHidden) {
-			el.amortWrap.removeAttribute('hidden');
-			el.toggleBtn.setAttribute('aria-expanded', 'true');
-			el.toggleBtn.textContent = 'Hide Schedule';
-		} else {
-			el.amortWrap.setAttribute('hidden', '');
-			el.toggleBtn.setAttribute('aria-expanded', 'false');
-			el.toggleBtn.textContent = 'Show Schedule';
-		}
+	function fmt(v) {
+		return new Intl.NumberFormat('en-US', {
+			style: 'currency',
+			currency: 'USD',
+			minimumFractionDigits: 2,
+			maximumFractionDigits: 2,
+		}).format(v);
 	}
 
-	// ─── Reset ────────────────────────────────────────────────────────────────────
+	// ─── Public API ──────────────────────────────────────────────────────────────
 
-	function handleReset() {
-		// Clear inputs
-		[el.amount, el.rate, el.years, el.extra].forEach(function (input) {
-			input.value = '';
-		});
+	global.FSP_LC = {
+		switchTab: switchTab,
+		setScheduleView: setScheduleView,
+	};
 
-		// Hide results
-		el.resultsWrap.setAttribute('hidden', '');
-		el.amortSection.setAttribute('hidden', '');
-		el.amortWrap.setAttribute('hidden', '');
-
-		// Clear table
-		el.amortBody.innerHTML = '';
-
-		// Clear error
-		clearError();
-
-		// Focus first input for a11y
-		el.amount.focus();
-	}
-
-	// ─── Error handling ───────────────────────────────────────────────────────────
-
-	function showError(message) {
-		el.errorBox.textContent = message;
-		el.errorBox.removeAttribute('hidden');
-	}
-
-	function clearError() {
-		el.errorBox.textContent = '';
-		el.errorBox.setAttribute('hidden', '');
-	}
-
-})();
+})(window);

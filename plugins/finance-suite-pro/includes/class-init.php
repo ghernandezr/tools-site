@@ -24,6 +24,7 @@ class FSP_Init {
 	/** Private constructor — register hooks */
 	private function __construct() {
 		$enqueue    = new FSP_Enqueue();
+		$enqueue->register();
 		$shortcodes = new FSP_Shortcodes( $enqueue );
 
 		// Register shortcodes on init

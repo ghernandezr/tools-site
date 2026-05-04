@@ -5,6 +5,12 @@
  */
 
 /**
+ * AdSense Publisher ID — set this after AdSense approval.
+ * Leave empty ('') to hide all ad slots (safe during application review).
+ */
+define( 'TOOLSHUB_ADSENSE_PUB_ID', '' );
+
+/**
  * Register custom logo support
  */
 function toolshub_custom_logo_setup() {
@@ -265,6 +271,10 @@ add_filter( 'body_class', 'toolshub_body_classes' );
  * Use shortcode: [ad_slot position="header|mid|footer"]
  */
 function toolshub_ad_slot_shortcode( $atts ) {
+    if ( empty( TOOLSHUB_ADSENSE_PUB_ID ) ) {
+        return '';
+    }
+
     $atts = shortcode_atts( array( 'position' => 'mid' ), $atts );
     $position = esc_attr( $atts['position'] );
 
@@ -272,7 +282,7 @@ function toolshub_ad_slot_shortcode( $atts ) {
     <!-- AdSense unit injected here by adsense-loader.js -->
     <ins class="adsbygoogle"
          style="display:block"
-         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+         data-ad-client="' . esc_attr( TOOLSHUB_ADSENSE_PUB_ID ) . '"
          data-ad-slot="XXXXXXXXXX"
          data-ad-format="auto"
          data-full-width-responsive="true"

@@ -3,7 +3,7 @@
      WordPress page slug: /loan-payment-calculator/
      Primary keyword: "loan payment calculator"
      RankMath Title: Loan Payment Calculator — Free Monthly Payment Tool | ToolsHub
-     RankMath Meta: Use our free loan payment calculator to find your exact monthly payment. Enter loan amount, interest rate, and term for instant results.
+     RankMath Meta: Use our free loan payment calculator to find your estimated monthly payment. Enter loan amount, interest rate, and term for instant results.
      ============================================================ -->
 
 <div class="lpc-wrap">
@@ -32,7 +32,7 @@
       <div class="lpc-hero__badges">
         <div class="lpc-badge lpc-badge--blue">
           <span class="lpc-badge__number">🏦</span>
-          <span class="lpc-badge__label">Loan &amp; Mortgage</span>
+          <span class="lpc-badge__label">Loan Calculator</span>
         </div>
         <div class="lpc-badge lpc-badge--dark">
           <span class="lpc-badge__number">100%</span>
@@ -58,10 +58,8 @@
 <!-- ══════════════════════════════════════════════
      CALCULATOR — FINANCE SUITE PRO PLUGIN
      ══════════════════════════════════════════════ -->
-<section class="lpc-tool-section">
-  <div class="th-container">
-    [loan_calculator amount="25000" rate="6.5" years="5"]
-  </div>
+<section>
+    [loan_calculator amount="300000" rate="6.5" years="30"]
 </section>
 
 <!-- ══════════════════════════════════════════════
@@ -84,12 +82,39 @@
         <h2 class="ab-section-title">How This Loan Calculator Works</h2>
         <p class="ab-section-subtitle">This loan payment calculator uses the standard <strong>loan amortization formula</strong> used by banks and financial institutions worldwide:</p>
 
-        <div class="tool-formula">
-          Monthly Payment (M) = P × [ r(1+r)^n ] / [ (1+r)^n − 1 ]<br><br>
-          Where:<br>
-          P = Loan principal (amount borrowed)<br>
-          r = Monthly interest rate (Annual Rate ÷ 12 ÷ 100)<br>
-          n = Total number of monthly payments (Years × 12)
+        <div class="tool-formula-pro">
+          <div class="tfp-header">
+            <span class="tfp-badge">∑ Formula</span>
+            <span class="tfp-title">Loan Amortization Formula</span>
+          </div>
+          <div class="tfp-equation">
+            <span class="tfp-var tfp-result">M</span>
+            <span class="tfp-equals">=</span>
+            <span class="tfp-var">P</span>
+            <span class="tfp-operator">×</span>
+            <div class="tfp-fraction">
+              <div class="tfp-numerator">r (1 + r)<sup>n</sup></div>
+              <div class="tfp-denominator">(1 + r)<sup>n</sup> − 1</div>
+            </div>
+          </div>
+          <div class="tfp-legend">
+            <div class="tfp-legend-item">
+              <span class="tfp-legend-var">M</span>
+              <span class="tfp-legend-desc">Monthly payment</span>
+            </div>
+            <div class="tfp-legend-item">
+              <span class="tfp-legend-var">P</span>
+              <span class="tfp-legend-desc">Principal — total amount borrowed</span>
+            </div>
+            <div class="tfp-legend-item">
+              <span class="tfp-legend-var">r</span>
+              <span class="tfp-legend-desc">Monthly interest rate <em>(Annual Rate ÷ 12 ÷ 100)</em></span>
+            </div>
+            <div class="tfp-legend-item">
+              <span class="tfp-legend-var">n</span>
+              <span class="tfp-legend-desc">Total payments <em>(Years × 12)</em></span>
+            </div>
+          </div>
         </div>
 
         <h3>Understanding Your Results</h3>
@@ -101,15 +126,16 @@
 
         <h2>Input Field Guide</h2>
         <ul>
-          <li><strong>Loan Amount</strong> — The total amount you're borrowing. For mortgages, this is the home price minus your down payment. For auto loans, it's the car price minus any trade-in or down payment.</li>
-          <li><strong>Annual Interest Rate</strong> — Enter the annual percentage rate (APR) from your lender. Common rates: auto loans 4–8%, mortgages 6–8%, personal loans 6–36%.</li>
-          <li><strong>Loan Term (Years)</strong> — How long you have to repay. Common terms: auto loans 3–7 years, mortgages 15–30 years, personal loans 1–7 years.</li>
+          <li><strong>Loan Amount</strong> — The total amount you're borrowing. For auto loans, it's the car price minus any trade-in or down payment. For personal loans, it's the amount you receive.</li>
+          <li><strong>Annual Interest Rate</strong> — Enter the annual percentage rate (APR) from your lender. Common rates: auto loans 4–8%, personal loans 6–36%.</li>
+          <li><strong>Loan Term (Years)</strong> — How long you have to repay. Common terms: auto loans 3–7 years, personal loans 1–7 years.</li>
         </ul>
 
         <!-- INTERNAL LINKS -->
         <h2>Related Tools</h2>
         <ul>
-          <li><a href="/compound-interest-calculator/"><strong>Compound Interest Calculator</strong></a> — See how savings grow instead of shrink with a loan.</li>
+          <li><a href="/mortgage-calculator/"><strong>Mortgage Calculator</strong></a> — Buying a home? Get the full picture with PITI, PMI, HOA, property taxes, and refinancing analysis.</li>
+          <li><a href="/compound-interest-calculator/"><strong>Compound Interest Calculator</strong></a> — See how your money grows with compound interest over time.</li>
           <li><a href="/credit-card-interest-calculator/"><strong>Credit Card Interest Calculator</strong></a> — Calculate revolving credit costs the same way your bank does.</li>
           <li><a href="/percentage-calculator/"><strong>Percentage Calculator</strong></a> — Useful for calculating the interest rate percentage on any loan.</li>
         </ul>
@@ -129,13 +155,8 @@
           </div>
 
           <div class="tool-faq__item">
-            <div class="tool-faq__question">Does this calculator work for mortgages?</div>
-            <div class="tool-faq__answer">Yes. Enter the loan amount (purchase price minus down payment), your mortgage APR, and the loan term in years. Note: this calculator shows principal + interest only. Your actual mortgage payment may also include property taxes, homeowner's insurance, and PMI which are handled separately by your lender.</div>
-          </div>
-
-          <div class="tool-faq__item">
             <div class="tool-faq__question">What happens if I pay extra each month?</div>
-            <div class="tool-faq__answer">Extra principal payments reduce your outstanding balance faster, which means you pay less total interest and pay off the loan sooner. If you want to model extra payments, reduce your loan term proportionally or ask your lender for a custom amortization schedule.</div>
+            <div class="tool-faq__answer">Extra principal payments reduce your outstanding balance faster, which means you pay less total interest and pay off the loan sooner. Enter an extra monthly amount in the <strong>Monthly Extra Payment</strong> field — the calculator will instantly show you how much interest you save and how many months earlier you'll pay off the loan.</div>
           </div>
 
           <div class="tool-faq__item">
@@ -156,7 +177,7 @@
           </div>
         </div>
 
-        <p><small>⚠️ <strong>Disclaimer:</strong> This calculator provides estimates for informational purposes only. Results may differ from actual lender quotes. Always consult your lender for official payment amounts. See our <a href="/disclaimer/">full Disclaimer</a>.</small></p>
+        <p><small>⚠️ <strong>Disclaimer:</strong> This calculator provides estimated results for informational purposes only. These are NOT exact figures. Actual loan payments may vary based on fees, taxes, and specific lender terms. Always consult your lender for official payment amounts. See our <a href="/disclaimer/">full Disclaimer</a>.</small></p>
 
       </div>
 
