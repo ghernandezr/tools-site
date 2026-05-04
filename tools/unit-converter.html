@@ -1,187 +1,435 @@
 <!-- ============================================================
-     TOOL 10: UNIT CONVERTER
+     TOOL 10: UNIT CONVERTER — Plugin Style Edition
      Slug: /unit-converter/
      Primary keyword: "unit converter"
      RankMath Title: Unit Converter — Length, Weight & Temperature | ToolsHub
      RankMath Meta: Free unit converter: convert km to miles, kg to lbs, Celsius to Fahrenheit and back. Instant results, no sign-up, works on any device.
+     =============================================================
+     CSS: theme/assets/css/tools.css (classes .unc-*)
+     JS:  theme/assets/js/calculators.js (initUnitConverter)
      ============================================================ -->
 
-<h1>Unit Converter — Length, Weight &amp; Temperature</h1>
+<div class="lpc-wrap">
 
-<p>Our free <strong>unit converter</strong> instantly converts between the most common measurement units: kilometers to miles (and back), kilograms to pounds (and back), and Celsius to Fahrenheit (and back). Select a category, enter your value, and get results instantly.</p>
+<!-- ════════════════════════════════════════════════
+     TOOL HERO
+     ════════════════════════════════════════════════ -->
+<section class="lpc-hero">
+  <div class="th-container">
+    <div class="lpc-hero__inner">
 
-[ad_slot position="header"]
+      <div class="lpc-hero__text">
+        <div class="lpc-hero__eyebrow">
+          <span class="lpc-hero__eyebrow-line"></span>
+          Travel &amp; Science · Free Tool
+        </div>
+        <h1 class="lpc-hero__title">
+          Unit Converter<br>
+          <span>Length, Weight &amp; Temperature</span>
+        </h1>
+        <p class="lpc-hero__desc">
+          Our free <strong>unit converter</strong> instantly converts between the most common measurement units: kilometers to miles, kilograms to pounds, and Celsius to Fahrenheit — and back. No sign-up, works on any device.
+        </p>
+      </div>
 
-<div class="tool-card">
-  <h2>Unit Converter</h2>
+      <div class="lpc-hero__badges">
+        <div class="lpc-badge lpc-badge--blue">
+          <span class="lpc-badge__number">3</span>
+          <span class="lpc-badge__label">Categories</span>
+        </div>
+        <div class="lpc-badge lpc-badge--dark">
+          <span class="lpc-badge__number">100%</span>
+          <span class="lpc-badge__label">Free &amp;</span>
+          <span class="lpc-badge__sublabel">Private</span>
+        </div>
+      </div>
 
-  <!-- Tab buttons -->
-  <div class="unit-tabs">
-    <button type="button" class="unit-tab-btn is-active" data-tab="unit-length">📏 Length</button>
-    <button type="button" class="unit-tab-btn" data-tab="unit-weight">⚖️ Weight</button>
-    <button type="button" class="unit-tab-btn" data-tab="unit-temp">🌡️ Temperature</button>
+    </div>
   </div>
+</section>
 
-  <form id="unit-form">
+<!-- ════════════════════════════════════════════════
+     AD — LEADERBOARD
+     ════════════════════════════════════════════════ -->
+<div class="th-container">
+  <div class="ad-leaderboard">
+    <span class="ad-label">Advertisement</span>
+    [ad_slot position="header"]
+  </div>
+</div>
 
-    <!-- LENGTH PANEL -->
-    <div class="unit-panel is-active" id="unit-length">
-      <div class="tool-group">
-        <label for="length-mode">Convert</label>
-        <select id="length-mode">
-          <option value="km-to-mi">Kilometers → Miles</option>
-          <option value="mi-to-km">Miles → Kilometers</option>
-        </select>
+<!-- ════════════════════════════════════════════════
+     CALCULATOR UI
+     ════════════════════════════════════════════════ -->
+<section>
+  <div class="unc-calculator" id="unc-calculator">
+
+    <!-- Header -->
+    <header class="unc-header">
+      <div class="unc-header-icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z"/>
+        </svg>
       </div>
-      <div class="tool-group">
-        <label for="length-value">Value</label>
-        <input type="number" id="length-value" placeholder="e.g. 100" step="any">
+      <div>
+        <h2 class="unc-title">Unit <span style="color: var(--unc-primary);">Converter</span></h2>
+        <p class="unc-subtitle">Instant &amp; Accurate Conversions</p>
       </div>
+    </header>
+
+    <!-- Category Tabs -->
+    <div class="unc-tabs" role="tablist" aria-label="Conversion category">
+      <button type="button" class="unc-tab-btn unc-tab-btn--active" data-tab="unc-length" role="tab" aria-selected="true">
+        <span class="unc-tab-icon">📏</span> Length
+      </button>
+      <button type="button" class="unc-tab-btn" data-tab="unc-weight" role="tab" aria-selected="false">
+        <span class="unc-tab-icon">⚖️</span> Weight
+      </button>
+      <button type="button" class="unc-tab-btn" data-tab="unc-temp" role="tab" aria-selected="false">
+        <span class="unc-tab-icon">🌡️</span> Temperature
+      </button>
     </div>
 
-    <!-- WEIGHT PANEL -->
-    <div class="unit-panel" id="unit-weight">
-      <div class="tool-group">
-        <label for="weight-mode">Convert</label>
-        <select id="weight-mode">
-          <option value="kg-to-lbs">Kilograms → Pounds</option>
-          <option value="lbs-to-kg">Pounds → Kilograms</option>
-        </select>
-      </div>
-      <div class="tool-group">
-        <label for="weight-value">Value</label>
-        <input type="number" id="weight-value" placeholder="e.g. 70" step="any">
-      </div>
+    <!-- Main Layout: Sidebar + Panel -->
+    <div class="unc-layout">
+
+      <!-- Sidebar: Inputs -->
+      <aside class="unc-sidebar" aria-label="Conversion parameters">
+        <div class="unc-glass-card">
+
+          <!-- LENGTH PANEL -->
+          <div class="unc-panel unc-panel--active" id="unc-length" role="tabpanel">
+            <h3 class="unc-section-label">Length</h3>
+            <div class="unc-field-stack">
+
+              <div class="unc-input-group">
+                <label class="unc-label-tech" for="unc-length-mode">Direction</label>
+                <select id="unc-length-mode" class="unc-select-field">
+                  <option value="km-to-mi">Kilometers → Miles</option>
+                  <option value="mi-to-km">Miles → Kilometers</option>
+                </select>
+              </div>
+
+              <div class="unc-input-group">
+                <label class="unc-label-tech" for="unc-length-value">Value</label>
+                <input type="number" id="unc-length-value" class="unc-input-field" placeholder="e.g. 100" step="any" autocomplete="off">
+                <div class="unc-presets">
+                  <button type="button" class="unc-preset-btn" onclick="UNC.setLength(1)">1</button>
+                  <button type="button" class="unc-preset-btn" onclick="UNC.setLength(5)">5</button>
+                  <button type="button" class="unc-preset-btn" onclick="UNC.setLength(10)">10</button>
+                  <button type="button" class="unc-preset-btn" onclick="UNC.setLength(100)">100</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- WEIGHT PANEL -->
+          <div class="unc-panel" id="unc-weight" role="tabpanel">
+            <h3 class="unc-section-label">Weight</h3>
+            <div class="unc-field-stack">
+
+              <div class="unc-input-group">
+                <label class="unc-label-tech" for="unc-weight-mode">Direction</label>
+                <select id="unc-weight-mode" class="unc-select-field">
+                  <option value="kg-to-lbs">Kilograms → Pounds</option>
+                  <option value="lbs-to-kg">Pounds → Kilograms</option>
+                </select>
+              </div>
+
+              <div class="unc-input-group">
+                <label class="unc-label-tech" for="unc-weight-value">Value</label>
+                <input type="number" id="unc-weight-value" class="unc-input-field" placeholder="e.g. 70" step="any" autocomplete="off">
+                <div class="unc-presets">
+                  <button type="button" class="unc-preset-btn" onclick="UNC.setWeight(50)">50</button>
+                  <button type="button" class="unc-preset-btn" onclick="UNC.setWeight(70)">70</button>
+                  <button type="button" class="unc-preset-btn" onclick="UNC.setWeight(100)">100</button>
+                  <button type="button" class="unc-preset-btn" onclick="UNC.setWeight(150)">150</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- TEMPERATURE PANEL -->
+          <div class="unc-panel" id="unc-temp" role="tabpanel">
+            <h3 class="unc-section-label">Temperature</h3>
+            <div class="unc-field-stack">
+
+              <div class="unc-input-group">
+                <label class="unc-label-tech" for="unc-temp-mode">Direction</label>
+                <select id="unc-temp-mode" class="unc-select-field">
+                  <option value="c-to-f">Celsius → Fahrenheit</option>
+                  <option value="f-to-c">Fahrenheit → Celsius</option>
+                </select>
+              </div>
+
+              <div class="unc-input-group">
+                <label class="unc-label-tech" for="unc-temp-value">Value</label>
+                <input type="number" id="unc-temp-value" class="unc-input-field" placeholder="e.g. 25" step="any" autocomplete="off">
+                <div class="unc-presets">
+                  <button type="button" class="unc-preset-btn" onclick="UNC.setTemp(0)">0°</button>
+                  <button type="button" class="unc-preset-btn" onclick="UNC.setTemp(20)">20°</button>
+                  <button type="button" class="unc-preset-btn" onclick="UNC.setTemp(37)">37°</button>
+                  <button type="button" class="unc-preset-btn" onclick="UNC.setTemp(100)">100°</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </aside>
+
+      <!-- Panel: Results -->
+      <main class="unc-panel-results" aria-label="Conversion results">
+
+        <!-- KPI Result Card -->
+        <div class="unc-kpi-row">
+          <div class="unc-kpi-card unc-kpi-card--primary">
+            <span class="unc-kpi-label">Result</span>
+            <strong class="unc-kpi-value unc-kpi-value--primary" id="unc-kpi-result">—</strong>
+          </div>
+          <div class="unc-kpi-card unc-kpi-card--teal">
+            <span class="unc-kpi-label">Input</span>
+            <strong class="unc-kpi-value unc-kpi-value--teal" id="unc-kpi-input">—</strong>
+          </div>
+          <div class="unc-kpi-card unc-kpi-card--slate">
+            <span class="unc-kpi-label">Formula</span>
+            <strong class="unc-kpi-value unc-kpi-value--slate" id="unc-kpi-formula">—</strong>
+          </div>
+        </div>
+
+        <!-- Impact Panel -->
+        <div class="unc-impact-panel">
+          <div class="unc-impact-content">
+            <div class="unc-impact-left">
+              <div class="unc-impact-badge">
+                <span class="unc-impact-badge-dot"></span>
+                <span>Live Conversion</span>
+              </div>
+              <h3 class="unc-impact-title">Conversion Summary</h3>
+              <p class="unc-impact-desc" id="unc-impact-desc">Select a category and enter a value to convert instantly.</p>
+            </div>
+            <div class="unc-impact-stats" id="unc-impact-stats" style="display:none;">
+              <div class="unc-impact-stat">
+                <p class="unc-impact-stat-label">From</p>
+                <p class="unc-impact-stat-value" id="unc-stat-from">—</p>
+              </div>
+              <div class="unc-impact-stat">
+                <p class="unc-impact-stat-label">To</p>
+                <p class="unc-impact-stat-value" id="unc-stat-to">—</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Reference Card -->
+        <div class="unc-ref-card" id="unc-ref-card">
+          <h4 class="unc-ref-title">Quick Reference</h4>
+          <div class="unc-ref-list" id="unc-ref-list">
+            <div class="unc-ref-row"><span>1 km</span><span>=</span><span>0.6214 mi</span></div>
+            <div class="unc-ref-row"><span>5 km</span><span>=</span><span>3.107 mi</span></div>
+            <div class="unc-ref-row"><span>10 km</span><span>=</span><span>6.214 mi</span></div>
+            <div class="unc-ref-row"><span>42.195 km</span><span>=</span><span>26.219 mi</span></div>
+          </div>
+        </div>
+
+      </main>
     </div>
 
-    <!-- TEMPERATURE PANEL -->
-    <div class="unit-panel" id="unit-temp">
-      <div class="tool-group">
-        <label for="temp-mode">Convert</label>
-        <select id="temp-mode">
-          <option value="c-to-f">Celsius → Fahrenheit</option>
-          <option value="f-to-c">Fahrenheit → Celsius</option>
-        </select>
+    <!-- Bottom Ad Placeholder -->
+    <div class="unc-ad-slot" aria-hidden="true"></div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════
+     MAIN CONTENT
+     ════════════════════════════════════════════════ -->
+<section class="ab-mission">
+  <div class="th-container">
+    <div class="lpc-content-grid">
+
+      <!-- Left 2/3: article content -->
+      <div>
+
+        <!-- MID CONTENT AD -->
+        <div class="ad-infeed" style="margin:0 0 2rem;">
+          <span class="ad-label">Advertisement</span>
+          [ad_slot position="mid"]
+        </div>
+
+        <!-- FORMULAS -->
+        <h2 class="ab-section-title">Conversion Formulas Explained</h2>
+        <p class="ab-section-subtitle">The exact factors used by this converter:</p>
+
+        <div class="tool-formula-pro">
+          <div class="tfp-header">
+            <span class="tfp-badge">km</span>
+            <span class="tfp-title">Length — Kilometers ↔ Miles</span>
+          </div>
+          <div class="tfp-equation">
+            <span class="tfp-var tfp-result">miles</span>
+            <span class="tfp-equals">=</span>
+            <span class="tfp-var">km</span>
+            <span class="tfp-operator">×</span>
+            <span class="tfp-var">0.621371</span>
+          </div>
+          <div class="tfp-legend">
+            <div class="tfp-legend-item">
+              <span class="tfp-legend-var">→</span>
+              <span class="tfp-legend-desc">100 km = <strong>62.14 miles</strong></span>
+            </div>
+            <div class="tfp-legend-item">
+              <span class="tfp-legend-var">←</span>
+              <span class="tfp-legend-desc">1 mile = km × 1.60934</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tool-formula-pro">
+          <div class="tfp-header">
+            <span class="tfp-badge">kg</span>
+            <span class="tfp-title">Weight — Kilograms ↔ Pounds</span>
+          </div>
+          <div class="tfp-equation">
+            <span class="tfp-var tfp-result">lbs</span>
+            <span class="tfp-equals">=</span>
+            <span class="tfp-var">kg</span>
+            <span class="tfp-operator">×</span>
+            <span class="tfp-var">2.20462</span>
+          </div>
+          <div class="tfp-legend">
+            <div class="tfp-legend-item">
+              <span class="tfp-legend-var">→</span>
+              <span class="tfp-legend-desc">70 kg = <strong>154.32 lbs</strong></span>
+            </div>
+            <div class="tfp-legend-item">
+              <span class="tfp-legend-var">←</span>
+              <span class="tfp-legend-desc">1 lb = kg × 0.453592</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tool-formula-pro">
+          <div class="tfp-header">
+            <span class="tfp-badge">°C</span>
+            <span class="tfp-title">Temperature — Celsius ↔ Fahrenheit</span>
+          </div>
+          <div class="tfp-equation">
+            <span class="tfp-var tfp-result">°F</span>
+            <span class="tfp-equals">=</span>
+            <span class="tfp-fraction">
+              <div class="tfp-numerator">(°C × 9)</div>
+              <div class="tfp-denominator">5</div>
+            </span>
+            <span class="tfp-operator">+</span>
+            <span class="tfp-var">32</span>
+          </div>
+          <div class="tfp-legend">
+            <div class="tfp-legend-item">
+              <span class="tfp-legend-var">→</span>
+              <span class="tfp-legend-desc">37°C = <strong>98.6°F</strong> (body temp)</span>
+            </div>
+            <div class="tfp-legend-item">
+              <span class="tfp-legend-var">←</span>
+              <span class="tfp-legend-desc">°C = (°F − 32) × 5/9</span>
+            </div>
+          </div>
+        </div>
+
+        <h2>Common Conversion Examples</h2>
+        <ul>
+          <li><strong>5 km</strong> → 3.107 miles (popular running race distance)</li>
+          <li><strong>70 kg</strong> → 154.32 lbs (average adult weight)</li>
+          <li><strong>100 km/h</strong> → 62.14 mph (highway speed)</li>
+          <li><strong>20°C</strong> → 68°F (comfortable room temperature)</li>
+          <li><strong>100°F</strong> → 37.78°C (near body temperature)</li>
+        </ul>
+
+        <!-- INTERNAL LINKS -->
+        <h2>Related Tools</h2>
+        <ul>
+          <li><a href="/fuel-cost-calculator/"><strong>Fuel Cost Calculator</strong></a> — Uses miles; convert km first if needed.</li>
+          <li><a href="/percentage-calculator/"><strong>Percentage Calculator</strong></a> — Calculate percentage differences between measurements.</li>
+          <li><a href="/tip-calculator/"><strong>Tip Calculator</strong></a> — Useful alongside unit conversions for international travel.</li>
+          <li><a href="/discount-calculator/"><strong>Discount Calculator</strong></a> — Great for international shopping where unit differences matter.</li>
+        </ul>
+
+        <!-- FAQ SECTION -->
+        <div class="tool-faq">
+          <h2>Frequently Asked Questions</h2>
+
+          <div class="tool-faq__item">
+            <div class="tool-faq__question">How many miles is 1 kilometer?</div>
+            <div class="tool-faq__answer">1 kilometer = 0.621371 miles. As a quick rule of thumb, multiply km by 0.6 for a rough miles estimate. For more precision, use our converter above or the exact factor of 0.621371.</div>
+          </div>
+
+          <div class="tool-faq__item">
+            <div class="tool-faq__question">How do I convert Celsius to Fahrenheit?</div>
+            <div class="tool-faq__answer">Formula: °F = (°C × 9/5) + 32. Example: 25°C = (25 × 1.8) + 32 = 45 + 32 = 77°F. Quick estimate: double the Celsius temperature and add 30 (not precise but useful mentally). For example: 20°C → 20×2+30 = 70°F (actual: 68°F).</div>
+          </div>
+
+          <div class="tool-faq__item">
+            <div class="tool-faq__question">How many pounds is 1 kilogram?</div>
+            <div class="tool-faq__answer">1 kilogram = 2.20462 pounds. Roughly 2.2 lbs per kg. To convert quickly in your head: multiply kg by 2, then add 10%. Example: 70 kg → 70 × 2 = 140, + 7 = 147 lbs (actual: 154.3 lbs — this approximation is less accurate for large values; use the calculator for precision).</div>
+          </div>
+
+          <div class="tool-faq__item">
+            <div class="tool-faq__question">What is 100°F in Celsius?</div>
+            <div class="tool-faq__answer">°C = (100 − 32) × 5/9 = 68 × 5/9 = 37.78°C. Note: 98.6°F (normal body temperature) = exactly 37°C. 100°C is the boiling point of water = 212°F.</div>
+          </div>
+
+          <div class="tool-faq__item">
+            <div class="tool-faq__question">How many km is a 5K race?</div>
+            <div class="tool-faq__answer">A 5K race is exactly 5 kilometers, which equals approximately 3.107 miles. A 10K is 10 km = 6.214 miles. A half marathon is 21.097 km = 13.109 miles. A full marathon is 42.195 km = 26.219 miles.</div>
+          </div>
+        </div>
+
+        <p><small>⚠️ <strong>Disclaimer:</strong> Conversion factors are standard internationally recognized values. For scientific or engineering applications, verify with your institution's standards. See our <a href="/disclaimer/">full Disclaimer</a>.</small></p>
+
       </div>
-      <div class="tool-group">
-        <label for="temp-value">Value</label>
-        <input type="number" id="temp-value" placeholder="e.g. 100" step="any">
+
+      <!-- Right 1/3: ad + callout -->
+      <div class="ab-sidebar">
+
+        <div class="ad-sidebar">
+          <span class="ad-label">Advertisement</span>
+          <span class="ad-placeholder-text">Ad Space</span>
+          [ad_slot position="sidebar"]
+        </div>
+
+        <div class="lpc-sidebar-card">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          <p class="lpc-sidebar-card__title">100% Private</p>
+          <p class="lpc-sidebar-card__text">All conversions happen instantly in your browser. No data is stored or sent to any server.</p>
+        </div>
+
+        <div class="ab-callout">
+          <span class="ab-callout__icon">💡</span>
+          <div class="ab-callout__title">Pro Tip</div>
+          <p class="ab-callout__text">
+            Quick mental math: 1 km ≈ 0.6 miles. For kg to lbs, multiply by 2 then add 10%. For °C to °F, double and add 32 (rough estimate).
+          </p>
+        </div>
+
       </div>
+
     </div>
-
-    <button type="submit" class="tool-btn">Convert</button>
-  </form>
-
-  <div id="unit-error" class="tool-error"></div>
-
-  <div id="unit-result" class="tool-result">
-    <div class="tool-result__label">Result</div>
-    <div class="tool-result__value" id="unit-answer">—</div>
   </div>
+</section>
 
-  <button id="unit-reset" class="tool-reset">Reset</button>
-</div>
-
-[ad_slot position="mid"]
-
-<h2>Conversion Formulas</h2>
-
-<h3>Length: Kilometers ↔ Miles</h3>
-<div class="tool-formula">
-  km → miles:  miles = km × 0.621371<br>
-  miles → km:  km = miles × 1.60934<br><br>
-  Examples:<br>
-  100 km = 62.14 miles<br>
-  26.2 miles (marathon) = 42.16 km<br>
-  1 mile = 1.609 km
-</div>
-
-<h3>Weight: Kilograms ↔ Pounds</h3>
-<div class="tool-formula">
-  kg → lbs:  lbs = kg × 2.20462<br>
-  lbs → kg:  kg = lbs × 0.453592<br><br>
-  Examples:<br>
-  70 kg = 154.32 lbs<br>
-  150 lbs = 68.04 kg<br>
-  1 kg = 2.205 lbs
-</div>
-
-<h3>Temperature: Celsius ↔ Fahrenheit</h3>
-<div class="tool-formula">
-  °C → °F:  F = (C × 9/5) + 32<br>
-  °F → °C:  C = (F − 32) × 5/9<br><br>
-  Key reference points:<br>
-  0°C = 32°F (water freezes)<br>
-  20°C = 68°F (room temperature)<br>
-  37°C = 98.6°F (body temperature)<br>
-  100°C = 212°F (water boils)
-</div>
-
-<h2>Quick Reference Tables</h2>
-
-<h3>km to Miles</h3>
-<ul>
-  <li>1 km = 0.621 mi</li>
-  <li>5 km = 3.107 mi</li>
-  <li>10 km = 6.214 mi</li>
-  <li>50 km = 31.07 mi</li>
-  <li>100 km = 62.14 mi</li>
-</ul>
-
-<h3>kg to Pounds</h3>
-<ul>
-  <li>50 kg = 110.23 lbs</li>
-  <li>60 kg = 132.28 lbs</li>
-  <li>70 kg = 154.32 lbs</li>
-  <li>80 kg = 176.37 lbs</li>
-  <li>100 kg = 220.46 lbs</li>
-</ul>
-
-<h3>°C to °F</h3>
-<ul>
-  <li>−10°C = 14°F</li>
-  <li>0°C = 32°F</li>
-  <li>15°C = 59°F</li>
-  <li>25°C = 77°F</li>
-  <li>40°C = 104°F</li>
-</ul>
-
-<h2>Related Tools</h2>
-<ul>
-  <li><a href="/fuel-cost-calculator/"><strong>Fuel Cost Calculator</strong></a> — Uses miles; convert km first if needed.</li>
-  <li><a href="/percentage-calculator/"><strong>Percentage Calculator</strong></a> — Calculate percentage differences between measurements.</li>
-  <li><a href="/tip-calculator/"><strong>Tip Calculator</strong></a> — Useful alongside unit conversions for international travel.</li>
-</ul>
-
-<div class="tool-faq">
-  <h2>Frequently Asked Questions</h2>
-
-  <div class="tool-faq__item">
-    <div class="tool-faq__question">How many miles is 1 kilometer?</div>
-    <div class="tool-faq__answer">1 kilometer = 0.621371 miles. As a quick rule of thumb, multiply km by 0.6 for a rough miles estimate. For more precision, use our converter above or the exact factor of 0.621371.</div>
+<!-- ════════════════════════════════════════════════
+     AD — FOOTER
+     ════════════════════════════════════════════════ -->
+<section class="ab-policy" style="padding:3rem 0;">
+  <div class="th-container">
+    <div class="ad-leaderboard">
+      <span class="ad-label">Advertisement</span>
+      [ad_slot position="footer"]
+    </div>
   </div>
+</section>
 
-  <div class="tool-faq__item">
-    <div class="tool-faq__question">How do I convert Celsius to Fahrenheit?</div>
-    <div class="tool-faq__answer">Formula: °F = (°C × 9/5) + 32. Example: 25°C = (25 × 1.8) + 32 = 45 + 32 = 77°F. Quick estimate: double the Celsius temperature and add 30 (not precise but useful mentally). For example: 20°C → 20×2+30 = 70°F (actual: 68°F).</div>
-  </div>
-
-  <div class="tool-faq__item">
-    <div class="tool-faq__question">How many pounds is 1 kilogram?</div>
-    <div class="tool-faq__answer">1 kilogram = 2.20462 pounds. Roughly 2.2 lbs per kg. To convert quickly in your head: multiply kg by 2, then add 10%. Example: 70 kg → 70 × 2 = 140, + 7 = 147 lbs (actual: 154.3 lbs — this approximation is less accurate for large values; use the calculator for precision).</div>
-  </div>
-
-  <div class="tool-faq__item">
-    <div class="tool-faq__question">What is 100°F in Celsius?</div>
-    <div class="tool-faq__answer">°C = (100 − 32) × 5/9 = 68 × 5/9 = 37.78°C. Note: 98.6°F (normal body temperature) = exactly 37°C. 100°C is the boiling point of water = 212°F.</div>
-  </div>
-
-  <div class="tool-faq__item">
-    <div class="tool-faq__question">How many km is a 5K race?</div>
-    <div class="tool-faq__answer">A 5K race is exactly 5 kilometers, which equals approximately 3.107 miles. A 10K is 10 km = 6.214 miles. A half marathon is 21.097 km = 13.109 miles. A full marathon is 42.195 km = 26.219 miles.</div>
-  </div>
-</div>
-
-<p><small>⚠️ <strong>Disclaimer:</strong> Conversion factors are standard internationally recognized values. For scientific or engineering applications, verify with your institution's standards. See our <a href="/disclaimer/">full Disclaimer</a>.</small></p>
-
-[ad_slot position="footer"]
+</div><!-- /.lpc-wrap -->

@@ -1146,88 +1146,203 @@
   }
 
   /* ============================================================
-     TOOL 9 — Unit Converter
+     TOOL 9 — Unit Converter (Plugin Style Edition)
      Length: km ↔ miles | Weight: kg ↔ lbs | Temp: C ↔ F
+     Features: Real-time calculation, KPI cards, reference table, presets
   ============================================================ */
   function initUnitConverter() {
-    var form = el('unit-form');
-    if (!form) return;
+    var container = document.getElementById('unc-calculator');
+    if (!container) return;
 
-    var resultEl = el('unit-result');
-    var errorEl = el('unit-error');
-    var resetBtn = el('unit-reset');
-    var tabBtns = document.querySelectorAll('.unit-tab-btn');
-    var panels = document.querySelectorAll('.unit-panel');
+    var els = {
+      tabBtns: document.querySelectorAll('.unc-tab-btn'),
+      panels: document.querySelectorAll('.unc-panel'),
+      lengthMode: el('unc-length-mode'),
+      lengthValue: el('unc-length-value'),
+      weightMode: el('unc-weight-mode'),
+      weightValue: el('unc-weight-value'),
+      tempMode: el('unc-temp-mode'),
+      tempValue: el('unc-temp-value'),
+      kpiResult: el('unc-kpi-result'),
+      kpiInput: el('unc-kpi-input'),
+      kpiFormula: el('unc-kpi-formula'),
+      impactDesc: el('unc-impact-desc'),
+      impactStats: el('unc-impact-stats'),
+      statFrom: el('unc-stat-from'),
+      statTo: el('unc-stat-to'),
+      refList: el('unc-ref-list'),
+    };
+
+    var refData = {
+      'unc-length': {
+        'km-to-mi': [
+          ['1 km', '0.6214 mi'], ['5 km', '3.107 mi'],
+          ['10 km', '6.214 mi'], ['42.195 km', '26.219 mi']
+        ],
+        'mi-to-km': [
+          ['1 mi', '1.6093 km'], ['5 mi', '8.047 km'],
+          ['10 mi', '16.093 km'], ['26.219 mi', '42.195 km']
+        ]
+      },
+      'unc-weight': {
+        'kg-to-lbs': [
+          ['50 kg', '110.23 lbs'], ['70 kg', '154.32 lbs'],
+          ['80 kg', '176.37 lbs'], ['100 kg', '220.46 lbs']
+        ],
+        'lbs-to-kg': [
+          ['100 lbs', '45.36 kg'], ['150 lbs', '68.04 kg'],
+          ['175 lbs', '79.38 kg'], ['200 lbs', '90.72 kg']
+        ]
+      },
+      'unc-temp': {
+        'c-to-f': [
+          ['0°C', '32°F'], ['20°C', '68°F'],
+          ['37°C', '98.6°F'], ['100°C', '212°F']
+        ],
+        'f-to-c': [
+          ['32°F', '0°C'], ['68°F', '20°C'],
+          ['98.6°F', '37°C'], ['212°F', '100°C']
+        ]
+      }
+    };
+
+    var activeTab = 'unc-length';
+
+    function getActiveMode() {
+      if (activeTab === 'unc-length') return els.lengthMode ? els.lengthMode.value : 'km-to-mi';
+      if (activeTab === 'unc-weight') return els.weightMode ? els.weightMode.value : 'kg-to-lbs';
+      if (activeTab === 'unc-temp') return els.tempMode ? els.tempMode.value : 'c-to-f';
+      return '';
+    }
+
+    function updateRefTable() {
+      if (!els.refList) return;
+      var mode = getActiveMode();
+      var rows = (refData[activeTab] && refData[activeTab][mode]) || [];
+      els.refList.innerHTML = rows.map(function (r) {
+        return '<div class="unc-ref-row"><span>' + r[0] + '</span><span>=</span><span>' + r[1] + '</span></div>';
+      }).join('');
+    }
+
+    function resetUI() {
+      if (els.kpiResult) els.kpiResult.textContent = '—';
+      if (els.kpiInput) els.kpiInput.textContent = '—';
+      if (els.kpiFormula) els.kpiFormula.textContent = '—';
+      if (els.impactDesc) els.impactDesc.textContent = 'Select a category and enter a value to convert instantly.';
+      if (els.impactStats) els.impactStats.style.display = 'none';
+    }
+
+    function calculate() {
+      var value, mode, result, fromLabel, toLabel, formulaLabel;
+
+      if (activeTab === 'unc-length') {
+        value = parseFloat(els.lengthValue ? els.lengthValue.value : '');
+        mode = els.lengthMode ? els.lengthMode.value : 'km-to-mi';
+        if (isNaN(value)) { resetUI(); return; }
+        if (mode === 'km-to-mi') {
+          result = value * 0.621371;
+          fromLabel = fmt(value, 4) + ' km';
+          toLabel = fmt(result, 4) + ' mi';
+          formulaLabel = '× 0.621371';
+        } else {
+          result = value * 1.60934;
+          fromLabel = fmt(value, 4) + ' mi';
+          toLabel = fmt(result, 4) + ' km';
+          formulaLabel = '× 1.60934';
+        }
+
+      } else if (activeTab === 'unc-weight') {
+        value = parseFloat(els.weightValue ? els.weightValue.value : '');
+        mode = els.weightMode ? els.weightMode.value : 'kg-to-lbs';
+        if (isNaN(value)) { resetUI(); return; }
+        if (mode === 'kg-to-lbs') {
+          result = value * 2.20462;
+          fromLabel = fmt(value, 4) + ' kg';
+          toLabel = fmt(result, 4) + ' lbs';
+          formulaLabel = '× 2.20462';
+        } else {
+          result = value * 0.453592;
+          fromLabel = fmt(value, 4) + ' lbs';
+          toLabel = fmt(result, 4) + ' kg';
+          formulaLabel = '× 0.453592';
+        }
+
+      } else if (activeTab === 'unc-temp') {
+        value = parseFloat(els.tempValue ? els.tempValue.value : '');
+        mode = els.tempMode ? els.tempMode.value : 'c-to-f';
+        if (isNaN(value)) { resetUI(); return; }
+        if (mode === 'c-to-f') {
+          result = (value * 9 / 5) + 32;
+          fromLabel = fmt(value, 2) + '°C';
+          toLabel = fmt(result, 2) + '°F';
+          formulaLabel = '(× 9/5) + 32';
+        } else {
+          result = (value - 32) * 5 / 9;
+          fromLabel = fmt(value, 2) + '°F';
+          toLabel = fmt(result, 2) + '°C';
+          formulaLabel = '(− 32) × 5/9';
+        }
+      } else {
+        return;
+      }
+
+      if (els.kpiResult) els.kpiResult.textContent = toLabel;
+      if (els.kpiInput) els.kpiInput.textContent = fromLabel;
+      if (els.kpiFormula) els.kpiFormula.textContent = formulaLabel;
+      if (els.impactDesc) els.impactDesc.textContent = fromLabel + ' = ' + toLabel;
+      if (els.impactStats) els.impactStats.style.display = 'grid';
+      if (els.statFrom) els.statFrom.textContent = fromLabel;
+      if (els.statTo) els.statTo.textContent = toLabel;
+    }
 
     // Tab switching
-    tabBtns.forEach(function (btn) {
+    els.tabBtns.forEach(function (btn) {
       btn.addEventListener('click', function () {
-        tabBtns.forEach(function (b) { b.classList.remove('is-active'); });
-        panels.forEach(function (p) { p.classList.remove('is-active'); });
-        btn.classList.add('is-active');
-        var target = btn.getAttribute('data-tab');
-        var targetPanel = document.getElementById(target);
-        if (targetPanel) targetPanel.classList.add('is-active');
-        resultEl && resultEl.classList.remove('is-visible');
-        errorEl && errorEl.classList.remove('is-visible');
+        els.tabBtns.forEach(function (b) {
+          b.classList.remove('unc-tab-btn--active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        els.panels.forEach(function (p) { p.classList.remove('unc-panel--active'); });
+        btn.classList.add('unc-tab-btn--active');
+        btn.setAttribute('aria-selected', 'true');
+        activeTab = btn.getAttribute('data-tab');
+        var targetPanel = document.getElementById(activeTab);
+        if (targetPanel) targetPanel.classList.add('unc-panel--active');
+        resetUI();
+        updateRefTable();
       });
     });
 
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-
-      var activeTab = document.querySelector('.unit-tab-btn.is-active');
-      if (!activeTab) return;
-      var type = activeTab.getAttribute('data-tab');
-
-      if (type === 'unit-length') {
-        var lVal = parseFloat(el('length-value').value);
-        var lMode = el('length-mode').value;
-        if (isNaN(lVal)) return showError(resultEl, errorEl, 'Please enter a valid number.');
-        var lResult, lLabel;
-        if (lMode === 'km-to-mi') {
-          lResult = lVal * 0.621371;
-          lLabel = fmt(lVal, 4) + ' km = ' + fmt(lResult, 4) + ' miles';
-        } else {
-          lResult = lVal * 1.60934;
-          lLabel = fmt(lVal, 4) + ' miles = ' + fmt(lResult, 4) + ' km';
-        }
-        el('unit-answer').textContent = lLabel;
-
-      } else if (type === 'unit-weight') {
-        var wVal = parseFloat(el('weight-value').value);
-        var wMode = el('weight-mode').value;
-        if (isNaN(wVal)) return showError(resultEl, errorEl, 'Please enter a valid number.');
-        var wResult, wLabel;
-        if (wMode === 'kg-to-lbs') {
-          wResult = wVal * 2.20462;
-          wLabel = fmt(wVal, 4) + ' kg = ' + fmt(wResult, 4) + ' lbs';
-        } else {
-          wResult = wVal * 0.453592;
-          wLabel = fmt(wVal, 4) + ' lbs = ' + fmt(wResult, 4) + ' kg';
-        }
-        el('unit-answer').textContent = wLabel;
-
-      } else if (type === 'unit-temp') {
-        var tVal = parseFloat(el('temp-value').value);
-        var tMode = el('temp-mode').value;
-        if (isNaN(tVal)) return showError(resultEl, errorEl, 'Please enter a valid temperature.');
-        var tResult, tLabel;
-        if (tMode === 'c-to-f') {
-          tResult = (tVal * 9 / 5) + 32;
-          tLabel = fmt(tVal, 2) + '°C = ' + fmt(tResult, 2) + '°F';
-        } else {
-          tResult = (tVal - 32) * 5 / 9;
-          tLabel = fmt(tVal, 2) + '°F = ' + fmt(tResult, 2) + '°C';
-        }
-        el('unit-answer').textContent = tLabel;
+    // Mode selects update reference table and recalculate
+    [els.lengthMode, els.weightMode, els.tempMode].forEach(function (sel) {
+      if (sel) {
+        sel.addEventListener('change', function () {
+          updateRefTable();
+          calculate();
+        });
       }
-
-      showResult(resultEl, errorEl);
-      resetBtn && resetBtn.classList.add('is-visible');
     });
 
-    bindReset(resetBtn, form, resultEl, errorEl);
+    // Value inputs trigger real-time calculation
+    [els.lengthValue, els.weightValue, els.tempValue].forEach(function (inp) {
+      if (inp) inp.addEventListener('input', calculate);
+    });
+
+    // Preset helpers (exposed globally for onclick attributes)
+    window.UNC = {
+      setLength: function (val) {
+        if (els.lengthValue) { els.lengthValue.value = val; calculate(); }
+      },
+      setWeight: function (val) {
+        if (els.weightValue) { els.weightValue.value = val; calculate(); }
+      },
+      setTemp: function (val) {
+        if (els.tempValue) { els.tempValue.value = val; calculate(); }
+      }
+    };
+
+    updateRefTable();
+    calculate();
   }
 
   /* ============================================================
