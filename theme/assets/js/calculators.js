@@ -634,41 +634,86 @@
 
   /* ============================================================
      TOOL 4 — Salary to Hourly Converter
-     Formula: Hourly = Annual Salary / 2080
+     Formula: Hourly = Annual / (Hours/wk × Weeks/yr)
+     Features: Real-time calculation, KPI cards, shc-* UI
   ============================================================ */
   function initSalaryConverter() {
-    var form = el('salary-form');
-    if (!form) return;
+    var container = document.getElementById('shc-salary-calculator');
+    if (!container) return;
 
-    var resultEl = el('salary-result');
-    var errorEl = el('salary-error');
-    var resetBtn = el('salary-reset');
+    var els = {
+      annual: el('shc-annual'),
+      hours: el('shc-hours'),
+      weeks: el('shc-weeks'),
+      kpiHourly: el('shc-kpi-hourly'),
+      kpiDaily: el('shc-kpi-daily'),
+      kpiWeekly: el('shc-kpi-weekly'),
+      statMonthly: el('shc-stat-monthly'),
+      statBiweekly: el('shc-stat-biweekly'),
+      barSalary: el('shc-bar-salary'),
+      barTax: el('shc-bar-tax'),
+      legendLabel: el('shc-legend-salary-label'),
+    };
 
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
+    if (!els.annual || !els.hours || !els.weeks) return;
 
-      var annual = parseFloat(el('salary-annual').value);
-      var hoursWk = parseFloat(el('salary-hours').value) || 40;
-      var weeksYr = parseFloat(el('salary-weeks').value) || 52;
+    var fmtCur = new Intl.NumberFormat('en-US', {
+      style: 'currency', currency: 'USD',
+      minimumFractionDigits: 2, maximumFractionDigits: 2,
+    });
 
-      if (isNaN(annual) || annual <= 0) return showError(resultEl, errorEl, 'Please enter a valid annual salary.');
+    function calculate() {
+      var annual = parseFloat(els.annual.value) || 0;
+      var hoursWk = parseFloat(els.hours.value) || 40;
+      var weeksYr = parseFloat(els.weeks.value) || 52;
+
+      if (annual <= 0 || hoursWk <= 0 || weeksYr <= 0) {
+        resetUI();
+        return;
+      }
 
       var totalHours = hoursWk * weeksYr;
       var hourly = annual / totalHours;
-      var monthly = annual / 12;
-      var weekly = annual / weeksYr;
       var daily = annual / (weeksYr * 5);
+      var weekly = annual / weeksYr;
+      var monthly = annual / 12;
+      var biweekly = annual / 26;
 
-      el('salary-hourly').textContent = fmtCurrency(hourly);
-      el('salary-daily').textContent = fmtCurrency(daily);
-      el('salary-weekly').textContent = fmtCurrency(weekly);
-      el('salary-monthly').textContent = fmtCurrency(monthly);
+      if (els.kpiHourly) els.kpiHourly.textContent = fmtCur.format(hourly);
+      if (els.kpiDaily) els.kpiDaily.textContent = fmtCur.format(daily);
+      if (els.kpiWeekly) els.kpiWeekly.textContent = fmtCur.format(weekly);
+      if (els.statMonthly) els.statMonthly.textContent = fmtCur.format(monthly);
+      if (els.statBiweekly) els.statBiweekly.textContent = fmtCur.format(biweekly);
 
-      showResult(resultEl, errorEl);
-      resetBtn && resetBtn.classList.add('is-visible');
+      var hrsPct = Math.min(Math.round((hoursWk / 168) * 100), 95);
+      if (els.barSalary) els.barSalary.style.width = (100 - hrsPct) + '%';
+      if (els.barTax) els.barTax.style.width = hrsPct + '%';
+      if (els.legendLabel) els.legendLabel.textContent =
+        'Annual ' + fmtCur.format(annual) + ' (' + Math.round(totalHours).toLocaleString() + ' hrs/yr)';
+    }
+
+    function resetUI() {
+      if (els.kpiHourly) els.kpiHourly.textContent = '$0.00';
+      if (els.kpiDaily) els.kpiDaily.textContent = '$0.00';
+      if (els.kpiWeekly) els.kpiWeekly.textContent = '$0.00';
+      if (els.statMonthly) els.statMonthly.textContent = '$0.00';
+      if (els.statBiweekly) els.statBiweekly.textContent = '$0.00';
+      if (els.barSalary) els.barSalary.style.width = '80%';
+      if (els.barTax) els.barTax.style.width = '20%';
+      if (els.legendLabel) els.legendLabel.textContent = 'Annual Salary';
+    }
+
+    [els.annual, els.hours, els.weeks].forEach(function (input) {
+      if (input) input.addEventListener('input', calculate);
     });
 
-    bindReset(resetBtn, form, resultEl, errorEl);
+    window.SHC = {
+      setSalary: function (val) { els.annual.value = val; calculate(); },
+      setHours: function (val) { els.hours.value = val; calculate(); },
+      setWeeks: function (val) { els.weeks.value = val; calculate(); },
+    };
+
+    calculate();
   }
 
   /* ============================================================

@@ -4,111 +4,346 @@
      Primary keyword: "salary to hourly converter"
      RankMath Title: Salary to Hourly Converter — Annual to Hourly Pay Calculator | ToolsHub
      RankMath Meta: Convert any annual salary to hourly, daily, weekly, and monthly pay. Free salary-to-hourly converter — customize hours per week and weeks per year.
+     CSS: theme/assets/css/tools.css (classes .shc-*)
+     JS:  theme/assets/js/calculators.js (initSalaryConverter)
      ============================================================ -->
 
-<h1>Salary to Hourly Converter — Convert Annual Pay to Hourly Rate</h1>
+<div class="lpc-wrap">
 
-<p>Use our free <strong>salary to hourly converter</strong> to instantly see what any annual salary equals per hour, day, week, and month. Customize your hours per week and working weeks per year for accurate results — whether you work a standard 40-hour week or a different schedule.</p>
+<!-- ══════════════════════════════════════════════
+     TOOL HERO
+     ══════════════════════════════════════════════ -->
+<section class="lpc-hero">
+  <div class="th-container">
+    <div class="lpc-hero__inner">
 
-[ad_slot position="header"]
+      <div class="lpc-hero__text">
+        <div class="lpc-hero__eyebrow">
+          <span class="lpc-hero__eyebrow-line"></span>
+          Finance · Free Tool
+        </div>
+        <h1 class="lpc-hero__title">
+          Salary to Hourly Converter<br>
+          <span>Annual Pay to Hourly Rate</span>
+        </h1>
+        <p class="lpc-hero__desc">
+          Our free <strong>salary to hourly converter</strong> instantly shows what any annual salary equals per hour, day, week, and month. Customize hours per week and working weeks per year for a precise result — whether you work a standard 40-hour week or a flexible schedule.
+        </p>
+      </div>
 
-<div class="tool-card">
-  <h2>Salary to Hourly Converter</h2>
-  <form id="salary-form">
-    <div class="tool-group">
-      <label for="salary-annual">Annual Salary ($)</label>
-      <input type="number" id="salary-annual" placeholder="e.g. 65000" min="1" step="any" required>
+      <div class="lpc-hero__badges">
+        <div class="lpc-badge lpc-badge--blue">
+          <span class="lpc-badge__number">💼</span>
+          <span class="lpc-badge__label">Salary Tool</span>
+        </div>
+        <div class="lpc-badge lpc-badge--dark">
+          <span class="lpc-badge__number">100%</span>
+          <span class="lpc-badge__label">Free &amp;</span>
+          <span class="lpc-badge__sublabel">Private</span>
+        </div>
+      </div>
+
     </div>
-    <div class="tool-group">
-      <label for="salary-hours">Hours Worked per Week</label>
-      <input type="number" id="salary-hours" placeholder="40" min="1" max="168" step="any" value="40">
-    </div>
-    <div class="tool-group">
-      <label for="salary-weeks">Weeks Worked per Year</label>
-      <input type="number" id="salary-weeks" placeholder="52" min="1" max="52" step="any" value="52">
-    </div>
-    <button type="submit" class="tool-btn">Convert Salary</button>
-  </form>
-
-  <div id="salary-error" class="tool-error"></div>
-
-  <div id="salary-result" class="tool-result">
-    <div class="tool-result__label">Hourly Rate</div>
-    <div class="tool-result__value" id="salary-hourly">—</div>
-    <div class="tool-result__breakdown">
-      <strong>Daily (8h):</strong> <span id="salary-daily">—</span><br>
-      <strong>Weekly:</strong> <span id="salary-weekly">—</span><br>
-      <strong>Monthly (÷12):</strong> <span id="salary-monthly">—</span>
-    </div>
   </div>
+</section>
 
-  <button id="salary-reset" class="tool-reset">Reset</button>
-</div>
-
-[ad_slot position="mid"]
-
-<h2>How to Convert Salary to Hourly Rate</h2>
-<p>The standard <strong>salary to hourly</strong> conversion formula uses 2,080 hours as the baseline (40 hours × 52 weeks):</p>
-
-<div class="tool-formula">
-  Standard Formula (40hr/52wk):<br>
-  Hourly Rate = Annual Salary ÷ 2,080<br><br>
-  Custom Formula:<br>
-  Total Hours/Year = Hours per Week × Weeks per Year<br>
-  Hourly Rate = Annual Salary ÷ Total Hours per Year<br><br>
-  Examples:<br>
-  $50,000 ÷ 2,080 = $24.04/hr<br>
-  $75,000 ÷ 2,080 = $36.06/hr<br>
-  $100,000 ÷ 2,080 = $48.08/hr
-</div>
-
-<h2>Quick Salary Reference Table</h2>
-<ul>
-  <li><strong>$35,000/year</strong> → $16.83/hr | $1,346/biweekly | $2,917/month</li>
-  <li><strong>$45,000/year</strong> → $21.63/hr | $1,731/biweekly | $3,750/month</li>
-  <li><strong>$55,000/year</strong> → $26.44/hr | $2,115/biweekly | $4,583/month</li>
-  <li><strong>$65,000/year</strong> → $31.25/hr | $2,500/biweekly | $5,417/month</li>
-  <li><strong>$80,000/year</strong> → $38.46/hr | $3,077/biweekly | $6,667/month</li>
-  <li><strong>$100,000/year</strong> → $48.08/hr | $3,846/biweekly | $8,333/month</li>
-</ul>
-<p><em>Based on 40 hr/week, 52 weeks/year. Before taxes.</em></p>
-
-<h2>Related Tools</h2>
-<ul>
-  <li><a href="/percentage-calculator/"><strong>Percentage Calculator</strong></a> — Calculate the percentage difference between two salaries or a raise amount.</li>
-  <li><a href="/loan-payment-calculator/"><strong>Loan Payment Calculator</strong></a> — Understand what mortgage you can afford based on your salary.</li>
-  <li><a href="/discount-calculator/"><strong>Discount Calculator</strong></a> — Calculate your take-home pay after deductions.</li>
-</ul>
-
-<div class="tool-faq">
-  <h2>Frequently Asked Questions</h2>
-
-  <div class="tool-faq__item">
-    <div class="tool-faq__question">How do I convert my annual salary to an hourly rate?</div>
-    <div class="tool-faq__answer">Divide your annual salary by 2,080 (the standard number of working hours in a year: 40 hours × 52 weeks). For example, $60,000 ÷ 2,080 = $28.85 per hour. If you work a different number of hours, adjust the hours per week in the calculator above.</div>
-  </div>
-
-  <div class="tool-faq__item">
-    <div class="tool-faq__question">What is $20 an hour annually?</div>
-    <div class="tool-faq__answer">$20 per hour × 2,080 hours = $41,600 per year before taxes. Monthly that's approximately $3,467. Note: this doesn't account for federal, state, or local taxes, Social Security, or Medicare deductions.</div>
-  </div>
-
-  <div class="tool-faq__item">
-    <div class="tool-faq__question">Does this include taxes?</div>
-    <div class="tool-faq__answer">No — this converter shows gross pay only (before taxes). Your actual take-home pay depends on your federal income tax bracket, state income taxes, Social Security (6.2%), Medicare (1.45%), and any other deductions like 401(k) contributions or health insurance premiums. Use a payroll tax calculator for net pay estimates.</div>
-  </div>
-
-  <div class="tool-faq__item">
-    <div class="tool-faq__question">What salary do I need to earn $30 per hour?</div>
-    <div class="tool-faq__answer">$30/hour × 2,080 hours = $62,400 per year. If you work part-time or fewer weeks, multiply your hourly rate by your actual hours worked per year for your specific situation.</div>
-  </div>
-
-  <div class="tool-faq__item">
-    <div class="tool-faq__question">How do I compare a salary job offer to an hourly job offer?</div>
-    <div class="tool-faq__answer">Convert the salaried offer to hourly using this tool, then compare. But also consider: benefits (health insurance, 401k match, PTO) which can be worth $5,000–$20,000+/year, overtime potential for hourly positions, and job stability differences. Total compensation matters more than base salary alone.</div>
+<!-- ══════════════════════════════════════════════
+     AD — LEADERBOARD
+     ══════════════════════════════════════════════ -->
+<div class="th-container">
+  <div class="ad-leaderboard">
+    <span class="ad-label">Advertisement</span>
+    [ad_slot position="header"]
   </div>
 </div>
 
-<p><small>⚠️ <strong>Disclaimer:</strong> Figures shown are gross (pre-tax) estimates only. Tax obligations vary by jurisdiction. See our <a href="/disclaimer/">full Disclaimer</a>.</small></p>
+<!-- ══════════════════════════════════════════════
+     CALCULATOR UI
+     ══════════════════════════════════════════════ -->
+<section>
+  <div class="shc-calculator" id="shc-salary-calculator">
 
-[ad_slot position="footer"]
+    <!-- Header -->
+    <header class="shc-header">
+      <div class="shc-header-icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+          <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+        </svg>
+      </div>
+      <div>
+        <h2 class="shc-title">Salary to Hourly <span style="color: var(--shc-primary);">Converter</span></h2>
+        <p class="shc-subtitle">Pay Rate Conversion Tool</p>
+      </div>
+    </header>
+
+    <!-- Main Layout: Sidebar + Panel -->
+    <div class="shc-layout">
+
+      <!-- Sidebar: Inputs -->
+      <aside class="shc-sidebar" aria-label="Salary parameters">
+        <div class="shc-glass-card">
+          <h3 class="shc-section-label">Salary Parameters</h3>
+          <div class="shc-field-stack">
+
+            <div class="shc-input-group">
+              <label class="shc-label-tech" for="shc-annual">Annual Salary ($)</label>
+              <input type="number" id="shc-annual" class="shc-input-field" placeholder="65000" min="1" step="any" autocomplete="off">
+              <div class="shc-presets">
+                <button type="button" class="shc-preset-btn" onclick="SHC.setSalary(50000)">$50k</button>
+                <button type="button" class="shc-preset-btn" onclick="SHC.setSalary(75000)">$75k</button>
+                <button type="button" class="shc-preset-btn" onclick="SHC.setSalary(100000)">$100k</button>
+              </div>
+            </div>
+
+            <div class="shc-input-group">
+              <label class="shc-label-tech" for="shc-hours">Hours per Week</label>
+              <input type="number" id="shc-hours" class="shc-input-field" placeholder="40" min="1" max="168" step="any" value="40" autocomplete="off">
+              <div class="shc-presets">
+                <button type="button" class="shc-preset-btn" onclick="SHC.setHours(20)">20h</button>
+                <button type="button" class="shc-preset-btn" onclick="SHC.setHours(32)">32h</button>
+                <button type="button" class="shc-preset-btn" onclick="SHC.setHours(40)">40h</button>
+              </div>
+            </div>
+
+            <div class="shc-input-group">
+              <label class="shc-label-tech" for="shc-weeks">Weeks per Year</label>
+              <input type="number" id="shc-weeks" class="shc-input-field" placeholder="52" min="1" max="52" step="any" value="52" autocomplete="off">
+              <div class="shc-presets">
+                <button type="button" class="shc-preset-btn" onclick="SHC.setWeeks(48)">48 wk</button>
+                <button type="button" class="shc-preset-btn" onclick="SHC.setWeeks(50)">50 wk</button>
+                <button type="button" class="shc-preset-btn" onclick="SHC.setWeeks(52)">52 wk</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </aside>
+
+      <!-- Panel: Results -->
+      <main class="shc-panel" aria-label="Calculation results">
+
+        <!-- KPI Cards -->
+        <div class="shc-kpi-row">
+          <div class="shc-kpi-card shc-kpi-card--primary">
+            <span class="shc-kpi-label">Hourly Rate</span>
+            <strong class="shc-kpi-value shc-kpi-value--primary" id="shc-kpi-hourly">$0.00</strong>
+          </div>
+          <div class="shc-kpi-card shc-kpi-card--green">
+            <span class="shc-kpi-label">Daily (8h)</span>
+            <strong class="shc-kpi-value shc-kpi-value--green" id="shc-kpi-daily">$0.00</strong>
+          </div>
+          <div class="shc-kpi-card shc-kpi-card--amber">
+            <span class="shc-kpi-label">Weekly</span>
+            <strong class="shc-kpi-value shc-kpi-value--amber" id="shc-kpi-weekly">$0.00</strong>
+          </div>
+        </div>
+
+        <!-- Impact Panel -->
+        <div class="shc-impact-panel">
+          <div class="shc-impact-content">
+            <div class="shc-impact-left">
+              <div class="shc-impact-badge">
+                <span class="shc-impact-badge-dot"></span>
+                <span>Live Estimate</span>
+              </div>
+              <h3 class="shc-impact-title">Pay Rate Summary</h3>
+              <p class="shc-impact-desc">Gross pay only — before taxes and deductions. Actual take-home varies by tax bracket and location.</p>
+            </div>
+            <div class="shc-impact-stats">
+              <div class="shc-impact-stat">
+                <p class="shc-impact-stat-label">Monthly</p>
+                <p class="shc-impact-stat-value" id="shc-stat-monthly">$0.00</p>
+              </div>
+              <div class="shc-impact-stat">
+                <p class="shc-impact-stat-label">Biweekly</p>
+                <p class="shc-impact-stat-value" id="shc-stat-biweekly">$0.00</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Visual Breakdown -->
+        <div class="shc-breakdown-card">
+          <h4 class="shc-breakdown-title">Pay Period Breakdown</h4>
+          <div class="shc-breakdown-bar" aria-hidden="true">
+            <div class="shc-breakdown-segment shc-breakdown-segment--salary" id="shc-bar-salary" style="width: 80%;"></div>
+            <div class="shc-breakdown-segment shc-breakdown-segment--tax" id="shc-bar-tax" style="width: 20%;"></div>
+          </div>
+          <div class="shc-breakdown-legend">
+            <div class="shc-legend-item">
+              <span class="shc-legend-dot shc-legend-dot--salary"></span>
+              <span id="shc-legend-salary-label">Annual Salary</span>
+            </div>
+            <div class="shc-legend-item">
+              <span class="shc-legend-dot shc-legend-dot--tax"></span>
+              <span>Hours per Week</span>
+            </div>
+          </div>
+        </div>
+
+      </main>
+    </div>
+
+    <!-- Bottom Ad Placeholder -->
+    <div class="shc-ad-slot" aria-hidden="true"></div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     MAIN CONTENT
+     ══════════════════════════════════════════════ -->
+<section class="ab-mission">
+  <div class="th-container">
+    <div class="lpc-content-grid">
+
+      <!-- Left 2/3: article content -->
+      <div>
+
+        <!-- MID CONTENT AD -->
+        <div class="ad-infeed" style="margin:0 0 2rem;">
+          <span class="ad-label">Advertisement</span>
+          [ad_slot position="mid"]
+        </div>
+
+        <!-- HOW IT WORKS -->
+        <h2 class="ab-section-title">Salary Conversion Formula</h2>
+        <p class="ab-section-subtitle">This converter uses three simple formulas to break down your annual salary into every pay period:</p>
+
+        <div class="tool-formula-pro">
+          <div class="tfp-header">
+            <span class="tfp-badge">∑ Formula</span>
+            <span class="tfp-title">Salary to Hourly Conversion</span>
+          </div>
+          <div class="tfp-equation">
+            <span class="tfp-var tfp-result">Hourly</span>
+            <span class="tfp-equals">=</span>
+            <div class="tfp-fraction">
+              <div class="tfp-numerator">Annual Salary</div>
+              <div class="tfp-denominator">Hours/wk × Weeks/yr</div>
+            </div>
+          </div>
+          <div class="tfp-equation" style="margin-top:1rem;">
+            <span class="tfp-var tfp-result">Monthly</span>
+            <span class="tfp-equals">=</span>
+            <div class="tfp-fraction">
+              <div class="tfp-numerator">Annual Salary</div>
+              <div class="tfp-denominator">12</div>
+            </div>
+          </div>
+          <div class="tfp-equation" style="margin-top:1rem;">
+            <span class="tfp-var tfp-result">Daily</span>
+            <span class="tfp-equals">=</span>
+            <div class="tfp-fraction">
+              <div class="tfp-numerator">Annual Salary</div>
+              <div class="tfp-denominator">Weeks/yr × 5</div>
+            </div>
+          </div>
+          <div class="tfp-legend">
+            <div class="tfp-legend-item">
+              <span class="tfp-legend-var">Standard</span>
+              <span class="tfp-legend-desc">40 hrs/week × 52 weeks = 2,080 hours/year</span>
+            </div>
+            <div class="tfp-legend-item">
+              <span class="tfp-legend-var">Example</span>
+              <span class="tfp-legend-desc">$65,000 ÷ 2,080 = <strong>$31.25/hr</strong> &nbsp;|&nbsp; ÷ 12 = <strong>$5,417/mo</strong></span>
+            </div>
+          </div>
+        </div>
+
+        <h2>Quick Salary Reference Table</h2>
+        <ul>
+          <li><strong>$35,000/year</strong> → $16.83/hr | $1,346/biweekly | $2,917/month</li>
+          <li><strong>$45,000/year</strong> → $21.63/hr | $1,731/biweekly | $3,750/month</li>
+          <li><strong>$55,000/year</strong> → $26.44/hr | $2,115/biweekly | $4,583/month</li>
+          <li><strong>$65,000/year</strong> → $31.25/hr | $2,500/biweekly | $5,417/month</li>
+          <li><strong>$80,000/year</strong> → $38.46/hr | $3,077/biweekly | $6,667/month</li>
+          <li><strong>$100,000/year</strong> → $48.08/hr | $3,846/biweekly | $8,333/month</li>
+        </ul>
+        <p><em>Based on 40 hr/week, 52 weeks/year. Before taxes.</em></p>
+
+        <!-- INTERNAL LINKS -->
+        <h2>Related Tools</h2>
+        <ul>
+          <li><a href="/percentage-calculator/"><strong>Percentage Calculator</strong></a> — Calculate the percentage difference between two salaries or a raise amount.</li>
+          <li><a href="/loan-payment-calculator/"><strong>Loan Payment Calculator</strong></a> — Understand what mortgage you can afford based on your salary.</li>
+          <li><a href="/discount-calculator/"><strong>Discount Calculator</strong></a> — Calculate your take-home pay after deductions.</li>
+        </ul>
+
+        <!-- FAQ SECTION -->
+        <div class="tool-faq">
+          <h2>Frequently Asked Questions</h2>
+
+          <div class="tool-faq__item">
+            <div class="tool-faq__question">How do I convert my annual salary to an hourly rate?</div>
+            <div class="tool-faq__answer">Divide your annual salary by 2,080 (the standard number of working hours in a year: 40 hours × 52 weeks). For example, $60,000 ÷ 2,080 = $28.85 per hour. If you work a different number of hours, adjust the hours per week in the calculator above.</div>
+          </div>
+
+          <div class="tool-faq__item">
+            <div class="tool-faq__question">What is $20 an hour annually?</div>
+            <div class="tool-faq__answer">$20 per hour × 2,080 hours = $41,600 per year before taxes. Monthly that's approximately $3,467. Note: this doesn't account for federal, state, or local taxes, Social Security, or Medicare deductions.</div>
+          </div>
+
+          <div class="tool-faq__item">
+            <div class="tool-faq__question">Does this include taxes?</div>
+            <div class="tool-faq__answer">No — this converter shows gross pay only (before taxes). Your actual take-home pay depends on your federal income tax bracket, state income taxes, Social Security (6.2%), Medicare (1.45%), and any other deductions like 401(k) contributions or health insurance premiums. Use a payroll tax calculator for net pay estimates.</div>
+          </div>
+
+          <div class="tool-faq__item">
+            <div class="tool-faq__question">What salary do I need to earn $30 per hour?</div>
+            <div class="tool-faq__answer">$30/hour × 2,080 hours = $62,400 per year. If you work part-time or fewer weeks, multiply your hourly rate by your actual hours worked per year for your specific situation.</div>
+          </div>
+
+          <div class="tool-faq__item">
+            <div class="tool-faq__question">How do I compare a salary job offer to an hourly job offer?</div>
+            <div class="tool-faq__answer">Convert the salaried offer to hourly using this tool, then compare. But also consider: benefits (health insurance, 401k match, PTO) which can be worth $5,000–$20,000+/year, overtime potential for hourly positions, and job stability differences. Total compensation matters more than base salary alone.</div>
+          </div>
+        </div>
+
+        <p><small>⚠️ <strong>Disclaimer:</strong> Figures shown are gross (pre-tax) estimates only. Tax obligations vary by jurisdiction. See our <a href="/disclaimer/">full Disclaimer</a>.</small></p>
+
+      </div>
+
+      <!-- Right 1/3: ad + callout -->
+      <div class="ab-sidebar">
+
+        <div class="ad-sidebar">
+          <span class="ad-label">Advertisement</span>
+          <span class="ad-placeholder-text">Ad Space</span>
+          [ad_slot position="sidebar"]
+        </div>
+
+        <div class="lpc-sidebar-card">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          <p class="lpc-sidebar-card__title">100% Private</p>
+          <p class="lpc-sidebar-card__text">Your salary data is never stored or sent to any server. All calculations happen instantly in your browser.</p>
+        </div>
+
+        <div class="ab-callout">
+          <span class="ab-callout__icon">💡</span>
+          <div class="ab-callout__title">Pro Tip</div>
+          <p class="ab-callout__text">
+            Negotiating a raise? Enter your target annual salary above to instantly see the hourly equivalent — a powerful comparison when switching from hourly to salaried work.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     AD — FOOTER
+     ══════════════════════════════════════════════ -->
+<section class="ab-policy" style="padding:3rem 0;">
+  <div class="th-container">
+    <div class="ad-leaderboard">
+      <span class="ad-label">Advertisement</span>
+      [ad_slot position="footer"]
+    </div>
+  </div>
+</section>
+
+</div><!-- /.lpc-wrap -->

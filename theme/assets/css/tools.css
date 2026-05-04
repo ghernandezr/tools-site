@@ -4002,3 +4002,436 @@ nav .sub-menu a {
 .ccc-animate-in {
   animation: ccc-fade-in 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
+
+
+/* =============================================================
+   TOOL 4 — SALARY TO HOURLY CONVERTER (shc-*)
+   Matches fcc-* design system · Finance / Indigo-Blue palette
+   ============================================================= */
+
+/* ─── Custom Properties ───────────────────────────────────────────────────── */
+.shc-calculator {
+  --shc-primary:       #2563eb;
+  --shc-primary-dark:  #1d4ed8;
+  --shc-primary-light: #dbeafe;
+  --shc-green:         #10b981;
+  --shc-green-light:   #d1fae5;
+  --shc-amber:         #f59e0b;
+  --shc-amber-light:   #fef3c7;
+  --shc-text:          #1e293b;
+  --shc-text-muted:    #64748b;
+  --shc-text-light:    #94a3b8;
+  --shc-border:        #e2e8f0;
+  --shc-bg:            #f8fafc;
+  --shc-bg-card:       #ffffff;
+  --shc-radius:        0.5rem;
+  --shc-radius-lg:     1rem;
+  --shc-radius-xl:     1.5rem;
+  --shc-shadow:        0 4px 20px -4px rgb(0 0 0 / 0.08);
+  --shc-shadow-lg:     0 16px 40px -8px rgba(37, 99, 235, 0.25);
+  --shc-font:          inherit;
+  --shc-transition:    200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─── Calculator Container ────────────────────────────────────────────────── */
+.shc-calculator {
+  font-family: var(--shc-font);
+  color: var(--shc-text);
+  background: radial-gradient(circle at top right, #f8fafc, #eff6ff);
+  padding: 1rem;
+  width: 100%;
+  margin: 0 0 2rem;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+@media (min-width: 640px) {
+  .shc-calculator { padding: 1.5rem; }
+}
+
+/* ─── Header ──────────────────────────────────────────────────────────────── */
+.shc-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.shc-header-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  background: var(--shc-primary);
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgb(37 99 235 / 0.35);
+}
+
+.shc-title {
+  font-size: 1.2rem;
+  font-weight: 800;
+  margin: 0 0 0.1rem;
+  color: var(--shc-text);
+  line-height: 1.2;
+}
+
+.shc-subtitle {
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--shc-text-light);
+  margin: 0;
+}
+
+/* ─── Layout Grid ─────────────────────────────────────────────────────────── */
+.shc-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+@media (min-width: 900px) {
+  .shc-layout {
+    display: grid;
+    grid-template-columns: 5fr 8fr;
+    align-items: start;
+  }
+}
+
+/* ─── Glass Card ───────────────────────────────────────────────────────────── */
+.shc-glass-card {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: var(--shc-shadow);
+  border-radius: var(--shc-radius-xl);
+  padding: 1.5rem;
+}
+
+/* ─── Section Labels ──────────────────────────────────────────────────────── */
+.shc-section-label {
+  font-size: 0.6rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--shc-primary);
+  margin: 0 0 1rem;
+}
+
+/* ─── Input Groups ────────────────────────────────────────────────────────── */
+.shc-field-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.shc-input-group {
+  background: #fff;
+  border: 1px solid var(--shc-border);
+  border-radius: var(--shc-radius-lg);
+  padding: 0.625rem 0.875rem;
+  transition: border-color var(--shc-transition), box-shadow var(--shc-transition);
+}
+
+.shc-input-group:focus-within {
+  border-color: var(--shc-primary);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+}
+
+.shc-label-tech {
+  display: block;
+  font-size: 0.6rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--shc-text-light);
+  margin-bottom: 0.25rem;
+}
+
+.shc-input-field {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--shc-text);
+  padding: 0;
+  margin: 0;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.shc-input-field::-webkit-inner-spin-button,
+.shc-input-field::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+.shc-input-field::placeholder {
+  color: var(--shc-text-light);
+  font-weight: 400;
+}
+
+/* ─── Quick Presets ───────────────────────────────────────────────────────── */
+.shc-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.shc-preset-btn {
+  padding: 0.35rem 0.75rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--shc-text-muted);
+  background: #f1f5f9;
+  border: 1px solid var(--shc-border);
+  border-radius: var(--shc-radius);
+  cursor: pointer;
+  transition: all var(--shc-transition);
+}
+
+.shc-preset-btn:hover {
+  background: var(--shc-primary-light);
+  border-color: var(--shc-primary);
+  color: var(--shc-primary);
+}
+
+/* ─── KPI Cards ───────────────────────────────────────────────────────────── */
+.shc-kpi-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.875rem;
+  margin-bottom: 1.25rem;
+}
+
+@media (min-width: 560px) {
+  .shc-kpi-row {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.shc-kpi-card {
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: var(--shc-radius-xl);
+  padding: 1.1rem 1.25rem;
+  box-shadow: var(--shc-shadow);
+  border-left-width: 4px;
+  border-left-style: solid;
+  transition: transform var(--shc-transition);
+}
+
+.shc-kpi-card:hover {
+  transform: translateY(-2px);
+}
+
+.shc-kpi-card--primary { border-left-color: var(--shc-primary); }
+.shc-kpi-card--green   { border-left-color: var(--shc-green); }
+.shc-kpi-card--amber   { border-left-color: var(--shc-amber); }
+
+.shc-kpi-label {
+  display: block;
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--shc-text-light);
+  margin-bottom: 0.25rem;
+}
+
+.shc-kpi-value {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--shc-text);
+  line-height: 1.1;
+}
+
+.shc-kpi-value--primary { color: var(--shc-primary); }
+.shc-kpi-value--green   { color: var(--shc-green); }
+.shc-kpi-value--amber   { color: var(--shc-amber); }
+
+/* ─── Impact Panel ────────────────────────────────────────────────────────── */
+.shc-impact-panel {
+  background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 50%, #4f46e5 100%);
+  border-radius: 1.75rem;
+  padding: 1.75rem;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shc-shadow-lg);
+  margin-bottom: 1.25rem;
+}
+
+.shc-impact-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+@media (min-width: 600px) {
+  .shc-impact-content {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.shc-impact-left { flex: 1; }
+
+.shc-impact-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 9999px;
+  padding: 0.2rem 0.75rem;
+  font-size: 0.55rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.75rem;
+  backdrop-filter: blur(8px);
+}
+
+.shc-impact-badge-dot {
+  width: 0.4rem;
+  height: 0.4rem;
+  background: #fbbf24;
+  border-radius: 50%;
+}
+
+.shc-impact-title {
+  font-size: 1.25rem;
+  font-weight: 900;
+  margin: 0 0 0.5rem;
+  line-height: 1.2;
+}
+
+.shc-impact-desc {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: rgba(219, 234, 254, 0.85);
+  margin: 0;
+}
+
+.shc-impact-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.875rem;
+  flex-shrink: 0;
+}
+
+.shc-impact-stat {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 1rem;
+  padding: 1rem 1.1rem;
+  backdrop-filter: blur(8px);
+}
+
+.shc-impact-stat-label {
+  font-size: 0.55rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(191, 219, 254, 0.9);
+  margin: 0 0 0.2rem;
+}
+
+.shc-impact-stat-value {
+  font-size: 1.1rem;
+  font-weight: 900;
+  margin: 0 0 0.2rem;
+}
+
+/* ─── Visual Breakdown ────────────────────────────────────────────────────── */
+.shc-breakdown-card {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: var(--shc-shadow);
+  border-radius: var(--shc-radius-xl);
+  padding: 1.5rem;
+}
+
+.shc-breakdown-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--shc-text-muted);
+  margin: 0 0 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.shc-breakdown-bar {
+  height: 2rem;
+  background: #e2e8f0;
+  border-radius: var(--shc-radius);
+  overflow: hidden;
+  display: flex;
+  margin-bottom: 1rem;
+}
+
+.shc-breakdown-segment {
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.shc-breakdown-segment--salary { background: var(--shc-primary); }
+.shc-breakdown-segment--tax    { background: var(--shc-amber); }
+
+.shc-breakdown-legend {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.shc-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--shc-text-muted);
+}
+
+.shc-legend-dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 3px;
+}
+
+.shc-legend-dot--salary { background: var(--shc-primary); }
+.shc-legend-dot--tax    { background: var(--shc-amber); }
+
+/* ─── Ad Placeholder ──────────────────────────────────────────────────────── */
+.shc-ad-slot {
+  margin: 1.25rem 0;
+  text-align: center;
+  min-height: 1px;
+}
+
+/* ─── Mobile Touch Fixes ──────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .shc-input-field { font-size: 1rem; }
+}
+
+/* ─── Animation ─────────────────────────────────────────────────────────────── */
+@keyframes shc-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.shc-animate-in {
+  animation: shc-fade-in 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
