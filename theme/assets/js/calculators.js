@@ -18,6 +18,14 @@
     });
   }
 
+  function fmtUnit(n, maxDec) {
+    if (isNaN(n) || !isFinite(n)) return 'N/A';
+    return Number(n).toLocaleString('en-US', {
+      minimumFractionDigits: 0,
+      maximumFractionDigits: maxDec !== undefined ? maxDec : 4,
+    });
+  }
+
   function fmtCurrency(n) {
     if (isNaN(n) || !isFinite(n)) return 'N/A';
     return '$' + fmt(n, 2);
@@ -26,7 +34,8 @@
   // Export utilities for testing
   window.ToolsHubUtils = {
     fmt: fmt,
-    fmtCurrency: fmtCurrency
+    fmtCurrency: fmtCurrency,
+    fmtUnit: fmtUnit
   };
 
   /* ============================================================
@@ -201,29 +210,30 @@
   window.convertUnit = function (type, value, mode) {
     if (isNaN(value)) return { error: 'invalid_value' };
     var result, label;
+    var r4 = function (n) { return Math.round(n * 10000) / 10000; };
     if (type === 'length') {
       if (mode === 'km-to-mi') {
         result = value * 0.621371;
-        label = value + ' km = ' + result + ' miles';
+        label = value + ' km = ' + r4(result) + ' miles';
       } else {
         result = value * 1.60934;
-        label = value + ' miles = ' + result + ' km';
+        label = value + ' miles = ' + r4(result) + ' km';
       }
     } else if (type === 'weight') {
       if (mode === 'kg-to-lbs') {
         result = value * 2.20462;
-        label = value + ' kg = ' + result + ' lbs';
+        label = value + ' kg = ' + r4(result) + ' lbs';
       } else {
         result = value * 0.453592;
-        label = value + ' lbs = ' + result + ' kg';
+        label = value + ' lbs = ' + r4(result) + ' kg';
       }
     } else if (type === 'temp') {
       if (mode === 'c-to-f') {
         result = (value * 9 / 5) + 32;
-        label = value + '°C = ' + result + '°F';
+        label = value + '°C = ' + r4(result) + '°F';
       } else {
         result = (value - 32) * 5 / 9;
-        label = value + '°F = ' + result + '°C';
+        label = value + '°F = ' + r4(result) + '°C';
       }
     } else {
       return { error: 'invalid_type' };
@@ -231,6 +241,9 @@
     return { result: result, label: label };
   };
 
+  /* ============================================================
+     Utility helpers for UI (moved to root IIFE level)
+  ============================================================ */
   function el(id) {
     return document.getElementById(id);
   }
@@ -263,6 +276,28 @@
       errorEl && errorEl.classList.remove('is-visible');
       resetBtn.classList.remove('is-visible');
     });
+  }
+
+  /* ---- Performance: Debounce for input events ---- */
+  function debounce(fn, delay) {
+    var timeout;
+    return function () {
+      var context = this, args = arguments;
+      clearTimeout(timeout);
+      timeout = setTimeout(function () { fn.apply(context, args); }, delay);
+    };
+  }
+
+  /* ---- Performance: Throttle for scroll/resize ---- */
+  function throttle(fn, limit) {
+    var inThrottle;
+    return function () {
+      if (!inThrottle) {
+        fn.apply(this, arguments);
+        inThrottle = true;
+        setTimeout(function () { inThrottle = false; }, limit);
+      }
+    };
   }
 
   document.addEventListener('wheel', function (e) {
@@ -404,9 +439,9 @@
     });
     if (resetBtn) resetBtn.addEventListener('click', lpcReset);
     [inputPrincipal, inputRate, inputYears].forEach(function (input) {
-      if (input) input.addEventListener('input', function () {
+      if (input) input.addEventListener('input', debounce(function () {
         lpcCalculate();
-      });
+      }, 150));
     });
 
     lpcCalculate();
@@ -530,11 +565,12 @@
       els.legendInterestPct.textContent = Math.round(interestPct) + '%';
     }
 
-    // Event listeners
+    // Event listeners (debounced for performance)
+    var debouncedCalc = debounce(calculate, 150);
     [els.balance, els.apr, els.payment].forEach(function (input) {
       if (input) {
-        input.addEventListener('input', calculate);
-        input.addEventListener('change', calculate);
+        input.addEventListener('input', debouncedCalc);
+        input.addEventListener('change', calculate); // immediate on change
       }
     });
 
@@ -620,10 +656,11 @@
       el('cic-legend-interest-pct').textContent = 'Interest Earned (' + interestPct + '%)';
     }
 
-    principalEl.addEventListener('input', calcCIC);
-    rateEl.addEventListener('input', calcCIC);
+    var debouncedCalcCIC = debounce(calcCIC, 150);
+    principalEl.addEventListener('input', debouncedCalcCIC);
+    rateEl.addEventListener('input', debouncedCalcCIC);
     frequencyEl.addEventListener('change', calcCIC);
-    yearsEl.addEventListener('input', calcCIC);
+    yearsEl.addEventListener('input', debouncedCalcCIC);
   }
 
   window.CIC = {
@@ -704,7 +741,7 @@
     }
 
     [els.annual, els.hours, els.weeks].forEach(function (input) {
-      if (input) input.addEventListener('input', calculate);
+      if (input) input.addEventListener('input', debounce(calculate, 150));
     });
 
     window.SHC = {
@@ -810,7 +847,7 @@
     });
 
     [els.bill, els.custom, els.people].forEach(function (input) {
-      if (input) input.addEventListener('input', calculate);
+      if (input) input.addEventListener('input', debounce(calculate, 150));
     });
 
     window.TC = {
@@ -950,8 +987,8 @@
     }
 
     els.mode.addEventListener('change', updateMode);
-    els.inputA.addEventListener('input', calculate);
-    els.inputB.addEventListener('input', calculate);
+    els.inputA.addEventListener('input', debounce(calculate, 150));
+    els.inputB.addEventListener('input', debounce(calculate, 150));
 
     updateMode();
   }
@@ -1034,7 +1071,7 @@
     }
 
     [els.original, els.percent].forEach(function (input) {
-      if (input) input.addEventListener('input', calculate);
+      if (input) input.addEventListener('input', debounce(calculate, 150));
     });
 
     window.DSC = {
@@ -1124,9 +1161,9 @@
       if (els.barReserve) els.barReserve.style.width = '25%';
     }
 
-    // Event binding - real-time calculation
+    // Event binding - real-time calculation (debounced for performance)
     [els.distance, els.mpg, els.price].forEach(function (input) {
-      if (input) input.addEventListener('input', calculate);
+      if (input) input.addEventListener('input', debounce(calculate, 150));
     });
 
     // Preset helpers (exposed globally)
@@ -1241,13 +1278,13 @@
         if (isNaN(value)) { resetUI(); return; }
         if (mode === 'km-to-mi') {
           result = value * 0.621371;
-          fromLabel = fmt(value, 4) + ' km';
-          toLabel = fmt(result, 4) + ' mi';
+          fromLabel = fmtUnit(value) + ' km';
+          toLabel = fmtUnit(result) + ' mi';
           formulaLabel = '× 0.621371';
         } else {
           result = value * 1.60934;
-          fromLabel = fmt(value, 4) + ' mi';
-          toLabel = fmt(result, 4) + ' km';
+          fromLabel = fmtUnit(value) + ' mi';
+          toLabel = fmtUnit(result) + ' km';
           formulaLabel = '× 1.60934';
         }
 
@@ -1257,13 +1294,13 @@
         if (isNaN(value)) { resetUI(); return; }
         if (mode === 'kg-to-lbs') {
           result = value * 2.20462;
-          fromLabel = fmt(value, 4) + ' kg';
-          toLabel = fmt(result, 4) + ' lbs';
+          fromLabel = fmtUnit(value) + ' kg';
+          toLabel = fmtUnit(result) + ' lbs';
           formulaLabel = '× 2.20462';
         } else {
           result = value * 0.453592;
-          fromLabel = fmt(value, 4) + ' lbs';
-          toLabel = fmt(result, 4) + ' kg';
+          fromLabel = fmtUnit(value) + ' lbs';
+          toLabel = fmtUnit(result) + ' kg';
           formulaLabel = '× 0.453592';
         }
 
@@ -1273,13 +1310,13 @@
         if (isNaN(value)) { resetUI(); return; }
         if (mode === 'c-to-f') {
           result = (value * 9 / 5) + 32;
-          fromLabel = fmt(value, 2) + '°C';
-          toLabel = fmt(result, 2) + '°F';
+          fromLabel = fmtUnit(value, 2) + '°C';
+          toLabel = fmtUnit(result, 2) + '°F';
           formulaLabel = '(× 9/5) + 32';
         } else {
           result = (value - 32) * 5 / 9;
-          fromLabel = fmt(value, 2) + '°F';
-          toLabel = fmt(result, 2) + '°C';
+          fromLabel = fmtUnit(value, 2) + '°F';
+          toLabel = fmtUnit(result, 2) + '°C';
           formulaLabel = '(− 32) × 5/9';
         }
       } else {
@@ -1323,9 +1360,9 @@
       }
     });
 
-    // Value inputs trigger real-time calculation
+    // Value inputs trigger real-time calculation (debounced for performance)
     [els.lengthValue, els.weightValue, els.tempValue].forEach(function (inp) {
-      if (inp) inp.addEventListener('input', calculate);
+      if (inp) inp.addEventListener('input', debounce(calculate, 150));
     });
 
     // Preset helpers (exposed globally for onclick attributes)
@@ -1379,8 +1416,10 @@
 
   /* ============================================================
      Boot — initialize whichever tool is on the current page
+     Performance: Uses requestIdleCallback to reduce TBT
   ============================================================ */
-  function init() {
+  function initCalculators() {
+    // Core calculators - initialize immediately
     initLoanCalculator();
     initCreditCardCalculator();
     initCompoundInterestCalculator();
@@ -1390,8 +1429,25 @@
     initDiscountCalculator();
     initFuelCalculator();
     initUnitConverter();
+  }
+
+  function init() {
+    // FAQ and non-critical UI - immediate
     bindFAQ();
-    initAdSenseLazy();
+
+    // Defer calculator initialization to reduce TBT
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(function () {
+        initCalculators();
+        initAdSenseLazy();
+      }, { timeout: 2000 });
+    } else {
+      // Fallback: use setTimeout to yield to main thread
+      setTimeout(function () {
+        initCalculators();
+        initAdSenseLazy();
+      }, 50);
+    }
   }
 
   if (document.readyState === 'loading') {

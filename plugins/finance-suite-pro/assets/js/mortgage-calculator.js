@@ -40,55 +40,56 @@
 	function cacheElements() {
 		el = {
 			// Inputs
-			homePrice:  document.getElementById('fspm-home-price'),
-			down:       document.getElementById('fspm-down'),
-			downPct:    document.getElementById('fspm-down-pct'),
-			rate:       document.getElementById('fspm-rate'),
-			years:      document.getElementById('fspm-years'),
-			extra:      document.getElementById('fspm-extra'),
-			tax:        document.getElementById('fspm-tax'),
-			insurance:  document.getElementById('fspm-insurance'),
-			pmi:        document.getElementById('fspm-pmi'),
-			hoa:        document.getElementById('fspm-hoa'),
-			// PMI alert
-			pmiAlert:   document.getElementById('fspm-pmi-alert'),
+			homePrice: document.getElementById('fspm-home-price'),
+			down: document.getElementById('fspm-down'),
+			downPct: document.getElementById('fspm-down-pct'),
+			rate: document.getElementById('fspm-rate'),
+			years: document.getElementById('fspm-years'),
+			extra: document.getElementById('fspm-extra'),
+			tax: document.getElementById('fspm-tax'),
+			insurance: document.getElementById('fspm-insurance'),
+			pmi: document.getElementById('fspm-pmi'),
+			hoa: document.getElementById('fspm-hoa'),
+			// PMI alert & validation errors
+			pmiAlert: document.getElementById('fspm-pmi-alert'),
+			downError: document.getElementById('fspm-down-error'),
 			// KPIs
-			monthly:    document.getElementById('fspm-monthly-payment'),
-			saved:      document.getElementById('fspm-interest-saved'),
-			payoff:     document.getElementById('fspm-payoff-time'),
-			timeSaved:  document.getElementById('fspm-time-saved'),
+			monthly: document.getElementById('fspm-monthly-payment'),
+			saved: document.getElementById('fspm-interest-saved'),
+			payoff: document.getElementById('fspm-payoff-time'),
+			timeSaved: document.getElementById('fspm-time-saved'),
 			// Impact panel
-			totalInt:   document.getElementById('fspm-total-interest'),
-			totalSav:   document.getElementById('fspm-total-savings'),
+			totalInt: document.getElementById('fspm-total-interest'),
+			totalSav: document.getElementById('fspm-total-savings'),
 			// Breakdown donut
-			circlePi:     document.getElementById('fspm-circle-pi'),
-			circleEsc:    document.getElementById('fspm-circle-escrow'),
-			circlePmi:    document.getElementById('fspm-circle-pmi'),
-			circleHoa:    document.getElementById('fspm-circle-hoa'),
-			pctPi:        document.getElementById('fspm-pct-pi'),
+			circlePi: document.getElementById('fspm-circle-pi'),
+			circleEsc: document.getElementById('fspm-circle-escrow'),
+			circlePmi: document.getElementById('fspm-circle-pmi'),
+			circleHoa: document.getElementById('fspm-circle-hoa'),
+			pctPi: document.getElementById('fspm-pct-pi'),
 			// Breakdown details
-			detPi:        document.getElementById('fspm-det-pi'),
-			detEscrow:    document.getElementById('fspm-det-escrow'),
-			detPmi:       document.getElementById('fspm-det-pmi'),
-			detHoa:       document.getElementById('fspm-det-hoa'),
-			detExtra:     document.getElementById('fspm-det-extra'),
-			detTotal:     document.getElementById('fspm-det-total'),
-			rowPmi:       document.getElementById('fspm-row-pmi'),
-			rowHoa:       document.getElementById('fspm-row-hoa'),
-			pmiDropNote:  document.getElementById('fspm-pmi-drop-note'),
+			detPi: document.getElementById('fspm-det-pi'),
+			detEscrow: document.getElementById('fspm-det-escrow'),
+			detPmi: document.getElementById('fspm-det-pmi'),
+			detHoa: document.getElementById('fspm-det-hoa'),
+			detExtra: document.getElementById('fspm-det-extra'),
+			detTotal: document.getElementById('fspm-det-total'),
+			rowPmi: document.getElementById('fspm-row-pmi'),
+			rowHoa: document.getElementById('fspm-row-hoa'),
+			pmiDropNote: document.getElementById('fspm-pmi-drop-note'),
 			// Equity tab
-			eqLabel:      document.getElementById('fspm-eq-label'),
-			eqValue:      document.getElementById('fspm-eq-value'),
-			eqPct:        document.getElementById('fspm-eq-pct'),
-			eqTime:       document.getElementById('fspm-eq-time'),
-			pmiCard:      document.getElementById('fspm-pmi-card'),
-			pmiDrop:      document.getElementById('fspm-pmi-drop'),
+			eqLabel: document.getElementById('fspm-eq-label'),
+			eqValue: document.getElementById('fspm-eq-value'),
+			eqPct: document.getElementById('fspm-eq-pct'),
+			eqTime: document.getElementById('fspm-eq-time'),
+			pmiCard: document.getElementById('fspm-pmi-card'),
+			pmiDrop: document.getElementById('fspm-pmi-drop'),
 			// Refi tab
-			refiRate:     document.getElementById('fspm-refi-current-rate'),
-			refiTarget:   document.getElementById('fspm-refi-target-rate'),
-			refiSavings:  document.getElementById('fspm-refi-savings'),
+			refiRate: document.getElementById('fspm-refi-current-rate'),
+			refiTarget: document.getElementById('fspm-refi-target-rate'),
+			refiSavings: document.getElementById('fspm-refi-savings'),
 			// Amortization table
-			amortBody:    document.getElementById('fspm-amort-tbody'),
+			amortBody: document.getElementById('fspm-amort-tbody'),
 		};
 		resetUI();
 	}
@@ -145,22 +146,46 @@
 		el.pmiAlert.hidden = pct >= 20 || price <= 0;
 	}
 
+	function showDownPaymentError(show) {
+		if (!el.downError) return;
+		if (show) {
+			el.downError.style.display = 'block';
+			if (el.down) el.down.classList.add('fsp-input-error');
+			if (el.downPct) el.downPct.classList.add('fsp-input-error');
+		} else {
+			el.downError.style.display = 'none';
+			if (el.down) el.down.classList.remove('fsp-input-error');
+			if (el.downPct) el.downPct.classList.remove('fsp-input-error');
+		}
+	}
+
 	// ─── Core calculate ───────────────────────────────────────────────────────────
 
 	function calculate() {
 		const homePrice = parseFloat(el.homePrice.value) || 0;
-		const down      = parseFloat(el.down.value) || 0;
-		const principal = Math.max(0, homePrice - down);
-		const rate      = parseFloat(el.rate.value) || 0;
-		const years     = parseFloat(el.years.value) || 0;
-		const extra     = parseFloat(el.extra.value) || 0;
-		const tax       = parseFloat(el.tax.value) || 0;
-		const ins       = parseFloat(el.insurance.value) || 0;
-		const pmiRate   = parseFloat(el.pmi.value) || 0;
-		const hoa       = parseFloat(el.hoa.value) || 0;
+		const down = parseFloat(el.down.value) || 0;
+		const rate = parseFloat(el.rate.value) || 0;
+		const years = parseFloat(el.years.value) || 0;
+		const extra = parseFloat(el.extra.value) || 0;
+		const tax = parseFloat(el.tax.value) || 0;
+		const ins = parseFloat(el.insurance.value) || 0;
+		const pmiRate = parseFloat(el.pmi.value) || 0;
+		const hoa = parseFloat(el.hoa.value) || 0;
 
 		// Sync % whenever home price changes
 		syncDownPct();
+
+		// Validate: down payment cannot exceed home price
+		if (homePrice > 0 && down >= homePrice) {
+			lastResult = null;
+			resetUI();
+			showDownPaymentError(true);
+			return;
+		} else {
+			showDownPaymentError(false);
+		}
+
+		const principal = Math.max(0, homePrice - down);
 
 		if (principal <= 0 || rate <= 0 || years <= 0) {
 			lastResult = null;
@@ -173,11 +198,11 @@
 			homePrice,
 			rate,
 			years,
-			extraMonthly:  extra,
-			annualTax:     tax,
-			annualIns:     ins,
+			extraMonthly: extra,
+			annualTax: tax,
+			annualIns: ins,
 			annualPmiRate: pmiRate,
-			hoaMonthly:    hoa,
+			hoaMonthly: hoa,
 		});
 
 		renderAll(lastResult, principal, homePrice, rate, extra);
@@ -198,10 +223,10 @@
 
 	function renderKPIs(res) {
 		el.monthly.textContent = fmt(res.totalMonthly);
-		el.saved.textContent   = fmt(res.interestSaved);
+		el.saved.textContent = fmt(res.interestSaved);
 
 		const yrs = Math.floor(res.payoffMonthsWith / 12);
-		const mo  = res.payoffMonthsWith % 12;
+		const mo = res.payoffMonthsWith % 12;
 		el.payoff.innerHTML = yrs + 'Y <span style="color:#94a3b8;font-size:1.1rem">' + mo + 'M</span>';
 
 		const yrSav = Math.floor(res.monthsSaved / 12);
@@ -226,21 +251,21 @@
 		const CIRC = 251.2;
 
 		// Cumulative offsets for stacked donut segments
-		const piOffset     = CIRC * (1 - res.piRatio);
+		const piOffset = CIRC * (1 - res.piRatio);
 		const escrowOffset = CIRC * (1 - (res.piRatio + res.escrowRatio));
-		const pmiOffset    = CIRC * (1 - (res.piRatio + res.escrowRatio + res.pmiRatio));
-		const hoaOffset    = CIRC * (1 - (res.piRatio + res.escrowRatio + res.pmiRatio + res.hoaRatio));
+		const pmiOffset = CIRC * (1 - (res.piRatio + res.escrowRatio + res.pmiRatio));
+		const hoaOffset = CIRC * (1 - (res.piRatio + res.escrowRatio + res.pmiRatio + res.hoaRatio));
 
-		el.circlePi.style.strokeDashoffset     = piOffset;
-		el.circleEsc.style.strokeDashoffset    = escrowOffset;
-		el.circlePmi.style.strokeDashoffset    = pmiOffset;
-		el.circleHoa.style.strokeDashoffset    = hoaOffset;
+		el.circlePi.style.strokeDashoffset = piOffset;
+		el.circleEsc.style.strokeDashoffset = escrowOffset;
+		el.circlePmi.style.strokeDashoffset = pmiOffset;
+		el.circleHoa.style.strokeDashoffset = hoaOffset;
 		el.pctPi.textContent = Math.round(res.piRatio * 100) + '%';
 
-		el.detPi.textContent     = fmt(res.basePI);
+		el.detPi.textContent = fmt(res.basePI);
 		el.detEscrow.textContent = fmt(res.escrowMonthly);
-		el.detExtra.textContent  = fmt(extra);
-		el.detTotal.textContent  = fmt(res.totalMonthly);
+		el.detExtra.textContent = fmt(extra);
+		el.detTotal.textContent = fmt(res.totalMonthly);
 
 		// PMI row
 		if (res.pmiMonthly > 0) {
@@ -270,8 +295,8 @@
 		const cpYr = Math.ceil(res.checkpointMonth / 12);
 		el.eqLabel.textContent = 'Equity at Year ' + cpYr;
 		el.eqValue.textContent = fmt(res.equityAtCheckpoint);
-		el.eqPct.textContent   = ((res.equityAtCheckpoint / principal) * 100).toFixed(1) + '% of total loan paid';
-		el.eqTime.textContent  = res.monthsSaved + ' months saved';
+		el.eqPct.textContent = ((res.equityAtCheckpoint / principal) * 100).toFixed(1) + '% of total loan paid';
+		el.eqTime.textContent = res.monthsSaved + ' months saved';
 
 		// PMI drop card
 		if (el.pmiCard && el.pmiDrop) {
@@ -289,17 +314,17 @@
 	// ─── Refi Tab ────────────────────────────────────────────────────────────────
 
 	function renderRefi(res, rate) {
-		el.refiRate.textContent    = rate.toFixed(2) + '%';
-		el.refiTarget.textContent  = res.refiTargetRate.toFixed(2) + '%';
+		el.refiRate.textContent = rate.toFixed(2) + '%';
+		el.refiTarget.textContent = res.refiTargetRate.toFixed(2) + '%';
 		el.refiSavings.textContent = fmt(res.refiMonthlySavings) + '/mo';
 	}
 
 	// ─── Amortization Table ───────────────────────────────────────────────────────
 
 	function renderAmortTable(res) {
-		const data  = currentAmortView === 'annual' ? res.scheduleAnnual : res.schedule;
+		const data = currentAmortView === 'annual' ? res.scheduleAnnual : res.schedule;
 		const label = currentAmortView === 'annual' ? 'Year' : 'Month';
-		const frag  = document.createDocumentFragment();
+		const frag = document.createDocumentFragment();
 
 		data.forEach(function (row, idx) {
 			const tr = document.createElement('tr');
@@ -323,7 +348,7 @@
 		const tabs = ['breakdown', 'equity', 'amort', 'refi'];
 		tabs.forEach(function (t) {
 			const panel = document.getElementById('fspm-tab-' + t);
-			const btn   = document.getElementById('fspm-btn-' + t);
+			const btn = document.getElementById('fspm-btn-' + t);
 			if (panel) panel.classList.toggle('fsp-tab-panel--hidden', t !== tab);
 			if (btn) {
 				btn.classList.toggle('fsp-tab-btn--active', t === tab);
@@ -348,30 +373,30 @@
 
 	function resetUI() {
 		const zero = fmt(0);
-		if (el.monthly)   el.monthly.textContent   = zero;
-		if (el.saved)     el.saved.textContent      = zero;
-		if (el.payoff)    el.payoff.innerHTML       = '0Y <span style="color:#94a3b8;font-size:1.1rem">0M</span>';
-		if (el.timeSaved) el.timeSaved.textContent  = 'Awaiting valid inputs';
-		if (el.totalInt)  el.totalInt.textContent   = zero;
-		if (el.totalSav)  el.totalSav.textContent   = zero;
-		if (el.pctPi)     el.pctPi.textContent      = '0%';
-		if (el.detPi)     el.detPi.textContent      = zero;
-		if (el.detEscrow) el.detEscrow.textContent  = zero;
-		if (el.detPmi)    el.detPmi.textContent     = zero;
-		if (el.detHoa)    el.detHoa.textContent     = zero;
-		if (el.detExtra)  el.detExtra.textContent   = zero;
-		if (el.detTotal)  el.detTotal.textContent   = zero;
-		if (el.eqLabel)   el.eqLabel.textContent    = 'Equity at Year 0';
-		if (el.eqValue)   el.eqValue.textContent    = zero;
-		if (el.eqPct)     el.eqPct.textContent      = '0% of total loan paid';
-		if (el.eqTime)    el.eqTime.textContent     = '0 months saved';
-		if (el.pmiDrop)   el.pmiDrop.textContent    = '—';
-		if (el.refiRate)    el.refiRate.textContent    = '0.00%';
-		if (el.refiTarget)  el.refiTarget.textContent  = '0.00%';
+		if (el.monthly) el.monthly.textContent = zero;
+		if (el.saved) el.saved.textContent = zero;
+		if (el.payoff) el.payoff.innerHTML = '0Y <span style="color:#94a3b8;font-size:1.1rem">0M</span>';
+		if (el.timeSaved) el.timeSaved.textContent = 'Awaiting valid inputs';
+		if (el.totalInt) el.totalInt.textContent = zero;
+		if (el.totalSav) el.totalSav.textContent = zero;
+		if (el.pctPi) el.pctPi.textContent = '0%';
+		if (el.detPi) el.detPi.textContent = zero;
+		if (el.detEscrow) el.detEscrow.textContent = zero;
+		if (el.detPmi) el.detPmi.textContent = zero;
+		if (el.detHoa) el.detHoa.textContent = zero;
+		if (el.detExtra) el.detExtra.textContent = zero;
+		if (el.detTotal) el.detTotal.textContent = zero;
+		if (el.eqLabel) el.eqLabel.textContent = 'Equity at Year 0';
+		if (el.eqValue) el.eqValue.textContent = zero;
+		if (el.eqPct) el.eqPct.textContent = '0% of total loan paid';
+		if (el.eqTime) el.eqTime.textContent = '0 months saved';
+		if (el.pmiDrop) el.pmiDrop.textContent = '—';
+		if (el.refiRate) el.refiRate.textContent = '0.00%';
+		if (el.refiTarget) el.refiTarget.textContent = '0.00%';
 		if (el.refiSavings) el.refiSavings.textContent = zero + '/mo';
-		if (el.amortBody)   el.amortBody.innerHTML     = '';
+		if (el.amortBody) el.amortBody.innerHTML = '';
 		const CIRC = 251.2;
-		if (el.circlePi)  el.circlePi.style.strokeDashoffset  = CIRC;
+		if (el.circlePi) el.circlePi.style.strokeDashoffset = CIRC;
 		if (el.circleEsc) el.circleEsc.style.strokeDashoffset = CIRC;
 		if (el.circlePmi) el.circlePmi.style.strokeDashoffset = CIRC;
 		if (el.circleHoa) el.circleHoa.style.strokeDashoffset = CIRC;
@@ -391,7 +416,7 @@
 	// ─── Public API ──────────────────────────────────────────────────────────────
 
 	global.FSP_MC = {
-		switchTab:       switchTab,
+		switchTab: switchTab,
 		setScheduleView: setScheduleView,
 	};
 

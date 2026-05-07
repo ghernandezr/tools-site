@@ -50,6 +50,36 @@ describe('ToolsHubUtils', () => {
     });
   });
 
+  describe('fmtUnit', () => {
+    test('trims trailing zeros — round number shows no decimals', () => {
+      expect(window.ToolsHubUtils.fmtUnit(100)).toBe('100');
+    });
+
+    test('trims trailing zeros — 62.1371 shows as-is', () => {
+      expect(window.ToolsHubUtils.fmtUnit(62.1371)).toBe('62.1371');
+    });
+
+    test('does not exceed maxDec decimal places', () => {
+      expect(window.ToolsHubUtils.fmtUnit(62.13710000001, 4)).toBe('62.1371');
+    });
+
+    test('respects custom maxDec of 2 and trims zeros', () => {
+      expect(window.ToolsHubUtils.fmtUnit(32, 2)).toBe('32');
+    });
+
+    test('respects custom maxDec of 2 with decimals', () => {
+      expect(window.ToolsHubUtils.fmtUnit(37.78, 2)).toBe('37.78');
+    });
+
+    test('returns N/A for NaN', () => {
+      expect(window.ToolsHubUtils.fmtUnit(NaN)).toBe('N/A');
+    });
+
+    test('returns N/A for Infinity', () => {
+      expect(window.ToolsHubUtils.fmtUnit(Infinity)).toBe('N/A');
+    });
+  });
+
   describe('fmtCurrency', () => {
     test('formats currency with $', () => {
       expect(window.ToolsHubUtils.fmtCurrency(1234.567)).toBe('$1,234.57');
@@ -410,6 +440,21 @@ describe('convertUnit', () => {
       const result = window.convertUnit('length', 10, 'mi-to-km');
       expect(result.result).toBeCloseTo(16.0934, 4);
     });
+
+    test('label does not contain raw floating-point decimals (km to mi)', () => {
+      const result = window.convertUnit('length', 10, 'km-to-mi');
+      expect(result.label).toBe('10 km = 6.2137 miles');
+    });
+
+    test('label does not contain raw floating-point decimals (mi to km)', () => {
+      const result = window.convertUnit('length', 10, 'mi-to-km');
+      expect(result.label).toBe('10 miles = 16.0934 km');
+    });
+
+    test('label for round result shows no trailing zeros (100 km)', () => {
+      const result = window.convertUnit('length', 100, 'km-to-mi');
+      expect(result.label).not.toMatch(/\.\d*0+\s/);
+    });
   });
 
   describe('weight conversions', () => {
@@ -421,6 +466,16 @@ describe('convertUnit', () => {
     test('converts lbs to kg', () => {
       const result = window.convertUnit('weight', 10, 'lbs-to-kg');
       expect(result.result).toBeCloseTo(4.53592, 5);
+    });
+
+    test('label does not contain raw floating-point decimals (kg to lbs)', () => {
+      const result = window.convertUnit('weight', 70, 'kg-to-lbs');
+      expect(result.label).toBe('70 kg = 154.3234 lbs');
+    });
+
+    test('label does not contain raw floating-point decimals (lbs to kg)', () => {
+      const result = window.convertUnit('weight', 100, 'lbs-to-kg');
+      expect(result.label).toBe('100 lbs = 45.3592 kg');
     });
   });
 
@@ -448,6 +503,24 @@ describe('convertUnit', () => {
     test('converts negative temperatures', () => {
       const result = window.convertUnit('temp', -40, 'c-to-f');
       expect(result.result).toBe(-40);
+    });
+
+    test('label for 0C to 32F shows no trailing zeros', () => {
+      const result = window.convertUnit('temp', 0, 'c-to-f');
+      expect(result.label).toBe('0°C = 32°F');
+    });
+
+    test('label for 100F to C is rounded to 4 decimal places', () => {
+      const result = window.convertUnit('temp', 100, 'f-to-c');
+      expect(result.label).toBe('100°F = 37.7778°C');
+    });
+
+    test('label does not contain more than 4 decimal places', () => {
+      const result = window.convertUnit('temp', 100, 'f-to-c');
+      const match = result.label.match(/=(\s*[\d,]+\.?(\d*))/);
+      if (match && match[2]) {
+        expect(match[2].length).toBeLessThanOrEqual(4);
+      }
     });
   });
 

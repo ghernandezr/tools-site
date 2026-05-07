@@ -942,6 +942,32 @@
 	color:       #d97706;
 }
 
+/* ─── Down payment error badge ─────────────────────────────────────────────────── */
+.fsp-down-error {
+	display:       flex;
+	align-items:   center;
+	gap:           0.35rem;
+	padding:       0.4rem 0.65rem;
+	border-radius: calc( var( --fsp-radius ) - 2px );
+	background:    rgba( 239, 68, 68, 0.12 );
+	border:        1px solid rgba( 239, 68, 68, 0.35 );
+	color:         #b91c1c;
+	font-size:     0.68rem;
+	font-weight:   600;
+	margin-top:    0.5rem;
+}
+
+.fsp-down-error svg {
+	flex-shrink: 0;
+	color:       #dc2626;
+}
+
+/* ─── Input error state ────────────────────────────────────────────────────────── */
+.fsp-input-error {
+	border-color: #ef4444 !important;
+	background:   rgba( 239, 68, 68, 0.05 ) !important;
+}
+
 /* ─── Input suffix (e.g. % sign) ─────────────────────────────────────────────── */
 .fsp-input-suffix {
 	position:    absolute;

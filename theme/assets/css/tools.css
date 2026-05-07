@@ -93,16 +93,20 @@
 
 /* ---- Result Box ---- */
 .tool-result {
-  display: none;
+  visibility: hidden;
+  opacity: 0;
+  min-height: 120px; /* reserve space to prevent CLS */
   margin-top: 1.5rem;
   padding: 1.25rem 1.5rem;
   background: #e8f5e9;
   border: 1.5px solid var(--th-accent);
   border-radius: var(--th-radius);
+  transition: opacity 0.2s ease;
 }
 
 .tool-result.is-visible {
-  display: block;
+  visibility: visible;
+  opacity: 1;
 }
 
 .tool-result__label {
@@ -134,7 +138,9 @@
 
 /* ---- Error state ---- */
 .tool-error {
-  display: none;
+  visibility: hidden;
+  opacity: 0;
+  min-height: 48px; /* reserve space to prevent CLS */
   margin-top: 1rem;
   padding: .75rem 1rem;
   background: #fff3f3;
@@ -142,15 +148,18 @@
   border-radius: var(--th-radius);
   color: #c53030;
   font-size: .9rem;
+  transition: opacity 0.2s ease;
 }
 
 .tool-error.is-visible {
-  display: block;
+  visibility: visible;
+  opacity: 1;
 }
 
 /* ---- Reset Button ---- */
 .tool-reset {
-  display: none;
+  visibility: hidden;
+  opacity: 0;
   background: none;
   border: 1.5px solid var(--th-border);
   border-radius: var(--th-radius);
@@ -160,10 +169,12 @@
   cursor: pointer;
   margin-top: .75rem;
   width: 100%;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
 }
 
 .tool-reset.is-visible {
-  display: inline-block;
+  visibility: visible;
+  opacity: 1;
 }
 
 .tool-reset:hover {
