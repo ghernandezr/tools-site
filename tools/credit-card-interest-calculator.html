@@ -28,7 +28,7 @@
           <span>Interest Charges & Payoff Timeline</span>
         </h1>
         <p class="lpc-hero__desc">
-          Our free <strong>credit card APR calculator</strong> shows exactly how much interest your card charges each month based on your balance and APR — and how many months it will take to pay off your balance. Use it to <strong>calculate interest rate on your credit card</strong>, see your payoff date, and find the monthly payment that works for you.
+          <strong>Credit card APR calculator</strong> — free, instant, and private. See exactly how much interest your card charges each month based on your balance and APR, how many months it will take to pay off your balance, and your exact payoff date. Use it to <strong>calculate interest rate on your credit card</strong> and find the monthly payment that works for you.
         </p>
       </div>
 
@@ -64,6 +64,12 @@
 <section>
   <div class="ccc-calculator" id="ccc-credit-calculator">
 
+    <!-- Mode Toggle -->
+    <div class="ccc-mode-tabs">
+      <button class="ccc-mode-tab is-active" id="ccc-tab-main">Calculate Interest &amp; Payoff</button>
+      <button class="ccc-mode-tab" id="ccc-tab-finder">Find My APR</button>
+    </div>
+
     <!-- Header -->
     <header class="ccc-header">
       <div class="ccc-header-icon" aria-hidden="true">
@@ -77,6 +83,9 @@
         <p class="ccc-subtitle">Monthly Interest Charges & Payoff Timeline</p>
       </div>
     </header>
+
+    <!-- MAIN MODE PANEL -->
+    <div id="ccc-panel-main" class="ccc-main-mode">
 
     <!-- Main Layout: Sidebar + Panel -->
     <div class="ccc-layout">
@@ -153,7 +162,7 @@
                 <span>Live Calculation</span>
               </div>
               <h3 class="ccc-impact-title">Debt Payoff Summary</h3>
-              <p class="ccc-impact-desc">Based on your current balance, APR, and payment amount. Results assume no new charges are added to the card.</p>
+              <p class="ccc-impact-desc">Based on your current balance, APR, and payment amount. Lower your APR or raise your monthly payment to cut total interest costs significantly.</p>
             </div>
             <div class="ccc-impact-stats">
               <div class="ccc-impact-stat">
@@ -191,7 +200,50 @@
         <button id="cc-reset" class="ccc-reset-btn">Reset Calculator</button>
 
       </main>
-    </div>
+    </div><!-- /.ccc-layout -->
+
+    </div><!-- /#ccc-panel-main -->
+
+    <!-- APR FINDER PANEL -->
+    <div id="ccc-apr-finder" class="ccc-apr-finder">
+      <div class="ccc-glass-card">
+        <h3 class="ccc-section-label">Find My APR</h3>
+        <p style="font-size:.85rem;color:var(--ccc-text-muted);margin:0 0 1rem;">Look at your credit card statement and enter your last monthly interest charge and your balance at that time.</p>
+        <form id="apr-form" class="ccc-field-stack">
+
+          <div class="ccc-input-group">
+            <label class="ccc-label-tech" for="apr-monthly-interest">Monthly Interest Charged ($)</label>
+            <input type="number" id="apr-monthly-interest" class="ccc-input-field" placeholder="67.05" min="0.01" step="any" autocomplete="off" required>
+          </div>
+
+          <div class="ccc-input-group">
+            <label class="ccc-label-tech" for="apr-balance">Balance at Statement Date ($)</label>
+            <input type="number" id="apr-balance" class="ccc-input-field" placeholder="3500" min="1" step="any" autocomplete="off" required>
+          </div>
+
+        </form>
+
+        <!-- APR Result -->
+        <div id="apr-result-card" class="ccc-apr-result-card is-hidden">
+          <p class="ccc-apr-result-eyebrow">Your Estimated APR</p>
+          <p class="ccc-apr-result-value" id="apr-result-value">—</p>
+          <div id="apr-result-badge" class="ccc-apr-badge"></div>
+          <div class="ccc-apr-result-divider"></div>
+          <div class="ccc-apr-result-breakdown">
+            <div class="ccc-apr-result-stat">
+              <span class="ccc-apr-result-stat__label">Monthly Rate</span>
+              <span class="ccc-apr-result-stat__value" id="apr-result-monthly-rate">—</span>
+            </div>
+            <div class="ccc-apr-result-stat">
+              <span class="ccc-apr-result-stat__label">Daily Rate</span>
+              <span class="ccc-apr-result-stat__value" id="apr-result-daily-rate">—</span>
+            </div>
+          </div>
+        </div>
+
+        <button id="apr-reset" class="ccc-reset-btn" style="margin-top:1rem;">Reset</button>
+      </div>
+    </div><!-- /#ccc-apr-finder -->
 
     <!-- Bottom Ad Placeholder -->
     <div class="ccc-ad-slot" aria-hidden="true"></div>
@@ -247,6 +299,7 @@
         </div>
 
         <h3>Key Terms Explained</h3>
+        <p style="margin:0 0 .75rem;">Understanding how APR drives your monthly interest charge is the first step to paying off credit card debt efficiently.</p>
         <ul>
           <li><strong>APR (Annual Percentage Rate)</strong> — The yearly interest rate on your card. Find it on your statement or card agreement. Average US credit card APR: ~20–27%.</li>
           <li><strong>Monthly Interest Charge</strong> — The dollar amount of interest added to your balance each billing cycle.</li>
@@ -301,7 +354,7 @@
 
           <div class="tool-faq__item">
             <div class="tool-faq__question">Does this calculator account for daily compounding?</div>
-            <div class="tool-faq__answer">This calculator uses the standard monthly calculation method, which closely approximates the actual amount you'll see on your statement. For exact daily-compounding results, the difference is typically less than $1/month on most balances. Your monthly statement is the most accurate source for your actual charge.</div>
+            <div class="tool-faq__answer">This calculator uses the standard monthly calculation method (APR ÷ 12 × balance), which closely approximates the interest charge you'll see on your statement. For exact daily-compounding results, the difference is typically less than $1/month on most balances. Your monthly statement remains the most accurate source for your actual interest charge.</div>
           </div>
         </div>
 
@@ -328,7 +381,7 @@
           <span class="ab-callout__icon">💡</span>
           <div class="ab-callout__title">Pro Tip</div>
           <p class="ab-callout__text">
-            Paying just the minimum can cost you thousands in interest. Increasing your monthly payment by even $50 can cut years off your debt payoff timeline.
+            Paying just the minimum can cost you thousands in interest. If your card's APR is above 20%, every extra dollar toward principal saves more in long-term interest than almost any other move you can make.
           </p>
         </div>
 

@@ -1418,10 +1418,108 @@
      Boot — initialize whichever tool is on the current page
      Performance: Uses requestIdleCallback to reduce TBT
   ============================================================ */
+  /* ============================================================
+     TOOL 2b — APR Finder (reverse calculator)
+     Inputs: Monthly Interest Charge + Balance → APR
+     Formula: APR = (monthlyInterest / balance) * 12 * 100
+  ============================================================ */
+  function initAPRFinder() {
+    var container = document.getElementById('ccc-apr-finder');
+    if (!container) return;
+
+    var inputInterest = document.getElementById('apr-monthly-interest');
+    var inputBalance = document.getElementById('apr-balance');
+    var resultCard = document.getElementById('apr-result-card');
+    var resultValue = document.getElementById('apr-result-value');
+    var resultMonthlyRate = document.getElementById('apr-result-monthly-rate');
+    var resultDailyRate = document.getElementById('apr-result-daily-rate');
+    var resultBadge = document.getElementById('apr-result-badge');
+
+    function calculateAPR() {
+      var interest = parseFloat(inputInterest.value) || 0;
+      var balance = parseFloat(inputBalance.value) || 0;
+
+      if (interest <= 0 || balance <= 0 || interest >= balance) {
+        if (resultCard) resultCard.classList.add('is-hidden');
+        return;
+      }
+
+      var apr = (interest / balance) * 12 * 100;
+      var monthlyRate = (interest / balance) * 100;
+      var dailyRate = apr / 365;
+
+      if (resultValue) resultValue.innerHTML = apr.toFixed(2) + '<span>%</span>';
+      if (resultMonthlyRate) resultMonthlyRate.textContent = monthlyRate.toFixed(3) + '%';
+      if (resultDailyRate) resultDailyRate.textContent = dailyRate.toFixed(4) + '%';
+
+      if (resultBadge) {
+        resultBadge.className = 'ccc-apr-badge';
+        if (apr < 15) {
+          resultBadge.classList.add('ccc-apr-badge--low');
+          resultBadge.textContent = '\u2713 Below average \u2014 good rate';
+        } else if (apr < 22) {
+          resultBadge.classList.add('ccc-apr-badge--avg');
+          resultBadge.textContent = '~ Average US credit card rate';
+        } else if (apr < 28) {
+          resultBadge.classList.add('ccc-apr-badge--high');
+          resultBadge.textContent = '\u2191 Above average \u2014 consider options';
+        } else {
+          resultBadge.classList.add('ccc-apr-badge--very-high');
+          resultBadge.textContent = '\u26a0 High rate \u2014 look into balance transfer';
+        }
+      }
+
+      if (resultCard) resultCard.classList.remove('is-hidden');
+    }
+
+    var debouncedCalc = debounce(calculateAPR, 150);
+    if (inputInterest) {
+      inputInterest.addEventListener('input', debouncedCalc);
+      inputInterest.addEventListener('change', calculateAPR);
+    }
+    if (inputBalance) {
+      inputBalance.addEventListener('input', debouncedCalc);
+      inputBalance.addEventListener('change', calculateAPR);
+    }
+
+    var resetBtn = document.getElementById('apr-reset');
+    if (resetBtn) {
+      resetBtn.addEventListener('click', function () {
+        if (inputInterest) inputInterest.value = '';
+        if (inputBalance) inputBalance.value = '';
+        if (resultCard) resultCard.classList.add('is-hidden');
+      });
+    }
+
+    /* ── Mode toggle tabs ── */
+    var tabMain = document.getElementById('ccc-tab-main');
+    var tabFinder = document.getElementById('ccc-tab-finder');
+    var panelMain = document.getElementById('ccc-panel-main');
+    var panelFinder = container;
+
+    function switchMode(mode) {
+      if (mode === 'finder') {
+        if (tabMain) tabMain.classList.remove('is-active');
+        if (tabFinder) tabFinder.classList.add('is-active');
+        if (panelMain) panelMain.classList.add('is-hidden');
+        if (panelFinder) panelFinder.classList.add('is-active');
+      } else {
+        if (tabFinder) tabFinder.classList.remove('is-active');
+        if (tabMain) tabMain.classList.add('is-active');
+        if (panelFinder) panelFinder.classList.remove('is-active');
+        if (panelMain) panelMain.classList.remove('is-hidden');
+      }
+    }
+
+    if (tabMain) tabMain.addEventListener('click', function () { switchMode('main'); });
+    if (tabFinder) tabFinder.addEventListener('click', function () { switchMode('finder'); });
+  }
+
   function initCalculators() {
     // Core calculators - initialize immediately
     initLoanCalculator();
     initCreditCardCalculator();
+    initAPRFinder();
     initCompoundInterestCalculator();
     initSalaryConverter();
     initTipCalculator();
