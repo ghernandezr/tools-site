@@ -1,11 +1,11 @@
 {
-  "_comment": "SoftwareApplication Schema Template — paste into RankMath Schema Builder OR inject via functions.php wp_head hook. Replace all PLACEHOLDER values before publishing.",
+  "_comment": "SoftwareApplication Schema — inject each tool's block as a <script type='application/ld+json'> at the bottom of its corresponding tool page HTML.",
 
   "loan-payment-calculator": {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "name": "Loan Payment Calculator",
-    "url": "https://yoursite.com/loan-payment-calculator/",
+    "url": "https://quickcalclab.com/loan-payment-calculator/",
     "applicationCategory": "UtilitiesApplication",
     "operatingSystem": "Web Browser",
     "description": "Free online loan payment calculator. Calculate monthly payment, total interest, and total cost for any loan using the standard amortization formula.",
@@ -16,8 +16,8 @@
     },
     "author": {
       "@type": "Organization",
-      "name": "ToolsHub",
-      "url": "https://yoursite.com"
+      "name": "QuickCalc Lab",
+      "url": "https://quickcalclab.com"
     }
   },
 
@@ -25,7 +25,7 @@
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "name": "Credit Card Interest Calculator",
-    "url": "https://yoursite.com/credit-card-interest-calculator/",
+    "url": "https://quickcalclab.com/credit-card-interest-calculator/",
     "applicationCategory": "UtilitiesApplication",
     "operatingSystem": "Web Browser",
     "description": "Calculate your monthly credit card interest charge, how much of your payment reduces principal, and how many months to pay off your balance.",
@@ -33,6 +33,11 @@
       "@type": "Offer",
       "price": "0",
       "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Organization",
+      "name": "QuickCalc Lab",
+      "url": "https://quickcalclab.com"
     }
   },
 
@@ -40,7 +45,7 @@
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "name": "Compound Interest Calculator",
-    "url": "https://yoursite.com/compound-interest-calculator/",
+    "url": "https://quickcalclab.com/compound-interest-calculator/",
     "applicationCategory": "UtilitiesApplication",
     "operatingSystem": "Web Browser",
     "description": "Calculate how an investment grows with compound interest using the formula A = P(1 + r/n)^(nt). Supports annual, monthly, and daily compounding.",
@@ -48,6 +53,11 @@
       "@type": "Offer",
       "price": "0",
       "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Organization",
+      "name": "QuickCalc Lab",
+      "url": "https://quickcalclab.com"
     }
   },
 
@@ -55,7 +65,7 @@
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "name": "Salary to Hourly Converter",
-    "url": "https://yoursite.com/salary-to-hourly-converter/",
+    "url": "https://quickcalclab.com/salary-to-hourly-converter/",
     "applicationCategory": "UtilitiesApplication",
     "operatingSystem": "Web Browser",
     "description": "Convert any annual salary to hourly, daily, weekly, and monthly pay. Customizable hours per week and weeks per year.",
@@ -63,6 +73,11 @@
       "@type": "Offer",
       "price": "0",
       "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Organization",
+      "name": "QuickCalc Lab",
+      "url": "https://quickcalclab.com"
     }
   },
 
@@ -70,7 +85,7 @@
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "name": "Tip Calculator",
-    "url": "https://yoursite.com/tip-calculator/",
+    "url": "https://quickcalclab.com/tip-calculator/",
     "applicationCategory": "UtilitiesApplication",
     "operatingSystem": "Web Browser",
     "description": "Calculate tip amount by percentage, see total bill including tip, and split evenly among any number of people.",
@@ -78,6 +93,11 @@
       "@type": "Offer",
       "price": "0",
       "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Organization",
+      "name": "QuickCalc Lab",
+      "url": "https://quickcalclab.com"
     }
   },
 
@@ -85,7 +105,7 @@
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "name": "Percentage Calculator",
-    "url": "https://yoursite.com/percentage-calculator/",
+    "url": "https://quickcalclab.com/percentage-calculator/",
     "applicationCategory": "UtilitiesApplication",
     "operatingSystem": "Web Browser",
     "description": "Solve three types of percentage problems: find X% of Y, find what % X is of Y, and calculate % change between two values.",
@@ -93,6 +113,11 @@
       "@type": "Offer",
       "price": "0",
       "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Organization",
+      "name": "QuickCalc Lab",
+      "url": "https://quickcalclab.com"
     }
   },
 
@@ -100,7 +125,7 @@
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "name": "Discount Calculator",
-    "url": "https://yoursite.com/discount-calculator/",
+    "url": "https://quickcalclab.com/discount-calculator/",
     "applicationCategory": "UtilitiesApplication",
     "operatingSystem": "Web Browser",
     "description": "Calculate final price, total savings, and discount amount from any original price and percentage off.",
@@ -108,6 +133,11 @@
       "@type": "Offer",
       "price": "0",
       "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Organization",
+      "name": "QuickCalc Lab",
+      "url": "https://quickcalclab.com"
     }
   },
 
@@ -115,7 +145,7 @@
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "name": "Fuel Cost Calculator",
-    "url": "https://yoursite.com/fuel-cost-calculator/",
+    "url": "https://quickcalclab.com/fuel-cost-calculator/",
     "applicationCategory": "UtilitiesApplication",
     "operatingSystem": "Web Browser",
     "description": "Estimate total gas cost for any trip using distance (miles), fuel efficiency (MPG), and current gas price per gallon.",
@@ -123,6 +153,11 @@
       "@type": "Offer",
       "price": "0",
       "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Organization",
+      "name": "QuickCalc Lab",
+      "url": "https://quickcalclab.com"
     }
   },
 
@@ -130,7 +165,7 @@
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "name": "Mortgage Calculator",
-    "url": "https://yoursite.com/mortgage-calculator/",
+    "url": "https://quickcalclab.com/mortgage-calculator/",
     "applicationCategory": "UtilitiesApplication",
     "operatingSystem": "Web Browser",
     "description": "Free mortgage calculator with full PITI breakdown (principal, interest, taxes, insurance), PMI, HOA fees, extra payments, equity growth tracking, and refinancing analysis.",
@@ -141,8 +176,8 @@
     },
     "author": {
       "@type": "Organization",
-      "name": "ToolsHub",
-      "url": "https://yoursite.com"
+      "name": "QuickCalc Lab",
+      "url": "https://quickcalclab.com"
     }
   },
 
@@ -150,14 +185,19 @@
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "name": "Unit Converter",
-    "url": "https://yoursite.com/unit-converter/",
+    "url": "https://quickcalclab.com/unit-converter/",
     "applicationCategory": "UtilitiesApplication",
     "operatingSystem": "Web Browser",
-    "description": "Convert length (km to miles), weight (kg to lbs), and temperature (Celsius to Fahrenheit) instantly. Free online unit conversion tool.",
+    "description": "Free online unit converter: length, weight, temperature, speed, volume, area, cooking, data storage, and pressure. Instant results, no sign-up required.",
     "offers": {
       "@type": "Offer",
       "price": "0",
       "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Organization",
+      "name": "QuickCalc Lab",
+      "url": "https://quickcalclab.com"
     }
   }
 }

@@ -2,7 +2,7 @@
      TOOL 7: DISCOUNT CALCULATOR — Plugin Style Edition
      Slug: /discount-calculator/
      Primary keyword: "discount calculator"
-     RankMath Title: Discount Calculator — Final Price After % Off | ToolsHub
+     RankMath Title: Discount Calculator — Calculate Sale Price & Savings | QuickCalc Lab
      RankMath Meta: Calculate the final price after any percentage discount. Enter original price and discount % to instantly see your savings and new price. Free tool.
      =============================================================
      CSS: theme/assets/css/tools.css (classes .dsc-*)
@@ -281,6 +281,33 @@
           </div>
         </div>
 
+        <h2>Working Backwards: Find the Original Price</h2>
+        <p>If you know the sale price and the discount percentage but want to find the original price, use the reverse formula:</p>
+        <div class="tool-formula-pro">
+          <div class="tfp-header">
+            <span class="tfp-badge">↩</span>
+            <span class="tfp-title">Reverse Discount Formula</span>
+          </div>
+          <div class="tfp-equation">
+            <span class="tfp-var tfp-result">Original Price</span>
+            <span class="tfp-equals">=</span>
+            <div class="tfp-fraction">
+              <div class="tfp-numerator">Sale Price</div>
+              <div class="tfp-denominator">1 − (Discount% ÷ 100)</div>
+            </div>
+          </div>
+          <div class="tfp-legend">
+            <div class="tfp-legend-item">
+              <span class="tfp-legend-var">Example</span>
+              <span class="tfp-legend-desc">You paid $63 after a 30% discount → $63 ÷ 0.70 = <strong>$90 original price</strong></span>
+            </div>
+          </div>
+        </div>
+
+        <h2>BOGO and Black Friday: The Math You Need</h2>
+        <p><strong>BOGO (Buy One Get One Free)</strong> is not the same as 50% off everything. The discount only applies when you buy at least two items. If you only need one item, the effective discount is 0%. If you buy two, the effective discount is 50% per item. Buying three at BOGO: you pay for 2, get 1 free — effective discount is 33.3% per item.</p>
+        <p><strong>Black Friday stacked promotions</strong> (e.g., 40% off + extra 20% off) work sequentially, not additively. A $200 item with 40% off = $120. Then 20% off $120 = $96. The effective total discount is 52%, not 60%. Always apply the calculator twice when stacking.</p>
+
         <!-- INTERNAL LINKS -->
         <h2>Related Tools</h2>
         <ul>
@@ -366,3 +393,50 @@
 </section>
 
 </div><!-- /.lpc-wrap -->
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Discount Calculator",
+  "url": "https://quickcalclab.com/discount-calculator/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web Browser",
+  "description": "Calculate final price, total savings, and discount amount from any original price and percentage off.",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": { "@type": "Organization", "name": "QuickCalc Lab", "url": "https://quickcalclab.com" }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do I calculate a discounted price?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Multiply the original price by (1 − discount% ÷ 100). Example: $120 item with 25% off: $120 × (1 − 0.25) = $120 × 0.75 = $90. Your savings = $120 − $90 = $30."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much do I save with a 30% discount on a $200 item?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "30% of $200 = $60 savings. Final price = $200 − $60 = $140. To verify: $140 ÷ $200 = 0.70, meaning you pay 70% of the original price."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I find the original price before a discount?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Divide the sale price by (1 − discount% ÷ 100). Example: item is $75 after 40% off: original price = $75 ÷ (1 − 0.40) = $75 ÷ 0.60 = $125."
+      }
+    }
+  ]
+}
+</script>

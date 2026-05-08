@@ -2,7 +2,7 @@
      TOOL 2: CREDIT CARD INTEREST CALCULATOR — Plugin Style Edition
      Slug: /credit-card-interest-calculator/
      Primary keyword: "credit card APR calculator"
-     RankMath Title: Credit Card APR Calculator — Interest Rate & Payoff Time | ToolsHub
+     RankMath Title: Credit Card APR Calculator — Interest Rate & Payoff Time | QuickCalc Lab
      RankMath Meta: Free credit card APR calculator. Calculate how much interest your card charges monthly based on your APR and balance. Find your payoff date instantly. No sign-up.
      =============================================================
      CSS: theme/assets/css/tools.css (classes .ccc-*)
@@ -301,11 +301,32 @@
         <h3>Key Terms Explained</h3>
         <p style="margin:0 0 .75rem;">Understanding how APR drives your monthly interest charge is the first step to paying off credit card debt efficiently.</p>
         <ul>
-          <li><strong>APR (Annual Percentage Rate)</strong> — The yearly interest rate on your card. Find it on your statement or card agreement. Average US credit card APR: ~20–27%.</li>
+          <li><strong>APR (Annual Percentage Rate)</strong> — The yearly interest rate on your card. Find it on your statement or card agreement. Average US credit card APR: ~20–27% (source: <a href="https://www.consumerfinance.gov/" rel="noopener noreferrer" target="_blank">CFPB</a>).</li>
+          <li><strong>Daily Periodic Rate (DPR)</strong> — How your bank actually charges interest daily. DPR = APR ÷ 365. At 24% APR, your DPR is 0.0658%. Multiply by your balance and days in the billing cycle to get the exact charge on your statement.</li>
           <li><strong>Monthly Interest Charge</strong> — The dollar amount of interest added to your balance each billing cycle.</li>
           <li><strong>Principal Paid</strong> — The portion of your payment that actually reduces your balance (payment minus interest).</li>
           <li><strong>Months to Pay Off</strong> — How long it takes to reach $0 at your current payment amount. Assumes no new charges.</li>
         </ul>
+
+        <h2>What Does Your APR Actually Cost? A Real Comparison</h2>
+        <p>The table below shows the monthly interest charge and total cost of carrying a <strong>$5,000 balance</strong> at different APRs, paying $150/month:</p>
+        <table style="width:100%;border-collapse:collapse;font-size:.9rem;margin:1rem 0 1.5rem;">
+          <thead>
+            <tr style="background:#F3F4F6;">
+              <th style="padding:.6rem .75rem;text-align:left;border-bottom:2px solid #E5E7EB;">APR</th>
+              <th style="padding:.6rem .75rem;text-align:right;border-bottom:2px solid #E5E7EB;">Monthly Interest</th>
+              <th style="padding:.6rem .75rem;text-align:right;border-bottom:2px solid #E5E7EB;">Months to Pay Off</th>
+              <th style="padding:.6rem .75rem;text-align:right;border-bottom:2px solid #E5E7EB;">Total Interest Paid</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td style="padding:.5rem .75rem;border-bottom:1px solid #F3F4F6;">15%</td><td style="padding:.5rem .75rem;text-align:right;border-bottom:1px solid #F3F4F6;">$62.50</td><td style="padding:.5rem .75rem;text-align:right;border-bottom:1px solid #F3F4F6;">~41 months</td><td style="padding:.5rem .75rem;text-align:right;border-bottom:1px solid #F3F4F6;">~$1,080</td></tr>
+            <tr style="background:#FAFAFA;"><td style="padding:.5rem .75rem;border-bottom:1px solid #F3F4F6;">20%</td><td style="padding:.5rem .75rem;text-align:right;border-bottom:1px solid #F3F4F6;">$83.33</td><td style="padding:.5rem .75rem;text-align:right;border-bottom:1px solid #F3F4F6;">~48 months</td><td style="padding:.5rem .75rem;text-align:right;border-bottom:1px solid #F3F4F6;">~$1,940</td></tr>
+            <tr><td style="padding:.5rem .75rem;border-bottom:1px solid #F3F4F6;">25%</td><td style="padding:.5rem .75rem;text-align:right;border-bottom:1px solid #F3F4F6;">$104.17</td><td style="padding:.5rem .75rem;text-align:right;border-bottom:1px solid #F3F4F6;">~62 months</td><td style="padding:.5rem .75rem;text-align:right;border-bottom:1px solid #F3F4F6;">~$3,280</td></tr>
+            <tr style="background:#FAFAFA;"><td style="padding:.5rem .75rem;">30%</td><td style="padding:.5rem .75rem;text-align:right;">$125.00</td><td style="padding:.5rem .75rem;text-align:right;">Never paid off*</td><td style="padding:.5rem .75rem;text-align:right;">—</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:.8125rem;color:#6B7280;">*At 30% APR, a $150 payment on a $5,000 balance barely covers monthly interest ($125). Only $25/month goes to principal — it takes over 20 years to pay off. Increasing payment to $200 resolves this.</p>
 
         <h2>Why Calculating Your Credit Card APR Matters</h2>
         <p>At a 22.99% APR on a $3,500 balance, you're paying ~$67/month in interest alone. A minimum payment of $75 only reduces your balance by ~$8 per month — it would take over 20 years to pay off at the minimum. <strong>Calculating credit card interest</strong> with the right tool helps you make a real payoff plan instead of guessing.</p>
@@ -345,11 +366,6 @@
           <div class="tool-faq__item">
             <div class="tool-faq__question">Is 22.99% APR high for a credit card?</div>
             <div class="tool-faq__answer">As of 2024, the average US credit card APR is approximately 20–27%. A 22.99% APR is within the typical range for general-purpose credit cards. Cards for people with excellent credit may offer 15–18%, while store cards and secured cards often exceed 25–29%. The best rate is always 0% — achieved by paying your full balance each month.</div>
-          </div>
-
-          <div class="tool-faq__item">
-            <div class="tool-faq__question">How do I calculate my APR interest on a credit card?</div>
-            <div class="tool-faq__answer">Divide your APR by 12 to get your monthly interest rate, then multiply by your current balance. For example: 24% APR ÷ 12 = 2% per month. On a $2,000 balance that's $40 in interest. Our APR calculator for credit cards does this automatically — just enter your balance, APR, and monthly payment.</div>
           </div>
 
           <div class="tool-faq__item">
@@ -404,3 +420,50 @@
 </section>
 
 </div><!-- /.lpc-wrap -->
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Credit Card Interest Calculator",
+  "url": "https://quickcalclab.com/credit-card-interest-calculator/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web Browser",
+  "description": "Calculate your monthly credit card interest charge, how much of your payment reduces principal, and how many months to pay off your balance.",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": { "@type": "Organization", "name": "QuickCalc Lab", "url": "https://quickcalclab.com" }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How is credit card interest calculated?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Credit card interest is calculated using your Daily Periodic Rate (DPR): DPR = APR ÷ 365. Your monthly interest charge = average daily balance × DPR × days in billing cycle. For example, a $1,000 balance at 24% APR: DPR = 0.0658%, monthly interest ≈ $20."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long will it take to pay off my credit card?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It depends on your balance, APR, and monthly payment. Paying only the minimum (often 1–2% of balance) can take decades. For a $3,000 balance at 20% APR, paying $100/month takes about 4 years and costs ~$1,800 in interest. Paying $200/month cuts it to under 18 months."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is a good APR for a credit card?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "As of 2024, the average credit card APR in the U.S. is around 20–24%. Rates below 20% are considered good. Cards for excellent credit (750+) may offer 15–18% APR. The best strategy is to pay your full balance monthly to avoid interest entirely."
+      }
+    }
+  ]
+}
+</script>

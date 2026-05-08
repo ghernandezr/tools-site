@@ -2,7 +2,7 @@
      TOOL 5: TIP CALCULATOR — Plugin Style Edition
      Slug: /tip-calculator/
      Primary keyword: "tip calculator"
-     RankMath Title: Tip Calculator — Calculate Tip Amount & Split Bill | ToolsHub
+     RankMath Title: Tip Calculator — Calculate Tip Amount & Split Bill | QuickCalc Lab
      RankMath Meta: Free tip calculator: calculate your tip amount by percentage, see total bill, and split evenly among any number of people. No sign-up required.
      =============================================================
      CSS: theme/assets/css/tools.css (classes .fcc-* reused)
@@ -290,6 +290,26 @@
           <li><strong>Hair salon:</strong> 15–20%</li>
         </ul>
 
+        <h2>Tipping Outside the United States</h2>
+        <p>Tipping customs vary significantly by country. Using US norms abroad can cause confusion, and in some places is actually considered rude:</p>
+        <ul>
+          <li><strong>Canada</strong> — Similar to the US: 15–20% is standard at restaurants.</li>
+          <li><strong>United Kingdom</strong> — 10–12.5% is typical. Many restaurants add a "service charge" automatically — check before tipping again.</li>
+          <li><strong>Europe (France, Germany, Spain)</strong> — Tipping is appreciated but not expected. Rounding up the bill or leaving small change (5–10%) is common.</li>
+          <li><strong>Japan</strong> — Tipping is generally not practiced and can be considered impolite. Excellent service is a cultural standard, not something paid extra for.</li>
+          <li><strong>Mexico</strong> — 10–15% is standard at restaurants. In tourist areas, 15–20% is appreciated. Always tip in local currency when possible.</li>
+          <li><strong>Australia</strong> — No tipping requirement, but 10% is appreciated for good service at restaurants.</li>
+        </ul>
+
+        <h2>What If the Service Was Poor?</h2>
+        <p>This is genuinely debated. A few honest perspectives:</p>
+        <ul>
+          <li><strong>If the issue was with the kitchen, not the server</strong> — Tip normally. Servers don't control food speed or quality in most restaurants.</li>
+          <li><strong>If the server was rude or inattentive</strong> — A reduced tip (10%) is a clear signal without being punitive. Leaving nothing is rarely constructive.</li>
+          <li><strong>If the experience was genuinely unacceptable</strong> — Speak to a manager before reducing or skipping a tip. It gives the restaurant a chance to respond.</li>
+          <li><strong>In restaurants with auto-gratuity (18–20% added for large parties)</strong> — You can ask for it to be removed if service was genuinely poor, but this is uncommon.</li>
+        </ul>
+
         <!-- INTERNAL LINKS -->
         <h2>Related Tools</h2>
         <ul>
@@ -313,13 +333,18 @@
           </div>
 
           <div class="tool-faq__item">
-            <div class="tool-faq__question">Should I tip on the pre-tax or post-tax amount?</div>
-            <div class="tool-faq__answer">There's no universal rule. Most people tip on the pre-tax subtotal, which is what the server actually provided service on. Some tip on the total bill for simplicity. The difference on a $50 bill with 8% tax and 20% tip is $0.80 — minimal either way.</div>
+            <div class="tool-faq__question">What is a tip on a $100 bill at 20%?</div>
+            <div class="tool-faq__answer">20% of $100 = $20. Your total would be $120. Split among 4 people, each person pays $30 total ($25 for food + $5 tip per person).</div>
           </div>
 
           <div class="tool-faq__item">
-            <div class="tool-faq__question">What is a tip on a $100 bill at 20%?</div>
-            <div class="tool-faq__answer">20% of $100 = $20. Your total would be $120. Split among 4 people, each person pays $30 total ($25 for food + $5 tip per person).</div>
+            <div class="tool-faq__question">Do you tip on the pre-tax or post-tax amount?</div>
+            <div class="tool-faq__answer">Most etiquette guidelines say to tip on the pre-tax subtotal since that reflects the actual service cost. However, tipping on the total (including tax) is common for simplicity. On a $60 meal with 8% tax, the difference between tipping on $60 vs $64.80 at 20% is less than $1. Either approach is widely accepted.</div>
+          </div>
+
+          <div class="tool-faq__item">
+            <div class="tool-faq__question">Is it OK to not tip at a restaurant?</div>
+            <div class="tool-faq__answer">In the US, servers typically earn $2.13/hour (federal tipped minimum wage) and rely on tips for the majority of their income. Leaving no tip for standard service is generally considered poor etiquette. If the experience was problematic, a reduced tip (10%) or speaking with a manager is usually more appropriate than leaving nothing.</div>
           </div>
         </div>
 
@@ -369,3 +394,50 @@
 </section>
 
 </div><!-- /.lpc-wrap -->
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Tip Calculator",
+  "url": "https://quickcalclab.com/tip-calculator/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web Browser",
+  "description": "Calculate tip amount by percentage, see total bill including tip, and split evenly among any number of people.",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": { "@type": "Organization", "name": "QuickCalc Lab", "url": "https://quickcalclab.com" }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How much should I tip at a restaurant?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In the United States, 18–20% is standard for good service at sit-down restaurants. For exceptional service, 25% or more is appropriate. For counter service or takeout, 10–15% is common."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I calculate a 20% tip quickly in my head?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Move the decimal point one place left to find 10%, then double it for 20%. For a $75 bill: 10% = $7.50, so 20% = $15.00. For 15%, take 10% and add half: $7.50 + $3.75 = $11.25."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is a tip on a $100 bill at 20%?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "20% of $100 = $20 tip. Total bill = $120. Split among 4 people, each person pays $30 ($25 food + $5 tip per person)."
+      }
+    }
+  ]
+}
+</script>

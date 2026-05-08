@@ -212,29 +212,89 @@
     var result, label;
     var r4 = function (n) { return Math.round(n * 10000) / 10000; };
     if (type === 'length') {
-      if (mode === 'km-to-mi') {
-        result = value * 0.621371;
-        label = value + ' km = ' + r4(result) + ' miles';
-      } else {
-        result = value * 1.60934;
-        label = value + ' miles = ' + r4(result) + ' km';
-      }
+      if (mode === 'km-to-mi') { result = value * 0.621371; label = value + ' km = ' + r4(result) + ' miles'; }
+      else if (mode === 'mi-to-km') { result = value * 1.60934; label = value + ' miles = ' + r4(result) + ' km'; }
+      else if (mode === 'm-to-ft') { result = value * 3.28084; label = value + ' m = ' + r4(result) + ' ft'; }
+      else if (mode === 'ft-to-m') { result = value * 0.3048; label = value + ' ft = ' + r4(result) + ' m'; }
+      else if (mode === 'cm-to-in') { result = value * 0.393701; label = value + ' cm = ' + r4(result) + ' in'; }
+      else if (mode === 'in-to-cm') { result = value * 2.54; label = value + ' in = ' + r4(result) + ' cm'; }
+      else if (mode === 'm-to-yd') { result = value * 1.09361; label = value + ' m = ' + r4(result) + ' yd'; }
+      else if (mode === 'yd-to-m') { result = value * 0.9144; label = value + ' yd = ' + r4(result) + ' m'; }
+      else { return { error: 'invalid_mode' }; }
     } else if (type === 'weight') {
-      if (mode === 'kg-to-lbs') {
-        result = value * 2.20462;
-        label = value + ' kg = ' + r4(result) + ' lbs';
-      } else {
-        result = value * 0.453592;
-        label = value + ' lbs = ' + r4(result) + ' kg';
-      }
+      if (mode === 'kg-to-lbs') { result = value * 2.20462; label = value + ' kg = ' + r4(result) + ' lbs'; }
+      else if (mode === 'lbs-to-kg') { result = value * 0.453592; label = value + ' lbs = ' + r4(result) + ' kg'; }
+      else if (mode === 'g-to-oz') { result = value * 0.035274; label = value + ' g = ' + r4(result) + ' oz'; }
+      else if (mode === 'oz-to-g') { result = value * 28.3495; label = value + ' oz = ' + r4(result) + ' g'; }
+      else if (mode === 'kg-to-oz') { result = value * 35.274; label = value + ' kg = ' + r4(result) + ' oz'; }
+      else if (mode === 'oz-to-kg') { result = value * 0.0283495; label = value + ' oz = ' + r4(result) + ' kg'; }
+      else if (mode === 'stone-to-lbs') { result = value * 14; label = value + ' stone = ' + r4(result) + ' lbs'; }
+      else if (mode === 'lbs-to-stone') { result = value / 14; label = value + ' lbs = ' + r4(result) + ' stone'; }
+      else { return { error: 'invalid_mode' }; }
     } else if (type === 'temp') {
-      if (mode === 'c-to-f') {
-        result = (value * 9 / 5) + 32;
-        label = value + '°C = ' + r4(result) + '°F';
-      } else {
-        result = (value - 32) * 5 / 9;
-        label = value + '°F = ' + r4(result) + '°C';
-      }
+      if (mode === 'c-to-f') { result = (value * 9 / 5) + 32; label = value + '°C = ' + r4(result) + '°F'; }
+      else if (mode === 'f-to-c') { result = (value - 32) * 5 / 9; label = value + '°F = ' + r4(result) + '°C'; }
+      else if (mode === 'c-to-k') { result = value + 273.15; label = value + '°C = ' + r4(result) + ' K'; }
+      else if (mode === 'k-to-c') { result = value - 273.15; label = value + ' K = ' + r4(result) + '°C'; }
+      else if (mode === 'f-to-k') { result = (value - 32) * 5 / 9 + 273.15; label = value + '°F = ' + r4(result) + ' K'; }
+      else if (mode === 'k-to-f') { result = (value - 273.15) * 9 / 5 + 32; label = value + ' K = ' + r4(result) + '°F'; }
+      else { return { error: 'invalid_mode' }; }
+    } else if (type === 'speed') {
+      if (mode === 'kmh-to-mph') { result = value * 0.621371; label = value + ' km/h = ' + r4(result) + ' mph'; }
+      else if (mode === 'mph-to-kmh') { result = value * 1.60934; label = value + ' mph = ' + r4(result) + ' km/h'; }
+      else if (mode === 'ms-to-mph') { result = value * 2.23694; label = value + ' m/s = ' + r4(result) + ' mph'; }
+      else if (mode === 'mph-to-ms') { result = value * 0.44704; label = value + ' mph = ' + r4(result) + ' m/s'; }
+      else if (mode === 'knots-to-mph') { result = value * 1.15078; label = value + ' knots = ' + r4(result) + ' mph'; }
+      else if (mode === 'mph-to-knots') { result = value * 0.868976; label = value + ' mph = ' + r4(result) + ' knots'; }
+      else { return { error: 'invalid_mode' }; }
+    } else if (type === 'volume') {
+      if (mode === 'l-to-gal') { result = value * 0.264172; label = value + ' L = ' + r4(result) + ' gal'; }
+      else if (mode === 'gal-to-l') { result = value * 3.78541; label = value + ' gal = ' + r4(result) + ' L'; }
+      else if (mode === 'ml-to-floz') { result = value * 0.033814; label = value + ' mL = ' + r4(result) + ' fl oz'; }
+      else if (mode === 'floz-to-ml') { result = value * 29.5735; label = value + ' fl oz = ' + r4(result) + ' mL'; }
+      else if (mode === 'cups-to-ml') { result = value * 236.588; label = value + ' cups = ' + r4(result) + ' mL'; }
+      else if (mode === 'ml-to-cups') { result = value / 236.588; label = value + ' mL = ' + r4(result) + ' cups'; }
+      else if (mode === 'l-to-qt') { result = value * 1.05669; label = value + ' L = ' + r4(result) + ' qt'; }
+      else if (mode === 'qt-to-l') { result = value * 0.946353; label = value + ' qt = ' + r4(result) + ' L'; }
+      else { return { error: 'invalid_mode' }; }
+    } else if (type === 'area') {
+      if (mode === 'm2-to-ft2') { result = value * 10.7639; label = value + ' m² = ' + r4(result) + ' ft²'; }
+      else if (mode === 'ft2-to-m2') { result = value * 0.092903; label = value + ' ft² = ' + r4(result) + ' m²'; }
+      else if (mode === 'acres-to-m2') { result = value * 4046.86; label = value + ' acres = ' + r4(result) + ' m²'; }
+      else if (mode === 'm2-to-acres') { result = value / 4046.86; label = value + ' m² = ' + r4(result) + ' acres'; }
+      else if (mode === 'ha-to-acres') { result = value * 2.47105; label = value + ' ha = ' + r4(result) + ' acres'; }
+      else if (mode === 'acres-to-ha') { result = value / 2.47105; label = value + ' acres = ' + r4(result) + ' ha'; }
+      else if (mode === 'km2-to-mi2') { result = value * 0.386102; label = value + ' km² = ' + r4(result) + ' mi²'; }
+      else if (mode === 'mi2-to-km2') { result = value * 2.58999; label = value + ' mi² = ' + r4(result) + ' km²'; }
+      else { return { error: 'invalid_mode' }; }
+    } else if (type === 'cooking') {
+      if (mode === 'tbsp-to-ml') { result = value * 14.7868; label = value + ' tbsp = ' + r4(result) + ' mL'; }
+      else if (mode === 'ml-to-tbsp') { result = value / 14.7868; label = value + ' mL = ' + r4(result) + ' tbsp'; }
+      else if (mode === 'tsp-to-ml') { result = value * 4.92892; label = value + ' tsp = ' + r4(result) + ' mL'; }
+      else if (mode === 'ml-to-tsp') { result = value / 4.92892; label = value + ' mL = ' + r4(result) + ' tsp'; }
+      else if (mode === 'cups-to-oz') { result = value * 8; label = value + ' cups = ' + r4(result) + ' fl oz'; }
+      else if (mode === 'oz-to-cups') { result = value / 8; label = value + ' fl oz = ' + r4(result) + ' cups'; }
+      else if (mode === 'cups-to-tbsp') { result = value * 16; label = value + ' cups = ' + r4(result) + ' tbsp'; }
+      else if (mode === 'tbsp-to-cups') { result = value / 16; label = value + ' tbsp = ' + r4(result) + ' cups'; }
+      else { return { error: 'invalid_mode' }; }
+    } else if (type === 'data') {
+      if (mode === 'gb-to-mb') { result = value * 1024; label = value + ' GB = ' + r4(result) + ' MB'; }
+      else if (mode === 'mb-to-gb') { result = value / 1024; label = value + ' MB = ' + r4(result) + ' GB'; }
+      else if (mode === 'tb-to-gb') { result = value * 1024; label = value + ' TB = ' + r4(result) + ' GB'; }
+      else if (mode === 'gb-to-tb') { result = value / 1024; label = value + ' GB = ' + r4(result) + ' TB'; }
+      else if (mode === 'kb-to-mb') { result = value / 1024; label = value + ' KB = ' + r4(result) + ' MB'; }
+      else if (mode === 'mb-to-kb') { result = value * 1024; label = value + ' MB = ' + r4(result) + ' KB'; }
+      else if (mode === 'tb-to-mb') { result = value * 1048576; label = value + ' TB = ' + r4(result) + ' MB'; }
+      else if (mode === 'mb-to-tb') { result = value / 1048576; label = value + ' MB = ' + r4(result) + ' TB'; }
+      else { return { error: 'invalid_mode' }; }
+    } else if (type === 'pressure') {
+      if (mode === 'psi-to-kpa') { result = value * 6.89476; label = value + ' PSI = ' + r4(result) + ' kPa'; }
+      else if (mode === 'kpa-to-psi') { result = value / 6.89476; label = value + ' kPa = ' + r4(result) + ' PSI'; }
+      else if (mode === 'bar-to-psi') { result = value * 14.5038; label = value + ' bar = ' + r4(result) + ' PSI'; }
+      else if (mode === 'psi-to-bar') { result = value / 14.5038; label = value + ' PSI = ' + r4(result) + ' bar'; }
+      else if (mode === 'atm-to-psi') { result = value * 14.696; label = value + ' atm = ' + r4(result) + ' PSI'; }
+      else if (mode === 'psi-to-atm') { result = value / 14.696; label = value + ' PSI = ' + r4(result) + ' atm'; }
+      else { return { error: 'invalid_mode' }; }
     } else {
       return { error: 'invalid_type' };
     }
@@ -1194,12 +1254,15 @@
     var els = {
       tabBtns: document.querySelectorAll('.unc-tab-btn'),
       panels: document.querySelectorAll('.unc-panel'),
-      lengthMode: el('unc-length-mode'),
-      lengthValue: el('unc-length-value'),
-      weightMode: el('unc-weight-mode'),
-      weightValue: el('unc-weight-value'),
-      tempMode: el('unc-temp-mode'),
-      tempValue: el('unc-temp-value'),
+      lengthMode: el('unc-length-mode'), lengthValue: el('unc-length-value'),
+      weightMode: el('unc-weight-mode'), weightValue: el('unc-weight-value'),
+      tempMode: el('unc-temp-mode'), tempValue: el('unc-temp-value'),
+      speedMode: el('unc-speed-mode'), speedValue: el('unc-speed-value'),
+      volumeMode: el('unc-volume-mode'), volumeValue: el('unc-volume-value'),
+      areaMode: el('unc-area-mode'), areaValue: el('unc-area-value'),
+      cookingMode: el('unc-cooking-mode'), cookingValue: el('unc-cooking-value'),
+      dataMode: el('unc-data-mode'), dataValue: el('unc-data-value'),
+      pressureMode: el('unc-pressure-mode'), pressureValue: el('unc-pressure-value'),
       kpiResult: el('unc-kpi-result'),
       kpiInput: el('unc-kpi-input'),
       kpiFormula: el('unc-kpi-formula'),
@@ -1212,44 +1275,82 @@
 
     var refData = {
       'unc-length': {
-        'km-to-mi': [
-          ['1 km', '0.6214 mi'], ['5 km', '3.107 mi'],
-          ['10 km', '6.214 mi'], ['42.195 km', '26.219 mi']
-        ],
-        'mi-to-km': [
-          ['1 mi', '1.6093 km'], ['5 mi', '8.047 km'],
-          ['10 mi', '16.093 km'], ['26.219 mi', '42.195 km']
-        ]
+        'km-to-mi': [['1 km', '0.6214 mi'], ['5 km', '3.107 mi'], ['10 km', '6.214 mi'], ['42.195 km', '26.219 mi']],
+        'mi-to-km': [['1 mi', '1.6093 km'], ['5 mi', '8.047 km'], ['10 mi', '16.093 km'], ['26.219 mi', '42.195 km']],
+        'm-to-ft': [['1 m', '3.2808 ft'], ['1.8 m', '5.906 ft'], ['10 m', '32.808 ft'], ['100 m', '328.08 ft']],
+        'ft-to-m': [['1 ft', '0.3048 m'], ['5 ft', '1.524 m'], ['6 ft', '1.8288 m'], ['10 ft', '3.048 m']],
+        'cm-to-in': [['1 cm', '0.3937 in'], ['10 cm', '3.937 in'], ['30 cm', '11.811 in'], ['100 cm', '39.37 in']],
+        'in-to-cm': [['1 in', '2.54 cm'], ['6 in', '15.24 cm'], ['12 in', '30.48 cm'], ['36 in', '91.44 cm']]
       },
       'unc-weight': {
-        'kg-to-lbs': [
-          ['50 kg', '110.23 lbs'], ['70 kg', '154.32 lbs'],
-          ['80 kg', '176.37 lbs'], ['100 kg', '220.46 lbs']
-        ],
-        'lbs-to-kg': [
-          ['100 lbs', '45.36 kg'], ['150 lbs', '68.04 kg'],
-          ['175 lbs', '79.38 kg'], ['200 lbs', '90.72 kg']
-        ]
+        'kg-to-lbs': [['50 kg', '110.23 lbs'], ['70 kg', '154.32 lbs'], ['80 kg', '176.37 lbs'], ['100 kg', '220.46 lbs']],
+        'lbs-to-kg': [['100 lbs', '45.36 kg'], ['150 lbs', '68.04 kg'], ['175 lbs', '79.38 kg'], ['200 lbs', '90.72 kg']],
+        'g-to-oz': [['28 g', '0.9877 oz'], ['100 g', '3.527 oz'], ['250 g', '8.818 oz'], ['500 g', '17.637 oz']],
+        'oz-to-g': [['1 oz', '28.35 g'], ['4 oz', '113.4 g'], ['8 oz', '226.8 g'], ['16 oz', '453.59 g']],
+        'stone-to-lbs': [['8 stone', '112 lbs'], ['10 stone', '140 lbs'], ['12 stone', '168 lbs'], ['14 stone', '196 lbs']],
+        'lbs-to-stone': [['140 lbs', '10 stone'], ['154 lbs', '11 stone'], ['168 lbs', '12 stone'], ['196 lbs', '14 stone']]
       },
       'unc-temp': {
-        'c-to-f': [
-          ['0°C', '32°F'], ['20°C', '68°F'],
-          ['37°C', '98.6°F'], ['100°C', '212°F']
-        ],
-        'f-to-c': [
-          ['32°F', '0°C'], ['68°F', '20°C'],
-          ['98.6°F', '37°C'], ['212°F', '100°C']
-        ]
+        'c-to-f': [['0°C', '32°F'], ['20°C', '68°F'], ['37°C', '98.6°F'], ['100°C', '212°F']],
+        'f-to-c': [['32°F', '0°C'], ['68°F', '20°C'], ['98.6°F', '37°C'], ['212°F', '100°C']],
+        'c-to-k': [['0°C', '273.15 K'], ['20°C', '293.15 K'], ['37°C', '310.15 K'], ['100°C', '373.15 K']],
+        'k-to-c': [['273.15 K', '0°C'], ['293.15 K', '20°C'], ['310.15 K', '37°C'], ['373.15 K', '100°C']]
+      },
+      'unc-speed': {
+        'kmh-to-mph': [['60 km/h', '37.28 mph'], ['100 km/h', '62.14 mph'], ['120 km/h', '74.56 mph'], ['130 km/h', '80.78 mph']],
+        'mph-to-kmh': [['30 mph', '48.28 km/h'], ['55 mph', '88.51 km/h'], ['60 mph', '96.56 km/h'], ['70 mph', '112.65 km/h']],
+        'knots-to-mph': [['1 knot', '1.1508 mph'], ['10 knots', '11.508 mph'], ['100 knots', '115.08 mph'], ['500 knots', '575.39 mph']],
+        'ms-to-mph': [['1 m/s', '2.237 mph'], ['9 m/s', '20.13 mph'], ['30 m/s', '67.11 mph'], ['343 m/s', '767 mph']]
+      },
+      'unc-volume': {
+        'l-to-gal': [['1 L', '0.2642 gal'], ['10 L', '2.6417 gal'], ['40 L', '10.567 gal'], ['100 L', '26.417 gal']],
+        'gal-to-l': [['1 gal', '3.7854 L'], ['5 gal', '18.927 L'], ['10 gal', '37.854 L'], ['20 gal', '75.708 L']],
+        'ml-to-floz': [['30 mL', '1.014 fl oz'], ['100 mL', '3.381 fl oz'], ['250 mL', '8.454 fl oz'], ['500 mL', '16.907 fl oz']],
+        'cups-to-ml': [['0.5 cups', '118.3 mL'], ['1 cup', '236.6 mL'], ['2 cups', '473.2 mL'], ['4 cups', '946.4 mL']]
+      },
+      'unc-area': {
+        'm2-to-ft2': [['10 m²', '107.64 ft²'], ['50 m²', '538.2 ft²'], ['100 m²', '1076.4 ft²'], ['200 m²', '2152.8 ft²']],
+        'ft2-to-m2': [['100 ft²', '9.29 m²'], ['500 ft²', '46.45 m²'], ['1000 ft²', '92.9 m²'], ['2000 ft²', '185.8 m²']],
+        'ha-to-acres': [['1 ha', '2.471 acres'], ['5 ha', '12.355 acres'], ['10 ha', '24.71 acres'], ['100 ha', '247.1 acres']],
+        'acres-to-ha': [['1 acre', '0.4047 ha'], ['5 acres', '2.023 ha'], ['10 acres', '4.047 ha'], ['100 acres', '40.47 ha']]
+      },
+      'unc-cooking': {
+        'tbsp-to-ml': [['1 tbsp', '14.79 mL'], ['2 tbsp', '29.57 mL'], ['4 tbsp', '59.15 mL'], ['8 tbsp', '118.3 mL']],
+        'tsp-to-ml': [['1 tsp', '4.929 mL'], ['2 tsp', '9.858 mL'], ['3 tsp', '14.79 mL'], ['4 tsp', '19.72 mL']],
+        'cups-to-tbsp': [['0.25 cup', '4 tbsp'], ['0.5 cup', '8 tbsp'], ['1 cup', '16 tbsp'], ['2 cups', '32 tbsp']],
+        'cups-to-oz': [['0.5 cup', '4 fl oz'], ['1 cup', '8 fl oz'], ['2 cups', '16 fl oz'], ['4 cups', '32 fl oz']]
+      },
+      'unc-data': {
+        'gb-to-mb': [['1 GB', '1024 MB'], ['8 GB', '8192 MB'], ['16 GB', '16384 MB'], ['64 GB', '65536 MB']],
+        'tb-to-gb': [['1 TB', '1024 GB'], ['2 TB', '2048 GB'], ['4 TB', '4096 GB'], ['8 TB', '8192 GB']],
+        'mb-to-gb': [['512 MB', '0.5 GB'], ['1024 MB', '1 GB'], ['2048 MB', '2 GB'], ['4096 MB', '4 GB']],
+        'gb-to-tb': [['512 GB', '0.5 TB'], ['1024 GB', '1 TB'], ['2048 GB', '2 TB'], ['4096 GB', '4 TB']]
+      },
+      'unc-pressure': {
+        'psi-to-kpa': [['14.7 PSI', '101.3 kPa'], ['30 PSI', '206.8 kPa'], ['35 PSI', '241.3 kPa'], ['100 PSI', '689.5 kPa']],
+        'kpa-to-psi': [['101.3 kPa', '14.7 PSI'], ['207 kPa', '30 PSI'], ['241 kPa', '34.96 PSI'], ['690 kPa', '100.05 PSI']],
+        'bar-to-psi': [['1 bar', '14.5 PSI'], ['2 bar', '29 PSI'], ['2.4 bar', '34.81 PSI'], ['3 bar', '43.51 PSI']],
+        'psi-to-bar': [['15 PSI', '1.034 bar'], ['30 PSI', '2.069 bar'], ['35 PSI', '2.413 bar'], ['100 PSI', '6.895 bar']]
       }
     };
 
     var activeTab = 'unc-length';
 
+    var modeEls = {
+      'unc-length': { mode: els.lengthMode, value: els.lengthValue, type: 'length' },
+      'unc-weight': { mode: els.weightMode, value: els.weightValue, type: 'weight' },
+      'unc-temp': { mode: els.tempMode, value: els.tempValue, type: 'temp' },
+      'unc-speed': { mode: els.speedMode, value: els.speedValue, type: 'speed' },
+      'unc-volume': { mode: els.volumeMode, value: els.volumeValue, type: 'volume' },
+      'unc-area': { mode: els.areaMode, value: els.areaValue, type: 'area' },
+      'unc-cooking': { mode: els.cookingMode, value: els.cookingValue, type: 'cooking' },
+      'unc-data': { mode: els.dataMode, value: els.dataValue, type: 'data' },
+      'unc-pressure': { mode: els.pressureMode, value: els.pressureValue, type: 'pressure' }
+    };
+
     function getActiveMode() {
-      if (activeTab === 'unc-length') return els.lengthMode ? els.lengthMode.value : 'km-to-mi';
-      if (activeTab === 'unc-weight') return els.weightMode ? els.weightMode.value : 'kg-to-lbs';
-      if (activeTab === 'unc-temp') return els.tempMode ? els.tempMode.value : 'c-to-f';
-      return '';
+      var m = modeEls[activeTab];
+      return m && m.mode ? m.mode.value : '';
     }
 
     function updateRefTable() {
@@ -1270,58 +1371,16 @@
     }
 
     function calculate() {
-      var value, mode, result, fromLabel, toLabel, formulaLabel;
-
-      if (activeTab === 'unc-length') {
-        value = parseFloat(els.lengthValue ? els.lengthValue.value : '');
-        mode = els.lengthMode ? els.lengthMode.value : 'km-to-mi';
-        if (isNaN(value)) { resetUI(); return; }
-        if (mode === 'km-to-mi') {
-          result = value * 0.621371;
-          fromLabel = fmtUnit(value) + ' km';
-          toLabel = fmtUnit(result) + ' mi';
-          formulaLabel = '× 0.621371';
-        } else {
-          result = value * 1.60934;
-          fromLabel = fmtUnit(value) + ' mi';
-          toLabel = fmtUnit(result) + ' km';
-          formulaLabel = '× 1.60934';
-        }
-
-      } else if (activeTab === 'unc-weight') {
-        value = parseFloat(els.weightValue ? els.weightValue.value : '');
-        mode = els.weightMode ? els.weightMode.value : 'kg-to-lbs';
-        if (isNaN(value)) { resetUI(); return; }
-        if (mode === 'kg-to-lbs') {
-          result = value * 2.20462;
-          fromLabel = fmtUnit(value) + ' kg';
-          toLabel = fmtUnit(result) + ' lbs';
-          formulaLabel = '× 2.20462';
-        } else {
-          result = value * 0.453592;
-          fromLabel = fmtUnit(value) + ' lbs';
-          toLabel = fmtUnit(result) + ' kg';
-          formulaLabel = '× 0.453592';
-        }
-
-      } else if (activeTab === 'unc-temp') {
-        value = parseFloat(els.tempValue ? els.tempValue.value : '');
-        mode = els.tempMode ? els.tempMode.value : 'c-to-f';
-        if (isNaN(value)) { resetUI(); return; }
-        if (mode === 'c-to-f') {
-          result = (value * 9 / 5) + 32;
-          fromLabel = fmtUnit(value, 2) + '°C';
-          toLabel = fmtUnit(result, 2) + '°F';
-          formulaLabel = '(× 9/5) + 32';
-        } else {
-          result = (value - 32) * 5 / 9;
-          fromLabel = fmtUnit(value, 2) + '°F';
-          toLabel = fmtUnit(result, 2) + '°C';
-          formulaLabel = '(− 32) × 5/9';
-        }
-      } else {
-        return;
-      }
+      var m = modeEls[activeTab];
+      if (!m) return;
+      var value = parseFloat(m.value ? m.value.value : '');
+      var mode = m.mode ? m.mode.value : '';
+      if (isNaN(value)) { resetUI(); return; }
+      var conv = window.convertUnit(m.type, value, mode);
+      if (!conv || conv.error) { resetUI(); return; }
+      var fromLabel = conv.label.split(' = ')[0];
+      var toLabel = conv.label.split(' = ')[1] || conv.label;
+      var formulaLabel = mode.replace(/-/g, ' → ');
 
       if (els.kpiResult) els.kpiResult.textContent = toLabel;
       if (els.kpiInput) els.kpiInput.textContent = fromLabel;
@@ -1351,31 +1410,28 @@
     });
 
     // Mode selects update reference table and recalculate
-    [els.lengthMode, els.weightMode, els.tempMode].forEach(function (sel) {
-      if (sel) {
-        sel.addEventListener('change', function () {
-          updateRefTable();
-          calculate();
-        });
-      }
+    Object.keys(modeEls).forEach(function (tab) {
+      var sel = modeEls[tab].mode;
+      if (sel) sel.addEventListener('change', function () { updateRefTable(); calculate(); });
     });
 
-    // Value inputs trigger real-time calculation (debounced for performance)
-    [els.lengthValue, els.weightValue, els.tempValue].forEach(function (inp) {
+    // Value inputs trigger real-time calculation (debounced)
+    Object.keys(modeEls).forEach(function (tab) {
+      var inp = modeEls[tab].value;
       if (inp) inp.addEventListener('input', debounce(calculate, 150));
     });
 
-    // Preset helpers (exposed globally for onclick attributes)
+    // Preset helpers (exposed globally for onclick attributes in HTML)
     window.UNC = {
-      setLength: function (val) {
-        if (els.lengthValue) { els.lengthValue.value = val; calculate(); }
-      },
-      setWeight: function (val) {
-        if (els.weightValue) { els.weightValue.value = val; calculate(); }
-      },
-      setTemp: function (val) {
-        if (els.tempValue) { els.tempValue.value = val; calculate(); }
-      }
+      setLength: function (v) { if (els.lengthValue) { els.lengthValue.value = v; calculate(); } },
+      setWeight: function (v) { if (els.weightValue) { els.weightValue.value = v; calculate(); } },
+      setTemp: function (v) { if (els.tempValue) { els.tempValue.value = v; calculate(); } },
+      setSpeed: function (v) { if (els.speedValue) { els.speedValue.value = v; calculate(); } },
+      setVolume: function (v) { if (els.volumeValue) { els.volumeValue.value = v; calculate(); } },
+      setArea: function (v) { if (els.areaValue) { els.areaValue.value = v; calculate(); } },
+      setCooking: function (v) { if (els.cookingValue) { els.cookingValue.value = v; calculate(); } },
+      setData: function (v) { if (els.dataValue) { els.dataValue.value = v; calculate(); } },
+      setPressure: function (v) { if (els.pressureValue) { els.pressureValue.value = v; calculate(); } }
     };
 
     updateRefTable();

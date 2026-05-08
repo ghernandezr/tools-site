@@ -2,8 +2,8 @@
      TOOL 10: UNIT CONVERTER — Plugin Style Edition
      Slug: /unit-converter/
      Primary keyword: "unit converter"
-     RankMath Title: Unit Converter — Length, Weight & Temperature | ToolsHub
-     RankMath Meta: Free unit converter: convert km to miles, kg to lbs, Celsius to Fahrenheit and back. Instant results, no sign-up, works on any device.
+     RankMath Title: Unit Converter — Length, Weight, Temperature, Speed & More | QuickCalc Lab
+     RankMath Meta: Free unit converter: length, weight, temperature, speed, volume, area, cooking, data storage, and pressure. Instant results, no sign-up.
      =============================================================
      CSS: theme/assets/css/tools.css (classes .unc-*)
      JS:  theme/assets/js/calculators.js (initUnitConverter)
@@ -25,16 +25,16 @@
         </div>
         <h1 class="lpc-hero__title">
           Unit Converter<br>
-          <span>Length, Weight &amp; Temperature</span>
+          <span>Length, Weight, Temperature &amp; More</span>
         </h1>
         <p class="lpc-hero__desc">
-          Our free <strong>unit converter</strong> instantly converts between the most common measurement units: kilometers to miles, kilograms to pounds, and Celsius to Fahrenheit — and back. No sign-up, works on any device.
+          Our free <strong>unit converter</strong> handles 9 categories: length, weight, temperature, speed, volume, area, cooking measurements, data storage, and pressure. Instant results, no sign-up, works on any device.
         </p>
       </div>
 
       <div class="lpc-hero__badges">
         <div class="lpc-badge lpc-badge--blue">
-          <span class="lpc-badge__number">3</span>
+          <span class="lpc-badge__number">9</span>
           <span class="lpc-badge__label">Categories</span>
         </div>
         <div class="lpc-badge lpc-badge--dark">
@@ -78,7 +78,7 @@
     </header>
 
     <!-- Category Tabs -->
-    <div class="unc-tabs" role="tablist" aria-label="Conversion category">
+    <div class="unc-tabs" role="tablist" aria-label="Conversion category" style="flex-wrap:wrap;">
       <button type="button" class="unc-tab-btn unc-tab-btn--active" data-tab="unc-length" role="tab" aria-selected="true">
         <span class="unc-tab-icon">📏</span> Length
       </button>
@@ -87,6 +87,24 @@
       </button>
       <button type="button" class="unc-tab-btn" data-tab="unc-temp" role="tab" aria-selected="false">
         <span class="unc-tab-icon">🌡️</span> Temperature
+      </button>
+      <button type="button" class="unc-tab-btn" data-tab="unc-speed" role="tab" aria-selected="false">
+        <span class="unc-tab-icon">🚗</span> Speed
+      </button>
+      <button type="button" class="unc-tab-btn" data-tab="unc-volume" role="tab" aria-selected="false">
+        <span class="unc-tab-icon">🥤</span> Volume
+      </button>
+      <button type="button" class="unc-tab-btn" data-tab="unc-area" role="tab" aria-selected="false">
+        <span class="unc-tab-icon">📍</span> Area
+      </button>
+      <button type="button" class="unc-tab-btn" data-tab="unc-cooking" role="tab" aria-selected="false">
+        <span class="unc-tab-icon">🥄</span> Cooking
+      </button>
+      <button type="button" class="unc-tab-btn" data-tab="unc-data" role="tab" aria-selected="false">
+        <span class="unc-tab-icon">💾</span> Data
+      </button>
+      <button type="button" class="unc-tab-btn" data-tab="unc-pressure" role="tab" aria-selected="false">
+        <span class="unc-tab-icon">🔧</span> Pressure
       </button>
     </div>
 
@@ -101,15 +119,19 @@
           <div class="unc-panel unc-panel--active" id="unc-length" role="tabpanel">
             <h3 class="unc-section-label">Length</h3>
             <div class="unc-field-stack">
-
               <div class="unc-input-group">
                 <label class="unc-label-tech" for="unc-length-mode">Direction</label>
                 <select id="unc-length-mode" class="unc-select-field">
                   <option value="km-to-mi">Kilometers → Miles</option>
                   <option value="mi-to-km">Miles → Kilometers</option>
+                  <option value="m-to-ft">Meters → Feet</option>
+                  <option value="ft-to-m">Feet → Meters</option>
+                  <option value="cm-to-in">Centimeters → Inches</option>
+                  <option value="in-to-cm">Inches → Centimeters</option>
+                  <option value="m-to-yd">Meters → Yards</option>
+                  <option value="yd-to-m">Yards → Meters</option>
                 </select>
               </div>
-
               <div class="unc-input-group">
                 <label class="unc-label-tech" for="unc-length-value">Value</label>
                 <input type="number" id="unc-length-value" class="unc-input-field" placeholder="e.g. 100" step="any" autocomplete="off">
@@ -120,7 +142,6 @@
                   <button type="button" class="unc-preset-btn" onclick="UNC.setLength(100)">100</button>
                 </div>
               </div>
-
             </div>
           </div>
 
@@ -128,15 +149,19 @@
           <div class="unc-panel" id="unc-weight" role="tabpanel">
             <h3 class="unc-section-label">Weight</h3>
             <div class="unc-field-stack">
-
               <div class="unc-input-group">
                 <label class="unc-label-tech" for="unc-weight-mode">Direction</label>
                 <select id="unc-weight-mode" class="unc-select-field">
                   <option value="kg-to-lbs">Kilograms → Pounds</option>
                   <option value="lbs-to-kg">Pounds → Kilograms</option>
+                  <option value="g-to-oz">Grams → Ounces</option>
+                  <option value="oz-to-g">Ounces → Grams</option>
+                  <option value="kg-to-oz">Kilograms → Ounces</option>
+                  <option value="oz-to-kg">Ounces → Kilograms</option>
+                  <option value="stone-to-lbs">Stone → Pounds</option>
+                  <option value="lbs-to-stone">Pounds → Stone</option>
                 </select>
               </div>
-
               <div class="unc-input-group">
                 <label class="unc-label-tech" for="unc-weight-value">Value</label>
                 <input type="number" id="unc-weight-value" class="unc-input-field" placeholder="e.g. 70" step="any" autocomplete="off">
@@ -147,7 +172,6 @@
                   <button type="button" class="unc-preset-btn" onclick="UNC.setWeight(150)">150</button>
                 </div>
               </div>
-
             </div>
           </div>
 
@@ -155,15 +179,17 @@
           <div class="unc-panel" id="unc-temp" role="tabpanel">
             <h3 class="unc-section-label">Temperature</h3>
             <div class="unc-field-stack">
-
               <div class="unc-input-group">
                 <label class="unc-label-tech" for="unc-temp-mode">Direction</label>
                 <select id="unc-temp-mode" class="unc-select-field">
                   <option value="c-to-f">Celsius → Fahrenheit</option>
                   <option value="f-to-c">Fahrenheit → Celsius</option>
+                  <option value="c-to-k">Celsius → Kelvin</option>
+                  <option value="k-to-c">Kelvin → Celsius</option>
+                  <option value="f-to-k">Fahrenheit → Kelvin</option>
+                  <option value="k-to-f">Kelvin → Fahrenheit</option>
                 </select>
               </div>
-
               <div class="unc-input-group">
                 <label class="unc-label-tech" for="unc-temp-value">Value</label>
                 <input type="number" id="unc-temp-value" class="unc-input-field" placeholder="e.g. 25" step="any" autocomplete="off">
@@ -174,7 +200,182 @@
                   <button type="button" class="unc-preset-btn" onclick="UNC.setTemp(100)">100°</button>
                 </div>
               </div>
+            </div>
+          </div>
 
+          <!-- SPEED PANEL -->
+          <div class="unc-panel" id="unc-speed" role="tabpanel">
+            <h3 class="unc-section-label">Speed</h3>
+            <div class="unc-field-stack">
+              <div class="unc-input-group">
+                <label class="unc-label-tech" for="unc-speed-mode">Direction</label>
+                <select id="unc-speed-mode" class="unc-select-field">
+                  <option value="kmh-to-mph">km/h → mph</option>
+                  <option value="mph-to-kmh">mph → km/h</option>
+                  <option value="ms-to-mph">m/s → mph</option>
+                  <option value="mph-to-ms">mph → m/s</option>
+                  <option value="knots-to-mph">Knots → mph</option>
+                  <option value="mph-to-knots">mph → Knots</option>
+                </select>
+              </div>
+              <div class="unc-input-group">
+                <label class="unc-label-tech" for="unc-speed-value">Value</label>
+                <input type="number" id="unc-speed-value" class="unc-input-field" placeholder="e.g. 100" step="any" autocomplete="off">
+                <div class="unc-presets">
+                  <button type="button" class="unc-preset-btn" onclick="UNC.setSpeed(60)">60</button>
+                  <button type="button" class="unc-preset-btn" onclick="UNC.setSpeed(100)">100</button>
+                  <button type="button" class="unc-preset-btn" onclick="UNC.setSpeed(120)">120</button>
+                  <button type="button" class="unc-preset-btn" onclick="UNC.setSpeed(200)">200</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- VOLUME PANEL -->
+          <div class="unc-panel" id="unc-volume" role="tabpanel">
+            <h3 class="unc-section-label">Volume</h3>
+            <div class="unc-field-stack">
+              <div class="unc-input-group">
+                <label class="unc-label-tech" for="unc-volume-mode">Direction</label>
+                <select id="unc-volume-mode" class="unc-select-field">
+                  <option value="l-to-gal">Liters → US Gallons</option>
+                  <option value="gal-to-l">US Gallons → Liters</option>
+                  <option value="ml-to-floz">Milliliters → fl oz</option>
+                  <option value="floz-to-ml">fl oz → Milliliters</option>
+                  <option value="cups-to-ml">Cups → Milliliters</option>
+                  <option value="ml-to-cups">Milliliters → Cups</option>
+                  <option value="l-to-qt">Liters → Quarts</option>
+                  <option value="qt-to-l">Quarts → Liters</option>
+                </select>
+              </div>
+              <div class="unc-input-group">
+                <label class="unc-label-tech" for="unc-volume-value">Value</label>
+                <input type="number" id="unc-volume-value" class="unc-input-field" placeholder="e.g. 1" step="any" autocomplete="off">
+                <div class="unc-presets">
+                  <button type="button" class="unc-preset-btn" onclick="UNC.setVolume(1)">1</button>
+                  <button type="button" class="unc-preset-btn" onclick="UNC.setVolume(5)">5</button>
+                  <button type="button" class="unc-preset-btn" onclick="UNC.setVolume(10)">10</button>
+                  <button type="button" class="unc-preset-btn" onclick="UNC.setVolume(100)">100</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- AREA PANEL -->
+          <div class="unc-panel" id="unc-area" role="tabpanel">
+            <h3 class="unc-section-label">Area</h3>
+            <div class="unc-field-stack">
+              <div class="unc-input-group">
+                <label class="unc-label-tech" for="unc-area-mode">Direction</label>
+                <select id="unc-area-mode" class="unc-select-field">
+                  <option value="m2-to-ft2">m² → ft²</option>
+                  <option value="ft2-to-m2">ft² → m²</option>
+                  <option value="acres-to-m2">Acres → m²</option>
+                  <option value="m2-to-acres">m² → Acres</option>
+                  <option value="ha-to-acres">Hectares → Acres</option>
+                  <option value="acres-to-ha">Acres → Hectares</option>
+                  <option value="km2-to-mi2">km² → mi²</option>
+                  <option value="mi2-to-km2">mi² → km²</option>
+                </select>
+              </div>
+              <div class="unc-input-group">
+                <label class="unc-label-tech" for="unc-area-value">Value</label>
+                <input type="number" id="unc-area-value" class="unc-input-field" placeholder="e.g. 100" step="any" autocomplete="off">
+                <div class="unc-presets">
+                  <button type="button" class="unc-preset-btn" onclick="UNC.setArea(1)">1</button>
+                  <button type="button" class="unc-preset-btn" onclick="UNC.setArea(100)">100</button>
+                  <button type="button" class="unc-preset-btn" onclick="UNC.setArea(500)">500</button>
+                  <button type="button" class="unc-preset-btn" onclick="UNC.setArea(1000)">1000</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- COOKING PANEL -->
+          <div class="unc-panel" id="unc-cooking" role="tabpanel">
+            <h3 class="unc-section-label">Cooking</h3>
+            <div class="unc-field-stack">
+              <div class="unc-input-group">
+                <label class="unc-label-tech" for="unc-cooking-mode">Direction</label>
+                <select id="unc-cooking-mode" class="unc-select-field">
+                  <option value="tbsp-to-ml">Tablespoons → mL</option>
+                  <option value="ml-to-tbsp">mL → Tablespoons</option>
+                  <option value="tsp-to-ml">Teaspoons → mL</option>
+                  <option value="ml-to-tsp">mL → Teaspoons</option>
+                  <option value="cups-to-oz">Cups → fl oz</option>
+                  <option value="oz-to-cups">fl oz → Cups</option>
+                  <option value="cups-to-tbsp">Cups → Tablespoons</option>
+                  <option value="tbsp-to-cups">Tablespoons → Cups</option>
+                </select>
+              </div>
+              <div class="unc-input-group">
+                <label class="unc-label-tech" for="unc-cooking-value">Value</label>
+                <input type="number" id="unc-cooking-value" class="unc-input-field" placeholder="e.g. 2" step="any" autocomplete="off">
+                <div class="unc-presets">
+                  <button type="button" class="unc-preset-btn" onclick="UNC.setCooking(0.5)">½</button>
+                  <button type="button" class="unc-preset-btn" onclick="UNC.setCooking(1)">1</button>
+                  <button type="button" class="unc-preset-btn" onclick="UNC.setCooking(2)">2</button>
+                  <button type="button" class="unc-preset-btn" onclick="UNC.setCooking(4)">4</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- DATA STORAGE PANEL -->
+          <div class="unc-panel" id="unc-data" role="tabpanel">
+            <h3 class="unc-section-label">Data Storage</h3>
+            <div class="unc-field-stack">
+              <div class="unc-input-group">
+                <label class="unc-label-tech" for="unc-data-mode">Direction</label>
+                <select id="unc-data-mode" class="unc-select-field">
+                  <option value="gb-to-mb">GB → MB</option>
+                  <option value="mb-to-gb">MB → GB</option>
+                  <option value="tb-to-gb">TB → GB</option>
+                  <option value="gb-to-tb">GB → TB</option>
+                  <option value="kb-to-mb">KB → MB</option>
+                  <option value="mb-to-kb">MB → KB</option>
+                  <option value="tb-to-mb">TB → MB</option>
+                  <option value="mb-to-tb">MB → TB</option>
+                </select>
+              </div>
+              <div class="unc-input-group">
+                <label class="unc-label-tech" for="unc-data-value">Value</label>
+                <input type="number" id="unc-data-value" class="unc-input-field" placeholder="e.g. 1" step="any" autocomplete="off">
+                <div class="unc-presets">
+                  <button type="button" class="unc-preset-btn" onclick="UNC.setData(1)">1</button>
+                  <button type="button" class="unc-preset-btn" onclick="UNC.setData(16)">16</button>
+                  <button type="button" class="unc-preset-btn" onclick="UNC.setData(256)">256</button>
+                  <button type="button" class="unc-preset-btn" onclick="UNC.setData(1000)">1000</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PRESSURE PANEL -->
+          <div class="unc-panel" id="unc-pressure" role="tabpanel">
+            <h3 class="unc-section-label">Pressure</h3>
+            <div class="unc-field-stack">
+              <div class="unc-input-group">
+                <label class="unc-label-tech" for="unc-pressure-mode">Direction</label>
+                <select id="unc-pressure-mode" class="unc-select-field">
+                  <option value="psi-to-kpa">PSI → kPa</option>
+                  <option value="kpa-to-psi">kPa → PSI</option>
+                  <option value="bar-to-psi">Bar → PSI</option>
+                  <option value="psi-to-bar">PSI → Bar</option>
+                  <option value="atm-to-psi">atm → PSI</option>
+                  <option value="psi-to-atm">PSI → atm</option>
+                </select>
+              </div>
+              <div class="unc-input-group">
+                <label class="unc-label-tech" for="unc-pressure-value">Value</label>
+                <input type="number" id="unc-pressure-value" class="unc-input-field" placeholder="e.g. 32" step="any" autocomplete="off">
+                <div class="unc-presets">
+                  <button type="button" class="unc-preset-btn" onclick="UNC.setPressure(32)">32</button>
+                  <button type="button" class="unc-preset-btn" onclick="UNC.setPressure(35)">35</button>
+                  <button type="button" class="unc-preset-btn" onclick="UNC.setPressure(100)">100</button>
+                  <button type="button" class="unc-preset-btn" onclick="UNC.setPressure(1)">1</button>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -261,100 +462,99 @@
         </div>
 
         <!-- FORMULAS -->
-        <h2 class="ab-section-title">Conversion Formulas Explained</h2>
-        <p class="ab-section-subtitle">The exact factors used by this converter:</p>
+        <h2 class="ab-section-title">Conversion Formulas &amp; Reference</h2>
+        <p class="ab-section-subtitle">The exact conversion factors used by this tool, organized by category:</p>
 
-        <div class="tool-formula-pro">
-          <div class="tfp-header">
-            <span class="tfp-badge">km</span>
-            <span class="tfp-title">Length — Kilometers ↔ Miles</span>
-          </div>
-          <div class="tfp-equation">
-            <span class="tfp-var tfp-result">miles</span>
-            <span class="tfp-equals">=</span>
-            <span class="tfp-var">km</span>
-            <span class="tfp-operator">×</span>
-            <span class="tfp-var">0.621371</span>
-          </div>
-          <div class="tfp-legend">
-            <div class="tfp-legend-item">
-              <span class="tfp-legend-var">→</span>
-              <span class="tfp-legend-desc">100 km = <strong>62.14 miles</strong></span>
-            </div>
-            <div class="tfp-legend-item">
-              <span class="tfp-legend-var">←</span>
-              <span class="tfp-legend-desc">1 mile = km × 1.60934</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="tool-formula-pro">
-          <div class="tfp-header">
-            <span class="tfp-badge">kg</span>
-            <span class="tfp-title">Weight — Kilograms ↔ Pounds</span>
-          </div>
-          <div class="tfp-equation">
-            <span class="tfp-var tfp-result">lbs</span>
-            <span class="tfp-equals">=</span>
-            <span class="tfp-var">kg</span>
-            <span class="tfp-operator">×</span>
-            <span class="tfp-var">2.20462</span>
-          </div>
-          <div class="tfp-legend">
-            <div class="tfp-legend-item">
-              <span class="tfp-legend-var">→</span>
-              <span class="tfp-legend-desc">70 kg = <strong>154.32 lbs</strong></span>
-            </div>
-            <div class="tfp-legend-item">
-              <span class="tfp-legend-var">←</span>
-              <span class="tfp-legend-desc">1 lb = kg × 0.453592</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="tool-formula-pro">
-          <div class="tfp-header">
-            <span class="tfp-badge">°C</span>
-            <span class="tfp-title">Temperature — Celsius ↔ Fahrenheit</span>
-          </div>
-          <div class="tfp-equation">
-            <span class="tfp-var tfp-result">°F</span>
-            <span class="tfp-equals">=</span>
-            <span class="tfp-fraction">
-              <div class="tfp-numerator">(°C × 9)</div>
-              <div class="tfp-denominator">5</div>
-            </span>
-            <span class="tfp-operator">+</span>
-            <span class="tfp-var">32</span>
-          </div>
-          <div class="tfp-legend">
-            <div class="tfp-legend-item">
-              <span class="tfp-legend-var">→</span>
-              <span class="tfp-legend-desc">37°C = <strong>98.6°F</strong> (body temp)</span>
-            </div>
-            <div class="tfp-legend-item">
-              <span class="tfp-legend-var">←</span>
-              <span class="tfp-legend-desc">°C = (°F − 32) × 5/9</span>
-            </div>
-          </div>
-        </div>
-
-        <h2>Common Conversion Examples</h2>
+        <h3>Length</h3>
         <ul>
-          <li><strong>5 km</strong> → 3.107 miles (popular running race distance)</li>
-          <li><strong>70 kg</strong> → 154.32 lbs (average adult weight)</li>
-          <li><strong>100 km/h</strong> → 62.14 mph (highway speed)</li>
-          <li><strong>20°C</strong> → 68°F (comfortable room temperature)</li>
-          <li><strong>100°F</strong> → 37.78°C (near body temperature)</li>
+          <li><strong>km → miles:</strong> × 0.621371 &nbsp;|&nbsp; <em>100 km = 62.14 mi</em></li>
+          <li><strong>miles → km:</strong> × 1.60934 &nbsp;|&nbsp; <em>26.2 mi (marathon) = 42.2 km</em></li>
+          <li><strong>meters → feet:</strong> × 3.28084 &nbsp;|&nbsp; <em>1.8 m = 5 ft 11 in</em></li>
+          <li><strong>cm → inches:</strong> × 0.393701 &nbsp;|&nbsp; <em>30 cm = 11.81 in</em></li>
         </ul>
+
+        <h3>Weight</h3>
+        <ul>
+          <li><strong>kg → lbs:</strong> × 2.20462 &nbsp;|&nbsp; <em>70 kg = 154.32 lbs</em></li>
+          <li><strong>lbs → kg:</strong> × 0.453592 &nbsp;|&nbsp; <em>150 lbs = 68.04 kg</em></li>
+          <li><strong>g → oz:</strong> × 0.035274 &nbsp;|&nbsp; <em>100 g = 3.53 oz</em></li>
+          <li><strong>stone → lbs:</strong> × 14 &nbsp;|&nbsp; <em>10 stone = 140 lbs</em></li>
+        </ul>
+
+        <h3>Temperature</h3>
+        <ul>
+          <li><strong>°C → °F:</strong> (°C × 9/5) + 32 &nbsp;|&nbsp; <em>0°C = 32°F &bull; 37°C = 98.6°F &bull; 100°C = 212°F</em></li>
+          <li><strong>°F → °C:</strong> (°F − 32) × 5/9 &nbsp;|&nbsp; <em>72°F = 22.2°C</em></li>
+          <li><strong>°C → K:</strong> °C + 273.15 &nbsp;|&nbsp; <em>0°C = 273.15 K (absolute zero = −273.15°C)</em></li>
+        </ul>
+
+        <h3>Speed</h3>
+        <ul>
+          <li><strong>km/h → mph:</strong> × 0.621371 &nbsp;|&nbsp; <em>100 km/h = 62.14 mph</em></li>
+          <li><strong>mph → km/h:</strong> × 1.60934 &nbsp;|&nbsp; <em>60 mph = 96.56 km/h</em></li>
+          <li><strong>knots → mph:</strong> × 1.15078 &nbsp;|&nbsp; <em>used in aviation and maritime</em></li>
+          <li><strong>m/s → mph:</strong> × 2.23694 &nbsp;|&nbsp; <em>9 m/s = 20.13 mph (sprinting speed)</em></li>
+        </ul>
+
+        <h3>Volume</h3>
+        <ul>
+          <li><strong>Liters → US gallons:</strong> × 0.264172 &nbsp;|&nbsp; <em>40 L = 10.57 gal &mdash; Note: UK gallon = 4.546 L, US gallon = 3.785 L</em></li>
+          <li><strong>mL → fl oz:</strong> × 0.033814 &nbsp;|&nbsp; <em>250 mL = 8.45 fl oz</em></li>
+          <li><strong>Cups → mL:</strong> × 236.588 &nbsp;|&nbsp; <em>1 cup = 236.6 mL (US standard)</em></li>
+        </ul>
+
+        <h3>Area</h3>
+        <ul>
+          <li><strong>m² → ft²:</strong> × 10.7639 &nbsp;|&nbsp; <em>100 m² = 1,076 ft²</em></li>
+          <li><strong>acres → m²:</strong> × 4046.86 &nbsp;|&nbsp; <em>1 acre = 4,047 m² (about the size of a football field)</em></li>
+          <li><strong>hectares → acres:</strong> × 2.47105 &nbsp;|&nbsp; <em>1 ha = 2.47 acres</em></li>
+        </ul>
+
+        <h3>Cooking Measurements</h3>
+        <ul>
+          <li><strong>1 tablespoon</strong> = 14.787 mL &nbsp;|&nbsp; <strong>1 teaspoon</strong> = 4.929 mL</li>
+          <li><strong>1 cup</strong> = 16 tablespoons = 48 teaspoons = 8 fl oz = 236.6 mL</li>
+          <li><strong>Common mistake:</strong> UK tablespoon = 15 mL vs US tablespoon = 14.79 mL (negligible for cooking, but precise for chemistry).</li>
+        </ul>
+
+        <h3>Data Storage</h3>
+        <ul>
+          <li><strong>1 GB</strong> = 1,024 MB = 1,048,576 KB (binary) &nbsp;|&nbsp; <em>Manufacturers often use 1 GB = 1,000 MB (decimal), which is why a &ldquo;1 TB&rdquo; drive shows as ~931 GB in your OS.</em></li>
+          <li><strong>1 TB</strong> = 1,024 GB (binary) &nbsp;|&nbsp; <strong>1 MB</strong> = 1,024 KB</li>
+        </ul>
+
+        <h3>Pressure</h3>
+        <ul>
+          <li><strong>PSI → kPa:</strong> × 6.89476 &nbsp;|&nbsp; <em>35 PSI (typical tire) = 241.3 kPa</em></li>
+          <li><strong>Bar → PSI:</strong> × 14.5038 &nbsp;|&nbsp; <em>standard car tire: 2.4 bar = 34.8 PSI</em></li>
+          <li><strong>1 atm</strong> = 14.696 PSI = 101.325 kPa = 1.01325 bar (standard atmospheric pressure)</li>
+        </ul>
+
+        <h2>Real-World Reference Points by Category</h2>
+        <table style="width:100%;border-collapse:collapse;font-size:.875rem;margin:1rem 0 1.5rem;">
+          <thead>
+            <tr style="background:#F3F4F6;">
+              <th style="padding:.5rem .75rem;text-align:left;border-bottom:2px solid #E5E7EB;">Value</th>
+              <th style="padding:.5rem .75rem;text-align:left;border-bottom:2px solid #E5E7EB;">What it means</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td style="padding:.4rem .75rem;border-bottom:1px solid #F3F4F6;">37°C / 98.6°F</td><td style="padding:.4rem .75rem;border-bottom:1px solid #F3F4F6;">Normal human body temperature</td></tr>
+            <tr style="background:#FAFAFA;"><td style="padding:.4rem .75rem;border-bottom:1px solid #F3F4F6;">100 km/h / 62.1 mph</td><td style="padding:.4rem .75rem;border-bottom:1px solid #F3F4F6;">Standard highway speed limit (many countries)</td></tr>
+            <tr><td style="padding:.4rem .75rem;border-bottom:1px solid #F3F4F6;">32–35 PSI / 220–241 kPa</td><td style="padding:.4rem .75rem;border-bottom:1px solid #F3F4F6;">Typical passenger car tire inflation</td></tr>
+            <tr style="background:#FAFAFA;"><td style="padding:.4rem .75rem;border-bottom:1px solid #F3F4F6;">1 cup / 236.6 mL</td><td style="padding:.4rem .75rem;border-bottom:1px solid #F3F4F6;">Standard US recipe measurement</td></tr>
+            <tr><td style="padding:.4rem .75rem;border-bottom:1px solid #F3F4F6;">1 TB / 1,024 GB</td><td style="padding:.4rem .75rem;border-bottom:1px solid #F3F4F6;">Storage capacity of a typical external hard drive</td></tr>
+            <tr style="background:#FAFAFA;"><td style="padding:.4rem .75rem;">1 acre / 43,560 ft²</td><td style="padding:.4rem .75rem;">Approximately the size of an American football field</td></tr>
+          </tbody>
+        </table>
 
         <!-- INTERNAL LINKS -->
         <h2>Related Tools</h2>
         <ul>
-          <li><a href="/fuel-cost-calculator/"><strong>Fuel Cost Calculator</strong></a> — Uses miles; convert km first if needed.</li>
-          <li><a href="/percentage-calculator/"><strong>Percentage Calculator</strong></a> — Calculate percentage differences between measurements.</li>
+          <li><a href="/fuel-cost-calculator/"><strong>Fuel Cost Calculator</strong></a> — Uses miles and MPG; convert km/liters first if planning an international road trip.</li>
           <li><a href="/tip-calculator/"><strong>Tip Calculator</strong></a> — Useful alongside unit conversions for international travel.</li>
           <li><a href="/discount-calculator/"><strong>Discount Calculator</strong></a> — Great for international shopping where unit differences matter.</li>
+          <li><a href="/percentage-calculator/"><strong>Percentage Calculator</strong></a> — Calculate percentage differences between measurements.</li>
         </ul>
 
         <!-- FAQ SECTION -->
@@ -384,6 +584,31 @@
           <div class="tool-faq__item">
             <div class="tool-faq__question">How many km is a 5K race?</div>
             <div class="tool-faq__answer">A 5K race is exactly 5 kilometers, which equals approximately 3.107 miles. A 10K is 10 km = 6.214 miles. A half marathon is 21.097 km = 13.109 miles. A full marathon is 42.195 km = 26.219 miles.</div>
+          </div>
+
+          <div class="tool-faq__item">
+            <div class="tool-faq__question">How fast is 100 km/h in mph?</div>
+            <div class="tool-faq__answer">100 km/h = 62.14 mph. A quick mental rule: multiply km/h by 0.6 for a rough mph estimate. Common reference: 60 mph = 96.56 km/h (a standard US highway speed). 110 km/h = 68.35 mph. 130 km/h (European motorway) = 80.78 mph.</div>
+          </div>
+
+          <div class="tool-faq__item">
+            <div class="tool-faq__question">How many mL is 1 cup?</div>
+            <div class="tool-faq__answer">1 US cup = 236.588 mL. 1 cup = 8 fl oz = 16 tablespoons = 48 teaspoons. Note: a "metric cup" used in Australia and Canada = 250 mL. A British cup is also 250 mL. Always check the recipe origin to use the correct conversion.</div>
+          </div>
+
+          <div class="tool-faq__item">
+            <div class="tool-faq__question">Why does my 1 TB hard drive show 931 GB?</div>
+            <div class="tool-faq__answer">Drive manufacturers market using decimal units (1 TB = 1,000,000,000,000 bytes), but operating systems measure in binary units (1 GB = 1,073,741,824 bytes). So 1 TB (decimal) ÷ 1.0737 = 931.32 GB (binary). This is not a defect — it's simply a difference in how the units are defined.</div>
+          </div>
+
+          <div class="tool-faq__item">
+            <div class="tool-faq__question">What PSI should my car tires be?</div>
+            <div class="tool-faq__answer">Most passenger cars recommend 30–35 PSI (207–241 kPa or 2.1–2.4 bar). The exact recommended pressure is on the sticker inside your driver's door or in the owner's manual — not on the tire sidewall (that shows the maximum pressure). Check when tires are cold for the most accurate reading.</div>
+          </div>
+
+          <div class="tool-faq__item">
+            <div class="tool-faq__question">How many square feet is 1 acre?</div>
+            <div class="tool-faq__answer">1 acre = 43,560 square feet = 4,047 m² = 0.4047 hectares. A standard American football field (including end zones) is about 1.32 acres. A 1/4-acre residential lot is approximately 10,890 ft².</div>
           </div>
         </div>
 
@@ -433,3 +658,58 @@
 </section>
 
 </div><!-- /.lpc-wrap -->
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Unit Converter",
+  "url": "https://quickcalclab.com/unit-converter/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web Browser",
+  "description": "Free online unit converter: length, weight, temperature, speed, volume, area, cooking, data storage, and pressure. Instant results, no sign-up required.",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": { "@type": "Organization", "name": "QuickCalc Lab", "url": "https://quickcalclab.com" }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How many miles is 1 kilometer?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "1 kilometer = 0.621371 miles. As a quick estimate, multiply km by 0.6. For example, 10 km ≈ 6 miles (exact: 6.214 miles)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I convert Celsius to Fahrenheit?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Formula: °F = (°C × 9/5) + 32. Example: 25°C = (25 × 1.8) + 32 = 77°F. Key reference: 0°C = 32°F, 100°C = 212°F, 37°C = 98.6°F (body temperature)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How many pounds is 1 kilogram?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "1 kilogram = 2.20462 pounds. To convert quickly: multiply kg by 2.2. Example: 70 kg × 2.2 = 154 lbs (exact: 154.32 lbs)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How many km is a 5K race?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A 5K race is exactly 5 kilometers = 3.107 miles. A 10K = 6.214 miles. A half marathon = 21.097 km = 13.109 miles. A full marathon = 42.195 km = 26.219 miles."
+      }
+    }
+  ]
+}
+</script>

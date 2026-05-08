@@ -2,7 +2,7 @@
      TOOL 4: SALARY TO HOURLY CONVERTER
      Slug: /salary-to-hourly-converter/
      Primary keyword: "salary to hourly converter"
-     RankMath Title: Salary to Hourly Converter — Annual to Hourly Pay Calculator | ToolsHub
+     RankMath Title: Salary to Hourly Converter — Free Pay Rate Calculator | QuickCalc Lab
      RankMath Meta: Convert any annual salary to hourly, daily, weekly, and monthly pay. Free salary-to-hourly converter — customize hours per week and weeks per year.
      CSS: theme/assets/css/tools.css (classes .shc-*)
      JS:  theme/assets/js/calculators.js (initSalaryConverter)
@@ -263,12 +263,39 @@
         </ul>
         <p><em>Based on 40 hr/week, 52 weeks/year. Before taxes.</em></p>
 
+        <h2>W-2 Employee vs 1099 Contractor: The Real Hourly Difference</h2>
+        <p>The converter above calculates <strong>gross pay only</strong>. But the same hourly rate on a W-2 vs a 1099 contract has very different take-home implications:</p>
+        <ul>
+          <li><strong>W-2 Employee</strong> — Your employer pays half of your Social Security and Medicare (7.65% each side). You also receive benefits like health insurance, PTO, and 401(k) matching — which can add 20–30% on top of your base salary in total compensation.</li>
+          <li><strong>1099 Contractor</strong> — You pay the full 15.3% self-employment tax on top of income tax, and no employer-provided benefits. As a rule of thumb, a 1099 contractor rate should be 20–30% higher than an equivalent W-2 salary to break even after taxes and benefits.</li>
+        </ul>
+        <p>Example: A $60,000 W-2 salary ≈ $28.85/hr. The equivalent 1099 contractor rate to match take-home is roughly <strong>$35–$37/hr</strong>.</p>
+
+        <h2>Estimated Tax Impact by Salary Range</h2>
+        <p>These are approximate federal effective tax rates for a single filer in the US (2024). Your actual rate depends on state taxes, deductions, and filing status:</p>
+        <table style="width:100%;border-collapse:collapse;font-size:.9rem;margin:1rem 0 1.5rem;">
+          <thead>
+            <tr style="background:#F3F4F6;">
+              <th style="padding:.6rem .75rem;text-align:left;border-bottom:2px solid #E5E7EB;">Annual Salary</th>
+              <th style="padding:.6rem .75rem;text-align:right;border-bottom:2px solid #E5E7EB;">Est. Fed. Tax Rate</th>
+              <th style="padding:.6rem .75rem;text-align:right;border-bottom:2px solid #E5E7EB;">Approx. Monthly Take-Home</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td style="padding:.5rem .75rem;border-bottom:1px solid #F3F4F6;">$35,000</td><td style="padding:.5rem .75rem;text-align:right;border-bottom:1px solid #F3F4F6;">~10–12%</td><td style="padding:.5rem .75rem;text-align:right;border-bottom:1px solid #F3F4F6;">~$2,500</td></tr>
+            <tr style="background:#FAFAFA;"><td style="padding:.5rem .75rem;border-bottom:1px solid #F3F4F6;">$55,000</td><td style="padding:.5rem .75rem;text-align:right;border-bottom:1px solid #F3F4F6;">~14–16%</td><td style="padding:.5rem .75rem;text-align:right;border-bottom:1px solid #F3F4F6;">~$3,700</td></tr>
+            <tr><td style="padding:.5rem .75rem;border-bottom:1px solid #F3F4F6;">$80,000</td><td style="padding:.5rem .75rem;text-align:right;border-bottom:1px solid #F3F4F6;">~18–20%</td><td style="padding:.5rem .75rem;text-align:right;border-bottom:1px solid #F3F4F6;">~$5,300</td></tr>
+            <tr style="background:#FAFAFA;"><td style="padding:.5rem .75rem;">$100,000</td><td style="padding:.5rem .75rem;text-align:right;">~22–24%</td><td style="padding:.5rem .75rem;text-align:right;">~$6,300</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:.8125rem;color:#6B7280;">Federal only. Add 5–10% for state income tax where applicable. These are estimates — use a dedicated tax calculator for precise figures. See our <a href="/disclaimer/">Disclaimer</a>.</p>
+
         <!-- INTERNAL LINKS -->
         <h2>Related Tools</h2>
         <ul>
           <li><a href="/percentage-calculator/"><strong>Percentage Calculator</strong></a> — Calculate the percentage difference between two salaries or a raise amount.</li>
           <li><a href="/loan-payment-calculator/"><strong>Loan Payment Calculator</strong></a> — Understand what mortgage you can afford based on your salary.</li>
-          <li><a href="/discount-calculator/"><strong>Discount Calculator</strong></a> — Calculate your take-home pay after deductions.</li>
+          <li><a href="/discount-calculator/"><strong>Discount Calculator</strong></a> — Calculate your exact savings on any purchase or sale price.</li>
         </ul>
 
         <!-- FAQ SECTION -->
@@ -347,3 +374,50 @@
 </section>
 
 </div><!-- /.lpc-wrap -->
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Salary to Hourly Converter",
+  "url": "https://quickcalclab.com/salary-to-hourly-converter/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web Browser",
+  "description": "Convert any annual salary to hourly, daily, weekly, and monthly pay. Customizable hours per week and weeks per year.",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": { "@type": "Organization", "name": "QuickCalc Lab", "url": "https://quickcalclab.com" }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do I convert my annual salary to hourly rate?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Divide your annual salary by the number of hours worked per year. Standard formula: hourly = annual ÷ (hours/week × weeks/year). For a $60,000 salary at 40 hours/week, 52 weeks: $60,000 ÷ 2,080 = $28.85/hour."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How many working hours are in a year?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A standard full-time year has 2,080 working hours (40 hours/week × 52 weeks). Accounting for 10 federal holidays it drops to 2,000 hours. With 2 weeks vacation: 1,960 hours. Use 2,080 as the baseline unless your employer specifies otherwise."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is $50,000 a year as an hourly wage?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "$50,000 per year ÷ 2,080 hours = approximately $24.04 per hour. Monthly: ~$4,167. Weekly: ~$961.54. Daily (8-hour day): ~$192.31."
+      }
+    }
+  ]
+}
+</script>

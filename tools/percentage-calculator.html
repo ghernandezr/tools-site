@@ -2,7 +2,7 @@
      TOOL 6: PERCENTAGE CALCULATOR — Plugin Style Edition
      Slug: /percentage-calculator/
      Primary keyword: "percentage calculator"
-     RankMath Title: Percentage Calculator — 3 Ways to Calculate Percentages | ToolsHub
+     RankMath Title: Percentage Calculator — 3 Ways to Calculate Percentages | QuickCalc Lab
      RankMath Meta: Free percentage calculator: find what percent of a number is, what percentage X is of Y, and percentage change between two values. Instant results.
      =============================================================
      CSS: theme/assets/css/tools.css (classes .fcc-* reused)
@@ -265,6 +265,16 @@
           <li><strong>Stock dropped from $200 to $160</strong> = 20% decrease</li>
         </ul>
 
+        <h2>Percentage Calculations by Use Case</h2>
+        <p>The same formula applies across very different real-world scenarios. Here are common uses by category:</p>
+        <ul>
+          <li><strong>GPA &amp; grades</strong> — "I got 42 out of 50 on a test" → (42 ÷ 50) × 100 = <strong>84%</strong>. Use Mode 2.</li>
+          <li><strong>Salary raise</strong> — "My salary goes from $62,000 to $67,000" → ((67,000 − 62,000) ÷ 62,000) × 100 = <strong>8.06% raise</strong>. Use Mode 3.</li>
+          <li><strong>Sales tax</strong> — "8.25% tax on $95 purchase" → (8.25 ÷ 100) × 95 = <strong>$7.84 tax</strong>. Total = $102.84. Use Mode 1.</li>
+          <li><strong>Investment return</strong> — "Portfolio went from $12,000 to $14,400" → ((14,400 − 12,000) ÷ 12,000) × 100 = <strong>20% return</strong>. Use Mode 3.</li>
+          <li><strong>Body weight change</strong> — "Lost 15 lbs from 200 lbs" → (15 ÷ 200) × 100 = <strong>7.5% reduction</strong>. Use Mode 2.</li>
+        </ul>
+
         <!-- INTERNAL LINKS -->
         <h2>Related Tools</h2>
         <ul>
@@ -301,6 +311,16 @@
           <div class="tool-faq__item">
             <div class="tool-faq__question">How do I calculate sales tax?</div>
             <div class="tool-faq__answer">Use Mode 1 (What is X% of Y?). Enter your tax rate as X and the pre-tax price as Y. The result is the tax amount. Add it to the original price for the total. Example: 8.25% tax on $150 = $12.38 tax → total $162.38.</div>
+          </div>
+
+          <div class="tool-faq__item">
+            <div class="tool-faq__question">How do I calculate a percentage raise in salary?</div>
+            <div class="tool-faq__answer">Use Mode 3 (Percentage Change). Enter your current salary as the "from" value and your new salary as the "to" value. Example: going from $58,000 to $63,000: ((63,000 − 58,000) ÷ 58,000) × 100 = 8.62% raise. You can also use Mode 1 to find what a specific percentage raise would equal in dollars.</div>
+          </div>
+
+          <div class="tool-faq__item">
+            <div class="tool-faq__question">What is 15% of 200?</div>
+            <div class="tool-faq__answer">15% of 200 = (15 ÷ 100) × 200 = 30. Quick mental check: 10% of 200 = 20, half of that is 10, so 15% = 20 + 10 = 30. This formula works for any "what is X% of Y?" question.</div>
           </div>
         </div>
 
@@ -350,3 +370,50 @@
 </section>
 
 </div><!-- /.lpc-wrap -->
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Percentage Calculator",
+  "url": "https://quickcalclab.com/percentage-calculator/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web Browser",
+  "description": "Solve three types of percentage problems: find X% of Y, find what % X is of Y, and calculate % change between two values.",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": { "@type": "Organization", "name": "QuickCalc Lab", "url": "https://quickcalclab.com" }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do I calculate a percentage of a number?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Multiply the number by the percentage and divide by 100. Formula: result = (number × percentage) ÷ 100. Example: 15% of 200 = (200 × 15) ÷ 100 = 30."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I calculate percentage change?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Percentage change = ((new value − old value) ÷ old value) × 100. Example: price goes from $80 to $100: ((100 − 80) ÷ 80) × 100 = 25% increase. A negative result means a decrease."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What percentage is 30 out of 150?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "30 out of 150 = (30 ÷ 150) × 100 = 20%. Use this formula (part ÷ whole × 100) whenever you need to find what percent one number is of another."
+      }
+    }
+  ]
+}
+</script>
