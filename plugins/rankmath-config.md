@@ -107,6 +107,18 @@ Advanced tab:
 
 Apply the same pattern to all 10 tool pages with their respective keywords.
 
+### Credit Card APR Calculator page:
+```
+Focus Keyword: credit card APR calculator
+Title: Credit Card APR Calculator — Interest Rate & Payoff Time | ToolsHub
+Meta Description: Free credit card APR calculator. Calculate how much interest your card charges monthly based on your APR and balance. Find your payoff date instantly. No sign-up.
+
+Advanced tab:
+  → Canonical URL: (leave blank = auto)
+  → Robots: Index, Follow (default)
+  → Schema: SoftwareApplication (functions.php handles it)
+```
+
 ---
 
 ## Schema Builder (Free Tier)
@@ -123,6 +135,46 @@ To add FAQ schema to a tool page:
 3. Add each Q&A pair manually
 
 **Recommended**: Add 3–5 FAQ schema items per tool page to target "People Also Ask" results.
+
+---
+
+## Fixing "Duplicate: user didn't indicate canonical" in GSC
+
+This error appears when Google finds the same page accessible via multiple URLs without a canonical declared.
+
+### Step 1 — Verify WordPress URL settings
+```
+WordPress Admin → Settings → General:
+  WordPress Address (URL): https://quickcalclab.com
+  Site Address (URL):       https://quickcalclab.com
+  (NO trailing slash variants, NO www prefix unless intentional)
+```
+
+### Step 2 — Force HTTPS + non-www redirect in .htaccess (add at top)
+```apache
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+RewriteCond %{HTTP_HOST} ^www\.quickcalclab\.com [NC]
+RewriteRule ^(.*)$ https://quickcalclab.com/$1 [L,R=301]
+```
+
+### Step 3 — Verify RankMath is outputting canonical tags
+In browser: View Page Source of homepage → search for `rel="canonical"`.
+If missing, RankMath may not be active. The `functions.php` fallback 
+(`toolshub_canonical_tag`) will handle this automatically.
+
+### Step 4 — Check RankMath Titles & Meta → Home Page
+```
+RankMath → Titles & Meta → Home Page:
+  → Advanced tab → Canonical URL: https://quickcalclab.com/
+  (set explicitly, don't leave blank)
+```
+
+### Step 5 — After fixing, request validation in GSC
+```
+GSC → Coverage → "Duplicate: user didn't indicate canonical" → VALIDAR CORRECCIÓN
+```
 
 ---
 
