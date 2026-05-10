@@ -45,7 +45,7 @@ defined( 'ABSPATH' ) || exit;
                         <div class="group">
                             <div class="flex justify-between mb-2">
                                 <label for="weup-in-p" class="text-xs font-bold text-slate-700 uppercase">Initial Capital</label>
-                                <input id="weup-in-p" type="number" class="w-24 text-right font-bold text-emerald-600 bg-transparent border-b border-transparent focus:border-emerald-500 outline-none" value="<?php echo esc_attr( $defaults['principal'] ?: '50000' ); ?>">
+                                <input id="weup-in-p" type="number" class="w-24 text-right font-bold text-emerald-600 bg-transparent border-b border-transparent focus-border-emerald-500 outline-none" value="<?php echo esc_attr( $defaults['principal'] ?: '50000' ); ?>">
                             </div>
                             <input id="weup-sl-p" type="range" min="0" max="500000" step="5000" aria-label="Initial capital amount" class="w-full custom-slider">
                         </div>
@@ -54,28 +54,37 @@ defined( 'ABSPATH' ) || exit;
                         <div>
                             <div class="flex justify-between mb-2">
                                 <label for="weup-in-m" class="text-xs font-bold text-slate-700 uppercase">Monthly Savings</label>
-                                <input id="weup-in-m" type="number" class="w-24 text-right font-bold text-emerald-600 bg-transparent border-b border-transparent focus:border-emerald-500 outline-none" value="<?php echo esc_attr( $defaults['monthly'] ?: '1000' ); ?>">
+                                <input id="weup-in-m" type="number" class="w-24 text-right font-bold text-emerald-600 bg-transparent border-b border-transparent focus-border-emerald-500 outline-none" value="<?php echo esc_attr( $defaults['monthly'] ?: '1000' ); ?>">
                             </div>
                             <input id="weup-sl-m" type="range" min="0" max="10000" step="100" aria-label="Monthly savings amount" class="w-full custom-slider">
                         </div>
 
-                        <!-- Rate & Years -->
-                        <div class="grid grid-cols-2 gap-4">
-                            <div>
-                                <label for="weup-in-r" class="text-10px font-bold text-slate-400 uppercase block mb-1">Expected ROI %</label>
-                                <input id="weup-in-r" type="number" step="0.1" class="w-full p-2 bg-slate-50 border border-slate-200 rounded-lg font-bold" value="<?php echo esc_attr( $defaults['rate'] ?: '8' ); ?>">
+                        <!-- Rate -->
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <label for="weup-in-r" class="text-xs font-bold text-slate-700 uppercase">Expected ROI %</label>
+                                <input id="weup-in-r" type="number" step="0.1" class="w-24 text-right font-bold text-emerald-600 bg-transparent border-b border-transparent focus-border-emerald-500 outline-none" value="<?php echo esc_attr( $defaults['rate'] ?: '8' ); ?>">
                             </div>
-                            <div>
-                                <label for="weup-in-y" class="text-10px font-bold text-slate-400 uppercase block mb-1">Years Horizon</label>
-                                <input id="weup-in-y" type="number" class="w-full p-2 bg-slate-50 border border-slate-200 rounded-lg font-bold" value="<?php echo esc_attr( $defaults['years'] ?: '25' ); ?>">
+                            <input id="weup-sl-r" type="range" min="0" max="50" step="0.1" aria-label="Expected ROI percentage" class="w-full custom-slider">
+                        </div>
+
+                        <!-- Years -->
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <label for="weup-in-y" class="text-xs font-bold text-slate-700 uppercase">Years Horizon</label>
+                                <input id="weup-in-y" type="number" class="w-24 text-right font-bold text-emerald-600 bg-transparent border-b border-transparent focus-border-emerald-500 outline-none" value="<?php echo esc_attr( $defaults['years'] ?: '25' ); ?>">
                             </div>
+                            <input id="weup-sl-y" type="range" min="1" max="60" step="1" aria-label="Years horizon" class="w-full custom-slider">
                         </div>
                     </div>
 
-                    <div class="mt-8 pt-6 border-t border-slate-100">
-                        <button onclick="WEUP_Calculator.toggleAdv()" class="flex items-center justify-between w-full text-10px font-black text-slate-400 uppercase tracking-widest group">
-                            Advanced Strategies
-                            <svg id="weup-adv-icon" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M19 9l-7 7-7-7" /></svg>
+                    <div class="mt-4 pt-6 border-t border-slate-100">
+                        <button id="weup-adv-toggle" onclick="WEUP_Calculator.toggleAdv()" class="group">
+                            <span class="flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" /></svg>
+                                Advanced Strategies
+                            </span>
+                            <svg id="weup-adv-icon" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
                         </button>
                         
                         <div id="weup-adv-panel" class="hidden mt-6 space-y-6 animate-in slide-in-from-top duration-300">
@@ -83,7 +92,7 @@ defined( 'ABSPATH' ) || exit;
                             <div>
                                 <div class="flex justify-between text-10px mb-1">
                                     <span class="font-bold text-slate-500 uppercase">Avg. Annual Inflation %</span>
-                                    <span id="weup-val-inf" class="font-black text-amber-600">2.5%</span>
+                                    <span id="weup-val-inf" class="font-black text-slate-600">2.5%</span>
                                 </div>
                                 <input id="weup-sl-inf" type="range" min="0" max="10" step="0.1" value="<?php echo esc_attr( $defaults['inflation'] ?: '2.5' ); ?>" aria-label="Average annual inflation percentage" class="w-full custom-slider">
                             </div>
@@ -92,7 +101,7 @@ defined( 'ABSPATH' ) || exit;
                             <div>
                                 <div class="flex justify-between text-10px mb-1">
                                     <span class="font-bold text-slate-500 uppercase">Capital Gains Tax %</span>
-                                    <span id="weup-val-tax" class="font-black text-red-600">15%</span>
+                                    <span id="weup-val-tax" class="font-black text-slate-600">15%</span>
                                 </div>
                                 <input id="weup-sl-tax" type="range" min="0" max="50" step="1" value="<?php echo esc_attr( $defaults['tax'] ?: '15' ); ?>" aria-label="Capital gains tax percentage" class="w-full custom-slider">
                             </div>
@@ -101,7 +110,7 @@ defined( 'ABSPATH' ) || exit;
                             <div>
                                 <div class="flex justify-between text-10px mb-1">
                                     <span class="font-bold text-slate-500 uppercase">Yearly Savings Increase %</span>
-                                    <span id="weup-val-step" class="font-black text-blue-600">3%</span>
+                                    <span id="weup-val-step" class="font-black text-slate-600">3%</span>
                                 </div>
                                 <input id="weup-sl-step" type="range" min="0" max="20" step="1" value="<?php echo esc_attr( $defaults['stepup'] ?: '3' ); ?>" aria-label="Yearly savings increase percentage" class="w-full custom-slider">
                             </div>
@@ -110,7 +119,7 @@ defined( 'ABSPATH' ) || exit;
                 </div>
 
                 <div class="bg-slate-900 rounded-2xl p-6 text-white overflow-hidden relative group">
-                    <div class="absolute right-neg-4 top-neg-4 w-24 h-24 bg-emerald-500/10 rounded-full blur-2xl group-hover-bg-emerald-500-20 transition-all"></div>
+                    <div class="absolute right-neg-4 top-neg-4 w-24 h-24 bg-emerald-500-10 rounded-full blur-2xl group-hover-bg-emerald-500-20 transition-all"></div>
                     <h3 class="text-emerald-400 text-10px font-black uppercase tracking-widest mb-2">Opportunity Cost</h3>
                     <p class="text-xs text-slate-400 leading-relaxed">Starting just <span class="text-white font-bold">1 year later</span> could cost you approximately:</p>
                     <p id="weup-opp-cost" class="text-2xl font-black mt-2 text-white">-$0</p>
@@ -132,15 +141,15 @@ defined( 'ABSPATH' ) || exit;
                     </div>
                     <div class="bg-white p-3 rounded-3xl border border-slate-200 shadow-sm">
                         <div class="flex items-center gap-1 mb-1">
-                            <p class="text-10px font-bold text-slate-400 uppercase">Est. FIRE Age</p>
+                            <p class="text-10px font-bold text-slate-400 uppercase mb-0">Est. FIRE Age</p>
                             <div class="relative group cursor-help inline-flex items-center" tabindex="0" role="button" aria-label="FIRE calculation information">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-slate-400 hover:text-slate-600 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-3-5 h-3-5 text-slate-400 hover-text-slate-600 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
-                                <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 p-3 bg-slate-900 text-white text-xs rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 pointer-events-none">
+                                <div class="absolute bottom-full left-1-2 neg-translate-x-1-2 mb-2 w-64 p-3 bg-slate-900 text-white text-xs rounded-lg shadow-xl opacity-0 invisible group-hover-opacity-100 group-hover-visible transition-all z-50 pointer-events-none">
                                     <p class="font-bold mb-1 text-emerald-400">FIRE = Financial Independence, Retire Early</p>
                                     <p class="text-slate-300 leading-relaxed">Age when you can retire using the 4% rule (25x annual expenses of $40K). Assumes starting at age 30.</p>
-                                    <div class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-slate-900"></div>
+                                    <div class="absolute top-full left-1-2 neg-translate-x-1-2 border-4 border-transparent border-t-slate-900"></div>
                                 </div>
                             </div>
                         </div>
@@ -150,7 +159,7 @@ defined( 'ABSPATH' ) || exit;
 
                 <div class="bg-white rounded-2-5rem p-6 md-p-8 border border-slate-200 shadow-sm">
                     <div class="flex flex-wrap items-center justify-between gap-4 mb-8 no-print">
-                        <div class="flex p-1.5 rounded-2xl">
+                        <div class="flex gap-2 p-1-5 bg-slate-100 rounded-2xl">
                             <button onclick="WEUP_Calculator.switchTab('chart')" id="weup-tab-chart" class="px-6 py-2 rounded-xl text-xs font-bold transition-all tab-active">Growth Curve</button>
                             <button onclick="WEUP_Calculator.switchTab('fire')" id="weup-tab-fire" class="px-6 py-2 rounded-xl text-xs font-bold transition-all text-slate-500">FIRE Analysis</button>
                             <button onclick="WEUP_Calculator.switchTab('table')" id="weup-tab-table" class="px-6 py-2 rounded-xl text-xs font-bold transition-all text-slate-500">Yearly Ledger</button>
@@ -158,7 +167,7 @@ defined( 'ABSPATH' ) || exit;
                         <div class="flex gap-4">
                             <label class="flex items-center gap-2 cursor-pointer group">
                                 <input type="checkbox" id="weup-check-vol" class="hidden" onchange="WEUP_Calculator.calculate()">
-                                <div id="weup-vol-box" class="w-4 h-4 rounded border-2 border-slate-300 transition-colors flex items-center justify-center">
+                                <div id="weup-vol-box" class="w-4 h-4 rounded-sm border-2 border-slate-300 transition-colors flex items-center justify-center">
                                     <div class="w-2 h-2 bg-emerald-500 rounded-sm scale-0 transition-transform"></div>
                                 </div>
                                 <span class="text-10px font-black text-slate-400 uppercase tracking-tighter group-hover-text-slate-600">Market Volatility Overlay</span>
@@ -180,7 +189,7 @@ defined( 'ABSPATH' ) || exit;
                             </div>
                             <div class="p-6 bg-emerald-50 rounded-3xl border border-emerald-100">
                                 <h5 class="font-black text-xs uppercase text-emerald-600 mb-4 tracking-widest">Passive Income Potential</h5>
-                                <p class="text-10px text-emerald-600/60 font-bold uppercase mb-1">Monthly Withdrawal (Safe Rate)</p>
+                                <p class="text-10px text-emerald-600-60 font-bold uppercase mb-1">Monthly Withdrawal (Safe Rate)</p>
                                 <h6 id="weup-fire-income" class="text-xl font-black text-emerald-700">$0</h6>
                             </div>
                         </div>

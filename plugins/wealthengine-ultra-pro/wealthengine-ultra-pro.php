@@ -3,7 +3,7 @@
  * Plugin Name:       WealthEngine Ultra Pro
  * Plugin URI:        https://quickcalclab.com/wealthengine-ultra-pro
  * Description:       Advanced compound interest calculator with FIRE analytics, inflation adjustment, tax calculations, and market volatility projections.
- * Version:           1.1.0
+ * Version:           1.1.1
  * Requires at least: 5.8
  * Requires PHP:      7.0
  * Author:            QuickCalc Lab
@@ -16,7 +16,7 @@
 defined( 'ABSPATH' ) || exit;
 
 // Plugin constants
-define( 'WEUP_VERSION',     '1.1.0' );
+define( 'WEUP_VERSION',     '1.1.1' );
 define( 'WEUP_PLUGIN_DIR',  plugin_dir_path( __FILE__ ) );
 define( 'WEUP_PLUGIN_URL',  plugin_dir_url( __FILE__ ) );
 define( 'WEUP_PLUGIN_FILE', __FILE__ );
