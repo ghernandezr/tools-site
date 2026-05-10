@@ -161,49 +161,6 @@ function toolshub_resource_hints( $urls, $relation_type ) {
 add_filter( 'wp_resource_hints', 'toolshub_resource_hints', 10, 2 );
 
 
-/**
- * Add SoftwareApplication schema for tool pages
- * Inject via wp_head on tool pages
- */
-function toolshub_tool_schema() {
-    if ( ! is_page() ) return;
-
-    $page_slug = get_post_field( 'post_name', get_the_ID() );
-
-    $tool_slugs = array(
-        'loan-payment-calculator',
-        'mortgage-calculator',
-        'credit-card-interest-calculator',
-        'compound-interest-calculator',
-        'salary-to-hourly-converter',
-        'tip-calculator',
-        'percentage-calculator',
-        'discount-calculator',
-        'fuel-cost-calculator',
-        'unit-converter',
-    );
-
-    if ( ! in_array( $page_slug, $tool_slugs, true ) ) return;
-
-    $schema = array(
-        '@context'            => 'https://schema.org',
-        '@type'               => 'SoftwareApplication',
-        'name'                => get_the_title(),
-        'url'                 => get_permalink(),
-        'applicationCategory' => 'UtilitiesApplication',
-        'operatingSystem'     => 'Web Browser',
-        'offers'              => array(
-            '@type'    => 'Offer',
-            'price'    => '0',
-            'priceCurrency' => 'USD',
-        ),
-        'description'         => get_the_excerpt(),
-    );
-
-    echo '<script type="application/ld+json">' . wp_json_encode( $schema, JSON_UNESCAPED_SLASHES ) . '</script>' . "\n";
-}
-add_action( 'wp_head', 'toolshub_tool_schema' );
-
 
 /**
  * Add FAQ schema — reads from page content shortcode [faq] blocks

@@ -1,4 +1,4 @@
-# 🧠 SEO Architecture — ToolsHub
+# 🧠 SEO Architecture — QuickCalc Lab
 
 ## Site-Wide SEO Strategy
 
@@ -12,11 +12,11 @@
 
 | Page | Primary Keyword | Title Tag | Meta Description |
 |------|----------------|-----------|-----------------|
-| Home | free online calculators | Free Online Calculators & Utility Tools \| ToolsHub | Free online calculators for loans, interest, salary, tips & more. Instant results, no sign-up. |
-| About | about toolshub calculators | About ToolsHub — Free Online Calculators & Tools | Learn about ToolsHub: our purpose, methodology, and commitment to accuracy for free online calculator tools. |
-| Contact | contact toolshub | Contact ToolsHub — Get in Touch | Questions, bug reports, or tool suggestions? Contact the ToolsHub team. We respond within 48 hours. |
-| Privacy Policy | privacy policy toolshub | Privacy Policy \| ToolsHub | Read ToolsHub's privacy policy covering data collection, Google AdSense, Analytics, and your rights. |
-| Disclaimer | disclaimer toolshub | Disclaimer — Financial & Tools Disclaimer \| ToolsHub | Important disclaimer for ToolsHub calculator tools. Results are educational estimates, not financial advice. |
+| Home | free online calculators | Free Online Calculators & Utility Tools \| QuickCalc Lab | Free online calculators for loans, interest, salary, tips & more. Instant results, no sign-up. |
+| About | about quickcalc lab calculators | About QuickCalc Lab — Free Online Calculators & Tools | Learn about QuickCalc Lab: our purpose, methodology, and commitment to accuracy for free online calculator tools. |
+| Contact | contact quickcalc lab | Contact QuickCalc Lab — Get in Touch | Questions, bug reports, or tool suggestions? Contact the QuickCalc Lab team. We respond within 48 hours. |
+| Privacy Policy | privacy policy quickcalc lab | Privacy Policy \| QuickCalc Lab | Read QuickCalc Lab's privacy policy covering data collection, Google AdSense, Analytics, and your rights. |
+| Disclaimer | disclaimer quickcalc lab | Disclaimer — Financial & Tools Disclaimer \| QuickCalc Lab | Important disclaimer for QuickCalc Lab calculator tools. Results are educational estimates, not financial advice. |
 
 ---
 
@@ -41,7 +41,7 @@
 
 ### Title Tag Format:
 ```
-[Primary Keyword] — [Benefit/Use Case] | ToolsHub
+[Primary Keyword] — [Benefit/Use Case] | QuickCalc Lab
 ```
 
 ### Meta Description Format (150–160 chars):
@@ -140,7 +140,7 @@ Unit Converter
 ## Schema Markup Strategy
 
 ### SoftwareApplication Schema (all 10 tool pages):
-- Applied automatically via `toolshub_tool_schema()` in functions.php
+- Applied automatically via `quickcalclab_tool_schema()` in functions.php
 - Key fields: name, url, applicationCategory, operatingSystem, offers (price: 0)
 
 ### FAQPage Schema (all tool pages):
