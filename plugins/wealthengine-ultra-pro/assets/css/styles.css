@@ -1039,6 +1039,30 @@
     .weup-calculator .p-3 {
         padding: 1rem;
     }
+
+    /* ── Yearly Ledger table — mobile fix ─────────────────────────── */
+    .weup-calculator #weup-view-table {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    .weup-calculator table {
+        table-layout: auto;
+        min-width: 480px;
+    }
+    .weup-calculator thead th:nth-child(1),
+    .weup-calculator thead th:nth-child(2),
+    .weup-calculator thead th:nth-child(3),
+    .weup-calculator thead th:nth-child(4),
+    .weup-calculator thead th:nth-child(5),
+    .weup-calculator thead th:nth-child(6) {
+        width: auto;
+        white-space: nowrap;
+    }
+    .weup-calculator thead th,
+    .weup-calculator tbody td {
+        padding: 0.5rem 0.625rem;
+        font-size: 0.6875rem;
+    }
 }
 
 /* Export Report button focus state */
