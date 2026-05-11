@@ -206,6 +206,12 @@
   position: relative;
 }
 
+@media (max-width: 768px) {
+  .tool-formula-pro {
+    padding: 1rem 1.25rem;
+  }
+}
+
 .tool-formula-pro::before {
   content: '';
   position: absolute;
@@ -308,13 +314,16 @@
 
 /* Legend */
 .tfp-legend {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  flex-direction: column;
   gap: .625rem;
 }
 
-@media (max-width: 560px) {
-  .tfp-legend { grid-template-columns: 1fr; }
+@media (min-width: 561px) {
+  .tfp-legend {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .tfp-legend-item {
@@ -5562,4 +5571,253 @@ nav .sub-menu a {
 @media (max-width: 560px) {
   .ccc-mode-tab { font-size: 0.65rem; padding: 0.5rem 0.4rem; }
   .ccc-apr-result-breakdown { grid-template-columns: 1fr; }
+}
+
+/* =============================================================
+   SHOE SIZE CONVERTER (SSC)
+   ============================================================= */
+
+.ssc-calculator {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Custom input styling for shoe size converter */
+.ssc-calculator .fcc-input-field {
+  padding: 0.3rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  background: #fff;
+  color: #1a202c;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width%3D%22292.4%22 height%3D%22292.4%22 viewBox%3D%220 0 292.4 292.4%22%3E%3Cpath fill%3D%22%234A5568%22 d%3D%22M287 69.4a17.6 17.6 0 0 0-13-5.4H18.4c-5 0-9.3 1.8-12.9 5.4A17.6 17.6 0 0 0 0 82.2c0 5 1.8 9.3 5.4 12.9l128 128c3.6 3.6 7.8 5.4 12.8 5.4s9.2-1.8 12.8-5.4l128-128c3.6-3.6 5.4-7.8 5.4-12.8 0-5-1.8-9.2-5.4-12.8z%22%2F%3E%3C%2Fsvg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 0.625rem auto;
+  padding-right: 2.5rem;
+}
+
+.ssc-calculator .fcc-input-field:hover {
+  border-color: #cbd5e0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.ssc-calculator .fcc-input-field:focus {
+  outline: none;
+  border-color: #1a73e8;
+  box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.15);
+}
+
+.ssc-calculator .fcc-input-field option {
+  padding: 0.75rem 1rem;
+  font-weight: 500;
+}
+
+.ssc-calculator .fcc-label-tech {
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #374151;
+  margin-bottom: 0.625rem;
+}
+
+.ssc-calculator .fcc-help-text {
+  font-size: 0.8125rem;
+  color: #6b7280;
+  margin-top: 0.5rem;
+  line-height: 1.5;
+}
+
+.ssc-calculator .fcc-glass-card {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.ssc-calculator .fcc-section-label {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #1a73e8;
+  margin-bottom: 1.25rem;
+}
+
+.ssc-calculator .fcc-field-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.ssc-results-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.ssc-result-card {
+  background: #fff;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.25rem 1rem;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.ssc-result-card:hover {
+  border-color: #1a73e8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(26, 115, 232, 0.15);
+}
+
+.ssc-result-card--primary {
+  border-color: #1a73e8;
+  background: linear-gradient(135deg, #1a73e8 0%, #1557b0 100%);
+}
+
+.ssc-result-card--primary .ssc-result-label,
+.ssc-result-card--primary .ssc-result-value {
+  color: #fff;
+}
+
+.ssc-result-card--secondary {
+  border-color: #34a853;
+  background: linear-gradient(135deg, #34a853 0%, #1e7e34 100%);
+}
+
+.ssc-result-card--secondary .ssc-result-label,
+.ssc-result-card--secondary .ssc-result-value {
+  color: #fff;
+}
+
+.ssc-result-card--tertiary {
+  border-color: #fbbc04;
+  background: linear-gradient(135deg, #fbbc04 0%, #f9ab00 100%);
+}
+
+.ssc-result-card--tertiary .ssc-result-label,
+.ssc-result-card--tertiary .ssc-result-value {
+  color: #fff;
+}
+
+.ssc-result-card--quaternary {
+  border-color: #ea4335;
+  background: linear-gradient(135deg, #ea4335 0%, #d93025 100%);
+}
+
+.ssc-result-card--quaternary .ssc-result-label,
+.ssc-result-card--quaternary .ssc-result-value {
+  color: #fff;
+}
+
+.ssc-result-label {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  color: #718096;
+}
+
+.ssc-result-value {
+  display: block;
+  font-size: clamp(1.75rem, 5vw, 2.25rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: #1a202c;
+}
+
+.ssc-size-chart {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+.ssc-chart-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.ssc-chart-table th {
+  background: #1a73e8;
+  color: #fff;
+  padding: 0.75rem 0.5rem;
+  text-align: center;
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.ssc-chart-table td {
+  padding: 0.625rem 0.5rem;
+  text-align: center;
+  border-bottom: 1px solid #e2e8f0;
+  font-weight: 600;
+  color: #1a202c;
+}
+
+.ssc-chart-table tbody tr:hover {
+  background: #e8f0fe;
+}
+
+.ssc-chart-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Mobile responsive for shoe size converter */
+@media (max-width: 1024px) {
+  .ssc-results-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .ssc-results-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  
+  .ssc-result-card {
+    padding: 1rem 0.75rem;
+  }
+  
+  .ssc-chart-table {
+    font-size: 0.85rem;
+  }
+  
+  .ssc-chart-table th,
+  .ssc-chart-table td {
+    padding: 0.5rem 0.375rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .ssc-chart-table {
+    font-size: 0.75rem;
+  }
+  
+  .ssc-chart-table th,
+  .ssc-chart-table td {
+    padding: 0.4rem 0.25rem;
+  }
+  
+  .ssc-result-value {
+    font-size: 1.5rem;
+  }
 }

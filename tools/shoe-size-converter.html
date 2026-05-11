@@ -1,0 +1,489 @@
+<!-- ============================================================
+     TOOL 11: SHOE SIZE CONVERTER
+     Slug: /shoe-size-converter/
+     Primary keyword: "shoe size converter"
+     RankMath Title: Shoe Size Converter — US, UK, EU, CM International Chart | QuickCalc Lab
+     RankMath Meta: Free international shoe size converter. Convert between US, UK, EU, and CM sizes for men, women, and kids. Instant accurate conversions.
+     =============================================================
+     CSS: theme/assets/css/tools.css (classes .ssc-* for shoe size converter)
+     JS:  theme/assets/js/calculators.js (initShoeSizeConverter)
+     ============================================================ -->
+
+<div class="lpc-wrap">
+
+<!-- ════════════════════════════════════════════════
+     TOOL HERO
+     ════════════════════════════════════════════════ -->
+<section class="lpc-hero">
+  <div class="th-container">
+    <div class="lpc-hero__inner">
+
+      <div class="lpc-hero__text">
+        <div class="lpc-hero__eyebrow">
+          <span class="lpc-hero__eyebrow-line"></span>
+          Shopping · Free Tool
+        </div>
+        <h1 class="lpc-hero__title">
+          International Shoe Size Converter<br>
+          <span>US, UK, EU & CM Instant Conversion</span>
+        </h1>
+        <p class="lpc-hero__desc">
+          Our free <strong>shoe size converter</strong> instantly converts between US, UK, European (EU), and centimeter (CM) sizes for men, women, and kids. Perfect for online shopping across international retailers.
+        </p>
+        <p style="font-size:.875rem;color:#6B7280;margin-top:.75rem;"><em>Last updated: May 11, 2026</em></p>
+      </div>
+
+      <div class="lpc-hero__badges">
+        <div class="lpc-badge lpc-badge--blue">
+          <span class="lpc-badge__number">👟</span>
+          <span class="lpc-badge__label">SizeSync</span>
+        </div>
+        <div class="lpc-badge lpc-badge--dark">
+          <span class="lpc-badge__number">4</span>
+          <span class="lpc-badge__label">Systems</span>
+          <span class="lpc-badge__sublabel">US, UK, EU, CM</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════
+     AD — LEADERBOARD
+     ════════════════════════════════════════════════ -->
+<div class="th-container">
+  <div class="ad-leaderboard">
+    <span class="ad-label">Advertisement</span>
+    [ad_slot position="header"]
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     CALCULATOR UI
+     ════════════════════════════════════════════════ -->
+<section>
+  <div class="ssc-calculator" id="shoe-size-calculator">
+
+    <!-- Header -->
+    <header class="fcc-header">
+      <div class="fcc-header-icon" aria-hidden="true" style="opacity: 1;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1a73e8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 16v-2"></path>
+          <path d="M4 12a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v2"></path>
+          <path d="M2 20h20"></path>
+          <path d="M6 16h12"></path>
+          <path d="M8 16v-2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+        </svg>
+      </div>
+      <div>
+        <h2 class="fcc-title">Shoe Size <span style="color: var(--fcc-primary);">Converter</span></h2>
+        <p class="fcc-subtitle">International Sizing System</p>
+      </div>
+    </header>
+
+    <!-- Main Layout: Sidebar + Panel -->
+    <div class="fcc-layout">
+
+      <!-- Sidebar: Inputs -->
+      <aside class="fcc-sidebar" aria-label="Shoe size parameters">
+        <div class="fcc-glass-card">
+          <h3 class="fcc-section-label">Size Selection</h3>
+          <div class="fcc-field-stack">
+
+            <div class="fcc-input-group">
+              <label class="fcc-label-tech" for="shoe-category">Gender / Category</label>
+              <select id="shoe-category" class="fcc-input-field">
+                <option value="men">Men's Shoes</option>
+                <option value="women">Women's Shoes</option>
+                <option value="kids">Kids / Junior</option>
+              </select>
+              <p class="fcc-help-text">Select the category for accurate conversion</p>
+            </div>
+
+            <div class="fcc-input-group">
+              <label class="fcc-label-tech" for="shoe-system">Input Size System</label>
+              <select id="shoe-system" class="fcc-input-field">
+                <option value="US">US & Canada</option>
+                <option value="EU">Europe (EU)</option>
+                <option value="UK">United Kingdom (UK)</option>
+                <option value="CM">Centimeters (CM/JP)</option>
+              </select>
+              <p class="fcc-help-text">Choose the sizing system you know</p>
+            </div>
+
+            <div class="fcc-input-group">
+              <label class="fcc-label-tech" for="shoe-size-input">Enter Your Size</label>
+              <select id="shoe-size-input" class="fcc-input-field" style="background: var(--fcc-primary-light); border-color: var(--fcc-primary); font-weight: 600;">
+                <!-- Options populated via JS -->
+              </select>
+              <p class="fcc-help-text" id="shoe-size-hint">Select your size to see conversions</p>
+            </div>
+
+          </div>
+        </div>
+      </aside>
+
+      <!-- Panel: Results -->
+      <main class="fcc-panel" aria-label="Conversion results">
+
+        <!-- KPI Cards -->
+        <div class="ssc-results-grid">
+          <div class="ssc-result-card ssc-result-card--primary">
+            <span class="ssc-result-label">US Size</span>
+            <strong class="ssc-result-value" id="res-us">—</strong>
+          </div>
+          <div class="ssc-result-card ssc-result-card--secondary">
+            <span class="ssc-result-label">EU Size</span>
+            <strong class="ssc-result-value" id="res-eu">—</strong>
+          </div>
+          <div class="ssc-result-card ssc-result-card--tertiary">
+            <span class="ssc-result-label">UK Size</span>
+            <strong class="ssc-result-value" id="res-uk">—</strong>
+          </div>
+          <div class="ssc-result-card ssc-result-card--quaternary">
+            <span class="ssc-result-label">CM / JP</span>
+            <strong class="ssc-result-value" id="res-cm">—</strong>
+          </div>
+        </div>
+
+        <!-- Impact Panel -->
+        <div class="fcc-impact-panel">
+          <div class="fcc-impact-content">
+            <div class="fcc-impact-left">
+              <div class="fcc-impact-badge">
+                <span class="fcc-impact-badge-dot"></span>
+                <span>Instant Conversion</span>
+              </div>
+              <h3 class="fcc-impact-title">Size Conversion Summary</h3>
+              <p class="fcc-impact-desc" id="shoe-impact-desc">Select a size to see your international conversions instantly.</p>
+            </div>
+            <div class="fcc-impact-stats" id="shoe-impact-stats" style="display:none;">
+              <div class="fcc-impact-stat">
+                <p class="fcc-impact-stat-label">Foot Length</p>
+                <p class="fcc-impact-stat-value" id="shoe-foot-length">— cm</p>
+              </div>
+              <div class="fcc-impact-stat">
+                <p class="fcc-impact-stat-label">Category</p>
+                <p class="fcc-impact-stat-value" id="shoe-category-display">—</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Size Guide Table -->
+        <div class="fcc-breakdown-card">
+          <h4 class="fcc-breakdown-title">Quick Reference Size Chart</h4>
+          <div class="ssc-size-chart">
+            <table class="ssc-chart-table" id="ssc-chart-table">
+              <thead>
+                <tr>
+                  <th>US</th>
+                  <th>UK</th>
+                  <th>EU</th>
+                  <th>CM</th>
+                </tr>
+              </thead>
+              <tbody id="ssc-chart-body">
+                <!-- Populated via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </main>
+    </div>
+
+    <!-- Bottom Ad Placeholder -->
+    <div class="fcc-ad-slot" aria-hidden="true"></div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════
+     MAIN CONTENT
+     ════════════════════════════════════════════════ -->
+<section class="ab-mission">
+  <div class="th-container">
+    <div class="lpc-content-grid">
+
+      <!-- Left 2/3: article content -->
+      <div>
+
+        <!-- MID CONTENT AD -->
+        <div class="ad-infeed" style="margin:0 0 2rem;">
+          <span class="ad-label">Advertisement</span>
+          [ad_slot position="mid"]
+        </div>
+
+        <!-- HOW TO MEASURE -->
+        <h2 class="ab-section-title">How to Measure Your Foot Properly</h2>
+        <p class="ab-section-subtitle">Accurate foot measurement is essential for finding the perfect shoe size. Follow these steps for precise results:</p>
+
+        <div class="tool-formula-pro">
+          <div class="tfp-header">
+            <span class="tfp-badge">Step 1</span>
+            <span class="tfp-title">Prepare Your Materials</span>
+          </div>
+          <div class="tfp-legend">
+            <span class="tfp-legend-var">Materials needed</span>
+            <span class="tfp-legend-desc">A piece of paper larger than your foot, a pencil or pen, a ruler or measuring tape, and a flat, hard floor surface.</span>
+          </div>
+        </div>
+
+        <div class="tool-formula-pro">
+          <div class="tfp-header">
+            <span class="tfp-badge">Step 2</span>
+            <span class="tfp-title">Measure at the Right Time</span>
+          </div>
+          <div class="tfp-legend">
+            <span class="tfp-legend-var">Best time</span>
+            <span class="tfp-legend-desc">Measure your feet at the end of the day when they are at their largest due to natural swelling from walking and standing.</span>
+          </div>
+        </div>
+
+        <div class="tool-formula-pro">
+          <div class="tfp-header">
+            <span class="tfp-badge">Step 3</span>
+            <span class="tfp-title">Trace Your Foot</span>
+          </div>
+          <div class="tfp-legend">
+            <span class="tfp-legend-var">Method</span>
+            <span class="tfp-legend-desc">Place the paper on a flat floor against a wall. Stand with your heel against the wall and your full weight on the foot. Trace the outline of your foot with the pencil held perpendicular to the paper.</span>
+          </div>
+        </div>
+
+        <div class="tool-formula-pro">
+          <div class="tfp-header">
+            <span class="tfp-badge">Step 4</span>
+            <span class="tfp-title">Measure the Length</span>
+          </div>
+          <div class="tfp-legend">
+            <span class="tfp-legend-var">Measurement</span>
+            <span class="tfp-legend-desc">Measure from the wall (heel) to the longest point of your toes in centimeters. This is your foot length. Measure both feet and use the larger measurement.</span>
+          </div>
+        </div>
+
+        <h2>Understanding International Size Systems</h2>
+        <p>Different regions use different sizing standards, which can be confusing when shopping internationally. Here's how each system works:</p>
+
+        <h3>US & Canada Sizing</h3>
+        <p>US sizes are based on the <strong>Brannock device</strong> measurement, which measures both foot length and width. US sizes are typically 1 size larger than UK sizes for the same foot length. For example, a US 9 is equivalent to a UK 8 in men's sizing.</p>
+
+        <h3>UK Sizing</h3>
+        <p>UK sizing is based on the length of the <strong>last</strong> (the mold used to make the shoe), measured in barleycorns (1/3 inch). UK sizes are generally smaller than US sizes. A UK size is calculated as: <code>(foot length in inches - 1) × 3</code>, rounded to the nearest whole or half size.</p>
+
+        <h3>European (EU) Sizing</h3>
+        <p>EU sizes are based on <strong>Paris Points</strong>, where 1 Paris Point equals 2/3 of a centimeter. EU sizing uses the formula: <code>EU = (foot length in cm × 1.5) + 2</code>. This system is used throughout most of Europe and provides a more direct correlation to foot length in centimeters.</p>
+
+        <h3>Centimeter (CM) / Japan Sizing</h3>
+        <p>CM sizing is the most straightforward system — it directly corresponds to your foot length in centimeters. This system is used in Japan, Korea, and increasingly as a universal standard. Simply measure your foot in CM and that's your size. For example, a 26cm foot equals size 26.</p>
+
+        <h2>Men's vs Women's Sizing</h2>
+        <p>Men's and women's sizes are not the same, even within the same country's system. Generally:</p>
+        <ul>
+          <li><strong>US Women's to Men's:</strong> Subtract 1.5 to 2 sizes. For example, women's US 8 ≈ men's US 6.5-7.</li>
+          <li><strong>UK Women's to Men's:</strong> Subtract approximately 1 to 1.5 sizes.</li>
+          <li><strong>EU Women's to Men's:</strong> Subtract approximately 1 to 2 sizes, though this varies by brand.</li>
+          <li><strong>CM sizing:</strong> Usually the same for both genders, as it's based on actual foot length.</li>
+        </ul>
+
+        <h2>Important Considerations</h2>
+        <h3>Width Matters Too</h3>
+        <p>Shoe sizes only account for length, but foot width is equally important for comfort. Common width designations include:</p>
+        <ul>
+          <li><strong>Narrow (N/2A):</strong> For slender feet</li>
+          <li><strong>Medium/Regular (M/D/B):</strong> Standard width for most people</li>
+          <li><strong>Wide (W/2E/EE):</strong> For wider feet</li>
+          <li><strong>Extra Wide (XW/4E/EEEE):</strong> For very wide feet</li>
+        </ul>
+
+        <h3>Brand Variations</h3>
+        <p>Sizing can vary significantly between brands. A size 9 in Nike may fit differently than a size 9 in Adidas. Always check the specific brand's size chart when possible, and read customer reviews for sizing feedback.</p>
+
+        <h3>Half Sizes</h3>
+        <p>Half sizes provide approximately 1/6 inch (4.23mm) difference in length. If you're between sizes, it's generally better to size up for comfort, especially for athletic shoes or if you plan to wear thick socks.</p>
+
+        <h2>Kids' Shoe Sizing</h3>
+        <p>Children's shoe sizing follows a different scale than adult sizing. Kids' sizes typically run from toddler sizes (around US 5-10) to "big kid" sizes (US 1-7), after which they transition to adult sizing. Kids' sizes are usually the same for boys and girls until they reach adult sizes.</p>
+
+        <h2>International Shopping Tips</h2>
+        <ul>
+          <li><strong>Always measure in CM:</strong> Centimeters are universal and eliminate conversion confusion.</li>
+          <li><strong>Check return policies:</strong> International returns can be expensive, so verify the retailer's return policy before purchasing.</li>
+          <li><strong>Read size reviews:</strong> Customer reviews often mention if a brand runs large, small, or true to size.</li>
+          <li><strong>Consider sock thickness:</strong> Account for the type of socks you'll wear with the shoes when selecting size.</li>
+          <li><strong>Toe box space:</strong> Ensure about 1/2 inch (1.27cm) of space between your longest toe and the front of the shoe for comfort.</li>
+        </ul>
+
+        <!-- INTERNAL LINKS -->
+        <h2>Related Tools</h2>
+        <ul>
+          <li><a href="/unit-converter/"><strong>Unit Converter</strong></a> — Convert between different measurement systems including length units.</li>
+          <li><a href="/percentage-calculator/"><strong>Percentage Calculator</strong></a> — Calculate discounts and savings during shoe sales.</li>
+        </ul>
+
+        <!-- FAQ SECTION -->
+        <div class="tool-faq">
+          <h2>Frequently Asked Questions</h2>
+
+          <div class="tool-faq__item">
+            <div class="tool-faq__question">What is my shoe size in CM if I'm a US 9 men's?</div>
+            <div class="tool-faq__answer">A US men's size 9 typically corresponds to approximately 27 cm in foot length. Use our converter above for precise conversions based on your specific size and category.</div>
+          </div>
+
+          <div class="tool-faq__item">
+            <div class="tool-faq__question">How do I convert US women's size to EU?</div>
+            <div class="tool-faq__answer">To convert US women's to EU, add approximately 31-33 to the US size. For example, US women's 8 ≈ EU 38-39. However, this varies by brand, so always check the specific manufacturer's size chart. Our converter provides standard conversions.</div>
+          </div>
+
+          <div class="tool-faq__item">
+            <div class="tool-faq__question">Are UK and US shoe sizes the same?</div>
+            <div class="tool-faq__answer">No, UK and US sizes are different. For men, US sizes are typically 1 size larger than UK sizes (US 9 = UK 8). For women, the difference is approximately 2-3 sizes (US women's 8 = UK 5-6). Always verify with a conversion chart.</div>
+          </div>
+
+          <div class="tool-faq__item">
+            <div class="tool-faq__question">What is the difference between men's and women's shoe sizes?</div>
+            <div class="tool-faq__answer">Men's and women's shoe sizes are on different scales. In the US system, women's sizes are typically 1.5-2 sizes larger than men's for the same foot length. For example, a foot that fits a men's US 8 would typically fit a women's US 9.5-10. The difference varies by country and brand.</div>
+          </div>
+
+          <div class="tool-faq__item">
+            <div class="tool-faq__question">How do I know if I need wide or extra-wide shoes?</div>
+            <div class="tool-faq__answer">Signs you may need wide shoes include: feet spilling over the sides of standard shoes, pinching or pressure on the sides, blisters on the sides of your feet, or discomfort after short periods. Measure your foot width at the widest point — if it's significantly wider than standard for your length, consider wide widths.</div>
+          </div>
+
+          <div class="tool-faq__item">
+            <div class="tool-faq__question">Should I size up or down if I'm between sizes?</div>
+            <div class="tool-faq__answer">Generally, size up rather than down. A slightly larger shoe can be adjusted with thicker socks or insoles, but a shoe that's too small cannot be made comfortable. This is especially important for athletic shoes, dress shoes you'll wear all day, or if you have wider feet. Allow about 1/2 inch of space in the toe box.</div>
+          </div>
+
+          <div class="tool-faq__item">
+            <div class="tool-faq__question">Why do shoe sizes vary between brands?</div>
+            <div class="tool-faq__answer">Shoe manufacturers use different lasts (molds) to create their shoes, and these lasts vary in shape and sizing. Some brands intentionally run larger or smaller. Athletic brands may have different sizing than dress shoe brands. Always check specific brand size charts and read customer reviews for sizing feedback.</div>
+          </div>
+
+          <div class="tool-faq__item">
+            <div class="tool-faq__question">How often should I remeasure my feet?</div>
+            <div class="tool-faq__answer">Remeasure your feet annually or whenever you notice shoes feeling tighter. Feet can change size over time due to age, weight changes, pregnancy, medical conditions, or prolonged standing. Adults' feet can increase by half a size or more over their lifetime.</div>
+          </div>
+
+          <div class="tool-faq__item">
+            <div class="tool-faq__question">What is the most accurate shoe sizing system?</div>
+            <div class="tool-faq__answer">Centimeter (CM) or Mondopoint sizing is considered the most accurate because it directly corresponds to actual foot length. This system eliminates the confusion of different scales between countries and is becoming more common internationally. Many European brands now list both their traditional size and the CM equivalent.</div>
+          </div>
+
+          <div class="tool-faq__item">
+            <div class="tool-faq__question">How do kids' shoe sizes convert to adult sizes?</div>
+            <div class="tool-faq__answer">Kids' sizes typically run from toddler (US 5-10) through "big kid" sizes (US 1-7). After US 7 in kids' sizing, they transition to adult sizing. Generally, kids' US size 7 equals men's US size 7. Girls may transition to women's sizing earlier, around kids' size 5-6.</div>
+          </div>
+        </div>
+
+        <p><small>⚠️ <strong>Disclaimer:</strong> Size conversions are approximate and may vary by brand and style. Always check the manufacturer's specific size chart. See our <a href="/disclaimer/">full Disclaimer</a>.</small></p>
+
+      </div>
+
+      <!-- Right 1/3: ad + callout -->
+      <div class="ab-sidebar">
+
+        <div class="ad-sidebar">
+          <span class="ad-label">Advertisement</span>
+          <span class="ad-placeholder-text">Ad Space</span>
+          [ad_slot position="sidebar"]
+        </div>
+
+        <div class="lpc-sidebar-card">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          <p class="lpc-sidebar-card__title">100% Private</p>
+          <p class="lpc-sidebar-card__text">Your size data is never stored or sent to any server. All conversions happen instantly in your browser.</p>
+        </div>
+
+        <div class="ab-callout">
+          <span class="ab-callout__icon">💡</span>
+          <div class="ab-callout__title">Pro Tip</div>
+          <p class="ab-callout__text">
+            Always measure your feet at the end of the day when they're at their largest. Many people have slightly different sized feet — always buy for the larger one.
+          </p>
+        </div>
+
+        <div class="ab-callout">
+          <span class="ab-callout__icon">📏</span>
+          <div class="ab-callout__title">Quick Reference</div>
+          <p class="ab-callout__text">
+            1 inch = 2.54 cm. To convert inches to cm, multiply by 2.54. To convert cm to inches, divide by 2.54.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════
+     AD — FOOTER
+     ════════════════════════════════════════════════ -->
+<section class="ab-policy" style="padding:3rem 0;">
+  <div class="th-container">
+    <div class="ad-leaderboard">
+      <span class="ad-label">Advertisement</span>
+      [ad_slot position="footer"]
+    </div>
+  </div>
+</section>
+
+</div><!-- /.lpc-wrap -->
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Shoe Size Converter",
+  "url": "https://quickcalclab.com/shoe-size-converter/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web Browser",
+  "description": "International shoe size converter supporting US, UK, EU, and CM sizing systems for men, women, and kids. Instant accurate conversions.",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": { "@type": "Organization", "name": "QuickCalc Lab", "url": "https://quickcalclab.com" }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is my shoe size in CM if I'm a US 9 men's?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A US men's size 9 typically corresponds to approximately 27 cm in foot length. Use our converter for precise conversions based on your specific size and category."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I convert US women's size to EU?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "To convert US women's to EU, add approximately 31-33 to the US size. For example, US women's 8 ≈ EU 38-39. However, this varies by brand, so always check the specific manufacturer's size chart."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are UK and US shoe sizes the same?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No, UK and US sizes are different. For men, US sizes are typically 1 size larger than UK sizes (US 9 = UK 8). For women, the difference is approximately 2-3 sizes (US women's 8 = UK 5-6)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the most accurate shoe sizing system?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Centimeter (CM) or Mondopoint sizing is considered the most accurate because it directly corresponds to actual foot length. This system eliminates the confusion of different scales between countries."
+      }
+    }
+  ]
+}
+</script>

@@ -1571,6 +1571,166 @@
     if (tabFinder) tabFinder.addEventListener('click', function () { switchMode('finder'); });
   }
 
+  function initShoeSizeConverter() {
+    var container = document.getElementById('shoe-size-calculator');
+    if (!container) return;
+
+    // Comprehensive shoe size data
+    var shoeData = {
+      men: [
+        { US: 6, EU: 39, UK: 5.5, CM: 24 },
+        { US: 6.5, EU: 39.5, UK: 6, CM: 24.5 },
+        { US: 7, EU: 40, UK: 6.5, CM: 25 },
+        { US: 7.5, EU: 40.5, UK: 7, CM: 25.5 },
+        { US: 8, EU: 41, UK: 7.5, CM: 26 },
+        { US: 8.5, EU: 42, UK: 8, CM: 26.5 },
+        { US: 9, EU: 42.5, UK: 8.5, CM: 27 },
+        { US: 9.5, EU: 43, UK: 9, CM: 27.5 },
+        { US: 10, EU: 44, UK: 9.5, CM: 28 },
+        { US: 10.5, EU: 44.5, UK: 10, CM: 28.5 },
+        { US: 11, EU: 45, UK: 10.5, CM: 29 },
+        { US: 11.5, EU: 45.5, UK: 11, CM: 29.5 },
+        { US: 12, EU: 46, UK: 11.5, CM: 30 },
+        { US: 13, EU: 47, UK: 12.5, CM: 31 },
+        { US: 14, EU: 48, UK: 13.5, CM: 32 }
+      ],
+      women: [
+        { US: 4, EU: 35, UK: 2, CM: 21 },
+        { US: 4.5, EU: 35.5, UK: 2.5, CM: 21.5 },
+        { US: 5, EU: 35.5, UK: 3, CM: 22 },
+        { US: 5.5, EU: 36, UK: 3.5, CM: 22.5 },
+        { US: 6, EU: 36.5, UK: 4, CM: 23 },
+        { US: 6.5, EU: 37, UK: 4.5, CM: 23.5 },
+        { US: 7, EU: 37.5, UK: 5, CM: 24 },
+        { US: 7.5, EU: 38, UK: 5.5, CM: 24.5 },
+        { US: 8, EU: 38.5, UK: 6, CM: 25 },
+        { US: 8.5, EU: 39, UK: 6.5, CM: 25.5 },
+        { US: 9, EU: 40, UK: 7, CM: 26 },
+        { US: 9.5, EU: 40.5, UK: 7.5, CM: 26.5 },
+        { US: 10, EU: 41, UK: 8, CM: 27 },
+        { US: 10.5, EU: 41.5, UK: 8.5, CM: 27.5 },
+        { US: 11, EU: 42.5, UK: 9, CM: 28 },
+        { US: 12, EU: 44, UK: 10, CM: 29 }
+      ],
+      kids: [
+        { US: 10, EU: 27, UK: 9, CM: 16.5 },
+        { US: 10.5, EU: 28, UK: 9.5, CM: 17 },
+        { US: 11, EU: 28.5, UK: 10, CM: 17.5 },
+        { US: 11.5, EU: 29, UK: 10.5, CM: 18 },
+        { US: 12, EU: 30, UK: 11, CM: 18.5 },
+        { US: 12.5, EU: 30.5, UK: 11.5, CM: 19 },
+        { US: 13, EU: 31, UK: 12, CM: 19.5 },
+        { US: 13.5, EU: 31.5, UK: 12.5, CM: 20 },
+        { US: 1, EU: 32, UK: 13, CM: 20.5 },
+        { US: 1.5, EU: 33, UK: 13.5, CM: 21 },
+        { US: 2, EU: 33.5, UK: 1, CM: 21.5 },
+        { US: 2.5, EU: 34, UK: 1.5, CM: 22 },
+        { US: 3, EU: 35, UK: 2, CM: 22.5 },
+        { US: 3.5, EU: 35.5, UK: 2.5, CM: 23 },
+        { US: 4, EU: 36, UK: 3, CM: 23.5 },
+        { US: 4.5, EU: 36.5, UK: 3.5, CM: 24 },
+        { US: 5, EU: 37, UK: 4, CM: 24.5 },
+        { US: 5.5, EU: 37.5, UK: 4.5, CM: 25 },
+        { US: 6, EU: 38, UK: 5, CM: 25.5 },
+        { US: 6.5, EU: 38.5, UK: 5.5, CM: 26 },
+        { US: 7, EU: 39, UK: 6, CM: 26.5 }
+      ]
+    };
+
+    var categorySelect = document.getElementById('shoe-category');
+    var systemSelect = document.getElementById('shoe-system');
+    var sizeInput = document.getElementById('shoe-size-input');
+    var resUS = document.getElementById('res-us');
+    var resEU = document.getElementById('res-eu');
+    var resUK = document.getElementById('res-uk');
+    var resCM = document.getElementById('res-cm');
+    var impactDesc = document.getElementById('shoe-impact-desc');
+    var impactStats = document.getElementById('shoe-impact-stats');
+    var footLength = document.getElementById('shoe-foot-length');
+    var categoryDisplay = document.getElementById('shoe-category-display');
+    var chartBody = document.getElementById('ssc-chart-body');
+
+    function updateOptions() {
+      var cat = categorySelect.value;
+      var sys = systemSelect.value;
+      sizeInput.innerHTML = '';
+
+      shoeData[cat].forEach(function (item) {
+        var opt = document.createElement('option');
+        opt.value = item[sys];
+        opt.textContent = item[sys];
+        sizeInput.appendChild(opt);
+      });
+
+      updateChart(cat);
+      calculate();
+    }
+
+    function calculate() {
+      var cat = categorySelect.value;
+      var sys = systemSelect.value;
+      var val = parseFloat(sizeInput.value);
+
+      var match = shoeData[cat].find(function (item) {
+        return item[sys] === val;
+      });
+
+      if (match) {
+        resUS.textContent = match.US;
+        resEU.textContent = match.EU;
+        resUK.textContent = match.UK;
+        resCM.textContent = match.CM;
+
+        impactDesc.textContent = cat.charAt(0).toUpperCase() + cat.slice(1) + "'s size " + match[sys] + ' ' + sys + ' converted to all international systems.';
+        impactStats.style.display = 'flex';
+        footLength.textContent = match.CM + ' cm';
+        categoryDisplay.textContent = cat.charAt(0).toUpperCase() + cat.slice(1);
+
+        // Highlight selected row in chart
+        highlightChartRow(match);
+      }
+    }
+
+    function updateChart(category) {
+      if (!chartBody) return;
+      chartBody.innerHTML = '';
+
+      shoeData[category].forEach(function (item) {
+        var row = document.createElement('tr');
+        row.dataset.us = item.US;
+        row.dataset.eu = item.EU;
+        row.dataset.uk = item.UK;
+        row.dataset.cm = item.CM;
+        row.innerHTML = '<td>' + item.US + '</td><td>' + item.UK + '</td><td>' + item.EU + '</td><td>' + item.CM + '</td>';
+        chartBody.appendChild(row);
+      });
+    }
+
+    function highlightChartRow(match) {
+      var rows = chartBody.querySelectorAll('tr');
+      rows.forEach(function (row) {
+        row.style.background = '';
+        row.style.fontWeight = '';
+        if (parseFloat(row.dataset.us) === match.US &&
+          parseFloat(row.dataset.eu) === match.EU &&
+          parseFloat(row.dataset.uk) === match.UK &&
+          parseFloat(row.dataset.cm) === match.CM) {
+          row.style.background = '#1a73e8';
+          row.style.color = '#fff';
+          row.style.fontWeight = '700';
+        }
+      });
+    }
+
+    // Event listeners
+    if (categorySelect) categorySelect.addEventListener('change', updateOptions);
+    if (systemSelect) systemSelect.addEventListener('change', updateOptions);
+    if (sizeInput) sizeInput.addEventListener('change', calculate);
+
+    // Initial setup
+    updateOptions();
+  }
+
   function initCalculators() {
     // Core calculators - initialize immediately
     initLoanCalculator();
@@ -1583,6 +1743,7 @@
     initDiscountCalculator();
     initFuelCalculator();
     initUnitConverter();
+    initShoeSizeConverter();
   }
 
   function init() {
