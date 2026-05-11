@@ -5,10 +5,16 @@
  */
 
 /**
- * AdSense Publisher ID — set this after AdSense approval.
- * Leave empty ('') to hide all ad slots (safe during application review).
+ * AdSense Publisher ID — managed by Site Kit plugin.
+ * Slot IDs for use in [ad_slot] shortcode.
  */
-define( 'TOOLSHUB_ADSENSE_PUB_ID', '' );
+define( 'TOOLSHUB_ADSENSE_PUB_ID', 'ca-pub-1790812811543296' );
+define( 'TOOLSHUB_ADSENSE_SLOTS', array(
+    'header' => '',  // Leaderboard (728×90 / responsive)
+    'mid'    => '',  // Rectangle (300×250 / responsive)
+    'footer' => '',  // Leaderboard (728×90 / responsive)
+) );
+
 
 /**
  * Register custom logo support
@@ -144,14 +150,10 @@ add_action( 'wp_default_scripts', 'toolshub_remove_jquery_migrate' );
 
 
 /**
- * Add preconnect hints for Google AdSense (performance)
+ * Add preconnect hints for Google Fonts (performance)
  */
 function toolshub_resource_hints( $urls, $relation_type ) {
     if ( 'preconnect' === $relation_type ) {
-        $urls[] = array(
-            'href' => 'https://pagead2.googlesyndication.com',
-            'crossorigin',
-        );
         $urls[] = array(
             'href' => 'https://fonts.googleapis.com',
         );
@@ -235,12 +237,19 @@ function toolshub_ad_slot_shortcode( $atts ) {
     $atts = shortcode_atts( array( 'position' => 'mid' ), $atts );
     $position = esc_attr( $atts['position'] );
 
+    $slots   = TOOLSHUB_ADSENSE_SLOTS;
+    $slot_id = isset( $slots[ $position ] ) ? $slots[ $position ] : '';
+
+    if ( empty( $slot_id ) ) {
+        return '';
+    }
+
     return '<div class="ad-slot ad-slot--' . $position . '" data-ad-position="' . $position . '" aria-label="Advertisement">
     <!-- AdSense unit injected here by adsense-loader.js -->
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="' . esc_attr( TOOLSHUB_ADSENSE_PUB_ID ) . '"
-         data-ad-slot="XXXXXXXXXX"
+         data-ad-slot="' . esc_attr( $slot_id ) . '"
          data-ad-format="auto"
          data-full-width-responsive="true"
          data-ad-lazy="true"></ins>
