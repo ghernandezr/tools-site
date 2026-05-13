@@ -2914,13 +2914,6 @@ nav .sub-menu a {
   gap: 1.5rem;
 }
 
-@media (min-width: 600px) {
-  .fcc-impact-content {
-    flex-direction: row;
-    align-items: center;
-  }
-}
-
 .fcc-impact-left { flex: 1; }
 
 .fcc-impact-badge {
@@ -2964,6 +2957,18 @@ nav .sub-menu a {
   grid-template-columns: 1fr 1fr;
   gap: 0.875rem;
   flex-shrink: 0;
+}
+
+@media (max-width: 599px) {
+  .fcc-impact-stats {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 600px) {
+  .fcc-impact-stats {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .fcc-impact-stat {

@@ -1647,7 +1647,8 @@
     var impactDesc = document.getElementById('shoe-impact-desc');
     var impactStats = document.getElementById('shoe-impact-stats');
     var footLength = document.getElementById('shoe-foot-length');
-    var categoryDisplay = document.getElementById('shoe-category-display');
+    var footInches = document.getElementById('shoe-foot-inches');
+    var footFeet = document.getElementById('shoe-foot-feet');
     var chartBody = document.getElementById('ssc-chart-body');
 
     function updateOptions() {
@@ -1676,6 +1677,9 @@
       });
 
       if (match) {
+        var inches = match.CM / 2.54;
+        var feet = inches / 12;
+
         resUS.textContent = match.US;
         resEU.textContent = match.EU;
         resUK.textContent = match.UK;
@@ -1684,7 +1688,8 @@
         impactDesc.textContent = cat.charAt(0).toUpperCase() + cat.slice(1) + "'s size " + match[sys] + ' ' + sys + ' converted to all international systems.';
         impactStats.style.display = 'flex';
         footLength.textContent = match.CM + ' cm';
-        categoryDisplay.textContent = cat.charAt(0).toUpperCase() + cat.slice(1);
+        footInches.textContent = inches.toFixed(2) + ' in';
+        footFeet.textContent = feet.toFixed(2) + ' ft';
 
         // Highlight selected row in chart
         highlightChartRow(match);
@@ -1697,11 +1702,15 @@
 
       shoeData[category].forEach(function (item) {
         var row = document.createElement('tr');
+        var inches = item.CM / 2.54;
+        var feet = inches / 12;
         row.dataset.us = item.US;
         row.dataset.eu = item.EU;
         row.dataset.uk = item.UK;
         row.dataset.cm = item.CM;
-        row.innerHTML = '<td>' + item.US + '</td><td>' + item.UK + '</td><td>' + item.EU + '</td><td>' + item.CM + '</td>';
+        row.dataset.in = inches.toFixed(2);
+        row.dataset.ft = feet.toFixed(2);
+        row.innerHTML = '<td>' + item.US + '</td><td>' + item.UK + '</td><td>' + item.EU + '</td><td>' + item.CM + '</td><td>' + inches.toFixed(2) + '</td><td>' + feet.toFixed(2) + '</td>';
         chartBody.appendChild(row);
       });
     }
